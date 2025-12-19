@@ -60,7 +60,7 @@ if [ "$parallel" -gt 1 ]; then
   fi
   CC="sem -j $parallel --id $$ ${CC}"
 fi
-COMP_FLAGS="${CPPFLAGS:-} ${CFLAGS:-} -w -fmax-errors=3 -fno-strict-aliasing -O3 -fno-ident -fno-math-errno $extraBuildArgs"
+COMP_FLAGS="${CPPFLAGS:-} ${CFLAGS:-} -w -fmax-errors=3 -fno-strict-aliasing $extraBuildArgs"
 LINK_FLAGS="${LDFLAGS:-} "
 PS4=""
 # platform detection
@@ -125,10 +125,13 @@ case $uos in
     ;;
   *darwin* )
     myos="macosx"
-    CC="clang"
+    CC="gcc"
     LINK_FLAGS="$LINK_FLAGS -ldl -lm"
     if [ "$HOSTTYPE" = "x86_64" ] ; then
       ucpu="amd64"
+    fi
+    if [ "$HOSTTYPE" = "powerpc" ] ; then
+      ucpu="powerpc"
     fi
     ;;
   *aix* )
@@ -203,6 +206,15 @@ case $ucpu in
         powerpc64le)
         mycpu="powerpc64el"
       esac
+    elif [ "$myos" = "macosx" ] ; then
+      mycpu="$("$CC" -dumpmachine | sed 's/-.*//')"
+      if [ "$mycpu" = "powerpc64" ] ; then
+        COMP_FLAGS="$COMP_FLAGS -arch ppc64"
+        LINK_FLAGS="$LINK_FLAGS -arch ppc64"
+      else
+        COMP_FLAGS="$COMP_FLAGS -arch ppc"
+        LINK_FLAGS="$LINK_FLAGS -arch ppc"
+      fi
     else
       mycpu="powerpc"
     fi
@@ -261,10 +273,12 @@ windows)
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@sexceptions.nim.c -o c_code/1_1/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@sdollars.nim.c -o c_code/1_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem.nim.c -o c_code/1_1/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pparseutils.nim.c -o c_code/1_1/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pmath.nim.c -o c_code/1_1/@pmath.nim.o
@@ -354,7 +368,6 @@ windows)
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mastmsgs.nim.c -o c_code/1_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mtypes.nim.c -o c_code/1_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mnimsets.nim.c -o c_code/1_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mcbuilderbase.nim.c -o c_code/1_1/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mcgendata.nim.c -o c_code/1_1/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mmangleutils.nim.c -o c_code/1_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mccgutils.nim.c -o c_code/1_1/@mccgutils.nim.o
@@ -423,11 +436,6 @@ windows)
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@msem.nim.c -o c_code/1_1/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mreorder.nim.c -o c_code/1_1/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mdepends.nim.c -o c_code/1_1/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mnifgen.nim.c -o c_code/1_1/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@msourcemap.nim.c -o c_code/1_1/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mjsgen.nim.c -o c_code/1_1/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@plists.nim.c -o c_code/1_1/@plists.nim.o
@@ -462,10 +470,12 @@ windows)
 c_code/1_1/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/1_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/1_1/@psystem.nim.o \
 c_code/1_1/@pparseutils.nim.o \
 c_code/1_1/@pmath.nim.o \
@@ -555,7 +565,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/1_1/@mastmsgs.nim.o \
 c_code/1_1/@mtypes.nim.o \
 c_code/1_1/@mnimsets.nim.o \
-c_code/1_1/@mcbuilderbase.nim.o \
 c_code/1_1/@mcgendata.nim.o \
 c_code/1_1/@mmangleutils.nim.o \
 c_code/1_1/@mccgutils.nim.o \
@@ -624,11 +633,6 @@ c_code/1_1/@mvtables.nim.o \
 c_code/1_1/@msem.nim.o \
 c_code/1_1/@mreorder.nim.o \
 c_code/1_1/@mdepends.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/1_1/@mnifgen.nim.o \
 c_code/1_1/@msourcemap.nim.o \
 c_code/1_1/@mjsgen.nim.o \
 c_code/1_1/@plists.nim.o \
@@ -662,10 +666,12 @@ c_code/1_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@sexceptions.nim.c -o c_code/1_2/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@sdollars.nim.c -o c_code/1_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem.nim.c -o c_code/1_2/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pparseutils.nim.c -o c_code/1_2/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pmath.nim.c -o c_code/1_2/@pmath.nim.o
@@ -755,7 +761,6 @@ c_code/1_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mastmsgs.nim.c -o c_code/1_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mtypes.nim.c -o c_code/1_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mnimsets.nim.c -o c_code/1_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mcbuilderbase.nim.c -o c_code/1_2/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mcgendata.nim.c -o c_code/1_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mmangleutils.nim.c -o c_code/1_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mccgutils.nim.c -o c_code/1_2/@mccgutils.nim.o
@@ -824,11 +829,6 @@ c_code/1_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@msem.nim.c -o c_code/1_2/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mreorder.nim.c -o c_code/1_2/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mdepends.nim.c -o c_code/1_2/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mnifgen.nim.c -o c_code/1_2/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@msourcemap.nim.c -o c_code/1_2/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mjsgen.nim.c -o c_code/1_2/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@plists.nim.c -o c_code/1_2/@plists.nim.o
@@ -863,10 +863,12 @@ c_code/1_1/@mnim.nim.o $LINK_FLAGS
 c_code/1_2/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/1_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/1_2/@psystem.nim.o \
 c_code/1_2/@pparseutils.nim.o \
 c_code/1_2/@pmath.nim.o \
@@ -956,7 +958,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/1_2/@mastmsgs.nim.o \
 c_code/1_2/@mtypes.nim.o \
 c_code/1_2/@mnimsets.nim.o \
-c_code/1_2/@mcbuilderbase.nim.o \
 c_code/1_2/@mcgendata.nim.o \
 c_code/1_2/@mmangleutils.nim.o \
 c_code/1_2/@mccgutils.nim.o \
@@ -1025,11 +1026,6 @@ c_code/1_2/@mvtables.nim.o \
 c_code/1_2/@msem.nim.o \
 c_code/1_2/@mreorder.nim.o \
 c_code/1_2/@mdepends.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/1_2/@mnifgen.nim.o \
 c_code/1_2/@msourcemap.nim.o \
 c_code/1_2/@mjsgen.nim.o \
 c_code/1_2/@plists.nim.o \
@@ -1204,10 +1200,12 @@ linux)
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sexceptions.nim.c -o c_code/2_1/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sdollars.nim.c -o c_code/2_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem.nim.c -o c_code/2_1/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pparseutils.nim.c -o c_code/2_1/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pmath.nim.c -o c_code/2_1/@pmath.nim.o
@@ -1294,7 +1292,6 @@ linux)
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimsets.nim.c -o c_code/2_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mcbuilderbase.nim.c -o c_code/2_1/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mcgendata.nim.c -o c_code/2_1/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
@@ -1364,11 +1361,6 @@ linux)
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msem.nim.c -o c_code/2_1/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mreorder.nim.c -o c_code/2_1/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mdepends.nim.c -o c_code/2_1/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnifgen.nim.c -o c_code/2_1/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msourcemap.nim.c -o c_code/2_1/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mjsgen.nim.c -o c_code/2_1/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
@@ -1403,10 +1395,12 @@ linux)
 c_code/2_1/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/2_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/2_1/@psystem.nim.o \
 c_code/2_1/@pparseutils.nim.o \
 c_code/2_1/@pmath.nim.o \
@@ -1493,7 +1487,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/2_1/@mastmsgs.nim.o \
 c_code/2_1/@mtypes.nim.o \
 c_code/2_1/@mnimsets.nim.o \
-c_code/2_1/@mcbuilderbase.nim.o \
 c_code/2_1/@mcgendata.nim.o \
 c_code/2_1/@mmangleutils.nim.o \
 c_code/2_1/@mccgutils.nim.o \
@@ -1563,11 +1556,6 @@ c_code/2_1/@mvtables.nim.o \
 c_code/2_1/@msem.nim.o \
 c_code/2_1/@mreorder.nim.o \
 c_code/2_1/@mdepends.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_1/@mnifgen.nim.o \
 c_code/2_1/@msourcemap.nim.o \
 c_code/2_1/@mjsgen.nim.o \
 c_code/2_1/@plists.nim.o \
@@ -1601,10 +1589,12 @@ c_code/2_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sexceptions.nim.c -o c_code/2_2/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem.nim.c -o c_code/2_2/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pparseutils.nim.c -o c_code/2_2/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -1692,7 +1682,6 @@ c_code/2_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcbuilderbase.nim.c -o c_code/2_2/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -1762,11 +1751,6 @@ c_code/2_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msem.nim.c -o c_code/2_2/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mreorder.nim.c -o c_code/2_2/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mdepends.nim.c -o c_code/2_2/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnifgen.nim.c -o c_code/2_2/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msourcemap.nim.c -o c_code/2_2/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mjsgen.nim.c -o c_code/2_2/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -1801,10 +1785,12 @@ c_code/2_1/@mnim.nim.o $LINK_FLAGS
 c_code/2_2/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_2/@psystem.nim.o \
 c_code/2_2/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -1892,7 +1878,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_2/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -1962,11 +1947,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_2/@msem.nim.o \
 c_code/2_2/@mreorder.nim.o \
 c_code/2_2/@mdepends.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_2/@mnifgen.nim.o \
 c_code/2_2/@msourcemap.nim.o \
 c_code/2_2/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -2000,10 +1980,12 @@ c_code/2_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem@sexceptions.nim.c -o c_code/2_3/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sdollars.nim.c -o c_code/2_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem.nim.c -o c_code/2_3/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseutils.nim.c -o c_code/2_3/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pmath.nim.c -o c_code/2_1/@pmath.nim.o
@@ -2090,7 +2072,6 @@ c_code/2_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimsets.nim.c -o c_code/2_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcbuilderbase.nim.c -o c_code/2_3/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcgendata.nim.c -o c_code/2_3/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
@@ -2160,11 +2141,6 @@ c_code/2_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msem.nim.c -o c_code/2_3/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mreorder.nim.c -o c_code/2_3/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mdepends.nim.c -o c_code/2_3/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mnifgen.nim.c -o c_code/2_3/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msourcemap.nim.c -o c_code/2_3/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mjsgen.nim.c -o c_code/2_3/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
@@ -2199,10 +2175,12 @@ c_code/2_2/@mnim.nim.o $LINK_FLAGS
 c_code/2_3/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/2_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/2_3/@psystem.nim.o \
 c_code/2_3/@pparseutils.nim.o \
 c_code/2_1/@pmath.nim.o \
@@ -2289,7 +2267,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/2_1/@mastmsgs.nim.o \
 c_code/2_1/@mtypes.nim.o \
 c_code/2_1/@mnimsets.nim.o \
-c_code/2_3/@mcbuilderbase.nim.o \
 c_code/2_3/@mcgendata.nim.o \
 c_code/2_1/@mmangleutils.nim.o \
 c_code/2_1/@mccgutils.nim.o \
@@ -2359,11 +2336,6 @@ c_code/2_1/@mvtables.nim.o \
 c_code/2_3/@msem.nim.o \
 c_code/2_3/@mreorder.nim.o \
 c_code/2_3/@mdepends.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_3/@mnifgen.nim.o \
 c_code/2_3/@msourcemap.nim.o \
 c_code/2_3/@mjsgen.nim.o \
 c_code/2_1/@plists.nim.o \
@@ -2397,10 +2369,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem.nim.c -o c_code/2_4/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -2487,7 +2461,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -2557,11 +2530,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msem.nim.c -o c_code/2_4/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mdepends.nim.c -o c_code/2_4/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mnifgen.nim.c -o c_code/2_4/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mjsgen.nim.c -o c_code/2_4/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -2596,10 +2564,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_4/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -2686,7 +2656,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -2756,11 +2725,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_4/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/2_4/@mdepends.nim.o \
-c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_4/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/2_4/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -2794,10 +2758,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem.nim.c -o c_code/2_4/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -2884,7 +2850,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -2954,11 +2919,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msem.nim.c -o c_code/2_4/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mdepends.nim.c -o c_code/2_4/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mnifgen.nim.c -o c_code/2_4/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mjsgen.nim.c -o c_code/2_4/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -2993,10 +2953,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_4/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -3083,7 +3045,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -3153,11 +3114,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_4/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/2_4/@mdepends.nim.o \
-c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_4/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/2_4/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -3191,10 +3147,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem.nim.c -o c_code/2_4/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -3281,7 +3239,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -3351,11 +3308,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msem.nim.c -o c_code/2_4/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mdepends.nim.c -o c_code/2_4/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mnifgen.nim.c -o c_code/2_4/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mjsgen.nim.c -o c_code/2_4/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -3390,10 +3342,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_4/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -3480,7 +3434,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -3550,11 +3503,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_4/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/2_4/@mdepends.nim.o \
-c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_4/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/2_4/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -3588,10 +3536,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem@sexceptions.nim.c -o c_code/2_7/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sprivate@sdigitsutils.nim.c -o c_code/2_7/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sassertions.nim.c -o c_code/2_7/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem@siterators.nim.c -o c_code/2_7/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem@sdollars.nim.c -o c_code/2_7/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sprivate@sdragonbox.nim.c -o c_code/2_7/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sprivate@sschubfach.nim.c -o c_code/2_7/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sformatfloat.nim.c -o c_code/2_7/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem@srepr_v2.nim.c -o c_code/2_7/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem.nim.c -o c_code/2_7/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pparseutils.nim.c -o c_code/2_7/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pmath.nim.c -o c_code/2_7/@pmath.nim.o
@@ -3678,7 +3628,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mastmsgs.nim.c -o c_code/2_7/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mtypes.nim.c -o c_code/2_7/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mnimsets.nim.c -o c_code/2_7/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mcbuilderbase.nim.c -o c_code/2_7/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mcgendata.nim.c -o c_code/2_7/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mmangleutils.nim.c -o c_code/2_7/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mccgutils.nim.c -o c_code/2_7/@mccgutils.nim.o
@@ -3748,11 +3697,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@msem.nim.c -o c_code/2_7/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mreorder.nim.c -o c_code/2_7/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mdepends.nim.c -o c_code/2_7/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/2_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mnifgen.nim.c -o c_code/2_7/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@msourcemap.nim.c -o c_code/2_7/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mjsgen.nim.c -o c_code/2_7/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@plists.nim.c -o c_code/2_7/@plists.nim.o
@@ -3787,10 +3731,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
 c_code/2_7/@psystem@sexceptions.nim.o \
 c_code/2_7/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/2_7/@pstd@sassertions.nim.o \
+c_code/2_7/@psystem@siterators.nim.o \
 c_code/2_7/@psystem@sdollars.nim.o \
 c_code/2_7/@pstd@sprivate@sdragonbox.nim.o \
 c_code/2_7/@pstd@sprivate@sschubfach.nim.o \
 c_code/2_7/@pstd@sformatfloat.nim.o \
+c_code/2_7/@psystem@srepr_v2.nim.o \
 c_code/2_7/@psystem.nim.o \
 c_code/2_7/@pparseutils.nim.o \
 c_code/2_7/@pmath.nim.o \
@@ -3877,7 +3823,6 @@ c_code/2_7/@mbitsets.nim.o \
 c_code/2_7/@mastmsgs.nim.o \
 c_code/2_7/@mtypes.nim.o \
 c_code/2_7/@mnimsets.nim.o \
-c_code/2_7/@mcbuilderbase.nim.o \
 c_code/2_7/@mcgendata.nim.o \
 c_code/2_7/@mmangleutils.nim.o \
 c_code/2_7/@mccgutils.nim.o \
@@ -3947,11 +3892,6 @@ c_code/2_7/@mvtables.nim.o \
 c_code/2_7/@msem.nim.o \
 c_code/2_7/@mreorder.nim.o \
 c_code/2_7/@mdepends.nim.o \
-c_code/2_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/2_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_7/@mnifgen.nim.o \
 c_code/2_7/@msourcemap.nim.o \
 c_code/2_7/@mjsgen.nim.o \
 c_code/2_7/@plists.nim.o \
@@ -3985,10 +3925,12 @@ c_code/2_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem@sexceptions.nim.c -o c_code/2_3/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sdollars.nim.c -o c_code/2_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem.nim.c -o c_code/2_3/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseutils.nim.c -o c_code/2_3/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pmath.nim.c -o c_code/2_1/@pmath.nim.o
@@ -4075,7 +4017,6 @@ c_code/2_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimsets.nim.c -o c_code/2_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcbuilderbase.nim.c -o c_code/2_3/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcgendata.nim.c -o c_code/2_3/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
@@ -4145,11 +4086,6 @@ c_code/2_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msem.nim.c -o c_code/2_3/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mreorder.nim.c -o c_code/2_3/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mdepends.nim.c -o c_code/2_3/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mnifgen.nim.c -o c_code/2_3/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msourcemap.nim.c -o c_code/2_3/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mjsgen.nim.c -o c_code/2_3/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
@@ -4184,10 +4120,12 @@ c_code/2_7/@mnim.nim.o $LINK_FLAGS
 c_code/2_3/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/2_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/2_3/@psystem.nim.o \
 c_code/2_3/@pparseutils.nim.o \
 c_code/2_1/@pmath.nim.o \
@@ -4274,7 +4212,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/2_1/@mastmsgs.nim.o \
 c_code/2_1/@mtypes.nim.o \
 c_code/2_1/@mnimsets.nim.o \
-c_code/2_3/@mcbuilderbase.nim.o \
 c_code/2_3/@mcgendata.nim.o \
 c_code/2_1/@mmangleutils.nim.o \
 c_code/2_1/@mccgutils.nim.o \
@@ -4344,11 +4281,6 @@ c_code/2_1/@mvtables.nim.o \
 c_code/2_3/@msem.nim.o \
 c_code/2_3/@mreorder.nim.o \
 c_code/2_3/@mdepends.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_3/@mnifgen.nim.o \
 c_code/2_3/@msourcemap.nim.o \
 c_code/2_3/@mjsgen.nim.o \
 c_code/2_1/@plists.nim.o \
@@ -4382,10 +4314,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem.nim.c -o c_code/2_4/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -4472,7 +4406,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -4542,11 +4475,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msem.nim.c -o c_code/2_4/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mdepends.nim.c -o c_code/2_4/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mnifgen.nim.c -o c_code/2_4/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mjsgen.nim.c -o c_code/2_4/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -4581,10 +4509,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_4/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -4671,7 +4601,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -4741,11 +4670,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_4/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/2_4/@mdepends.nim.o \
-c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_4/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/2_4/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -4779,10 +4703,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem.nim.c -o c_code/2_4/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -4869,7 +4795,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -4939,11 +4864,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msem.nim.c -o c_code/2_4/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mdepends.nim.c -o c_code/2_4/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mnifgen.nim.c -o c_code/2_4/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mjsgen.nim.c -o c_code/2_4/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -4978,10 +4898,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_4/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -5068,7 +4990,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -5138,11 +5059,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_4/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/2_4/@mdepends.nim.o \
-c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_4/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/2_4/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -5176,10 +5092,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem@sexceptions.nim.c -o c_code/2_3/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sdollars.nim.c -o c_code/2_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem.nim.c -o c_code/2_3/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseutils.nim.c -o c_code/2_3/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pmath.nim.c -o c_code/2_1/@pmath.nim.o
@@ -5266,7 +5184,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimsets.nim.c -o c_code/2_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcbuilderbase.nim.c -o c_code/2_3/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcgendata.nim.c -o c_code/2_3/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
@@ -5336,11 +5253,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msem.nim.c -o c_code/2_3/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mreorder.nim.c -o c_code/2_3/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mdepends.nim.c -o c_code/2_3/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mnifgen.nim.c -o c_code/2_3/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msourcemap.nim.c -o c_code/2_3/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mjsgen.nim.c -o c_code/2_3/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
@@ -5375,10 +5287,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
 c_code/2_3/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/2_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/2_3/@psystem.nim.o \
 c_code/2_3/@pparseutils.nim.o \
 c_code/2_1/@pmath.nim.o \
@@ -5465,7 +5379,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/2_1/@mastmsgs.nim.o \
 c_code/2_1/@mtypes.nim.o \
 c_code/2_1/@mnimsets.nim.o \
-c_code/2_3/@mcbuilderbase.nim.o \
 c_code/2_3/@mcgendata.nim.o \
 c_code/2_1/@mmangleutils.nim.o \
 c_code/2_1/@mccgutils.nim.o \
@@ -5535,11 +5448,6 @@ c_code/2_1/@mvtables.nim.o \
 c_code/2_3/@msem.nim.o \
 c_code/2_3/@mreorder.nim.o \
 c_code/2_3/@mdepends.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_3/@mnifgen.nim.o \
 c_code/2_3/@msourcemap.nim.o \
 c_code/2_3/@mjsgen.nim.o \
 c_code/2_1/@plists.nim.o \
@@ -5573,10 +5481,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem@sexceptions.nim.c -o c_code/2_3/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sdollars.nim.c -o c_code/2_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem.nim.c -o c_code/2_3/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseutils.nim.c -o c_code/2_3/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pmath.nim.c -o c_code/2_1/@pmath.nim.o
@@ -5663,7 +5573,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimsets.nim.c -o c_code/2_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcbuilderbase.nim.c -o c_code/2_3/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcgendata.nim.c -o c_code/2_3/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
@@ -5733,11 +5642,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msem.nim.c -o c_code/2_3/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mreorder.nim.c -o c_code/2_3/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mdepends.nim.c -o c_code/2_3/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mnifgen.nim.c -o c_code/2_3/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msourcemap.nim.c -o c_code/2_3/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mjsgen.nim.c -o c_code/2_3/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
@@ -5772,10 +5676,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
 c_code/2_3/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/2_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/2_3/@psystem.nim.o \
 c_code/2_3/@pparseutils.nim.o \
 c_code/2_1/@pmath.nim.o \
@@ -5862,7 +5768,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/2_1/@mastmsgs.nim.o \
 c_code/2_1/@mtypes.nim.o \
 c_code/2_1/@mnimsets.nim.o \
-c_code/2_3/@mcbuilderbase.nim.o \
 c_code/2_3/@mcgendata.nim.o \
 c_code/2_1/@mmangleutils.nim.o \
 c_code/2_1/@mccgutils.nim.o \
@@ -5932,11 +5837,6 @@ c_code/2_1/@mvtables.nim.o \
 c_code/2_3/@msem.nim.o \
 c_code/2_3/@mreorder.nim.o \
 c_code/2_3/@mdepends.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_3/@mnifgen.nim.o \
 c_code/2_3/@msourcemap.nim.o \
 c_code/2_3/@mjsgen.nim.o \
 c_code/2_1/@plists.nim.o \
@@ -5970,10 +5870,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem@sexceptions.nim.c -o c_code/2_3/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sdollars.nim.c -o c_code/2_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem.nim.c -o c_code/2_3/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseutils.nim.c -o c_code/2_3/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pmath.nim.c -o c_code/2_1/@pmath.nim.o
@@ -6060,7 +5962,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimsets.nim.c -o c_code/2_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcbuilderbase.nim.c -o c_code/2_3/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcgendata.nim.c -o c_code/2_3/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
@@ -6130,11 +6031,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msem.nim.c -o c_code/2_3/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mreorder.nim.c -o c_code/2_3/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mdepends.nim.c -o c_code/2_3/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mnifgen.nim.c -o c_code/2_3/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msourcemap.nim.c -o c_code/2_3/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mjsgen.nim.c -o c_code/2_3/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
@@ -6169,10 +6065,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
 c_code/2_3/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/2_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/2_3/@psystem.nim.o \
 c_code/2_3/@pparseutils.nim.o \
 c_code/2_1/@pmath.nim.o \
@@ -6259,7 +6157,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/2_1/@mastmsgs.nim.o \
 c_code/2_1/@mtypes.nim.o \
 c_code/2_1/@mnimsets.nim.o \
-c_code/2_3/@mcbuilderbase.nim.o \
 c_code/2_3/@mcgendata.nim.o \
 c_code/2_1/@mmangleutils.nim.o \
 c_code/2_1/@mccgutils.nim.o \
@@ -6329,11 +6226,6 @@ c_code/2_1/@mvtables.nim.o \
 c_code/2_3/@msem.nim.o \
 c_code/2_3/@mreorder.nim.o \
 c_code/2_3/@mdepends.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_3/@mnifgen.nim.o \
 c_code/2_3/@msourcemap.nim.o \
 c_code/2_3/@mjsgen.nim.o \
 c_code/2_1/@plists.nim.o \
@@ -6367,10 +6259,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem.nim.c -o c_code/2_4/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -6457,7 +6351,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -6527,11 +6420,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msem.nim.c -o c_code/2_4/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mdepends.nim.c -o c_code/2_4/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mnifgen.nim.c -o c_code/2_4/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mjsgen.nim.c -o c_code/2_4/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -6566,10 +6454,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_4/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -6656,7 +6546,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -6726,11 +6615,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_4/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/2_4/@mdepends.nim.o \
-c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_4/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/2_4/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -6764,10 +6648,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem.nim.c -o c_code/2_4/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -6854,7 +6740,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -6924,11 +6809,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msem.nim.c -o c_code/2_4/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mdepends.nim.c -o c_code/2_4/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mnifgen.nim.c -o c_code/2_4/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mjsgen.nim.c -o c_code/2_4/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -6963,10 +6843,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_4/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -7053,7 +6935,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -7123,11 +7004,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_4/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/2_4/@mdepends.nim.o \
-c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_4/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/2_4/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -7161,10 +7037,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem@sexceptions.nim.c -o c_code/2_3/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sdollars.nim.c -o c_code/2_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem.nim.c -o c_code/2_3/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseutils.nim.c -o c_code/2_3/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pmath.nim.c -o c_code/2_1/@pmath.nim.o
@@ -7251,7 +7129,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimsets.nim.c -o c_code/2_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcbuilderbase.nim.c -o c_code/2_3/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcgendata.nim.c -o c_code/2_3/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
@@ -7321,11 +7198,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msem.nim.c -o c_code/2_3/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mreorder.nim.c -o c_code/2_3/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mdepends.nim.c -o c_code/2_3/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mnifgen.nim.c -o c_code/2_3/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msourcemap.nim.c -o c_code/2_3/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mjsgen.nim.c -o c_code/2_3/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
@@ -7360,10 +7232,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
 c_code/2_3/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/2_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/2_3/@psystem.nim.o \
 c_code/2_3/@pparseutils.nim.o \
 c_code/2_1/@pmath.nim.o \
@@ -7450,7 +7324,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/2_1/@mastmsgs.nim.o \
 c_code/2_1/@mtypes.nim.o \
 c_code/2_1/@mnimsets.nim.o \
-c_code/2_3/@mcbuilderbase.nim.o \
 c_code/2_3/@mcgendata.nim.o \
 c_code/2_1/@mmangleutils.nim.o \
 c_code/2_1/@mccgutils.nim.o \
@@ -7520,11 +7393,6 @@ c_code/2_1/@mvtables.nim.o \
 c_code/2_3/@msem.nim.o \
 c_code/2_3/@mreorder.nim.o \
 c_code/2_3/@mdepends.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_3/@mnifgen.nim.o \
 c_code/2_3/@msourcemap.nim.o \
 c_code/2_3/@mjsgen.nim.o \
 c_code/2_1/@plists.nim.o \
@@ -7558,10 +7426,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem.nim.c -o c_code/2_4/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -7648,7 +7518,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -7718,11 +7587,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msem.nim.c -o c_code/2_4/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mdepends.nim.c -o c_code/2_4/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mnifgen.nim.c -o c_code/2_4/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mjsgen.nim.c -o c_code/2_4/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -7757,10 +7621,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_4/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -7847,7 +7713,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -7917,11 +7782,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_4/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/2_4/@mdepends.nim.o \
-c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_4/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/2_4/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -7955,10 +7815,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@sexceptions.nim.c -o c_code/2_18/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sdigitsutils.nim.c -o c_code/2_18/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sassertions.nim.c -o c_code/2_18/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@siterators.nim.c -o c_code/2_18/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@sdollars.nim.c -o c_code/2_18/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sdragonbox.nim.c -o c_code/2_18/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sschubfach.nim.c -o c_code/2_18/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sformatfloat.nim.c -o c_code/2_18/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@srepr_v2.nim.c -o c_code/2_18/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem.nim.c -o c_code/2_18/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pparseutils.nim.c -o c_code/2_18/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pmath.nim.c -o c_code/2_18/@pmath.nim.o
@@ -8045,7 +7907,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mastmsgs.nim.c -o c_code/2_18/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mtypes.nim.c -o c_code/2_18/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mnimsets.nim.c -o c_code/2_18/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mcbuilderbase.nim.c -o c_code/2_18/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mcgendata.nim.c -o c_code/2_18/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mmangleutils.nim.c -o c_code/2_18/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mccgutils.nim.c -o c_code/2_18/@mccgutils.nim.o
@@ -8115,11 +7976,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@msem.nim.c -o c_code/2_18/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mreorder.nim.c -o c_code/2_18/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mdepends.nim.c -o c_code/2_18/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mnifgen.nim.c -o c_code/2_18/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@msourcemap.nim.c -o c_code/2_18/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mjsgen.nim.c -o c_code/2_18/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@plists.nim.c -o c_code/2_18/@plists.nim.o
@@ -8154,10 +8010,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
 c_code/2_18/@psystem@sexceptions.nim.o \
 c_code/2_18/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/2_18/@pstd@sassertions.nim.o \
+c_code/2_18/@psystem@siterators.nim.o \
 c_code/2_18/@psystem@sdollars.nim.o \
 c_code/2_18/@pstd@sprivate@sdragonbox.nim.o \
 c_code/2_18/@pstd@sprivate@sschubfach.nim.o \
 c_code/2_18/@pstd@sformatfloat.nim.o \
+c_code/2_18/@psystem@srepr_v2.nim.o \
 c_code/2_18/@psystem.nim.o \
 c_code/2_18/@pparseutils.nim.o \
 c_code/2_18/@pmath.nim.o \
@@ -8244,7 +8102,6 @@ c_code/2_18/@mbitsets.nim.o \
 c_code/2_18/@mastmsgs.nim.o \
 c_code/2_18/@mtypes.nim.o \
 c_code/2_18/@mnimsets.nim.o \
-c_code/2_18/@mcbuilderbase.nim.o \
 c_code/2_18/@mcgendata.nim.o \
 c_code/2_18/@mmangleutils.nim.o \
 c_code/2_18/@mccgutils.nim.o \
@@ -8314,11 +8171,6 @@ c_code/2_18/@mvtables.nim.o \
 c_code/2_18/@msem.nim.o \
 c_code/2_18/@mreorder.nim.o \
 c_code/2_18/@mdepends.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_18/@mnifgen.nim.o \
 c_code/2_18/@msourcemap.nim.o \
 c_code/2_18/@mjsgen.nim.o \
 c_code/2_18/@plists.nim.o \
@@ -8352,10 +8204,12 @@ c_code/2_18/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem@sexceptions.nim.c -o c_code/2_3/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sdollars.nim.c -o c_code/2_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem.nim.c -o c_code/2_3/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseutils.nim.c -o c_code/2_3/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pmath.nim.c -o c_code/2_1/@pmath.nim.o
@@ -8442,7 +8296,6 @@ c_code/2_18/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimsets.nim.c -o c_code/2_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcbuilderbase.nim.c -o c_code/2_3/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcgendata.nim.c -o c_code/2_3/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
@@ -8512,11 +8365,6 @@ c_code/2_18/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msem.nim.c -o c_code/2_3/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mreorder.nim.c -o c_code/2_3/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mdepends.nim.c -o c_code/2_3/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mnifgen.nim.c -o c_code/2_3/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msourcemap.nim.c -o c_code/2_3/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mjsgen.nim.c -o c_code/2_3/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
@@ -8551,10 +8399,12 @@ c_code/2_18/@mnim.nim.o $LINK_FLAGS
 c_code/2_3/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/2_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/2_3/@psystem.nim.o \
 c_code/2_3/@pparseutils.nim.o \
 c_code/2_1/@pmath.nim.o \
@@ -8641,7 +8491,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/2_1/@mastmsgs.nim.o \
 c_code/2_1/@mtypes.nim.o \
 c_code/2_1/@mnimsets.nim.o \
-c_code/2_3/@mcbuilderbase.nim.o \
 c_code/2_3/@mcgendata.nim.o \
 c_code/2_1/@mmangleutils.nim.o \
 c_code/2_1/@mccgutils.nim.o \
@@ -8711,11 +8560,6 @@ c_code/2_1/@mvtables.nim.o \
 c_code/2_3/@msem.nim.o \
 c_code/2_3/@mreorder.nim.o \
 c_code/2_3/@mdepends.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_3/@mnifgen.nim.o \
 c_code/2_3/@msourcemap.nim.o \
 c_code/2_3/@mjsgen.nim.o \
 c_code/2_1/@plists.nim.o \
@@ -8749,10 +8593,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem.nim.c -o c_code/2_4/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -8839,7 +8685,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -8909,11 +8754,6 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msem.nim.c -o c_code/2_4/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mdepends.nim.c -o c_code/2_4/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mnifgen.nim.c -o c_code/2_4/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mjsgen.nim.c -o c_code/2_4/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -8948,10 +8788,12 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_4/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -9038,7 +8880,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -9108,11 +8949,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_4/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/2_4/@mdepends.nim.o \
-c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_4/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/2_4/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -9146,10 +8982,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sdollars.nim.c -o c_code/2_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem.nim.c -o c_code/2_4/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pmath.nim.c -o c_code/2_2/@pmath.nim.o
@@ -9236,7 +9074,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mnimsets.nim.c -o c_code/2_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -9306,11 +9143,6 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msem.nim.c -o c_code/2_4/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mdepends.nim.c -o c_code/2_4/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mnifgen.nim.c -o c_code/2_4/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mjsgen.nim.c -o c_code/2_4/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -9345,10 +9177,12 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/2_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/2_4/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/2_2/@pmath.nim.o \
@@ -9435,7 +9269,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/2_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -9505,11 +9338,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/2_4/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/2_4/@mdepends.nim.o \
-c_code/2_4/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_4/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/2_4/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -9551,10 +9379,12 @@ macosx)
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sexceptions.nim.c -o c_code/2_1/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@psystem@sdollars.nim.c -o c_code/3_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@psystem.nim.c -o c_code/3_1/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pparseutils.nim.c -o c_code/2_1/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pmath.nim.c -o c_code/3_1/@pmath.nim.o
@@ -9641,7 +9471,6 @@ macosx)
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mnimsets.nim.c -o c_code/3_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mcbuilderbase.nim.c -o c_code/2_1/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mcgendata.nim.c -o c_code/2_1/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
@@ -9711,11 +9540,6 @@ macosx)
     $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@msem.nim.c -o c_code/3_1/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mreorder.nim.c -o c_code/2_1/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mdepends.nim.c -o c_code/3_1/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/3_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/3_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mnifgen.nim.c -o c_code/3_1/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msourcemap.nim.c -o c_code/2_1/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mjsgen.nim.c -o c_code/3_1/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
@@ -9750,10 +9574,12 @@ macosx)
 c_code/2_1/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/3_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/3_1/@psystem.nim.o \
 c_code/2_1/@pparseutils.nim.o \
 c_code/3_1/@pmath.nim.o \
@@ -9840,7 +9666,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/2_1/@mastmsgs.nim.o \
 c_code/2_1/@mtypes.nim.o \
 c_code/3_1/@mnimsets.nim.o \
-c_code/2_1/@mcbuilderbase.nim.o \
 c_code/2_1/@mcgendata.nim.o \
 c_code/2_1/@mmangleutils.nim.o \
 c_code/2_1/@mccgutils.nim.o \
@@ -9910,11 +9735,6 @@ c_code/2_1/@mvtables.nim.o \
 c_code/3_1/@msem.nim.o \
 c_code/2_1/@mreorder.nim.o \
 c_code/3_1/@mdepends.nim.o \
-c_code/3_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/3_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/3_1/@mnifgen.nim.o \
 c_code/2_1/@msourcemap.nim.o \
 c_code/3_1/@mjsgen.nim.o \
 c_code/2_1/@plists.nim.o \
@@ -9948,10 +9768,12 @@ c_code/3_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@psystem@sexceptions.nim.c -o c_code/2_2/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@psystem@sdollars.nim.c -o c_code/3_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@psystem.nim.c -o c_code/3_2/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pparseutils.nim.c -o c_code/2_2/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@pmath.nim.c -o c_code/3_2/@pmath.nim.o
@@ -10038,7 +9860,6 @@ c_code/3_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@mnimsets.nim.c -o c_code/3_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcbuilderbase.nim.c -o c_code/2_2/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -10108,11 +9929,6 @@ c_code/3_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@msem.nim.c -o c_code/3_2/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mreorder.nim.c -o c_code/2_2/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@mdepends.nim.c -o c_code/3_2/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/3_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/3_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@mnifgen.nim.c -o c_code/3_2/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msourcemap.nim.c -o c_code/2_2/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@mjsgen.nim.c -o c_code/3_2/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -10147,10 +9963,12 @@ c_code/3_1/@mnim.nim.o $LINK_FLAGS
 c_code/2_2/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/3_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/3_2/@psystem.nim.o \
 c_code/2_2/@pparseutils.nim.o \
 c_code/3_2/@pmath.nim.o \
@@ -10237,7 +10055,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/3_2/@mnimsets.nim.o \
-c_code/2_2/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -10307,11 +10124,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/3_2/@msem.nim.o \
 c_code/2_2/@mreorder.nim.o \
 c_code/3_2/@mdepends.nim.o \
-c_code/3_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/3_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/3_2/@mnifgen.nim.o \
 c_code/2_2/@msourcemap.nim.o \
 c_code/3_2/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -10366,10 +10178,12 @@ c_code/3_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@psystem@sexceptions.nim.c -o c_code/2_4/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sassertions.nim.c -o c_code/1_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@psystem@sdollars.nim.c -o c_code/3_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sprivate@sschubfach.nim.c -o c_code/1_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sformatfloat.nim.c -o c_code/1_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@srepr_v2.nim.c -o c_code/1_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_6/@psystem.nim.c -o c_code/3_6/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseutils.nim.c -o c_code/2_4/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@pmath.nim.c -o c_code/3_2/@pmath.nim.o
@@ -10456,7 +10270,6 @@ c_code/3_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mastmsgs.nim.c -o c_code/2_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mtypes.nim.c -o c_code/2_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@mnimsets.nim.c -o c_code/3_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mcbuilderbase.nim.c -o c_code/2_4/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mcgendata.nim.c -o c_code/2_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mmangleutils.nim.c -o c_code/2_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@mccgutils.nim.c -o c_code/2_2/@mccgutils.nim.o
@@ -10526,11 +10339,6 @@ c_code/3_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/3_6/@msem.nim.c -o c_code/3_6/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@mreorder.nim.c -o c_code/2_4/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_6/@mdepends.nim.c -o c_code/3_6/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/3_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/3_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_6/@mnifgen.nim.c -o c_code/3_6/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@msourcemap.nim.c -o c_code/2_4/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_6/@mjsgen.nim.c -o c_code/3_6/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@plists.nim.c -o c_code/2_2/@plists.nim.o
@@ -10565,10 +10373,12 @@ c_code/3_2/@mnim.nim.o $LINK_FLAGS
 c_code/2_4/@psystem@sexceptions.nim.o \
 c_code/1_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/3_2/@psystem@sdollars.nim.o \
 c_code/1_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_2/@pstd@sformatfloat.nim.o \
+c_code/1_2/@psystem@srepr_v2.nim.o \
 c_code/3_6/@psystem.nim.o \
 c_code/2_4/@pparseutils.nim.o \
 c_code/3_2/@pmath.nim.o \
@@ -10655,7 +10465,6 @@ c_code/1_2/@mbitsets.nim.o \
 c_code/2_2/@mastmsgs.nim.o \
 c_code/2_2/@mtypes.nim.o \
 c_code/3_2/@mnimsets.nim.o \
-c_code/2_4/@mcbuilderbase.nim.o \
 c_code/2_2/@mcgendata.nim.o \
 c_code/2_2/@mmangleutils.nim.o \
 c_code/2_2/@mccgutils.nim.o \
@@ -10725,11 +10534,6 @@ c_code/2_2/@mvtables.nim.o \
 c_code/3_6/@msem.nim.o \
 c_code/2_4/@mreorder.nim.o \
 c_code/3_6/@mdepends.nim.o \
-c_code/3_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/3_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/3_6/@mnifgen.nim.o \
 c_code/2_4/@msourcemap.nim.o \
 c_code/3_6/@mjsgen.nim.o \
 c_code/2_2/@plists.nim.o \
@@ -10823,10 +10627,392 @@ c_code/3_6/@mnim.nim.o $LINK_FLAGS
     ;;
   powerpc)
     set -x
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@psystem@sexceptions.nim.c -o c_code/2_3/@psystem@sexceptions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@psystem@sdollars.nim.c -o c_code/3_1/@psystem@sdollars.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@psystem.nim.c -o c_code/3_16/@psystem.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseutils.nim.c -o c_code/2_3/@pparseutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pmath.nim.c -o c_code/3_1/@pmath.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@palgorithm.nim.c -o c_code/3_1/@palgorithm.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@punicode.nim.c -o c_code/2_1/@punicode.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@pstrutils.nim.c -o c_code/3_16/@pstrutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@ppathnorm.nim.c -o c_code/2_3/@ppathnorm.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pstd@soserrors.nim.c -o c_code/2_3/@pstd@soserrors.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@pstd@ssyncio.nim.c -o c_code/3_16/@pstd@ssyncio.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pposix.nim.c -o c_code/3_1/@pposix.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@soscommon.nim.c -o c_code/2_1/@pstd@sprivate@soscommon.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@pstd@sprivate@sospaths2.nim.c -o c_code/3_16/@pstd@sprivate@sospaths2.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sossymlinks.nim.c -o c_code/2_1/@pstd@sprivate@sossymlinks.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@ptimes.nim.c -o c_code/3_1/@ptimes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pstd@sprivate@sosfiles.nim.c -o c_code/3_1/@pstd@sprivate@sosfiles.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pstd@sprivate@sosdirs.nim.c -o c_code/2_3/@pstd@sprivate@sosdirs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@pstd@senvvars.nim.c -o c_code/3_16/@pstd@senvvars.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sosappdirs.nim.c -o c_code/2_1/@pstd@sprivate@sosappdirs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@scmdline.nim.c -o c_code/2_1/@pstd@scmdline.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@pos.nim.c -o c_code/3_16/@pos.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@pparseopt.nim.c -o c_code/3_16/@pparseopt.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@phashes.nim.c -o c_code/3_1/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pstrtabs.nim.c -o c_code/2_3/@pstrtabs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@ptables.nim.c -o c_code/3_16/@ptables.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstrformat.nim.c -o c_code/2_1/@pstrformat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pterminal.nim.c -o c_code/3_1/@pterminal.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mpathutils.nim.c -o c_code/3_1/@mpathutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mropes.nim.c -o c_code/3_1/@mropes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mlineinfos.nim.c -o c_code/2_1/@mlineinfos.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mplatform.nim.c -o c_code/3_16/@mplatform.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mprefixmatches.nim.c -o c_code/1_1/@mprefixmatches.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimpaths.nim.c -o c_code/2_1/@mnimpaths.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psets.nim.c -o c_code/2_1/@psets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@moptions.nim.c -o c_code/3_16/@moptions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mmsgs.nim.c -o c_code/3_16/@mmsgs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mcondsyms.nim.c -o c_code/1_1/@mcondsyms.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mwordrecg.nim.c -o c_code/1_1/@mwordrecg.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@midents.nim.c -o c_code/2_1/@midents.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mint128.nim.c -o c_code/2_1/@mint128.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mnodekinds.nim.c -o c_code/1_1/@mnodekinds.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mast.nim.c -o c_code/2_3/@mast.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mllstream.nim.c -o c_code/3_16/@mllstream.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimlexbase.nim.c -o c_code/2_1/@mnimlexbase.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mlexer.nim.c -o c_code/3_16/@mlexer.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mrenderer.nim.c -o c_code/3_16/@mrenderer.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mmodulepaths.nim.c -o c_code/3_1/@mmodulepaths.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@pstreams.nim.c -o c_code/3_16/@pstreams.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pcpuinfo.nim.c -o c_code/3_1/@pcpuinfo.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pdeques.nim.c -o c_code/3_1/@pdeques.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@posproc.nim.c -o c_code/3_16/@posproc.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@plexbase.nim.c -o c_code/1_1/@plexbase.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pparsejson.nim.c -o c_code/2_1/@pparsejson.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@pjson.nim.c -o c_code/3_16/@pjson.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pstd@sjsonutils.nim.c -o c_code/3_1/@pstd@sjsonutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@m..@sdist@schecksums@ssrc@schecksums@ssha1.nim.c -o c_code/3_16/@m..@sdist@schecksums@ssrc@schecksums@ssha1.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mextccomp.nim.c -o c_code/3_16/@mextccomp.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mnimblecmd.nim.c -o c_code/3_16/@mnimblecmd.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mcommands.nim.c -o c_code/3_16/@mcommands.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mparser.nim.c -o c_code/2_3/@mparser.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mfilters.nim.c -o c_code/2_1/@mfilters.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mfilter_tmpl.nim.c -o c_code/2_3/@mfilter_tmpl.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@msyntaxes.nim.c -o c_code/3_16/@msyntaxes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mrodutils.nim.c -o c_code/2_1/@mrodutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@spackedsets.nim.c -o c_code/2_1/@pstd@spackedsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastyaml.nim.c -o c_code/2_1/@mastyaml.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mastalgo.nim.c -o c_code/2_3/@mastalgo.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mtrees.nim.c -o c_code/1_1/@mtrees.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@schecksums@ssrc@schecksums@smd5.nim.c -o c_code/1_1/@m..@sdist@schecksums@ssrc@schecksums@smd5.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mbtrees.nim.c -o c_code/3_16/@mbtrees.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mpackages.nim.c -o c_code/2_1/@mpackages.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msuggestsymdb.nim.c -o c_code/2_1/@msuggestsymdb.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mic@srodfiles.nim.c -o c_code/3_16/@mic@srodfiles.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mic@sbitabs.nim.c -o c_code/1_1/@mic@sbitabs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mic@siclineinfos.nim.c -o c_code/1_1/@mic@siclineinfos.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mic@spacked_ast.nim.c -o c_code/1_1/@mic@spacked_ast.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mic@sic.nim.c -o c_code/2_3/@mic@sic.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mmodulegraphs.nim.c -o c_code/2_3/@mmodulegraphs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmagicsys.nim.c -o c_code/2_1/@mmagicsys.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mnimsets.nim.c -o c_code/3_1/@mnimsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mcgendata.nim.c -o c_code/2_3/@mcgendata.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mtreetab.nim.c -o c_code/1_1/@mtreetab.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mguards.nim.c -o c_code/2_3/@mguards.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msemfold.nim.c -o c_code/2_1/@msemfold.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mvmdef.nim.c -o c_code/3_16/@mvmdef.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mlayeredtable.nim.c -o c_code/2_1/@mlayeredtable.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mlowerings.nim.c -o c_code/2_3/@mlowerings.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mparampatterns.nim.c -o c_code/2_1/@mparampatterns.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msemdata.nim.c -o c_code/2_3/@msemdata.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypeallowed.nim.c -o c_code/2_1/@mtypeallowed.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@misolation_check.nim.c -o c_code/2_1/@misolation_check.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mvarpartitions.nim.c -o c_code/2_3/@mvarpartitions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mnilcheck.nim.c -o c_code/2_3/@mnilcheck.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@merrorhandling.nim.c -o c_code/1_1/@merrorhandling.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@maliasanalysis.nim.c -o c_code/1_1/@maliasanalysis.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@msemstrictfuncs.nim.c -o c_code/1_1/@msemstrictfuncs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@seditdistance.nim.c -o c_code/2_1/@pstd@seditdistance.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pheapqueue.nim.c -o c_code/2_3/@pheapqueue.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mlookups.nim.c -o c_code/2_3/@mlookups.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mlinter.nim.c -o c_code/2_1/@mlinter.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msemtypinst.nim.c -o c_code/2_3/@msemtypinst.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mconcepts.nim.c -o c_code/2_3/@mconcepts.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@msigmatch.nim.c -o c_code/3_16/@msigmatch.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mpragmas.nim.c -o c_code/3_16/@mpragmas.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mpushpoppragmas.nim.c -o c_code/1_1/@mpushpoppragmas.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msighashes.nim.c -o c_code/2_1/@msighashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mliftdestructors.nim.c -o c_code/2_3/@mliftdestructors.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msempass2.nim.c -o c_code/2_3/@msempass2.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mcgmeth.nim.c -o c_code/2_1/@mcgmeth.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@maliases.nim.c -o c_code/2_1/@maliases.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mliftlocals.nim.c -o c_code/2_3/@mliftlocals.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mlambdalifting.nim.c -o c_code/2_3/@mlambdalifting.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mclosureiters.nim.c -o c_code/2_3/@mclosureiters.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mtransf.nim.c -o c_code/2_3/@mtransf.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@moptimizer.nim.c -o c_code/2_3/@moptimizer.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mdfa.nim.c -o c_code/2_3/@mdfa.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@minjectdestructors.nim.c -o c_code/2_3/@minjectdestructors.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mexpanddefaults.nim.c -o c_code/1_1/@mexpanddefaults.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mpipelineutils.nim.c -o c_code/2_1/@mpipelineutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mspawn.nim.c -o c_code/2_1/@mspawn.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msemparallel.nim.c -o c_code/2_3/@msemparallel.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pdynlib.nim.c -o c_code/2_3/@pdynlib.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mcgen.nim.c -o c_code/3_16/@mcgen.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmodules.nim.c -o c_code/2_1/@mmodules.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msemmacrosanity.nim.c -o c_code/2_3/@msemmacrosanity.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mvmgen.nim.c -o c_code/2_3/@mvmgen.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mvmdeps.nim.c -o c_code/3_1/@mvmdeps.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mgorgeimpl.nim.c -o c_code/3_16/@mgorgeimpl.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mmacrocacheimpl.nim.c -o c_code/1_1/@mmacrocacheimpl.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mvmprofiler.nim.c -o c_code/3_1/@mvmprofiler.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mevaltempl.nim.c -o c_code/2_3/@mevaltempl.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mvmconv.nim.c -o c_code/3_1/@mvmconv.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mvmmarshal.nim.c -o c_code/2_1/@mvmmarshal.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mvm.nim.c -o c_code/3_16/@mvm.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mimporter.nim.c -o c_code/2_3/@mimporter.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mprocfind.nim.c -o c_code/2_3/@mprocfind.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mpatterns.nim.c -o c_code/2_3/@mpatterns.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mpluginsupport.nim.c -o c_code/1_1/@mpluginsupport.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mplugins@slocals.nim.c -o c_code/1_1/@mplugins@slocals.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mplugins@sitersgen.nim.c -o c_code/2_1/@mplugins@sitersgen.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mplugins@sactive.nim.c -o c_code/1_1/@mplugins@sactive.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@menumtostr.nim.c -o c_code/1_1/@menumtostr.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mvtables.nim.c -o c_code/2_1/@mvtables.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@msem.nim.c -o c_code/3_16/@msem.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mreorder.nim.c -o c_code/2_3/@mreorder.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mdepends.nim.c -o c_code/3_16/@mdepends.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@msourcemap.nim.c -o c_code/2_3/@msourcemap.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mjsgen.nim.c -o c_code/3_16/@mjsgen.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@ppackages@sdocutils@srstast.nim.c -o c_code/2_1/@ppackages@sdocutils@srstast.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@ppackages@sdocutils@sdochelpers.nim.c -o c_code/3_1/@ppackages@sdocutils@sdochelpers.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@ppackages@sdocutils@srstidx.nim.c -o c_code/3_1/@ppackages@sdocutils@srstidx.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@ppackages@sdocutils@shighlite.nim.c -o c_code/1_1/@ppackages@sdocutils@shighlite.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@ppackages@sdocutils@srst.nim.c -o c_code/3_16/@ppackages@sdocutils@srst.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@ppackages@sdocutils@srstgen.nim.c -o c_code/3_16/@ppackages@sdocutils@srstgen.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mtypesrenderer.nim.c -o c_code/2_3/@mtypesrenderer.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mrenderverbatim.nim.c -o c_code/2_3/@mrenderverbatim.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pxmltree.nim.c -o c_code/1_1/@pxmltree.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@puri.nim.c -o c_code/2_1/@puri.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mdocgen.nim.c -o c_code/3_16/@mdocgen.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mdocgen2.nim.c -o c_code/2_3/@mdocgen2.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mic@sreplayer.nim.c -o c_code/3_1/@mic@sreplayer.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@mpipelines.nim.c -o c_code/3_1/@mpipelines.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mscriptconfig.nim.c -o c_code/3_16/@mscriptconfig.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mnimconf.nim.c -o c_code/3_16/@mnimconf.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mic@sdce.nim.c -o c_code/2_3/@mic@sdce.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mic@scbackend.nim.c -o c_code/2_1/@mic@scbackend.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mic@sintegrity.nim.c -o c_code/2_3/@mic@sintegrity.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@mic@snavigator.nim.c -o c_code/2_3/@mic@snavigator.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mmain.nim.c -o c_code/3_16/@mmain.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mcmdlinehelper.nim.c -o c_code/2_1/@mcmdlinehelper.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pbrowsers.nim.c -o c_code/3_1/@pbrowsers.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@mnim.nim.c -o c_code/3_16/@mnim.nim.o
     if [ "$parallel" -gt 0 ]; then
       sem --wait --id $$
     fi
-    $CC -o $binDir/nim  $LINK_FLAGS
+    $CC -o $binDir/nim  \
+c_code/2_3/@psystem@sexceptions.nim.o \
+c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
+c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
+c_code/3_1/@psystem@sdollars.nim.o \
+c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
+c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
+c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
+c_code/3_16/@psystem.nim.o \
+c_code/2_3/@pparseutils.nim.o \
+c_code/3_1/@pmath.nim.o \
+c_code/3_1/@palgorithm.nim.o \
+c_code/1_1/@pstd@senumutils.nim.o \
+c_code/2_1/@punicode.nim.o \
+c_code/3_16/@pstrutils.nim.o \
+c_code/2_3/@ppathnorm.nim.o \
+c_code/2_3/@pstd@soserrors.nim.o \
+c_code/3_16/@pstd@ssyncio.nim.o \
+c_code/3_1/@pposix.nim.o \
+c_code/2_1/@pstd@sprivate@soscommon.nim.o \
+c_code/3_16/@pstd@sprivate@sospaths2.nim.o \
+c_code/2_1/@pstd@sprivate@sossymlinks.nim.o \
+c_code/3_1/@ptimes.nim.o \
+c_code/3_1/@pstd@sprivate@sosfiles.nim.o \
+c_code/2_3/@pstd@sprivate@sosdirs.nim.o \
+c_code/3_16/@pstd@senvvars.nim.o \
+c_code/2_1/@pstd@sprivate@sosappdirs.nim.o \
+c_code/2_1/@pstd@scmdline.nim.o \
+c_code/3_16/@pos.nim.o \
+c_code/3_16/@pparseopt.nim.o \
+c_code/1_1/@psequtils.nim.o \
+c_code/3_1/@phashes.nim.o \
+c_code/2_3/@pstrtabs.nim.o \
+c_code/3_16/@ptables.nim.o \
+c_code/2_1/@pstrformat.nim.o \
+c_code/3_1/@pterminal.nim.o \
+c_code/3_1/@mpathutils.nim.o \
+c_code/3_1/@mropes.nim.o \
+c_code/2_1/@mlineinfos.nim.o \
+c_code/3_16/@mplatform.nim.o \
+c_code/1_1/@mprefixmatches.nim.o \
+c_code/2_1/@mnimpaths.nim.o \
+c_code/2_1/@psets.nim.o \
+c_code/1_1/@pstd@sobjectdollar.nim.o \
+c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/3_16/@moptions.nim.o \
+c_code/3_16/@mmsgs.nim.o \
+c_code/1_1/@mcondsyms.nim.o \
+c_code/1_1/@mwordrecg.nim.o \
+c_code/2_1/@midents.nim.o \
+c_code/2_1/@mint128.nim.o \
+c_code/1_1/@mnodekinds.nim.o \
+c_code/2_3/@mast.nim.o \
+c_code/3_16/@mllstream.nim.o \
+c_code/2_1/@mnimlexbase.nim.o \
+c_code/3_16/@mlexer.nim.o \
+c_code/3_16/@mrenderer.nim.o \
+c_code/3_1/@mmodulepaths.nim.o \
+c_code/3_16/@pstreams.nim.o \
+c_code/3_1/@pcpuinfo.nim.o \
+c_code/3_1/@pdeques.nim.o \
+c_code/3_16/@posproc.nim.o \
+c_code/1_1/@plexbase.nim.o \
+c_code/2_1/@pparsejson.nim.o \
+c_code/3_16/@pjson.nim.o \
+c_code/3_1/@pstd@sjsonutils.nim.o \
+c_code/3_16/@m..@sdist@schecksums@ssrc@schecksums@ssha1.nim.o \
+c_code/3_16/@mextccomp.nim.o \
+c_code/3_16/@mnimblecmd.nim.o \
+c_code/3_16/@mcommands.nim.o \
+c_code/2_3/@mparser.nim.o \
+c_code/2_1/@mfilters.nim.o \
+c_code/2_3/@mfilter_tmpl.nim.o \
+c_code/3_16/@msyntaxes.nim.o \
+c_code/2_1/@mrodutils.nim.o \
+c_code/2_1/@pstd@spackedsets.nim.o \
+c_code/2_1/@mastyaml.nim.o \
+c_code/2_3/@mastalgo.nim.o \
+c_code/1_1/@mtrees.nim.o \
+c_code/1_1/@m..@sdist@schecksums@ssrc@schecksums@smd5.nim.o \
+c_code/3_16/@mbtrees.nim.o \
+c_code/2_1/@mpackages.nim.o \
+c_code/2_1/@msuggestsymdb.nim.o \
+c_code/3_16/@mic@srodfiles.nim.o \
+c_code/1_1/@mic@sbitabs.nim.o \
+c_code/1_1/@mic@siclineinfos.nim.o \
+c_code/1_1/@mic@spacked_ast.nim.o \
+c_code/2_3/@mic@sic.nim.o \
+c_code/2_3/@mmodulegraphs.nim.o \
+c_code/2_1/@mmagicsys.nim.o \
+c_code/1_1/@mbitsets.nim.o \
+c_code/2_1/@mastmsgs.nim.o \
+c_code/2_1/@mtypes.nim.o \
+c_code/3_1/@mnimsets.nim.o \
+c_code/2_3/@mcgendata.nim.o \
+c_code/2_1/@mmangleutils.nim.o \
+c_code/2_1/@mccgutils.nim.o \
+c_code/1_1/@mtreetab.nim.o \
+c_code/2_1/@msaturate.nim.o \
+c_code/2_3/@mguards.nim.o \
+c_code/2_1/@msemfold.nim.o \
+c_code/3_16/@mvmdef.nim.o \
+c_code/2_1/@mlayeredtable.nim.o \
+c_code/2_3/@mlowerings.nim.o \
+c_code/2_1/@mparampatterns.nim.o \
+c_code/2_3/@msemdata.nim.o \
+c_code/2_1/@mtypeallowed.nim.o \
+c_code/2_1/@misolation_check.nim.o \
+c_code/2_3/@mvarpartitions.nim.o \
+c_code/2_3/@mnilcheck.nim.o \
+c_code/1_1/@merrorhandling.nim.o \
+c_code/1_1/@maliasanalysis.nim.o \
+c_code/1_1/@msemstrictfuncs.nim.o \
+c_code/2_1/@pstd@seditdistance.nim.o \
+c_code/2_3/@pheapqueue.nim.o \
+c_code/2_3/@mlookups.nim.o \
+c_code/2_1/@mlinter.nim.o \
+c_code/2_3/@msemtypinst.nim.o \
+c_code/2_3/@mconcepts.nim.o \
+c_code/3_16/@msigmatch.nim.o \
+c_code/3_16/@mpragmas.nim.o \
+c_code/1_1/@mpushpoppragmas.nim.o \
+c_code/2_1/@msighashes.nim.o \
+c_code/2_3/@mliftdestructors.nim.o \
+c_code/2_3/@msempass2.nim.o \
+c_code/2_1/@mcgmeth.nim.o \
+c_code/2_1/@maliases.nim.o \
+c_code/2_3/@mliftlocals.nim.o \
+c_code/2_3/@mlambdalifting.nim.o \
+c_code/2_3/@mclosureiters.nim.o \
+c_code/2_3/@mtransf.nim.o \
+c_code/2_3/@moptimizer.nim.o \
+c_code/2_3/@mdfa.nim.o \
+c_code/2_3/@minjectdestructors.nim.o \
+c_code/1_1/@mexpanddefaults.nim.o \
+c_code/2_1/@mpipelineutils.nim.o \
+c_code/2_1/@mspawn.nim.o \
+c_code/2_3/@msemparallel.nim.o \
+c_code/2_3/@pdynlib.nim.o \
+c_code/3_16/@mcgen.nim.o \
+c_code/2_1/@mmodules.nim.o \
+c_code/2_3/@msemmacrosanity.nim.o \
+c_code/2_3/@mvmgen.nim.o \
+c_code/3_1/@mvmdeps.nim.o \
+c_code/3_16/@mgorgeimpl.nim.o \
+c_code/1_1/@mmacrocacheimpl.nim.o \
+c_code/3_1/@mvmprofiler.nim.o \
+c_code/2_3/@mevaltempl.nim.o \
+c_code/3_1/@mvmconv.nim.o \
+c_code/2_1/@mvmmarshal.nim.o \
+c_code/3_16/@mvm.nim.o \
+c_code/2_3/@mimporter.nim.o \
+c_code/2_3/@mprocfind.nim.o \
+c_code/2_3/@mpatterns.nim.o \
+c_code/1_1/@mpluginsupport.nim.o \
+c_code/1_1/@mplugins@slocals.nim.o \
+c_code/2_1/@mplugins@sitersgen.nim.o \
+c_code/1_1/@mplugins@sactive.nim.o \
+c_code/1_1/@menumtostr.nim.o \
+c_code/2_1/@mvtables.nim.o \
+c_code/3_16/@msem.nim.o \
+c_code/2_3/@mreorder.nim.o \
+c_code/3_16/@mdepends.nim.o \
+c_code/2_3/@msourcemap.nim.o \
+c_code/3_16/@mjsgen.nim.o \
+c_code/2_1/@plists.nim.o \
+c_code/2_1/@ppackages@sdocutils@srstast.nim.o \
+c_code/3_1/@ppackages@sdocutils@sdochelpers.nim.o \
+c_code/3_1/@ppackages@sdocutils@srstidx.nim.o \
+c_code/1_1/@ppackages@sdocutils@shighlite.nim.o \
+c_code/3_16/@ppackages@sdocutils@srst.nim.o \
+c_code/3_16/@ppackages@sdocutils@srstgen.nim.o \
+c_code/2_3/@mtypesrenderer.nim.o \
+c_code/2_3/@mrenderverbatim.nim.o \
+c_code/1_1/@pxmltree.nim.o \
+c_code/2_1/@puri.nim.o \
+c_code/3_16/@mdocgen.nim.o \
+c_code/2_3/@mdocgen2.nim.o \
+c_code/3_1/@mic@sreplayer.nim.o \
+c_code/3_1/@mpipelines.nim.o \
+c_code/3_16/@mscriptconfig.nim.o \
+c_code/3_16/@mnimconf.nim.o \
+c_code/2_3/@mic@sdce.nim.o \
+c_code/2_1/@mic@scbackend.nim.o \
+c_code/2_3/@mic@sintegrity.nim.o \
+c_code/2_3/@mic@snavigator.nim.o \
+c_code/3_16/@mmain.nim.o \
+c_code/2_1/@mcmdlinehelper.nim.o \
+c_code/3_1/@pbrowsers.nim.o \
+c_code/3_16/@mnim.nim.o $LINK_FLAGS
     ;;
   powerpc64el)
     set -x
@@ -10840,10 +11026,12 @@ c_code/3_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@sexceptions.nim.c -o c_code/2_18/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sdigitsutils.nim.c -o c_code/2_18/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sassertions.nim.c -o c_code/2_18/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@siterators.nim.c -o c_code/2_18/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_18/@psystem@sdollars.nim.c -o c_code/3_18/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sdragonbox.nim.c -o c_code/2_18/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sschubfach.nim.c -o c_code/2_18/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sformatfloat.nim.c -o c_code/2_18/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@srepr_v2.nim.c -o c_code/2_18/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_18/@psystem.nim.c -o c_code/3_18/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pparseutils.nim.c -o c_code/2_18/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_18/@pmath.nim.c -o c_code/3_18/@pmath.nim.o
@@ -10930,7 +11118,6 @@ c_code/3_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mastmsgs.nim.c -o c_code/2_18/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mtypes.nim.c -o c_code/2_18/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_18/@mnimsets.nim.c -o c_code/3_18/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mcbuilderbase.nim.c -o c_code/2_18/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mcgendata.nim.c -o c_code/2_18/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mmangleutils.nim.c -o c_code/2_18/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mccgutils.nim.c -o c_code/2_18/@mccgutils.nim.o
@@ -11000,11 +11187,6 @@ c_code/3_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/3_18/@msem.nim.c -o c_code/3_18/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mreorder.nim.c -o c_code/2_18/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_18/@mdepends.nim.c -o c_code/3_18/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/3_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/3_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_18/@mnifgen.nim.c -o c_code/3_18/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@msourcemap.nim.c -o c_code/2_18/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_18/@mjsgen.nim.c -o c_code/3_18/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@plists.nim.c -o c_code/2_18/@plists.nim.o
@@ -11039,10 +11221,12 @@ c_code/3_6/@mnim.nim.o $LINK_FLAGS
 c_code/2_18/@psystem@sexceptions.nim.o \
 c_code/2_18/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/2_18/@pstd@sassertions.nim.o \
+c_code/2_18/@psystem@siterators.nim.o \
 c_code/3_18/@psystem@sdollars.nim.o \
 c_code/2_18/@pstd@sprivate@sdragonbox.nim.o \
 c_code/2_18/@pstd@sprivate@sschubfach.nim.o \
 c_code/2_18/@pstd@sformatfloat.nim.o \
+c_code/2_18/@psystem@srepr_v2.nim.o \
 c_code/3_18/@psystem.nim.o \
 c_code/2_18/@pparseutils.nim.o \
 c_code/3_18/@pmath.nim.o \
@@ -11129,7 +11313,6 @@ c_code/2_18/@mbitsets.nim.o \
 c_code/2_18/@mastmsgs.nim.o \
 c_code/2_18/@mtypes.nim.o \
 c_code/3_18/@mnimsets.nim.o \
-c_code/2_18/@mcbuilderbase.nim.o \
 c_code/2_18/@mcgendata.nim.o \
 c_code/2_18/@mmangleutils.nim.o \
 c_code/2_18/@mccgutils.nim.o \
@@ -11199,11 +11382,6 @@ c_code/2_18/@mvtables.nim.o \
 c_code/3_18/@msem.nim.o \
 c_code/2_18/@mreorder.nim.o \
 c_code/3_18/@mdepends.nim.o \
-c_code/3_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/3_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/3_18/@mnifgen.nim.o \
 c_code/2_18/@msourcemap.nim.o \
 c_code/3_18/@mjsgen.nim.o \
 c_code/2_18/@plists.nim.o \
@@ -11266,15 +11444,17 @@ solaris)
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psystem@sexceptions.nim.c -o c_code/4_1/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/4_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sassertions.nim.c -o c_code/4_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psystem@sdollars.nim.c -o c_code/4_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/4_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sprivate@sschubfach.nim.c -o c_code/4_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sformatfloat.nim.c -o c_code/4_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psystem@srepr_v2.nim.c -o c_code/4_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psystem.nim.c -o c_code/4_1/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pparseutils.nim.c -o c_code/4_1/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pmath.nim.c -o c_code/4_1/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@palgorithm.nim.c -o c_code/4_1/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@senumutils.nim.c -o c_code/4_1/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@punicode.nim.c -o c_code/4_1/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstrutils.nim.c -o c_code/4_1/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@ppathnorm.nim.c -o c_code/4_1/@ppathnorm.nim.o
@@ -11292,7 +11472,7 @@ solaris)
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@scmdline.nim.c -o c_code/4_1/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pos.nim.c -o c_code/4_1/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pparseopt.nim.c -o c_code/4_1/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psequtils.nim.c -o c_code/4_1/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@phashes.nim.c -o c_code/4_1/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstrtabs.nim.c -o c_code/4_1/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@ptables.nim.c -o c_code/4_1/@ptables.nim.o
@@ -11305,8 +11485,8 @@ solaris)
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mprefixmatches.nim.c -o c_code/4_1/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mnimpaths.nim.c -o c_code/4_1/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psets.nim.c -o c_code/4_1/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sobjectdollar.nim.c -o c_code/4_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sprivate@sglobs.nim.c -o c_code/4_1/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@moptions.nim.c -o c_code/4_1/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mmsgs.nim.c -o c_code/4_1/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mcondsyms.nim.c -o c_code/4_1/@mcondsyms.nim.o
@@ -11353,16 +11533,15 @@ solaris)
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mic@sic.nim.c -o c_code/4_1/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mmodulegraphs.nim.c -o c_code/4_1/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mmagicsys.nim.c -o c_code/4_1/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mbitsets.nim.c -o c_code/4_1/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mastmsgs.nim.c -o c_code/4_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mtypes.nim.c -o c_code/4_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mnimsets.nim.c -o c_code/4_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mcbuilderbase.nim.c -o c_code/4_1/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mcgendata.nim.c -o c_code/4_1/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mmangleutils.nim.c -o c_code/4_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mccgutils.nim.c -o c_code/4_1/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mtreetab.nim.c -o c_code/4_1/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@msaturate.nim.c -o c_code/4_1/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mguards.nim.c -o c_code/4_1/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@msemfold.nim.c -o c_code/4_1/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mvmdef.nim.c -o c_code/4_1/@mvmdef.nim.o
@@ -11427,11 +11606,6 @@ solaris)
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@msem.nim.c -o c_code/4_1/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mreorder.nim.c -o c_code/4_1/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mdepends.nim.c -o c_code/4_1/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/4_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/4_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/4_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mnifgen.nim.c -o c_code/4_1/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@msourcemap.nim.c -o c_code/4_1/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mjsgen.nim.c -o c_code/4_1/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@plists.nim.c -o c_code/4_1/@plists.nim.o
@@ -11466,15 +11640,17 @@ solaris)
 c_code/4_1/@psystem@sexceptions.nim.o \
 c_code/4_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/4_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/4_1/@psystem@sdollars.nim.o \
 c_code/4_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/4_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/4_1/@pstd@sformatfloat.nim.o \
+c_code/4_1/@psystem@srepr_v2.nim.o \
 c_code/4_1/@psystem.nim.o \
 c_code/4_1/@pparseutils.nim.o \
 c_code/4_1/@pmath.nim.o \
 c_code/4_1/@palgorithm.nim.o \
-c_code/1_1/@pstd@senumutils.nim.o \
+c_code/4_1/@pstd@senumutils.nim.o \
 c_code/4_1/@punicode.nim.o \
 c_code/4_1/@pstrutils.nim.o \
 c_code/4_1/@ppathnorm.nim.o \
@@ -11492,7 +11668,7 @@ c_code/4_1/@pstd@sprivate@sosappdirs.nim.o \
 c_code/4_1/@pstd@scmdline.nim.o \
 c_code/4_1/@pos.nim.o \
 c_code/4_1/@pparseopt.nim.o \
-c_code/1_1/@psequtils.nim.o \
+c_code/4_1/@psequtils.nim.o \
 c_code/4_1/@phashes.nim.o \
 c_code/4_1/@pstrtabs.nim.o \
 c_code/4_1/@ptables.nim.o \
@@ -11505,8 +11681,8 @@ c_code/4_1/@mplatform.nim.o \
 c_code/4_1/@mprefixmatches.nim.o \
 c_code/4_1/@mnimpaths.nim.o \
 c_code/4_1/@psets.nim.o \
-c_code/1_1/@pstd@sobjectdollar.nim.o \
-c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/4_1/@pstd@sobjectdollar.nim.o \
+c_code/4_1/@pstd@sprivate@sglobs.nim.o \
 c_code/4_1/@moptions.nim.o \
 c_code/4_1/@mmsgs.nim.o \
 c_code/4_1/@mcondsyms.nim.o \
@@ -11553,16 +11729,15 @@ c_code/4_1/@mic@spacked_ast.nim.o \
 c_code/4_1/@mic@sic.nim.o \
 c_code/4_1/@mmodulegraphs.nim.o \
 c_code/4_1/@mmagicsys.nim.o \
-c_code/1_1/@mbitsets.nim.o \
+c_code/4_1/@mbitsets.nim.o \
 c_code/4_1/@mastmsgs.nim.o \
 c_code/4_1/@mtypes.nim.o \
 c_code/4_1/@mnimsets.nim.o \
-c_code/4_1/@mcbuilderbase.nim.o \
 c_code/4_1/@mcgendata.nim.o \
 c_code/4_1/@mmangleutils.nim.o \
 c_code/4_1/@mccgutils.nim.o \
 c_code/4_1/@mtreetab.nim.o \
-c_code/2_1/@msaturate.nim.o \
+c_code/4_1/@msaturate.nim.o \
 c_code/4_1/@mguards.nim.o \
 c_code/4_1/@msemfold.nim.o \
 c_code/4_1/@mvmdef.nim.o \
@@ -11627,11 +11802,6 @@ c_code/4_1/@mvtables.nim.o \
 c_code/4_1/@msem.nim.o \
 c_code/4_1/@mreorder.nim.o \
 c_code/4_1/@mdepends.nim.o \
-c_code/4_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/4_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/4_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/4_1/@mnifgen.nim.o \
 c_code/4_1/@msourcemap.nim.o \
 c_code/4_1/@mjsgen.nim.o \
 c_code/4_1/@plists.nim.o \
@@ -11665,15 +11835,17 @@ c_code/4_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psystem@sexceptions.nim.c -o c_code/4_2/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/4_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sassertions.nim.c -o c_code/4_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psystem@sdollars.nim.c -o c_code/4_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/4_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sprivate@sschubfach.nim.c -o c_code/4_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sformatfloat.nim.c -o c_code/4_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psystem@srepr_v2.nim.c -o c_code/4_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psystem.nim.c -o c_code/4_2/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pparseutils.nim.c -o c_code/4_2/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pmath.nim.c -o c_code/4_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@palgorithm.nim.c -o c_code/4_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@senumutils.nim.c -o c_code/4_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@punicode.nim.c -o c_code/4_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstrutils.nim.c -o c_code/4_2/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@ppathnorm.nim.c -o c_code/4_2/@ppathnorm.nim.o
@@ -11691,7 +11863,7 @@ c_code/4_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@scmdline.nim.c -o c_code/4_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pos.nim.c -o c_code/4_2/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pparseopt.nim.c -o c_code/4_2/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psequtils.nim.c -o c_code/4_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@phashes.nim.c -o c_code/4_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstrtabs.nim.c -o c_code/4_2/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@ptables.nim.c -o c_code/4_2/@ptables.nim.o
@@ -11704,8 +11876,8 @@ c_code/4_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mprefixmatches.nim.c -o c_code/4_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mnimpaths.nim.c -o c_code/4_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psets.nim.c -o c_code/4_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sobjectdollar.nim.c -o c_code/4_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sprivate@sglobs.nim.c -o c_code/4_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@moptions.nim.c -o c_code/4_2/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mmsgs.nim.c -o c_code/4_2/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mcondsyms.nim.c -o c_code/4_2/@mcondsyms.nim.o
@@ -11752,16 +11924,15 @@ c_code/4_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mic@sic.nim.c -o c_code/4_2/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mmodulegraphs.nim.c -o c_code/4_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mmagicsys.nim.c -o c_code/4_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mbitsets.nim.c -o c_code/4_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mastmsgs.nim.c -o c_code/4_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mtypes.nim.c -o c_code/4_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mnimsets.nim.c -o c_code/4_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mcbuilderbase.nim.c -o c_code/4_2/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mcgendata.nim.c -o c_code/4_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mmangleutils.nim.c -o c_code/4_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mccgutils.nim.c -o c_code/4_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mtreetab.nim.c -o c_code/4_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@msaturate.nim.c -o c_code/4_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mguards.nim.c -o c_code/4_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@msemfold.nim.c -o c_code/4_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mvmdef.nim.c -o c_code/4_2/@mvmdef.nim.o
@@ -11826,11 +11997,6 @@ c_code/4_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@msem.nim.c -o c_code/4_2/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mreorder.nim.c -o c_code/4_2/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mdepends.nim.c -o c_code/4_2/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/4_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/4_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/4_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mnifgen.nim.c -o c_code/4_2/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@msourcemap.nim.c -o c_code/4_2/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mjsgen.nim.c -o c_code/4_2/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@plists.nim.c -o c_code/4_2/@plists.nim.o
@@ -11865,15 +12031,17 @@ c_code/4_1/@mnim.nim.o $LINK_FLAGS
 c_code/4_2/@psystem@sexceptions.nim.o \
 c_code/4_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/4_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/4_2/@psystem@sdollars.nim.o \
 c_code/4_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/4_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/4_2/@pstd@sformatfloat.nim.o \
+c_code/4_2/@psystem@srepr_v2.nim.o \
 c_code/4_2/@psystem.nim.o \
 c_code/4_2/@pparseutils.nim.o \
 c_code/4_2/@pmath.nim.o \
 c_code/4_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/4_2/@pstd@senumutils.nim.o \
 c_code/4_2/@punicode.nim.o \
 c_code/4_2/@pstrutils.nim.o \
 c_code/4_2/@ppathnorm.nim.o \
@@ -11891,7 +12059,7 @@ c_code/4_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/4_2/@pstd@scmdline.nim.o \
 c_code/4_2/@pos.nim.o \
 c_code/4_2/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/4_2/@psequtils.nim.o \
 c_code/4_2/@phashes.nim.o \
 c_code/4_2/@pstrtabs.nim.o \
 c_code/4_2/@ptables.nim.o \
@@ -11904,8 +12072,8 @@ c_code/4_2/@mplatform.nim.o \
 c_code/4_2/@mprefixmatches.nim.o \
 c_code/4_2/@mnimpaths.nim.o \
 c_code/4_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/4_2/@pstd@sobjectdollar.nim.o \
+c_code/4_2/@pstd@sprivate@sglobs.nim.o \
 c_code/4_2/@moptions.nim.o \
 c_code/4_2/@mmsgs.nim.o \
 c_code/4_2/@mcondsyms.nim.o \
@@ -11952,16 +12120,15 @@ c_code/4_2/@mic@spacked_ast.nim.o \
 c_code/4_2/@mic@sic.nim.o \
 c_code/4_2/@mmodulegraphs.nim.o \
 c_code/4_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/4_2/@mbitsets.nim.o \
 c_code/4_2/@mastmsgs.nim.o \
 c_code/4_2/@mtypes.nim.o \
 c_code/4_2/@mnimsets.nim.o \
-c_code/4_2/@mcbuilderbase.nim.o \
 c_code/4_2/@mcgendata.nim.o \
 c_code/4_2/@mmangleutils.nim.o \
 c_code/4_2/@mccgutils.nim.o \
 c_code/4_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/4_2/@msaturate.nim.o \
 c_code/4_2/@mguards.nim.o \
 c_code/4_2/@msemfold.nim.o \
 c_code/4_2/@mvmdef.nim.o \
@@ -12026,11 +12193,6 @@ c_code/4_2/@mvtables.nim.o \
 c_code/4_2/@msem.nim.o \
 c_code/4_2/@mreorder.nim.o \
 c_code/4_2/@mdepends.nim.o \
-c_code/4_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/4_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/4_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/4_2/@mnifgen.nim.o \
 c_code/4_2/@msourcemap.nim.o \
 c_code/4_2/@mjsgen.nim.o \
 c_code/4_2/@plists.nim.o \
@@ -12099,15 +12261,17 @@ c_code/4_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@psystem@sexceptions.nim.c -o c_code/4_8/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/4_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sassertions.nim.c -o c_code/4_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psystem@sdollars.nim.c -o c_code/4_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/4_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sprivate@sschubfach.nim.c -o c_code/4_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sformatfloat.nim.c -o c_code/4_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psystem@srepr_v2.nim.c -o c_code/4_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@psystem.nim.c -o c_code/4_8/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@pparseutils.nim.c -o c_code/4_8/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pmath.nim.c -o c_code/4_1/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@palgorithm.nim.c -o c_code/4_1/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@senumutils.nim.c -o c_code/4_1/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@punicode.nim.c -o c_code/4_1/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@pstrutils.nim.c -o c_code/4_8/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@ppathnorm.nim.c -o c_code/4_8/@ppathnorm.nim.o
@@ -12125,7 +12289,7 @@ c_code/4_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@scmdline.nim.c -o c_code/4_1/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@pos.nim.c -o c_code/4_8/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@pparseopt.nim.c -o c_code/4_8/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psequtils.nim.c -o c_code/4_1/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@phashes.nim.c -o c_code/4_1/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@pstrtabs.nim.c -o c_code/4_8/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@ptables.nim.c -o c_code/4_8/@ptables.nim.o
@@ -12138,8 +12302,8 @@ c_code/4_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mprefixmatches.nim.c -o c_code/4_1/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mnimpaths.nim.c -o c_code/4_1/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psets.nim.c -o c_code/4_1/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sobjectdollar.nim.c -o c_code/4_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstd@sprivate@sglobs.nim.c -o c_code/4_1/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@moptions.nim.c -o c_code/4_8/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mmsgs.nim.c -o c_code/4_8/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mcondsyms.nim.c -o c_code/4_1/@mcondsyms.nim.o
@@ -12186,16 +12350,15 @@ c_code/4_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mic@sic.nim.c -o c_code/4_8/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mmodulegraphs.nim.c -o c_code/4_8/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mmagicsys.nim.c -o c_code/4_1/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mbitsets.nim.c -o c_code/4_1/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mastmsgs.nim.c -o c_code/4_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mtypes.nim.c -o c_code/4_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mnimsets.nim.c -o c_code/4_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mcbuilderbase.nim.c -o c_code/4_8/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mcgendata.nim.c -o c_code/4_8/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mmangleutils.nim.c -o c_code/4_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mccgutils.nim.c -o c_code/4_1/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@mtreetab.nim.c -o c_code/4_1/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@msaturate.nim.c -o c_code/4_1/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mguards.nim.c -o c_code/4_8/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@msemfold.nim.c -o c_code/4_1/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mvmdef.nim.c -o c_code/4_8/@mvmdef.nim.o
@@ -12260,11 +12423,6 @@ c_code/4_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@msem.nim.c -o c_code/4_8/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mreorder.nim.c -o c_code/4_8/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mdepends.nim.c -o c_code/4_8/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/4_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/4_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/4_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mnifgen.nim.c -o c_code/4_8/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@msourcemap.nim.c -o c_code/4_8/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@mjsgen.nim.c -o c_code/4_8/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@plists.nim.c -o c_code/4_1/@plists.nim.o
@@ -12299,15 +12457,17 @@ c_code/4_2/@mnim.nim.o $LINK_FLAGS
 c_code/4_8/@psystem@sexceptions.nim.o \
 c_code/4_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/4_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/4_1/@psystem@sdollars.nim.o \
 c_code/4_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/4_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/4_1/@pstd@sformatfloat.nim.o \
+c_code/4_1/@psystem@srepr_v2.nim.o \
 c_code/4_8/@psystem.nim.o \
 c_code/4_8/@pparseutils.nim.o \
 c_code/4_1/@pmath.nim.o \
 c_code/4_1/@palgorithm.nim.o \
-c_code/1_1/@pstd@senumutils.nim.o \
+c_code/4_1/@pstd@senumutils.nim.o \
 c_code/4_1/@punicode.nim.o \
 c_code/4_8/@pstrutils.nim.o \
 c_code/4_8/@ppathnorm.nim.o \
@@ -12325,7 +12485,7 @@ c_code/4_1/@pstd@sprivate@sosappdirs.nim.o \
 c_code/4_1/@pstd@scmdline.nim.o \
 c_code/4_8/@pos.nim.o \
 c_code/4_8/@pparseopt.nim.o \
-c_code/1_1/@psequtils.nim.o \
+c_code/4_1/@psequtils.nim.o \
 c_code/4_1/@phashes.nim.o \
 c_code/4_8/@pstrtabs.nim.o \
 c_code/4_8/@ptables.nim.o \
@@ -12338,8 +12498,8 @@ c_code/4_8/@mplatform.nim.o \
 c_code/4_1/@mprefixmatches.nim.o \
 c_code/4_1/@mnimpaths.nim.o \
 c_code/4_1/@psets.nim.o \
-c_code/1_1/@pstd@sobjectdollar.nim.o \
-c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/4_1/@pstd@sobjectdollar.nim.o \
+c_code/4_1/@pstd@sprivate@sglobs.nim.o \
 c_code/4_8/@moptions.nim.o \
 c_code/4_8/@mmsgs.nim.o \
 c_code/4_1/@mcondsyms.nim.o \
@@ -12386,16 +12546,15 @@ c_code/4_1/@mic@spacked_ast.nim.o \
 c_code/4_8/@mic@sic.nim.o \
 c_code/4_8/@mmodulegraphs.nim.o \
 c_code/4_1/@mmagicsys.nim.o \
-c_code/1_1/@mbitsets.nim.o \
+c_code/4_1/@mbitsets.nim.o \
 c_code/4_1/@mastmsgs.nim.o \
 c_code/4_1/@mtypes.nim.o \
 c_code/4_1/@mnimsets.nim.o \
-c_code/4_8/@mcbuilderbase.nim.o \
 c_code/4_8/@mcgendata.nim.o \
 c_code/4_1/@mmangleutils.nim.o \
 c_code/4_1/@mccgutils.nim.o \
 c_code/4_1/@mtreetab.nim.o \
-c_code/2_1/@msaturate.nim.o \
+c_code/4_1/@msaturate.nim.o \
 c_code/4_8/@mguards.nim.o \
 c_code/4_1/@msemfold.nim.o \
 c_code/4_8/@mvmdef.nim.o \
@@ -12460,11 +12619,6 @@ c_code/4_1/@mvtables.nim.o \
 c_code/4_8/@msem.nim.o \
 c_code/4_8/@mreorder.nim.o \
 c_code/4_8/@mdepends.nim.o \
-c_code/4_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/4_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/4_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/4_8/@mnifgen.nim.o \
 c_code/4_8/@msourcemap.nim.o \
 c_code/4_8/@mjsgen.nim.o \
 c_code/4_1/@plists.nim.o \
@@ -12498,15 +12652,17 @@ c_code/4_8/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@psystem@sexceptions.nim.c -o c_code/4_9/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/4_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sassertions.nim.c -o c_code/4_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psystem@sdollars.nim.c -o c_code/4_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/4_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sprivate@sschubfach.nim.c -o c_code/4_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sformatfloat.nim.c -o c_code/4_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psystem@srepr_v2.nim.c -o c_code/4_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@psystem.nim.c -o c_code/4_9/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@pparseutils.nim.c -o c_code/4_9/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pmath.nim.c -o c_code/4_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@palgorithm.nim.c -o c_code/4_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@senumutils.nim.c -o c_code/4_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@punicode.nim.c -o c_code/4_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@pstrutils.nim.c -o c_code/4_9/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@ppathnorm.nim.c -o c_code/4_9/@ppathnorm.nim.o
@@ -12524,7 +12680,7 @@ c_code/4_8/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@scmdline.nim.c -o c_code/4_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@pos.nim.c -o c_code/4_9/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@pparseopt.nim.c -o c_code/4_9/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psequtils.nim.c -o c_code/4_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@phashes.nim.c -o c_code/4_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@pstrtabs.nim.c -o c_code/4_9/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@ptables.nim.c -o c_code/4_2/@ptables.nim.o
@@ -12537,8 +12693,8 @@ c_code/4_8/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mprefixmatches.nim.c -o c_code/4_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mnimpaths.nim.c -o c_code/4_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psets.nim.c -o c_code/4_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sobjectdollar.nim.c -o c_code/4_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstd@sprivate@sglobs.nim.c -o c_code/4_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@moptions.nim.c -o c_code/4_9/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@mmsgs.nim.c -o c_code/4_9/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mcondsyms.nim.c -o c_code/4_2/@mcondsyms.nim.o
@@ -12585,16 +12741,15 @@ c_code/4_8/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@mic@sic.nim.c -o c_code/4_9/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mmodulegraphs.nim.c -o c_code/4_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mmagicsys.nim.c -o c_code/4_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mbitsets.nim.c -o c_code/4_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mastmsgs.nim.c -o c_code/4_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mtypes.nim.c -o c_code/4_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mnimsets.nim.c -o c_code/4_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@mcbuilderbase.nim.c -o c_code/4_9/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mcgendata.nim.c -o c_code/4_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mmangleutils.nim.c -o c_code/4_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mccgutils.nim.c -o c_code/4_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mtreetab.nim.c -o c_code/4_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@msaturate.nim.c -o c_code/4_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mguards.nim.c -o c_code/4_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@msemfold.nim.c -o c_code/4_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@mvmdef.nim.c -o c_code/4_2/@mvmdef.nim.o
@@ -12659,11 +12814,6 @@ c_code/4_8/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@msem.nim.c -o c_code/4_9/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@mreorder.nim.c -o c_code/4_9/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@mdepends.nim.c -o c_code/4_9/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/4_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/4_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/4_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@mnifgen.nim.c -o c_code/4_9/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@msourcemap.nim.c -o c_code/4_9/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@mjsgen.nim.c -o c_code/4_9/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@plists.nim.c -o c_code/4_2/@plists.nim.o
@@ -12698,15 +12848,17 @@ c_code/4_8/@mnim.nim.o $LINK_FLAGS
 c_code/4_9/@psystem@sexceptions.nim.o \
 c_code/4_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/4_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/4_2/@psystem@sdollars.nim.o \
 c_code/4_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/4_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/4_2/@pstd@sformatfloat.nim.o \
+c_code/4_2/@psystem@srepr_v2.nim.o \
 c_code/4_9/@psystem.nim.o \
 c_code/4_9/@pparseutils.nim.o \
 c_code/4_2/@pmath.nim.o \
 c_code/4_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/4_2/@pstd@senumutils.nim.o \
 c_code/4_2/@punicode.nim.o \
 c_code/4_9/@pstrutils.nim.o \
 c_code/4_9/@ppathnorm.nim.o \
@@ -12724,7 +12876,7 @@ c_code/4_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/4_2/@pstd@scmdline.nim.o \
 c_code/4_9/@pos.nim.o \
 c_code/4_9/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/4_2/@psequtils.nim.o \
 c_code/4_2/@phashes.nim.o \
 c_code/4_9/@pstrtabs.nim.o \
 c_code/4_2/@ptables.nim.o \
@@ -12737,8 +12889,8 @@ c_code/4_9/@mplatform.nim.o \
 c_code/4_2/@mprefixmatches.nim.o \
 c_code/4_2/@mnimpaths.nim.o \
 c_code/4_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/4_2/@pstd@sobjectdollar.nim.o \
+c_code/4_2/@pstd@sprivate@sglobs.nim.o \
 c_code/4_9/@moptions.nim.o \
 c_code/4_9/@mmsgs.nim.o \
 c_code/4_2/@mcondsyms.nim.o \
@@ -12785,16 +12937,15 @@ c_code/4_2/@mic@spacked_ast.nim.o \
 c_code/4_9/@mic@sic.nim.o \
 c_code/4_2/@mmodulegraphs.nim.o \
 c_code/4_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/4_2/@mbitsets.nim.o \
 c_code/4_2/@mastmsgs.nim.o \
 c_code/4_2/@mtypes.nim.o \
 c_code/4_2/@mnimsets.nim.o \
-c_code/4_9/@mcbuilderbase.nim.o \
 c_code/4_2/@mcgendata.nim.o \
 c_code/4_2/@mmangleutils.nim.o \
 c_code/4_2/@mccgutils.nim.o \
 c_code/4_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/4_2/@msaturate.nim.o \
 c_code/4_2/@mguards.nim.o \
 c_code/4_2/@msemfold.nim.o \
 c_code/4_2/@mvmdef.nim.o \
@@ -12859,11 +13010,6 @@ c_code/4_2/@mvtables.nim.o \
 c_code/4_9/@msem.nim.o \
 c_code/4_9/@mreorder.nim.o \
 c_code/4_9/@mdepends.nim.o \
-c_code/4_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/4_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/4_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/4_9/@mnifgen.nim.o \
 c_code/4_9/@msourcemap.nim.o \
 c_code/4_9/@mjsgen.nim.o \
 c_code/4_2/@plists.nim.o \
@@ -12989,15 +13135,17 @@ freebsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psystem@sexceptions.nim.c -o c_code/5_1/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sassertions.nim.c -o c_code/5_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psystem@sdollars.nim.c -o c_code/5_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sschubfach.nim.c -o c_code/5_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sformatfloat.nim.c -o c_code/5_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psystem@srepr_v2.nim.c -o c_code/5_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psystem.nim.c -o c_code/5_1/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pparseutils.nim.c -o c_code/5_1/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pmath.nim.c -o c_code/5_1/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@palgorithm.nim.c -o c_code/5_1/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@senumutils.nim.c -o c_code/5_1/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@punicode.nim.c -o c_code/5_1/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstrutils.nim.c -o c_code/5_1/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@ppathnorm.nim.c -o c_code/5_1/@ppathnorm.nim.o
@@ -13015,7 +13163,7 @@ freebsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@scmdline.nim.c -o c_code/5_1/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pos.nim.c -o c_code/5_1/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pparseopt.nim.c -o c_code/5_1/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psequtils.nim.c -o c_code/5_1/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@phashes.nim.c -o c_code/5_1/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstrtabs.nim.c -o c_code/5_1/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@ptables.nim.c -o c_code/5_1/@ptables.nim.o
@@ -13028,8 +13176,8 @@ freebsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mprefixmatches.nim.c -o c_code/5_1/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mnimpaths.nim.c -o c_code/5_1/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psets.nim.c -o c_code/5_1/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sobjectdollar.nim.c -o c_code/5_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sglobs.nim.c -o c_code/5_1/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@moptions.nim.c -o c_code/5_1/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mmsgs.nim.c -o c_code/5_1/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mcondsyms.nim.c -o c_code/5_1/@mcondsyms.nim.o
@@ -13075,16 +13223,15 @@ freebsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mic@sic.nim.c -o c_code/5_1/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mmodulegraphs.nim.c -o c_code/5_1/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mmagicsys.nim.c -o c_code/5_1/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mbitsets.nim.c -o c_code/5_1/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mastmsgs.nim.c -o c_code/5_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mtypes.nim.c -o c_code/5_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mnimsets.nim.c -o c_code/5_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mcbuilderbase.nim.c -o c_code/5_1/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mcgendata.nim.c -o c_code/5_1/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mmangleutils.nim.c -o c_code/5_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mccgutils.nim.c -o c_code/5_1/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mtreetab.nim.c -o c_code/5_1/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@msaturate.nim.c -o c_code/5_1/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mguards.nim.c -o c_code/5_1/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@msemfold.nim.c -o c_code/5_1/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mvmdef.nim.c -o c_code/5_1/@mvmdef.nim.o
@@ -13149,11 +13296,6 @@ freebsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@msem.nim.c -o c_code/5_1/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mreorder.nim.c -o c_code/5_1/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mdepends.nim.c -o c_code/5_1/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mnifgen.nim.c -o c_code/5_1/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@msourcemap.nim.c -o c_code/5_1/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mjsgen.nim.c -o c_code/5_1/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@plists.nim.c -o c_code/5_1/@plists.nim.o
@@ -13188,15 +13330,17 @@ freebsd)
 c_code/5_1/@psystem@sexceptions.nim.o \
 c_code/5_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/5_1/@psystem@sdollars.nim.o \
 c_code/5_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_1/@pstd@sformatfloat.nim.o \
+c_code/5_1/@psystem@srepr_v2.nim.o \
 c_code/5_1/@psystem.nim.o \
 c_code/5_1/@pparseutils.nim.o \
 c_code/5_1/@pmath.nim.o \
 c_code/5_1/@palgorithm.nim.o \
-c_code/1_1/@pstd@senumutils.nim.o \
+c_code/5_1/@pstd@senumutils.nim.o \
 c_code/5_1/@punicode.nim.o \
 c_code/5_1/@pstrutils.nim.o \
 c_code/5_1/@ppathnorm.nim.o \
@@ -13214,7 +13358,7 @@ c_code/5_1/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_1/@pstd@scmdline.nim.o \
 c_code/5_1/@pos.nim.o \
 c_code/5_1/@pparseopt.nim.o \
-c_code/1_1/@psequtils.nim.o \
+c_code/5_1/@psequtils.nim.o \
 c_code/5_1/@phashes.nim.o \
 c_code/5_1/@pstrtabs.nim.o \
 c_code/5_1/@ptables.nim.o \
@@ -13227,8 +13371,8 @@ c_code/5_1/@mplatform.nim.o \
 c_code/5_1/@mprefixmatches.nim.o \
 c_code/5_1/@mnimpaths.nim.o \
 c_code/5_1/@psets.nim.o \
-c_code/1_1/@pstd@sobjectdollar.nim.o \
-c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/5_1/@pstd@sobjectdollar.nim.o \
+c_code/5_1/@pstd@sprivate@sglobs.nim.o \
 c_code/5_1/@moptions.nim.o \
 c_code/5_1/@mmsgs.nim.o \
 c_code/5_1/@mcondsyms.nim.o \
@@ -13274,16 +13418,15 @@ c_code/5_1/@mic@spacked_ast.nim.o \
 c_code/5_1/@mic@sic.nim.o \
 c_code/5_1/@mmodulegraphs.nim.o \
 c_code/5_1/@mmagicsys.nim.o \
-c_code/1_1/@mbitsets.nim.o \
+c_code/5_1/@mbitsets.nim.o \
 c_code/5_1/@mastmsgs.nim.o \
 c_code/5_1/@mtypes.nim.o \
 c_code/5_1/@mnimsets.nim.o \
-c_code/5_1/@mcbuilderbase.nim.o \
 c_code/5_1/@mcgendata.nim.o \
 c_code/5_1/@mmangleutils.nim.o \
 c_code/5_1/@mccgutils.nim.o \
 c_code/5_1/@mtreetab.nim.o \
-c_code/2_1/@msaturate.nim.o \
+c_code/5_1/@msaturate.nim.o \
 c_code/5_1/@mguards.nim.o \
 c_code/5_1/@msemfold.nim.o \
 c_code/5_1/@mvmdef.nim.o \
@@ -13348,11 +13491,6 @@ c_code/5_1/@mvtables.nim.o \
 c_code/5_1/@msem.nim.o \
 c_code/5_1/@mreorder.nim.o \
 c_code/5_1/@mdepends.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_1/@mnifgen.nim.o \
 c_code/5_1/@msourcemap.nim.o \
 c_code/5_1/@mjsgen.nim.o \
 c_code/5_1/@plists.nim.o \
@@ -13386,15 +13524,17 @@ c_code/5_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@sexceptions.nim.c -o c_code/5_2/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sassertions.nim.c -o c_code/5_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@sdollars.nim.c -o c_code/5_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sschubfach.nim.c -o c_code/5_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sformatfloat.nim.c -o c_code/5_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@srepr_v2.nim.c -o c_code/5_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem.nim.c -o c_code/5_2/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pparseutils.nim.c -o c_code/5_2/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pmath.nim.c -o c_code/5_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@palgorithm.nim.c -o c_code/5_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@senumutils.nim.c -o c_code/5_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@punicode.nim.c -o c_code/5_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstrutils.nim.c -o c_code/5_2/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@ppathnorm.nim.c -o c_code/5_2/@ppathnorm.nim.o
@@ -13412,7 +13552,7 @@ c_code/5_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@scmdline.nim.c -o c_code/5_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pos.nim.c -o c_code/5_2/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pparseopt.nim.c -o c_code/5_2/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstrtabs.nim.c -o c_code/5_2/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@ptables.nim.c -o c_code/5_2/@ptables.nim.o
@@ -13425,8 +13565,8 @@ c_code/5_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mprefixmatches.nim.c -o c_code/5_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimpaths.nim.c -o c_code/5_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psets.nim.c -o c_code/5_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sobjectdollar.nim.c -o c_code/5_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sglobs.nim.c -o c_code/5_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@moptions.nim.c -o c_code/5_2/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmsgs.nim.c -o c_code/5_2/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcondsyms.nim.c -o c_code/5_2/@mcondsyms.nim.o
@@ -13472,16 +13612,15 @@ c_code/5_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mic@sic.nim.c -o c_code/5_2/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmodulegraphs.nim.c -o c_code/5_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmagicsys.nim.c -o c_code/5_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mbitsets.nim.c -o c_code/5_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mastmsgs.nim.c -o c_code/5_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtypes.nim.c -o c_code/5_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimsets.nim.c -o c_code/5_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcbuilderbase.nim.c -o c_code/5_2/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcgendata.nim.c -o c_code/5_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmangleutils.nim.c -o c_code/5_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mccgutils.nim.c -o c_code/5_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtreetab.nim.c -o c_code/5_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msaturate.nim.c -o c_code/5_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mguards.nim.c -o c_code/5_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msemfold.nim.c -o c_code/5_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mvmdef.nim.c -o c_code/5_2/@mvmdef.nim.o
@@ -13546,11 +13685,6 @@ c_code/5_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msem.nim.c -o c_code/5_2/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mreorder.nim.c -o c_code/5_2/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mdepends.nim.c -o c_code/5_2/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnifgen.nim.c -o c_code/5_2/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msourcemap.nim.c -o c_code/5_2/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mjsgen.nim.c -o c_code/5_2/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@plists.nim.c -o c_code/5_2/@plists.nim.o
@@ -13585,15 +13719,17 @@ c_code/5_1/@mnim.nim.o $LINK_FLAGS
 c_code/5_2/@psystem@sexceptions.nim.o \
 c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/5_2/@psystem@sdollars.nim.o \
 c_code/5_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_2/@pstd@sformatfloat.nim.o \
+c_code/5_2/@psystem@srepr_v2.nim.o \
 c_code/5_2/@psystem.nim.o \
 c_code/5_2/@pparseutils.nim.o \
 c_code/5_2/@pmath.nim.o \
 c_code/5_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/5_2/@pstd@senumutils.nim.o \
 c_code/5_2/@punicode.nim.o \
 c_code/5_2/@pstrutils.nim.o \
 c_code/5_2/@ppathnorm.nim.o \
@@ -13611,7 +13747,7 @@ c_code/5_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_2/@pos.nim.o \
 c_code/5_2/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/5_2/@psequtils.nim.o \
 c_code/5_2/@phashes.nim.o \
 c_code/5_2/@pstrtabs.nim.o \
 c_code/5_2/@ptables.nim.o \
@@ -13624,8 +13760,8 @@ c_code/5_2/@mplatform.nim.o \
 c_code/5_2/@mprefixmatches.nim.o \
 c_code/5_2/@mnimpaths.nim.o \
 c_code/5_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/5_2/@pstd@sobjectdollar.nim.o \
+c_code/5_2/@pstd@sprivate@sglobs.nim.o \
 c_code/5_2/@moptions.nim.o \
 c_code/5_2/@mmsgs.nim.o \
 c_code/5_2/@mcondsyms.nim.o \
@@ -13671,16 +13807,15 @@ c_code/5_2/@mic@spacked_ast.nim.o \
 c_code/5_2/@mic@sic.nim.o \
 c_code/5_2/@mmodulegraphs.nim.o \
 c_code/5_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/5_2/@mbitsets.nim.o \
 c_code/5_2/@mastmsgs.nim.o \
 c_code/5_2/@mtypes.nim.o \
 c_code/5_2/@mnimsets.nim.o \
-c_code/5_2/@mcbuilderbase.nim.o \
 c_code/5_2/@mcgendata.nim.o \
 c_code/5_2/@mmangleutils.nim.o \
 c_code/5_2/@mccgutils.nim.o \
 c_code/5_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/5_2/@msaturate.nim.o \
 c_code/5_2/@mguards.nim.o \
 c_code/5_2/@msemfold.nim.o \
 c_code/5_2/@mvmdef.nim.o \
@@ -13745,11 +13880,6 @@ c_code/5_2/@mvtables.nim.o \
 c_code/5_2/@msem.nim.o \
 c_code/5_2/@mreorder.nim.o \
 c_code/5_2/@mdepends.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_2/@mnifgen.nim.o \
 c_code/5_2/@msourcemap.nim.o \
 c_code/5_2/@mjsgen.nim.o \
 c_code/5_2/@plists.nim.o \
@@ -13804,15 +13934,17 @@ c_code/5_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem@sexceptions.nim.c -o c_code/5_6/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sassertions.nim.c -o c_code/5_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@sdollars.nim.c -o c_code/5_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sschubfach.nim.c -o c_code/5_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sformatfloat.nim.c -o c_code/5_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@srepr_v2.nim.c -o c_code/5_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem.nim.c -o c_code/5_6/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseutils.nim.c -o c_code/5_6/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pmath.nim.c -o c_code/5_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@palgorithm.nim.c -o c_code/5_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@senumutils.nim.c -o c_code/5_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@punicode.nim.c -o c_code/5_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrutils.nim.c -o c_code/5_6/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ppathnorm.nim.c -o c_code/5_6/@ppathnorm.nim.o
@@ -13830,7 +13962,7 @@ c_code/5_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@scmdline.nim.c -o c_code/5_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pos.nim.c -o c_code/5_6/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseopt.nim.c -o c_code/5_6/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrtabs.nim.c -o c_code/5_6/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ptables.nim.c -o c_code/5_6/@ptables.nim.o
@@ -13843,8 +13975,8 @@ c_code/5_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mprefixmatches.nim.c -o c_code/5_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimpaths.nim.c -o c_code/5_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psets.nim.c -o c_code/5_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sobjectdollar.nim.c -o c_code/5_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sglobs.nim.c -o c_code/5_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@moptions.nim.c -o c_code/5_6/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mmsgs.nim.c -o c_code/5_6/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcondsyms.nim.c -o c_code/5_2/@mcondsyms.nim.o
@@ -13890,16 +14022,15 @@ c_code/5_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mic@sic.nim.c -o c_code/5_6/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmodulegraphs.nim.c -o c_code/5_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmagicsys.nim.c -o c_code/5_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mbitsets.nim.c -o c_code/5_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mastmsgs.nim.c -o c_code/5_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtypes.nim.c -o c_code/5_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimsets.nim.c -o c_code/5_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mcbuilderbase.nim.c -o c_code/5_6/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcgendata.nim.c -o c_code/5_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmangleutils.nim.c -o c_code/5_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mccgutils.nim.c -o c_code/5_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtreetab.nim.c -o c_code/5_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msaturate.nim.c -o c_code/5_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mguards.nim.c -o c_code/5_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msemfold.nim.c -o c_code/5_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mvmdef.nim.c -o c_code/5_6/@mvmdef.nim.o
@@ -13964,11 +14095,6 @@ c_code/5_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msem.nim.c -o c_code/5_6/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mreorder.nim.c -o c_code/5_6/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mdepends.nim.c -o c_code/5_6/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mnifgen.nim.c -o c_code/5_6/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msourcemap.nim.c -o c_code/5_6/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mjsgen.nim.c -o c_code/5_6/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@plists.nim.c -o c_code/5_2/@plists.nim.o
@@ -14003,15 +14129,17 @@ c_code/5_2/@mnim.nim.o $LINK_FLAGS
 c_code/5_6/@psystem@sexceptions.nim.o \
 c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/5_2/@psystem@sdollars.nim.o \
 c_code/5_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_2/@pstd@sformatfloat.nim.o \
+c_code/5_2/@psystem@srepr_v2.nim.o \
 c_code/5_6/@psystem.nim.o \
 c_code/5_6/@pparseutils.nim.o \
 c_code/5_2/@pmath.nim.o \
 c_code/5_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/5_2/@pstd@senumutils.nim.o \
 c_code/5_2/@punicode.nim.o \
 c_code/5_6/@pstrutils.nim.o \
 c_code/5_6/@ppathnorm.nim.o \
@@ -14029,7 +14157,7 @@ c_code/5_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_6/@pos.nim.o \
 c_code/5_6/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/5_2/@psequtils.nim.o \
 c_code/5_2/@phashes.nim.o \
 c_code/5_6/@pstrtabs.nim.o \
 c_code/5_6/@ptables.nim.o \
@@ -14042,8 +14170,8 @@ c_code/5_6/@mplatform.nim.o \
 c_code/5_2/@mprefixmatches.nim.o \
 c_code/5_2/@mnimpaths.nim.o \
 c_code/5_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/5_2/@pstd@sobjectdollar.nim.o \
+c_code/5_2/@pstd@sprivate@sglobs.nim.o \
 c_code/5_6/@moptions.nim.o \
 c_code/5_6/@mmsgs.nim.o \
 c_code/5_2/@mcondsyms.nim.o \
@@ -14089,16 +14217,15 @@ c_code/5_2/@mic@spacked_ast.nim.o \
 c_code/5_6/@mic@sic.nim.o \
 c_code/5_2/@mmodulegraphs.nim.o \
 c_code/5_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/5_2/@mbitsets.nim.o \
 c_code/5_2/@mastmsgs.nim.o \
 c_code/5_2/@mtypes.nim.o \
 c_code/5_2/@mnimsets.nim.o \
-c_code/5_6/@mcbuilderbase.nim.o \
 c_code/5_2/@mcgendata.nim.o \
 c_code/5_2/@mmangleutils.nim.o \
 c_code/5_2/@mccgutils.nim.o \
 c_code/5_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/5_2/@msaturate.nim.o \
 c_code/5_2/@mguards.nim.o \
 c_code/5_2/@msemfold.nim.o \
 c_code/5_6/@mvmdef.nim.o \
@@ -14163,11 +14290,6 @@ c_code/5_2/@mvtables.nim.o \
 c_code/5_6/@msem.nim.o \
 c_code/5_6/@mreorder.nim.o \
 c_code/5_6/@mdepends.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_6/@mnifgen.nim.o \
 c_code/5_6/@msourcemap.nim.o \
 c_code/5_6/@mjsgen.nim.o \
 c_code/5_2/@plists.nim.o \
@@ -14201,15 +14323,17 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@psystem@sexceptions.nim.c -o c_code/5_7/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_7/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstd@sassertions.nim.c -o c_code/5_7/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem@siterators.nim.c -o c_code/2_7/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@psystem@sdollars.nim.c -o c_code/5_7/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_7/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstd@sprivate@sschubfach.nim.c -o c_code/5_7/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstd@sformatfloat.nim.c -o c_code/5_7/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@psystem@srepr_v2.nim.c -o c_code/5_7/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@psystem.nim.c -o c_code/5_7/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pparseutils.nim.c -o c_code/5_7/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pmath.nim.c -o c_code/5_7/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@palgorithm.nim.c -o c_code/5_7/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@senumutils.nim.c -o c_code/2_7/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstd@senumutils.nim.c -o c_code/5_7/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@punicode.nim.c -o c_code/5_7/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstrutils.nim.c -o c_code/5_7/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@ppathnorm.nim.c -o c_code/5_7/@ppathnorm.nim.o
@@ -14227,7 +14351,7 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstd@scmdline.nim.c -o c_code/5_7/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pos.nim.c -o c_code/5_7/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pparseopt.nim.c -o c_code/5_7/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psequtils.nim.c -o c_code/2_7/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@psequtils.nim.c -o c_code/5_7/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@phashes.nim.c -o c_code/5_7/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstrtabs.nim.c -o c_code/5_7/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@ptables.nim.c -o c_code/5_7/@ptables.nim.o
@@ -14240,8 +14364,8 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mprefixmatches.nim.c -o c_code/5_7/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mnimpaths.nim.c -o c_code/5_7/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@psets.nim.c -o c_code/5_7/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sobjectdollar.nim.c -o c_code/2_7/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sprivate@sglobs.nim.c -o c_code/2_7/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstd@sobjectdollar.nim.c -o c_code/5_7/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@pstd@sprivate@sglobs.nim.c -o c_code/5_7/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@moptions.nim.c -o c_code/5_7/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mmsgs.nim.c -o c_code/5_7/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mcondsyms.nim.c -o c_code/5_7/@mcondsyms.nim.o
@@ -14287,11 +14411,10 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mic@sic.nim.c -o c_code/5_7/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mmodulegraphs.nim.c -o c_code/5_7/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mmagicsys.nim.c -o c_code/5_7/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mbitsets.nim.c -o c_code/2_7/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mbitsets.nim.c -o c_code/5_7/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mastmsgs.nim.c -o c_code/5_7/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mtypes.nim.c -o c_code/5_7/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mnimsets.nim.c -o c_code/5_7/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mcbuilderbase.nim.c -o c_code/5_7/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mcgendata.nim.c -o c_code/5_7/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mmangleutils.nim.c -o c_code/5_7/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mccgutils.nim.c -o c_code/5_7/@mccgutils.nim.o
@@ -14361,11 +14484,6 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@msem.nim.c -o c_code/5_7/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mreorder.nim.c -o c_code/5_7/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mdepends.nim.c -o c_code/5_7/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mnifgen.nim.c -o c_code/5_7/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@msourcemap.nim.c -o c_code/5_7/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@mjsgen.nim.c -o c_code/5_7/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_7/@plists.nim.c -o c_code/5_7/@plists.nim.o
@@ -14400,15 +14518,17 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
 c_code/5_7/@psystem@sexceptions.nim.o \
 c_code/5_7/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_7/@pstd@sassertions.nim.o \
+c_code/2_7/@psystem@siterators.nim.o \
 c_code/5_7/@psystem@sdollars.nim.o \
 c_code/5_7/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_7/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_7/@pstd@sformatfloat.nim.o \
+c_code/5_7/@psystem@srepr_v2.nim.o \
 c_code/5_7/@psystem.nim.o \
 c_code/5_7/@pparseutils.nim.o \
 c_code/5_7/@pmath.nim.o \
 c_code/5_7/@palgorithm.nim.o \
-c_code/2_7/@pstd@senumutils.nim.o \
+c_code/5_7/@pstd@senumutils.nim.o \
 c_code/5_7/@punicode.nim.o \
 c_code/5_7/@pstrutils.nim.o \
 c_code/5_7/@ppathnorm.nim.o \
@@ -14426,7 +14546,7 @@ c_code/5_7/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_7/@pstd@scmdline.nim.o \
 c_code/5_7/@pos.nim.o \
 c_code/5_7/@pparseopt.nim.o \
-c_code/2_7/@psequtils.nim.o \
+c_code/5_7/@psequtils.nim.o \
 c_code/5_7/@phashes.nim.o \
 c_code/5_7/@pstrtabs.nim.o \
 c_code/5_7/@ptables.nim.o \
@@ -14439,8 +14559,8 @@ c_code/5_7/@mplatform.nim.o \
 c_code/5_7/@mprefixmatches.nim.o \
 c_code/5_7/@mnimpaths.nim.o \
 c_code/5_7/@psets.nim.o \
-c_code/2_7/@pstd@sobjectdollar.nim.o \
-c_code/2_7/@pstd@sprivate@sglobs.nim.o \
+c_code/5_7/@pstd@sobjectdollar.nim.o \
+c_code/5_7/@pstd@sprivate@sglobs.nim.o \
 c_code/5_7/@moptions.nim.o \
 c_code/5_7/@mmsgs.nim.o \
 c_code/5_7/@mcondsyms.nim.o \
@@ -14486,11 +14606,10 @@ c_code/5_7/@mic@spacked_ast.nim.o \
 c_code/5_7/@mic@sic.nim.o \
 c_code/5_7/@mmodulegraphs.nim.o \
 c_code/5_7/@mmagicsys.nim.o \
-c_code/2_7/@mbitsets.nim.o \
+c_code/5_7/@mbitsets.nim.o \
 c_code/5_7/@mastmsgs.nim.o \
 c_code/5_7/@mtypes.nim.o \
 c_code/5_7/@mnimsets.nim.o \
-c_code/5_7/@mcbuilderbase.nim.o \
 c_code/5_7/@mcgendata.nim.o \
 c_code/5_7/@mmangleutils.nim.o \
 c_code/5_7/@mccgutils.nim.o \
@@ -14560,11 +14679,6 @@ c_code/5_7/@mvtables.nim.o \
 c_code/5_7/@msem.nim.o \
 c_code/5_7/@mreorder.nim.o \
 c_code/5_7/@mdepends.nim.o \
-c_code/5_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_7/@mnifgen.nim.o \
 c_code/5_7/@msourcemap.nim.o \
 c_code/5_7/@mjsgen.nim.o \
 c_code/5_7/@plists.nim.o \
@@ -14605,15 +14719,17 @@ c_code/5_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem@sexceptions.nim.c -o c_code/5_6/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sassertions.nim.c -o c_code/5_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@sdollars.nim.c -o c_code/5_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sschubfach.nim.c -o c_code/5_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sformatfloat.nim.c -o c_code/5_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@srepr_v2.nim.c -o c_code/5_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem.nim.c -o c_code/5_6/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseutils.nim.c -o c_code/5_6/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pmath.nim.c -o c_code/5_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@palgorithm.nim.c -o c_code/5_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@senumutils.nim.c -o c_code/5_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@punicode.nim.c -o c_code/5_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrutils.nim.c -o c_code/5_6/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ppathnorm.nim.c -o c_code/5_6/@ppathnorm.nim.o
@@ -14631,7 +14747,7 @@ c_code/5_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@scmdline.nim.c -o c_code/5_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pos.nim.c -o c_code/5_6/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseopt.nim.c -o c_code/5_6/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrtabs.nim.c -o c_code/5_6/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ptables.nim.c -o c_code/5_6/@ptables.nim.o
@@ -14644,8 +14760,8 @@ c_code/5_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mprefixmatches.nim.c -o c_code/5_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimpaths.nim.c -o c_code/5_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psets.nim.c -o c_code/5_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sobjectdollar.nim.c -o c_code/5_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sglobs.nim.c -o c_code/5_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@moptions.nim.c -o c_code/5_6/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mmsgs.nim.c -o c_code/5_6/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcondsyms.nim.c -o c_code/5_2/@mcondsyms.nim.o
@@ -14691,16 +14807,15 @@ c_code/5_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mic@sic.nim.c -o c_code/5_6/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmodulegraphs.nim.c -o c_code/5_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmagicsys.nim.c -o c_code/5_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mbitsets.nim.c -o c_code/5_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mastmsgs.nim.c -o c_code/5_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtypes.nim.c -o c_code/5_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimsets.nim.c -o c_code/5_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mcbuilderbase.nim.c -o c_code/5_6/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcgendata.nim.c -o c_code/5_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmangleutils.nim.c -o c_code/5_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mccgutils.nim.c -o c_code/5_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtreetab.nim.c -o c_code/5_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msaturate.nim.c -o c_code/5_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mguards.nim.c -o c_code/5_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msemfold.nim.c -o c_code/5_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mvmdef.nim.c -o c_code/5_6/@mvmdef.nim.o
@@ -14765,11 +14880,6 @@ c_code/5_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msem.nim.c -o c_code/5_6/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mreorder.nim.c -o c_code/5_6/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mdepends.nim.c -o c_code/5_6/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mnifgen.nim.c -o c_code/5_6/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msourcemap.nim.c -o c_code/5_6/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mjsgen.nim.c -o c_code/5_6/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@plists.nim.c -o c_code/5_2/@plists.nim.o
@@ -14804,15 +14914,17 @@ c_code/5_7/@mnim.nim.o $LINK_FLAGS
 c_code/5_6/@psystem@sexceptions.nim.o \
 c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/5_2/@psystem@sdollars.nim.o \
 c_code/5_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_2/@pstd@sformatfloat.nim.o \
+c_code/5_2/@psystem@srepr_v2.nim.o \
 c_code/5_6/@psystem.nim.o \
 c_code/5_6/@pparseutils.nim.o \
 c_code/5_2/@pmath.nim.o \
 c_code/5_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/5_2/@pstd@senumutils.nim.o \
 c_code/5_2/@punicode.nim.o \
 c_code/5_6/@pstrutils.nim.o \
 c_code/5_6/@ppathnorm.nim.o \
@@ -14830,7 +14942,7 @@ c_code/5_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_6/@pos.nim.o \
 c_code/5_6/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/5_2/@psequtils.nim.o \
 c_code/5_2/@phashes.nim.o \
 c_code/5_6/@pstrtabs.nim.o \
 c_code/5_6/@ptables.nim.o \
@@ -14843,8 +14955,8 @@ c_code/5_9/@mplatform.nim.o \
 c_code/5_2/@mprefixmatches.nim.o \
 c_code/5_2/@mnimpaths.nim.o \
 c_code/5_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/5_2/@pstd@sobjectdollar.nim.o \
+c_code/5_2/@pstd@sprivate@sglobs.nim.o \
 c_code/5_6/@moptions.nim.o \
 c_code/5_6/@mmsgs.nim.o \
 c_code/5_2/@mcondsyms.nim.o \
@@ -14890,16 +15002,15 @@ c_code/5_2/@mic@spacked_ast.nim.o \
 c_code/5_6/@mic@sic.nim.o \
 c_code/5_2/@mmodulegraphs.nim.o \
 c_code/5_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/5_2/@mbitsets.nim.o \
 c_code/5_2/@mastmsgs.nim.o \
 c_code/5_2/@mtypes.nim.o \
 c_code/5_2/@mnimsets.nim.o \
-c_code/5_6/@mcbuilderbase.nim.o \
 c_code/5_2/@mcgendata.nim.o \
 c_code/5_2/@mmangleutils.nim.o \
 c_code/5_2/@mccgutils.nim.o \
 c_code/5_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/5_2/@msaturate.nim.o \
 c_code/5_2/@mguards.nim.o \
 c_code/5_2/@msemfold.nim.o \
 c_code/5_6/@mvmdef.nim.o \
@@ -14964,11 +15075,6 @@ c_code/5_2/@mvtables.nim.o \
 c_code/5_6/@msem.nim.o \
 c_code/5_6/@mreorder.nim.o \
 c_code/5_6/@mdepends.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_6/@mnifgen.nim.o \
 c_code/5_6/@msourcemap.nim.o \
 c_code/5_6/@mjsgen.nim.o \
 c_code/5_2/@plists.nim.o \
@@ -15016,15 +15122,17 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@psystem@sexceptions.nim.c -o c_code/5_12/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sassertions.nim.c -o c_code/5_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psystem@sdollars.nim.c -o c_code/5_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sschubfach.nim.c -o c_code/5_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sformatfloat.nim.c -o c_code/5_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psystem@srepr_v2.nim.c -o c_code/5_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@psystem.nim.c -o c_code/5_12/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pparseutils.nim.c -o c_code/5_12/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pmath.nim.c -o c_code/5_1/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@palgorithm.nim.c -o c_code/5_1/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@senumutils.nim.c -o c_code/5_1/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@punicode.nim.c -o c_code/5_1/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstrutils.nim.c -o c_code/5_12/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ppathnorm.nim.c -o c_code/5_12/@ppathnorm.nim.o
@@ -15042,7 +15150,7 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@scmdline.nim.c -o c_code/5_1/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pos.nim.c -o c_code/5_12/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pparseopt.nim.c -o c_code/5_12/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psequtils.nim.c -o c_code/5_1/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@phashes.nim.c -o c_code/5_1/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstrtabs.nim.c -o c_code/5_12/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ptables.nim.c -o c_code/5_12/@ptables.nim.o
@@ -15055,8 +15163,8 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mprefixmatches.nim.c -o c_code/5_1/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mnimpaths.nim.c -o c_code/5_1/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psets.nim.c -o c_code/5_1/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sobjectdollar.nim.c -o c_code/5_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sglobs.nim.c -o c_code/5_1/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@moptions.nim.c -o c_code/5_12/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mmsgs.nim.c -o c_code/5_12/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mcondsyms.nim.c -o c_code/5_1/@mcondsyms.nim.o
@@ -15102,16 +15210,15 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mic@sic.nim.c -o c_code/5_12/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mmodulegraphs.nim.c -o c_code/5_12/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mmagicsys.nim.c -o c_code/5_1/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mbitsets.nim.c -o c_code/5_1/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mastmsgs.nim.c -o c_code/5_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mtypes.nim.c -o c_code/5_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mnimsets.nim.c -o c_code/5_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mcbuilderbase.nim.c -o c_code/5_12/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mcgendata.nim.c -o c_code/5_12/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mmangleutils.nim.c -o c_code/5_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mccgutils.nim.c -o c_code/5_1/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mtreetab.nim.c -o c_code/5_1/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@msaturate.nim.c -o c_code/5_1/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mguards.nim.c -o c_code/5_12/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@msemfold.nim.c -o c_code/5_1/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mvmdef.nim.c -o c_code/5_12/@mvmdef.nim.o
@@ -15176,11 +15283,6 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@msem.nim.c -o c_code/5_12/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mreorder.nim.c -o c_code/5_12/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mdepends.nim.c -o c_code/5_12/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mnifgen.nim.c -o c_code/5_12/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@msourcemap.nim.c -o c_code/5_12/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mjsgen.nim.c -o c_code/5_12/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@plists.nim.c -o c_code/5_1/@plists.nim.o
@@ -15215,15 +15317,17 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
 c_code/5_12/@psystem@sexceptions.nim.o \
 c_code/5_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/5_1/@psystem@sdollars.nim.o \
 c_code/5_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_1/@pstd@sformatfloat.nim.o \
+c_code/5_1/@psystem@srepr_v2.nim.o \
 c_code/5_12/@psystem.nim.o \
 c_code/5_12/@pparseutils.nim.o \
 c_code/5_1/@pmath.nim.o \
 c_code/5_1/@palgorithm.nim.o \
-c_code/1_1/@pstd@senumutils.nim.o \
+c_code/5_1/@pstd@senumutils.nim.o \
 c_code/5_1/@punicode.nim.o \
 c_code/5_12/@pstrutils.nim.o \
 c_code/5_12/@ppathnorm.nim.o \
@@ -15241,7 +15345,7 @@ c_code/5_1/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_1/@pstd@scmdline.nim.o \
 c_code/5_12/@pos.nim.o \
 c_code/5_12/@pparseopt.nim.o \
-c_code/1_1/@psequtils.nim.o \
+c_code/5_1/@psequtils.nim.o \
 c_code/5_1/@phashes.nim.o \
 c_code/5_12/@pstrtabs.nim.o \
 c_code/5_12/@ptables.nim.o \
@@ -15254,8 +15358,8 @@ c_code/5_12/@mplatform.nim.o \
 c_code/5_1/@mprefixmatches.nim.o \
 c_code/5_1/@mnimpaths.nim.o \
 c_code/5_1/@psets.nim.o \
-c_code/1_1/@pstd@sobjectdollar.nim.o \
-c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/5_1/@pstd@sobjectdollar.nim.o \
+c_code/5_1/@pstd@sprivate@sglobs.nim.o \
 c_code/5_12/@moptions.nim.o \
 c_code/5_12/@mmsgs.nim.o \
 c_code/5_1/@mcondsyms.nim.o \
@@ -15301,16 +15405,15 @@ c_code/5_1/@mic@spacked_ast.nim.o \
 c_code/5_12/@mic@sic.nim.o \
 c_code/5_12/@mmodulegraphs.nim.o \
 c_code/5_1/@mmagicsys.nim.o \
-c_code/1_1/@mbitsets.nim.o \
+c_code/5_1/@mbitsets.nim.o \
 c_code/5_1/@mastmsgs.nim.o \
 c_code/5_1/@mtypes.nim.o \
 c_code/5_1/@mnimsets.nim.o \
-c_code/5_12/@mcbuilderbase.nim.o \
 c_code/5_12/@mcgendata.nim.o \
 c_code/5_1/@mmangleutils.nim.o \
 c_code/5_1/@mccgutils.nim.o \
 c_code/5_1/@mtreetab.nim.o \
-c_code/2_1/@msaturate.nim.o \
+c_code/5_1/@msaturate.nim.o \
 c_code/5_12/@mguards.nim.o \
 c_code/5_1/@msemfold.nim.o \
 c_code/5_12/@mvmdef.nim.o \
@@ -15375,11 +15478,6 @@ c_code/5_1/@mvtables.nim.o \
 c_code/5_12/@msem.nim.o \
 c_code/5_12/@mreorder.nim.o \
 c_code/5_12/@mdepends.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_12/@mnifgen.nim.o \
 c_code/5_12/@msourcemap.nim.o \
 c_code/5_12/@mjsgen.nim.o \
 c_code/5_1/@plists.nim.o \
@@ -15413,15 +15511,17 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@psystem@sexceptions.nim.c -o c_code/5_12/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sassertions.nim.c -o c_code/5_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psystem@sdollars.nim.c -o c_code/5_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sschubfach.nim.c -o c_code/5_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sformatfloat.nim.c -o c_code/5_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psystem@srepr_v2.nim.c -o c_code/5_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@psystem.nim.c -o c_code/5_12/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pparseutils.nim.c -o c_code/5_12/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pmath.nim.c -o c_code/5_1/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@palgorithm.nim.c -o c_code/5_1/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@senumutils.nim.c -o c_code/5_1/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@punicode.nim.c -o c_code/5_1/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstrutils.nim.c -o c_code/5_12/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ppathnorm.nim.c -o c_code/5_12/@ppathnorm.nim.o
@@ -15439,7 +15539,7 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@scmdline.nim.c -o c_code/5_1/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pos.nim.c -o c_code/5_12/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pparseopt.nim.c -o c_code/5_12/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psequtils.nim.c -o c_code/5_1/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@phashes.nim.c -o c_code/5_1/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstrtabs.nim.c -o c_code/5_12/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ptables.nim.c -o c_code/5_12/@ptables.nim.o
@@ -15452,8 +15552,8 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mprefixmatches.nim.c -o c_code/5_1/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mnimpaths.nim.c -o c_code/5_1/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psets.nim.c -o c_code/5_1/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sobjectdollar.nim.c -o c_code/5_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sglobs.nim.c -o c_code/5_1/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@moptions.nim.c -o c_code/5_12/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mmsgs.nim.c -o c_code/5_12/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mcondsyms.nim.c -o c_code/5_1/@mcondsyms.nim.o
@@ -15499,16 +15599,15 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mic@sic.nim.c -o c_code/5_12/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mmodulegraphs.nim.c -o c_code/5_12/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mmagicsys.nim.c -o c_code/5_1/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mbitsets.nim.c -o c_code/5_1/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mastmsgs.nim.c -o c_code/5_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mtypes.nim.c -o c_code/5_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mnimsets.nim.c -o c_code/5_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mcbuilderbase.nim.c -o c_code/5_12/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mcgendata.nim.c -o c_code/5_12/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mmangleutils.nim.c -o c_code/5_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mccgutils.nim.c -o c_code/5_1/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mtreetab.nim.c -o c_code/5_1/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@msaturate.nim.c -o c_code/5_1/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mguards.nim.c -o c_code/5_12/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@msemfold.nim.c -o c_code/5_1/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mvmdef.nim.c -o c_code/5_12/@mvmdef.nim.o
@@ -15573,11 +15672,6 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@msem.nim.c -o c_code/5_12/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mreorder.nim.c -o c_code/5_12/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mdepends.nim.c -o c_code/5_12/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mnifgen.nim.c -o c_code/5_12/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@msourcemap.nim.c -o c_code/5_12/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mjsgen.nim.c -o c_code/5_12/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@plists.nim.c -o c_code/5_1/@plists.nim.o
@@ -15612,15 +15706,17 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
 c_code/5_12/@psystem@sexceptions.nim.o \
 c_code/5_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/5_1/@psystem@sdollars.nim.o \
 c_code/5_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_1/@pstd@sformatfloat.nim.o \
+c_code/5_1/@psystem@srepr_v2.nim.o \
 c_code/5_12/@psystem.nim.o \
 c_code/5_12/@pparseutils.nim.o \
 c_code/5_1/@pmath.nim.o \
 c_code/5_1/@palgorithm.nim.o \
-c_code/1_1/@pstd@senumutils.nim.o \
+c_code/5_1/@pstd@senumutils.nim.o \
 c_code/5_1/@punicode.nim.o \
 c_code/5_12/@pstrutils.nim.o \
 c_code/5_12/@ppathnorm.nim.o \
@@ -15638,7 +15734,7 @@ c_code/5_1/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_1/@pstd@scmdline.nim.o \
 c_code/5_12/@pos.nim.o \
 c_code/5_12/@pparseopt.nim.o \
-c_code/1_1/@psequtils.nim.o \
+c_code/5_1/@psequtils.nim.o \
 c_code/5_1/@phashes.nim.o \
 c_code/5_12/@pstrtabs.nim.o \
 c_code/5_12/@ptables.nim.o \
@@ -15651,8 +15747,8 @@ c_code/5_13/@mplatform.nim.o \
 c_code/5_1/@mprefixmatches.nim.o \
 c_code/5_1/@mnimpaths.nim.o \
 c_code/5_1/@psets.nim.o \
-c_code/1_1/@pstd@sobjectdollar.nim.o \
-c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/5_1/@pstd@sobjectdollar.nim.o \
+c_code/5_1/@pstd@sprivate@sglobs.nim.o \
 c_code/5_12/@moptions.nim.o \
 c_code/5_12/@mmsgs.nim.o \
 c_code/5_1/@mcondsyms.nim.o \
@@ -15698,16 +15794,15 @@ c_code/5_1/@mic@spacked_ast.nim.o \
 c_code/5_12/@mic@sic.nim.o \
 c_code/5_12/@mmodulegraphs.nim.o \
 c_code/5_1/@mmagicsys.nim.o \
-c_code/1_1/@mbitsets.nim.o \
+c_code/5_1/@mbitsets.nim.o \
 c_code/5_1/@mastmsgs.nim.o \
 c_code/5_1/@mtypes.nim.o \
 c_code/5_1/@mnimsets.nim.o \
-c_code/5_12/@mcbuilderbase.nim.o \
 c_code/5_12/@mcgendata.nim.o \
 c_code/5_1/@mmangleutils.nim.o \
 c_code/5_1/@mccgutils.nim.o \
 c_code/5_1/@mtreetab.nim.o \
-c_code/2_1/@msaturate.nim.o \
+c_code/5_1/@msaturate.nim.o \
 c_code/5_12/@mguards.nim.o \
 c_code/5_1/@msemfold.nim.o \
 c_code/5_12/@mvmdef.nim.o \
@@ -15772,11 +15867,6 @@ c_code/5_1/@mvtables.nim.o \
 c_code/5_12/@msem.nim.o \
 c_code/5_12/@mreorder.nim.o \
 c_code/5_12/@mdepends.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_12/@mnifgen.nim.o \
 c_code/5_12/@msourcemap.nim.o \
 c_code/5_12/@mjsgen.nim.o \
 c_code/5_1/@plists.nim.o \
@@ -15810,15 +15900,17 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem@sexceptions.nim.c -o c_code/5_6/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sassertions.nim.c -o c_code/5_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@sdollars.nim.c -o c_code/5_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sschubfach.nim.c -o c_code/5_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sformatfloat.nim.c -o c_code/5_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@srepr_v2.nim.c -o c_code/5_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem.nim.c -o c_code/5_6/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseutils.nim.c -o c_code/5_6/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pmath.nim.c -o c_code/5_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@palgorithm.nim.c -o c_code/5_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@senumutils.nim.c -o c_code/5_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@punicode.nim.c -o c_code/5_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrutils.nim.c -o c_code/5_6/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ppathnorm.nim.c -o c_code/5_6/@ppathnorm.nim.o
@@ -15836,7 +15928,7 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@scmdline.nim.c -o c_code/5_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pos.nim.c -o c_code/5_6/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseopt.nim.c -o c_code/5_6/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrtabs.nim.c -o c_code/5_6/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ptables.nim.c -o c_code/5_6/@ptables.nim.o
@@ -15849,8 +15941,8 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mprefixmatches.nim.c -o c_code/5_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimpaths.nim.c -o c_code/5_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psets.nim.c -o c_code/5_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sobjectdollar.nim.c -o c_code/5_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sglobs.nim.c -o c_code/5_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@moptions.nim.c -o c_code/5_6/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mmsgs.nim.c -o c_code/5_6/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcondsyms.nim.c -o c_code/5_2/@mcondsyms.nim.o
@@ -15896,16 +15988,15 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mic@sic.nim.c -o c_code/5_6/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmodulegraphs.nim.c -o c_code/5_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmagicsys.nim.c -o c_code/5_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mbitsets.nim.c -o c_code/5_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mastmsgs.nim.c -o c_code/5_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtypes.nim.c -o c_code/5_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimsets.nim.c -o c_code/5_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mcbuilderbase.nim.c -o c_code/5_6/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcgendata.nim.c -o c_code/5_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmangleutils.nim.c -o c_code/5_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mccgutils.nim.c -o c_code/5_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtreetab.nim.c -o c_code/5_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msaturate.nim.c -o c_code/5_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mguards.nim.c -o c_code/5_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msemfold.nim.c -o c_code/5_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mvmdef.nim.c -o c_code/5_6/@mvmdef.nim.o
@@ -15970,11 +16061,6 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msem.nim.c -o c_code/5_6/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mreorder.nim.c -o c_code/5_6/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mdepends.nim.c -o c_code/5_6/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mnifgen.nim.c -o c_code/5_6/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msourcemap.nim.c -o c_code/5_6/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mjsgen.nim.c -o c_code/5_6/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@plists.nim.c -o c_code/5_2/@plists.nim.o
@@ -16009,15 +16095,17 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
 c_code/5_6/@psystem@sexceptions.nim.o \
 c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/5_2/@psystem@sdollars.nim.o \
 c_code/5_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_2/@pstd@sformatfloat.nim.o \
+c_code/5_2/@psystem@srepr_v2.nim.o \
 c_code/5_6/@psystem.nim.o \
 c_code/5_6/@pparseutils.nim.o \
 c_code/5_2/@pmath.nim.o \
 c_code/5_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/5_2/@pstd@senumutils.nim.o \
 c_code/5_2/@punicode.nim.o \
 c_code/5_6/@pstrutils.nim.o \
 c_code/5_6/@ppathnorm.nim.o \
@@ -16035,7 +16123,7 @@ c_code/5_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_6/@pos.nim.o \
 c_code/5_6/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/5_2/@psequtils.nim.o \
 c_code/5_2/@phashes.nim.o \
 c_code/5_6/@pstrtabs.nim.o \
 c_code/5_6/@ptables.nim.o \
@@ -16048,8 +16136,8 @@ c_code/5_14/@mplatform.nim.o \
 c_code/5_2/@mprefixmatches.nim.o \
 c_code/5_2/@mnimpaths.nim.o \
 c_code/5_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/5_2/@pstd@sobjectdollar.nim.o \
+c_code/5_2/@pstd@sprivate@sglobs.nim.o \
 c_code/5_6/@moptions.nim.o \
 c_code/5_6/@mmsgs.nim.o \
 c_code/5_2/@mcondsyms.nim.o \
@@ -16095,16 +16183,15 @@ c_code/5_2/@mic@spacked_ast.nim.o \
 c_code/5_6/@mic@sic.nim.o \
 c_code/5_2/@mmodulegraphs.nim.o \
 c_code/5_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/5_2/@mbitsets.nim.o \
 c_code/5_2/@mastmsgs.nim.o \
 c_code/5_2/@mtypes.nim.o \
 c_code/5_2/@mnimsets.nim.o \
-c_code/5_6/@mcbuilderbase.nim.o \
 c_code/5_2/@mcgendata.nim.o \
 c_code/5_2/@mmangleutils.nim.o \
 c_code/5_2/@mccgutils.nim.o \
 c_code/5_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/5_2/@msaturate.nim.o \
 c_code/5_2/@mguards.nim.o \
 c_code/5_2/@msemfold.nim.o \
 c_code/5_6/@mvmdef.nim.o \
@@ -16169,11 +16256,6 @@ c_code/5_2/@mvtables.nim.o \
 c_code/5_6/@msem.nim.o \
 c_code/5_6/@mreorder.nim.o \
 c_code/5_6/@mdepends.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_6/@mnifgen.nim.o \
 c_code/5_6/@msourcemap.nim.o \
 c_code/5_6/@mjsgen.nim.o \
 c_code/5_2/@plists.nim.o \
@@ -16207,15 +16289,17 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem@sexceptions.nim.c -o c_code/5_6/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sassertions.nim.c -o c_code/5_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@sdollars.nim.c -o c_code/5_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sschubfach.nim.c -o c_code/5_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sformatfloat.nim.c -o c_code/5_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@srepr_v2.nim.c -o c_code/5_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem.nim.c -o c_code/5_6/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseutils.nim.c -o c_code/5_6/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pmath.nim.c -o c_code/5_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@palgorithm.nim.c -o c_code/5_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@senumutils.nim.c -o c_code/5_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@punicode.nim.c -o c_code/5_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrutils.nim.c -o c_code/5_6/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ppathnorm.nim.c -o c_code/5_6/@ppathnorm.nim.o
@@ -16233,7 +16317,7 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@scmdline.nim.c -o c_code/5_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pos.nim.c -o c_code/5_6/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseopt.nim.c -o c_code/5_6/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrtabs.nim.c -o c_code/5_6/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ptables.nim.c -o c_code/5_6/@ptables.nim.o
@@ -16246,8 +16330,8 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mprefixmatches.nim.c -o c_code/5_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimpaths.nim.c -o c_code/5_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psets.nim.c -o c_code/5_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sobjectdollar.nim.c -o c_code/5_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sglobs.nim.c -o c_code/5_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@moptions.nim.c -o c_code/5_6/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mmsgs.nim.c -o c_code/5_6/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcondsyms.nim.c -o c_code/5_2/@mcondsyms.nim.o
@@ -16293,16 +16377,15 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mic@sic.nim.c -o c_code/5_6/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmodulegraphs.nim.c -o c_code/5_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmagicsys.nim.c -o c_code/5_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mbitsets.nim.c -o c_code/5_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mastmsgs.nim.c -o c_code/5_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtypes.nim.c -o c_code/5_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimsets.nim.c -o c_code/5_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mcbuilderbase.nim.c -o c_code/5_6/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcgendata.nim.c -o c_code/5_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmangleutils.nim.c -o c_code/5_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mccgutils.nim.c -o c_code/5_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtreetab.nim.c -o c_code/5_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msaturate.nim.c -o c_code/5_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mguards.nim.c -o c_code/5_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msemfold.nim.c -o c_code/5_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mvmdef.nim.c -o c_code/5_6/@mvmdef.nim.o
@@ -16367,11 +16450,6 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msem.nim.c -o c_code/5_6/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mreorder.nim.c -o c_code/5_6/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mdepends.nim.c -o c_code/5_6/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mnifgen.nim.c -o c_code/5_6/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msourcemap.nim.c -o c_code/5_6/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mjsgen.nim.c -o c_code/5_6/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@plists.nim.c -o c_code/5_2/@plists.nim.o
@@ -16406,15 +16484,17 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
 c_code/5_6/@psystem@sexceptions.nim.o \
 c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/5_2/@psystem@sdollars.nim.o \
 c_code/5_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_2/@pstd@sformatfloat.nim.o \
+c_code/5_2/@psystem@srepr_v2.nim.o \
 c_code/5_6/@psystem.nim.o \
 c_code/5_6/@pparseutils.nim.o \
 c_code/5_2/@pmath.nim.o \
 c_code/5_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/5_2/@pstd@senumutils.nim.o \
 c_code/5_2/@punicode.nim.o \
 c_code/5_6/@pstrutils.nim.o \
 c_code/5_6/@ppathnorm.nim.o \
@@ -16432,7 +16512,7 @@ c_code/5_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_6/@pos.nim.o \
 c_code/5_6/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/5_2/@psequtils.nim.o \
 c_code/5_2/@phashes.nim.o \
 c_code/5_6/@pstrtabs.nim.o \
 c_code/5_6/@ptables.nim.o \
@@ -16445,8 +16525,8 @@ c_code/5_15/@mplatform.nim.o \
 c_code/5_2/@mprefixmatches.nim.o \
 c_code/5_2/@mnimpaths.nim.o \
 c_code/5_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/5_2/@pstd@sobjectdollar.nim.o \
+c_code/5_2/@pstd@sprivate@sglobs.nim.o \
 c_code/5_6/@moptions.nim.o \
 c_code/5_6/@mmsgs.nim.o \
 c_code/5_2/@mcondsyms.nim.o \
@@ -16492,16 +16572,15 @@ c_code/5_2/@mic@spacked_ast.nim.o \
 c_code/5_6/@mic@sic.nim.o \
 c_code/5_2/@mmodulegraphs.nim.o \
 c_code/5_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/5_2/@mbitsets.nim.o \
 c_code/5_2/@mastmsgs.nim.o \
 c_code/5_2/@mtypes.nim.o \
 c_code/5_2/@mnimsets.nim.o \
-c_code/5_6/@mcbuilderbase.nim.o \
 c_code/5_2/@mcgendata.nim.o \
 c_code/5_2/@mmangleutils.nim.o \
 c_code/5_2/@mccgutils.nim.o \
 c_code/5_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/5_2/@msaturate.nim.o \
 c_code/5_2/@mguards.nim.o \
 c_code/5_2/@msemfold.nim.o \
 c_code/5_6/@mvmdef.nim.o \
@@ -16566,11 +16645,6 @@ c_code/5_2/@mvtables.nim.o \
 c_code/5_6/@msem.nim.o \
 c_code/5_6/@mreorder.nim.o \
 c_code/5_6/@mdepends.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_6/@mnifgen.nim.o \
 c_code/5_6/@msourcemap.nim.o \
 c_code/5_6/@mjsgen.nim.o \
 c_code/5_2/@plists.nim.o \
@@ -16604,15 +16678,17 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@psystem@sexceptions.nim.c -o c_code/5_12/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sassertions.nim.c -o c_code/5_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psystem@sdollars.nim.c -o c_code/5_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sschubfach.nim.c -o c_code/5_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sformatfloat.nim.c -o c_code/5_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psystem@srepr_v2.nim.c -o c_code/5_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@psystem.nim.c -o c_code/5_12/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pparseutils.nim.c -o c_code/5_12/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pmath.nim.c -o c_code/5_1/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@palgorithm.nim.c -o c_code/5_1/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@senumutils.nim.c -o c_code/5_1/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@punicode.nim.c -o c_code/5_1/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstrutils.nim.c -o c_code/5_12/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ppathnorm.nim.c -o c_code/5_12/@ppathnorm.nim.o
@@ -16630,7 +16706,7 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@scmdline.nim.c -o c_code/5_1/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pos.nim.c -o c_code/5_12/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pparseopt.nim.c -o c_code/5_12/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psequtils.nim.c -o c_code/5_1/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@phashes.nim.c -o c_code/5_1/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstrtabs.nim.c -o c_code/5_12/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ptables.nim.c -o c_code/5_12/@ptables.nim.o
@@ -16643,8 +16719,8 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mprefixmatches.nim.c -o c_code/5_1/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mnimpaths.nim.c -o c_code/5_1/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psets.nim.c -o c_code/5_1/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sobjectdollar.nim.c -o c_code/5_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sglobs.nim.c -o c_code/5_1/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@moptions.nim.c -o c_code/5_12/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mmsgs.nim.c -o c_code/5_12/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mcondsyms.nim.c -o c_code/5_1/@mcondsyms.nim.o
@@ -16690,16 +16766,15 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mic@sic.nim.c -o c_code/5_12/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mmodulegraphs.nim.c -o c_code/5_12/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mmagicsys.nim.c -o c_code/5_1/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mbitsets.nim.c -o c_code/5_1/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mastmsgs.nim.c -o c_code/5_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mtypes.nim.c -o c_code/5_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mnimsets.nim.c -o c_code/5_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mcbuilderbase.nim.c -o c_code/5_12/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mcgendata.nim.c -o c_code/5_12/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mmangleutils.nim.c -o c_code/5_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mccgutils.nim.c -o c_code/5_1/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@mtreetab.nim.c -o c_code/5_1/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@msaturate.nim.c -o c_code/5_1/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mguards.nim.c -o c_code/5_12/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@msemfold.nim.c -o c_code/5_1/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mvmdef.nim.c -o c_code/5_12/@mvmdef.nim.o
@@ -16764,11 +16839,6 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@msem.nim.c -o c_code/5_12/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mreorder.nim.c -o c_code/5_12/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mdepends.nim.c -o c_code/5_12/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mnifgen.nim.c -o c_code/5_12/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@msourcemap.nim.c -o c_code/5_12/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@mjsgen.nim.c -o c_code/5_12/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@plists.nim.c -o c_code/5_1/@plists.nim.o
@@ -16803,15 +16873,17 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
 c_code/5_12/@psystem@sexceptions.nim.o \
 c_code/5_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/5_1/@psystem@sdollars.nim.o \
 c_code/5_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_1/@pstd@sformatfloat.nim.o \
+c_code/5_1/@psystem@srepr_v2.nim.o \
 c_code/5_12/@psystem.nim.o \
 c_code/5_12/@pparseutils.nim.o \
 c_code/5_1/@pmath.nim.o \
 c_code/5_1/@palgorithm.nim.o \
-c_code/1_1/@pstd@senumutils.nim.o \
+c_code/5_1/@pstd@senumutils.nim.o \
 c_code/5_1/@punicode.nim.o \
 c_code/5_12/@pstrutils.nim.o \
 c_code/5_12/@ppathnorm.nim.o \
@@ -16829,7 +16901,7 @@ c_code/5_1/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_1/@pstd@scmdline.nim.o \
 c_code/5_12/@pos.nim.o \
 c_code/5_12/@pparseopt.nim.o \
-c_code/1_1/@psequtils.nim.o \
+c_code/5_1/@psequtils.nim.o \
 c_code/5_1/@phashes.nim.o \
 c_code/5_12/@pstrtabs.nim.o \
 c_code/5_12/@ptables.nim.o \
@@ -16842,8 +16914,8 @@ c_code/5_16/@mplatform.nim.o \
 c_code/5_1/@mprefixmatches.nim.o \
 c_code/5_1/@mnimpaths.nim.o \
 c_code/5_1/@psets.nim.o \
-c_code/1_1/@pstd@sobjectdollar.nim.o \
-c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/5_1/@pstd@sobjectdollar.nim.o \
+c_code/5_1/@pstd@sprivate@sglobs.nim.o \
 c_code/5_12/@moptions.nim.o \
 c_code/5_12/@mmsgs.nim.o \
 c_code/5_1/@mcondsyms.nim.o \
@@ -16889,16 +16961,15 @@ c_code/5_1/@mic@spacked_ast.nim.o \
 c_code/5_12/@mic@sic.nim.o \
 c_code/5_12/@mmodulegraphs.nim.o \
 c_code/5_1/@mmagicsys.nim.o \
-c_code/1_1/@mbitsets.nim.o \
+c_code/5_1/@mbitsets.nim.o \
 c_code/5_1/@mastmsgs.nim.o \
 c_code/5_1/@mtypes.nim.o \
 c_code/5_1/@mnimsets.nim.o \
-c_code/5_12/@mcbuilderbase.nim.o \
 c_code/5_12/@mcgendata.nim.o \
 c_code/5_1/@mmangleutils.nim.o \
 c_code/5_1/@mccgutils.nim.o \
 c_code/5_1/@mtreetab.nim.o \
-c_code/2_1/@msaturate.nim.o \
+c_code/5_1/@msaturate.nim.o \
 c_code/5_12/@mguards.nim.o \
 c_code/5_1/@msemfold.nim.o \
 c_code/5_12/@mvmdef.nim.o \
@@ -16963,11 +17034,6 @@ c_code/5_1/@mvtables.nim.o \
 c_code/5_12/@msem.nim.o \
 c_code/5_12/@mreorder.nim.o \
 c_code/5_12/@mdepends.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_12/@mnifgen.nim.o \
 c_code/5_12/@msourcemap.nim.o \
 c_code/5_12/@mjsgen.nim.o \
 c_code/5_1/@plists.nim.o \
@@ -17001,15 +17067,17 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem@sexceptions.nim.c -o c_code/5_6/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sassertions.nim.c -o c_code/5_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@sdollars.nim.c -o c_code/5_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sschubfach.nim.c -o c_code/5_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sformatfloat.nim.c -o c_code/5_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@srepr_v2.nim.c -o c_code/5_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem.nim.c -o c_code/5_6/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseutils.nim.c -o c_code/5_6/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pmath.nim.c -o c_code/5_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@palgorithm.nim.c -o c_code/5_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@senumutils.nim.c -o c_code/5_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@punicode.nim.c -o c_code/5_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrutils.nim.c -o c_code/5_6/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ppathnorm.nim.c -o c_code/5_6/@ppathnorm.nim.o
@@ -17027,7 +17095,7 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@scmdline.nim.c -o c_code/5_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pos.nim.c -o c_code/5_6/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseopt.nim.c -o c_code/5_6/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrtabs.nim.c -o c_code/5_6/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ptables.nim.c -o c_code/5_6/@ptables.nim.o
@@ -17040,8 +17108,8 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mprefixmatches.nim.c -o c_code/5_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimpaths.nim.c -o c_code/5_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psets.nim.c -o c_code/5_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sobjectdollar.nim.c -o c_code/5_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sglobs.nim.c -o c_code/5_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@moptions.nim.c -o c_code/5_6/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mmsgs.nim.c -o c_code/5_6/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcondsyms.nim.c -o c_code/5_2/@mcondsyms.nim.o
@@ -17087,16 +17155,15 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mic@sic.nim.c -o c_code/5_6/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmodulegraphs.nim.c -o c_code/5_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmagicsys.nim.c -o c_code/5_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mbitsets.nim.c -o c_code/5_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mastmsgs.nim.c -o c_code/5_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtypes.nim.c -o c_code/5_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimsets.nim.c -o c_code/5_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mcbuilderbase.nim.c -o c_code/5_6/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcgendata.nim.c -o c_code/5_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmangleutils.nim.c -o c_code/5_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mccgutils.nim.c -o c_code/5_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtreetab.nim.c -o c_code/5_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msaturate.nim.c -o c_code/5_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mguards.nim.c -o c_code/5_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msemfold.nim.c -o c_code/5_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mvmdef.nim.c -o c_code/5_6/@mvmdef.nim.o
@@ -17161,11 +17228,6 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msem.nim.c -o c_code/5_6/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mreorder.nim.c -o c_code/5_6/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mdepends.nim.c -o c_code/5_6/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mnifgen.nim.c -o c_code/5_6/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msourcemap.nim.c -o c_code/5_6/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mjsgen.nim.c -o c_code/5_6/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@plists.nim.c -o c_code/5_2/@plists.nim.o
@@ -17200,15 +17262,17 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
 c_code/5_6/@psystem@sexceptions.nim.o \
 c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/5_2/@psystem@sdollars.nim.o \
 c_code/5_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_2/@pstd@sformatfloat.nim.o \
+c_code/5_2/@psystem@srepr_v2.nim.o \
 c_code/5_6/@psystem.nim.o \
 c_code/5_6/@pparseutils.nim.o \
 c_code/5_2/@pmath.nim.o \
 c_code/5_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/5_2/@pstd@senumutils.nim.o \
 c_code/5_2/@punicode.nim.o \
 c_code/5_6/@pstrutils.nim.o \
 c_code/5_6/@ppathnorm.nim.o \
@@ -17226,7 +17290,7 @@ c_code/5_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_6/@pos.nim.o \
 c_code/5_6/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/5_2/@psequtils.nim.o \
 c_code/5_2/@phashes.nim.o \
 c_code/5_6/@pstrtabs.nim.o \
 c_code/5_6/@ptables.nim.o \
@@ -17239,8 +17303,8 @@ c_code/5_17/@mplatform.nim.o \
 c_code/5_2/@mprefixmatches.nim.o \
 c_code/5_2/@mnimpaths.nim.o \
 c_code/5_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/5_2/@pstd@sobjectdollar.nim.o \
+c_code/5_2/@pstd@sprivate@sglobs.nim.o \
 c_code/5_6/@moptions.nim.o \
 c_code/5_6/@mmsgs.nim.o \
 c_code/5_2/@mcondsyms.nim.o \
@@ -17286,16 +17350,15 @@ c_code/5_2/@mic@spacked_ast.nim.o \
 c_code/5_6/@mic@sic.nim.o \
 c_code/5_2/@mmodulegraphs.nim.o \
 c_code/5_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/5_2/@mbitsets.nim.o \
 c_code/5_2/@mastmsgs.nim.o \
 c_code/5_2/@mtypes.nim.o \
 c_code/5_2/@mnimsets.nim.o \
-c_code/5_6/@mcbuilderbase.nim.o \
 c_code/5_2/@mcgendata.nim.o \
 c_code/5_2/@mmangleutils.nim.o \
 c_code/5_2/@mccgutils.nim.o \
 c_code/5_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/5_2/@msaturate.nim.o \
 c_code/5_2/@mguards.nim.o \
 c_code/5_2/@msemfold.nim.o \
 c_code/5_6/@mvmdef.nim.o \
@@ -17360,11 +17423,6 @@ c_code/5_2/@mvtables.nim.o \
 c_code/5_6/@msem.nim.o \
 c_code/5_6/@mreorder.nim.o \
 c_code/5_6/@mdepends.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_6/@mnifgen.nim.o \
 c_code/5_6/@msourcemap.nim.o \
 c_code/5_6/@mjsgen.nim.o \
 c_code/5_2/@plists.nim.o \
@@ -17398,15 +17456,17 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@psystem@sexceptions.nim.c -o c_code/5_18/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_18/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstd@sassertions.nim.c -o c_code/5_18/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@siterators.nim.c -o c_code/2_18/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@psystem@sdollars.nim.c -o c_code/5_18/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_18/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstd@sprivate@sschubfach.nim.c -o c_code/5_18/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstd@sformatfloat.nim.c -o c_code/5_18/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@psystem@srepr_v2.nim.c -o c_code/5_18/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@psystem.nim.c -o c_code/5_18/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pparseutils.nim.c -o c_code/5_18/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pmath.nim.c -o c_code/5_18/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@palgorithm.nim.c -o c_code/5_18/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@senumutils.nim.c -o c_code/2_18/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstd@senumutils.nim.c -o c_code/5_18/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@punicode.nim.c -o c_code/5_18/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstrutils.nim.c -o c_code/5_18/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@ppathnorm.nim.c -o c_code/5_18/@ppathnorm.nim.o
@@ -17424,7 +17484,7 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstd@scmdline.nim.c -o c_code/5_18/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pos.nim.c -o c_code/5_18/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pparseopt.nim.c -o c_code/5_18/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psequtils.nim.c -o c_code/2_18/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@psequtils.nim.c -o c_code/5_18/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@phashes.nim.c -o c_code/5_18/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstrtabs.nim.c -o c_code/5_18/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@ptables.nim.c -o c_code/5_18/@ptables.nim.o
@@ -17437,8 +17497,8 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mprefixmatches.nim.c -o c_code/5_18/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mnimpaths.nim.c -o c_code/5_18/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@psets.nim.c -o c_code/5_18/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sobjectdollar.nim.c -o c_code/2_18/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sglobs.nim.c -o c_code/2_18/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstd@sobjectdollar.nim.c -o c_code/5_18/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@pstd@sprivate@sglobs.nim.c -o c_code/5_18/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@moptions.nim.c -o c_code/5_18/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mmsgs.nim.c -o c_code/5_18/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mcondsyms.nim.c -o c_code/5_18/@mcondsyms.nim.o
@@ -17484,11 +17544,10 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mic@sic.nim.c -o c_code/5_18/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mmodulegraphs.nim.c -o c_code/5_18/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mmagicsys.nim.c -o c_code/5_18/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mbitsets.nim.c -o c_code/2_18/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mbitsets.nim.c -o c_code/5_18/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mastmsgs.nim.c -o c_code/5_18/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mtypes.nim.c -o c_code/5_18/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mnimsets.nim.c -o c_code/5_18/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mcbuilderbase.nim.c -o c_code/5_18/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mcgendata.nim.c -o c_code/5_18/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mmangleutils.nim.c -o c_code/5_18/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mccgutils.nim.c -o c_code/5_18/@mccgutils.nim.o
@@ -17558,11 +17617,6 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@msem.nim.c -o c_code/5_18/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mreorder.nim.c -o c_code/5_18/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mdepends.nim.c -o c_code/5_18/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mnifgen.nim.c -o c_code/5_18/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@msourcemap.nim.c -o c_code/5_18/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@mjsgen.nim.c -o c_code/5_18/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_18/@plists.nim.c -o c_code/5_18/@plists.nim.o
@@ -17597,15 +17651,17 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
 c_code/5_18/@psystem@sexceptions.nim.o \
 c_code/5_18/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_18/@pstd@sassertions.nim.o \
+c_code/2_18/@psystem@siterators.nim.o \
 c_code/5_18/@psystem@sdollars.nim.o \
 c_code/5_18/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_18/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_18/@pstd@sformatfloat.nim.o \
+c_code/5_18/@psystem@srepr_v2.nim.o \
 c_code/5_18/@psystem.nim.o \
 c_code/5_18/@pparseutils.nim.o \
 c_code/5_18/@pmath.nim.o \
 c_code/5_18/@palgorithm.nim.o \
-c_code/2_18/@pstd@senumutils.nim.o \
+c_code/5_18/@pstd@senumutils.nim.o \
 c_code/5_18/@punicode.nim.o \
 c_code/5_18/@pstrutils.nim.o \
 c_code/5_18/@ppathnorm.nim.o \
@@ -17623,7 +17679,7 @@ c_code/5_18/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_18/@pstd@scmdline.nim.o \
 c_code/5_18/@pos.nim.o \
 c_code/5_18/@pparseopt.nim.o \
-c_code/2_18/@psequtils.nim.o \
+c_code/5_18/@psequtils.nim.o \
 c_code/5_18/@phashes.nim.o \
 c_code/5_18/@pstrtabs.nim.o \
 c_code/5_18/@ptables.nim.o \
@@ -17636,8 +17692,8 @@ c_code/5_18/@mplatform.nim.o \
 c_code/5_18/@mprefixmatches.nim.o \
 c_code/5_18/@mnimpaths.nim.o \
 c_code/5_18/@psets.nim.o \
-c_code/2_18/@pstd@sobjectdollar.nim.o \
-c_code/2_18/@pstd@sprivate@sglobs.nim.o \
+c_code/5_18/@pstd@sobjectdollar.nim.o \
+c_code/5_18/@pstd@sprivate@sglobs.nim.o \
 c_code/5_18/@moptions.nim.o \
 c_code/5_18/@mmsgs.nim.o \
 c_code/5_18/@mcondsyms.nim.o \
@@ -17683,11 +17739,10 @@ c_code/5_18/@mic@spacked_ast.nim.o \
 c_code/5_18/@mic@sic.nim.o \
 c_code/5_18/@mmodulegraphs.nim.o \
 c_code/5_18/@mmagicsys.nim.o \
-c_code/2_18/@mbitsets.nim.o \
+c_code/5_18/@mbitsets.nim.o \
 c_code/5_18/@mastmsgs.nim.o \
 c_code/5_18/@mtypes.nim.o \
 c_code/5_18/@mnimsets.nim.o \
-c_code/5_18/@mcbuilderbase.nim.o \
 c_code/5_18/@mcgendata.nim.o \
 c_code/5_18/@mmangleutils.nim.o \
 c_code/5_18/@mccgutils.nim.o \
@@ -17757,11 +17812,6 @@ c_code/5_18/@mvtables.nim.o \
 c_code/5_18/@msem.nim.o \
 c_code/5_18/@mreorder.nim.o \
 c_code/5_18/@mdepends.nim.o \
-c_code/5_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_18/@mnifgen.nim.o \
 c_code/5_18/@msourcemap.nim.o \
 c_code/5_18/@mjsgen.nim.o \
 c_code/5_18/@plists.nim.o \
@@ -17802,15 +17852,17 @@ c_code/5_18/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem@sexceptions.nim.c -o c_code/5_6/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sassertions.nim.c -o c_code/5_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@sdollars.nim.c -o c_code/5_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sschubfach.nim.c -o c_code/5_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sformatfloat.nim.c -o c_code/5_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@srepr_v2.nim.c -o c_code/5_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@psystem.nim.c -o c_code/5_6/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseutils.nim.c -o c_code/5_6/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pmath.nim.c -o c_code/5_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@palgorithm.nim.c -o c_code/5_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@senumutils.nim.c -o c_code/5_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@punicode.nim.c -o c_code/5_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrutils.nim.c -o c_code/5_6/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ppathnorm.nim.c -o c_code/5_6/@ppathnorm.nim.o
@@ -17828,7 +17880,7 @@ c_code/5_18/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@scmdline.nim.c -o c_code/5_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pos.nim.c -o c_code/5_6/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseopt.nim.c -o c_code/5_6/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrtabs.nim.c -o c_code/5_6/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ptables.nim.c -o c_code/5_6/@ptables.nim.o
@@ -17841,8 +17893,8 @@ c_code/5_18/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mprefixmatches.nim.c -o c_code/5_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimpaths.nim.c -o c_code/5_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psets.nim.c -o c_code/5_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sobjectdollar.nim.c -o c_code/5_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sglobs.nim.c -o c_code/5_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@moptions.nim.c -o c_code/5_6/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mmsgs.nim.c -o c_code/5_6/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcondsyms.nim.c -o c_code/5_2/@mcondsyms.nim.o
@@ -17888,16 +17940,15 @@ c_code/5_18/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mic@sic.nim.c -o c_code/5_6/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmodulegraphs.nim.c -o c_code/5_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmagicsys.nim.c -o c_code/5_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mbitsets.nim.c -o c_code/5_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mastmsgs.nim.c -o c_code/5_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtypes.nim.c -o c_code/5_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimsets.nim.c -o c_code/5_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mcbuilderbase.nim.c -o c_code/5_6/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcgendata.nim.c -o c_code/5_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmangleutils.nim.c -o c_code/5_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mccgutils.nim.c -o c_code/5_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtreetab.nim.c -o c_code/5_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msaturate.nim.c -o c_code/5_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mguards.nim.c -o c_code/5_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msemfold.nim.c -o c_code/5_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mvmdef.nim.c -o c_code/5_6/@mvmdef.nim.o
@@ -17962,11 +18013,6 @@ c_code/5_18/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msem.nim.c -o c_code/5_6/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mreorder.nim.c -o c_code/5_6/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mdepends.nim.c -o c_code/5_6/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mnifgen.nim.c -o c_code/5_6/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@msourcemap.nim.c -o c_code/5_6/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@mjsgen.nim.c -o c_code/5_6/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@plists.nim.c -o c_code/5_2/@plists.nim.o
@@ -18001,15 +18047,17 @@ c_code/5_18/@mnim.nim.o $LINK_FLAGS
 c_code/5_6/@psystem@sexceptions.nim.o \
 c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/5_2/@psystem@sdollars.nim.o \
 c_code/5_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_2/@pstd@sformatfloat.nim.o \
+c_code/5_2/@psystem@srepr_v2.nim.o \
 c_code/5_6/@psystem.nim.o \
 c_code/5_6/@pparseutils.nim.o \
 c_code/5_2/@pmath.nim.o \
 c_code/5_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/5_2/@pstd@senumutils.nim.o \
 c_code/5_2/@punicode.nim.o \
 c_code/5_6/@pstrutils.nim.o \
 c_code/5_6/@ppathnorm.nim.o \
@@ -18027,7 +18075,7 @@ c_code/5_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_6/@pos.nim.o \
 c_code/5_6/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/5_2/@psequtils.nim.o \
 c_code/5_2/@phashes.nim.o \
 c_code/5_6/@pstrtabs.nim.o \
 c_code/5_6/@ptables.nim.o \
@@ -18040,8 +18088,8 @@ c_code/5_20/@mplatform.nim.o \
 c_code/5_2/@mprefixmatches.nim.o \
 c_code/5_2/@mnimpaths.nim.o \
 c_code/5_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/5_2/@pstd@sobjectdollar.nim.o \
+c_code/5_2/@pstd@sprivate@sglobs.nim.o \
 c_code/5_6/@moptions.nim.o \
 c_code/5_6/@mmsgs.nim.o \
 c_code/5_2/@mcondsyms.nim.o \
@@ -18087,16 +18135,15 @@ c_code/5_2/@mic@spacked_ast.nim.o \
 c_code/5_6/@mic@sic.nim.o \
 c_code/5_2/@mmodulegraphs.nim.o \
 c_code/5_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/5_2/@mbitsets.nim.o \
 c_code/5_2/@mastmsgs.nim.o \
 c_code/5_2/@mtypes.nim.o \
 c_code/5_2/@mnimsets.nim.o \
-c_code/5_6/@mcbuilderbase.nim.o \
 c_code/5_2/@mcgendata.nim.o \
 c_code/5_2/@mmangleutils.nim.o \
 c_code/5_2/@mccgutils.nim.o \
 c_code/5_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/5_2/@msaturate.nim.o \
 c_code/5_2/@mguards.nim.o \
 c_code/5_2/@msemfold.nim.o \
 c_code/5_6/@mvmdef.nim.o \
@@ -18161,11 +18208,6 @@ c_code/5_2/@mvtables.nim.o \
 c_code/5_6/@msem.nim.o \
 c_code/5_6/@mreorder.nim.o \
 c_code/5_6/@mdepends.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_6/@mnifgen.nim.o \
 c_code/5_6/@msourcemap.nim.o \
 c_code/5_6/@mjsgen.nim.o \
 c_code/5_2/@plists.nim.o \
@@ -18214,15 +18256,17 @@ netbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem@sexceptions.nim.c -o c_code/6_1/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/6_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sassertions.nim.c -o c_code/6_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem@sdollars.nim.c -o c_code/6_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/6_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sschubfach.nim.c -o c_code/6_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sformatfloat.nim.c -o c_code/6_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem@srepr_v2.nim.c -o c_code/6_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem.nim.c -o c_code/6_1/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pparseutils.nim.c -o c_code/6_1/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pmath.nim.c -o c_code/6_1/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@palgorithm.nim.c -o c_code/6_1/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@senumutils.nim.c -o c_code/6_1/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@punicode.nim.c -o c_code/6_1/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstrutils.nim.c -o c_code/6_1/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@ppathnorm.nim.c -o c_code/6_1/@ppathnorm.nim.o
@@ -18240,7 +18284,7 @@ netbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@scmdline.nim.c -o c_code/6_1/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pos.nim.c -o c_code/6_1/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pparseopt.nim.c -o c_code/6_1/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psequtils.nim.c -o c_code/6_1/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@phashes.nim.c -o c_code/6_1/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstrtabs.nim.c -o c_code/6_1/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@ptables.nim.c -o c_code/6_1/@ptables.nim.o
@@ -18253,8 +18297,8 @@ netbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mprefixmatches.nim.c -o c_code/6_1/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mnimpaths.nim.c -o c_code/6_1/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psets.nim.c -o c_code/6_1/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sobjectdollar.nim.c -o c_code/6_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sglobs.nim.c -o c_code/6_1/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@moptions.nim.c -o c_code/6_1/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmsgs.nim.c -o c_code/6_1/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mcondsyms.nim.c -o c_code/6_1/@mcondsyms.nim.o
@@ -18300,16 +18344,15 @@ netbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mic@sic.nim.c -o c_code/6_1/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmodulegraphs.nim.c -o c_code/6_1/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmagicsys.nim.c -o c_code/6_1/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mbitsets.nim.c -o c_code/6_1/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mastmsgs.nim.c -o c_code/6_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mtypes.nim.c -o c_code/6_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mnimsets.nim.c -o c_code/6_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mcbuilderbase.nim.c -o c_code/6_1/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mcgendata.nim.c -o c_code/6_1/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmangleutils.nim.c -o c_code/6_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mccgutils.nim.c -o c_code/6_1/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mtreetab.nim.c -o c_code/6_1/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msaturate.nim.c -o c_code/6_1/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mguards.nim.c -o c_code/6_1/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msemfold.nim.c -o c_code/6_1/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mvmdef.nim.c -o c_code/6_1/@mvmdef.nim.o
@@ -18374,11 +18417,6 @@ netbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msem.nim.c -o c_code/6_1/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mreorder.nim.c -o c_code/6_1/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mdepends.nim.c -o c_code/6_1/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/6_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/6_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/6_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mnifgen.nim.c -o c_code/6_1/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msourcemap.nim.c -o c_code/6_1/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mjsgen.nim.c -o c_code/6_1/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@plists.nim.c -o c_code/6_1/@plists.nim.o
@@ -18413,15 +18451,17 @@ netbsd)
 c_code/6_1/@psystem@sexceptions.nim.o \
 c_code/6_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/6_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/6_1/@psystem@sdollars.nim.o \
 c_code/6_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/6_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/6_1/@pstd@sformatfloat.nim.o \
+c_code/6_1/@psystem@srepr_v2.nim.o \
 c_code/6_1/@psystem.nim.o \
 c_code/6_1/@pparseutils.nim.o \
 c_code/6_1/@pmath.nim.o \
 c_code/6_1/@palgorithm.nim.o \
-c_code/1_1/@pstd@senumutils.nim.o \
+c_code/6_1/@pstd@senumutils.nim.o \
 c_code/6_1/@punicode.nim.o \
 c_code/6_1/@pstrutils.nim.o \
 c_code/6_1/@ppathnorm.nim.o \
@@ -18439,7 +18479,7 @@ c_code/6_1/@pstd@sprivate@sosappdirs.nim.o \
 c_code/6_1/@pstd@scmdline.nim.o \
 c_code/6_1/@pos.nim.o \
 c_code/6_1/@pparseopt.nim.o \
-c_code/1_1/@psequtils.nim.o \
+c_code/6_1/@psequtils.nim.o \
 c_code/6_1/@phashes.nim.o \
 c_code/6_1/@pstrtabs.nim.o \
 c_code/6_1/@ptables.nim.o \
@@ -18452,8 +18492,8 @@ c_code/6_1/@mplatform.nim.o \
 c_code/6_1/@mprefixmatches.nim.o \
 c_code/6_1/@mnimpaths.nim.o \
 c_code/6_1/@psets.nim.o \
-c_code/1_1/@pstd@sobjectdollar.nim.o \
-c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/6_1/@pstd@sobjectdollar.nim.o \
+c_code/6_1/@pstd@sprivate@sglobs.nim.o \
 c_code/6_1/@moptions.nim.o \
 c_code/6_1/@mmsgs.nim.o \
 c_code/6_1/@mcondsyms.nim.o \
@@ -18499,16 +18539,15 @@ c_code/6_1/@mic@spacked_ast.nim.o \
 c_code/6_1/@mic@sic.nim.o \
 c_code/6_1/@mmodulegraphs.nim.o \
 c_code/6_1/@mmagicsys.nim.o \
-c_code/1_1/@mbitsets.nim.o \
+c_code/6_1/@mbitsets.nim.o \
 c_code/6_1/@mastmsgs.nim.o \
 c_code/6_1/@mtypes.nim.o \
 c_code/6_1/@mnimsets.nim.o \
-c_code/6_1/@mcbuilderbase.nim.o \
 c_code/6_1/@mcgendata.nim.o \
 c_code/6_1/@mmangleutils.nim.o \
 c_code/6_1/@mccgutils.nim.o \
 c_code/6_1/@mtreetab.nim.o \
-c_code/2_1/@msaturate.nim.o \
+c_code/6_1/@msaturate.nim.o \
 c_code/6_1/@mguards.nim.o \
 c_code/6_1/@msemfold.nim.o \
 c_code/6_1/@mvmdef.nim.o \
@@ -18573,11 +18612,6 @@ c_code/6_1/@mvtables.nim.o \
 c_code/6_1/@msem.nim.o \
 c_code/6_1/@mreorder.nim.o \
 c_code/6_1/@mdepends.nim.o \
-c_code/6_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/6_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/6_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/6_1/@mnifgen.nim.o \
 c_code/6_1/@msourcemap.nim.o \
 c_code/6_1/@mjsgen.nim.o \
 c_code/6_1/@plists.nim.o \
@@ -18611,15 +18645,17 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem@sexceptions.nim.c -o c_code/6_2/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/6_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sassertions.nim.c -o c_code/6_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem@sdollars.nim.c -o c_code/6_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/6_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sschubfach.nim.c -o c_code/6_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sformatfloat.nim.c -o c_code/6_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem@srepr_v2.nim.c -o c_code/6_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem.nim.c -o c_code/6_2/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pparseutils.nim.c -o c_code/6_2/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pmath.nim.c -o c_code/6_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@palgorithm.nim.c -o c_code/6_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@senumutils.nim.c -o c_code/6_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@punicode.nim.c -o c_code/6_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstrutils.nim.c -o c_code/6_2/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@ppathnorm.nim.c -o c_code/6_2/@ppathnorm.nim.o
@@ -18637,7 +18673,7 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@scmdline.nim.c -o c_code/6_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pos.nim.c -o c_code/6_2/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pparseopt.nim.c -o c_code/6_2/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psequtils.nim.c -o c_code/6_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@phashes.nim.c -o c_code/6_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstrtabs.nim.c -o c_code/6_2/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@ptables.nim.c -o c_code/6_2/@ptables.nim.o
@@ -18650,8 +18686,8 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mprefixmatches.nim.c -o c_code/6_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mnimpaths.nim.c -o c_code/6_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psets.nim.c -o c_code/6_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sobjectdollar.nim.c -o c_code/6_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sglobs.nim.c -o c_code/6_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@moptions.nim.c -o c_code/6_2/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmsgs.nim.c -o c_code/6_2/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mcondsyms.nim.c -o c_code/6_2/@mcondsyms.nim.o
@@ -18697,16 +18733,15 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mic@sic.nim.c -o c_code/6_2/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmodulegraphs.nim.c -o c_code/6_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmagicsys.nim.c -o c_code/6_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mbitsets.nim.c -o c_code/6_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mastmsgs.nim.c -o c_code/6_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mtypes.nim.c -o c_code/6_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mnimsets.nim.c -o c_code/6_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mcbuilderbase.nim.c -o c_code/6_2/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mcgendata.nim.c -o c_code/6_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmangleutils.nim.c -o c_code/6_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mccgutils.nim.c -o c_code/6_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mtreetab.nim.c -o c_code/6_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msaturate.nim.c -o c_code/6_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mguards.nim.c -o c_code/6_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msemfold.nim.c -o c_code/6_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mvmdef.nim.c -o c_code/6_2/@mvmdef.nim.o
@@ -18771,11 +18806,6 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msem.nim.c -o c_code/6_2/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mreorder.nim.c -o c_code/6_2/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mdepends.nim.c -o c_code/6_2/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/6_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/6_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/6_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mnifgen.nim.c -o c_code/6_2/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msourcemap.nim.c -o c_code/6_2/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mjsgen.nim.c -o c_code/6_2/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@plists.nim.c -o c_code/6_2/@plists.nim.o
@@ -18810,15 +18840,17 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
 c_code/6_2/@psystem@sexceptions.nim.o \
 c_code/6_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/6_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/6_2/@psystem@sdollars.nim.o \
 c_code/6_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/6_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/6_2/@pstd@sformatfloat.nim.o \
+c_code/6_2/@psystem@srepr_v2.nim.o \
 c_code/6_2/@psystem.nim.o \
 c_code/6_2/@pparseutils.nim.o \
 c_code/6_2/@pmath.nim.o \
 c_code/6_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/6_2/@pstd@senumutils.nim.o \
 c_code/6_2/@punicode.nim.o \
 c_code/6_2/@pstrutils.nim.o \
 c_code/6_2/@ppathnorm.nim.o \
@@ -18836,7 +18868,7 @@ c_code/6_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/6_2/@pstd@scmdline.nim.o \
 c_code/6_2/@pos.nim.o \
 c_code/6_2/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/6_2/@psequtils.nim.o \
 c_code/6_2/@phashes.nim.o \
 c_code/6_2/@pstrtabs.nim.o \
 c_code/6_2/@ptables.nim.o \
@@ -18849,8 +18881,8 @@ c_code/6_2/@mplatform.nim.o \
 c_code/6_2/@mprefixmatches.nim.o \
 c_code/6_2/@mnimpaths.nim.o \
 c_code/6_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/6_2/@pstd@sobjectdollar.nim.o \
+c_code/6_2/@pstd@sprivate@sglobs.nim.o \
 c_code/6_2/@moptions.nim.o \
 c_code/6_2/@mmsgs.nim.o \
 c_code/6_2/@mcondsyms.nim.o \
@@ -18896,16 +18928,15 @@ c_code/6_2/@mic@spacked_ast.nim.o \
 c_code/6_2/@mic@sic.nim.o \
 c_code/6_2/@mmodulegraphs.nim.o \
 c_code/6_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/6_2/@mbitsets.nim.o \
 c_code/6_2/@mastmsgs.nim.o \
 c_code/6_2/@mtypes.nim.o \
 c_code/6_2/@mnimsets.nim.o \
-c_code/6_2/@mcbuilderbase.nim.o \
 c_code/6_2/@mcgendata.nim.o \
 c_code/6_2/@mmangleutils.nim.o \
 c_code/6_2/@mccgutils.nim.o \
 c_code/6_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/6_2/@msaturate.nim.o \
 c_code/6_2/@mguards.nim.o \
 c_code/6_2/@msemfold.nim.o \
 c_code/6_2/@mvmdef.nim.o \
@@ -18970,11 +19001,6 @@ c_code/6_2/@mvtables.nim.o \
 c_code/6_2/@msem.nim.o \
 c_code/6_2/@mreorder.nim.o \
 c_code/6_2/@mdepends.nim.o \
-c_code/6_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/6_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/6_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/6_2/@mnifgen.nim.o \
 c_code/6_2/@msourcemap.nim.o \
 c_code/6_2/@mjsgen.nim.o \
 c_code/6_2/@plists.nim.o \
@@ -19113,15 +19139,17 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psystem@sexceptions.nim.c -o c_code/6_18/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sprivate@sdigitsutils.nim.c -o c_code/6_18/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sassertions.nim.c -o c_code/6_18/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@siterators.nim.c -o c_code/2_18/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psystem@sdollars.nim.c -o c_code/6_18/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sprivate@sdragonbox.nim.c -o c_code/6_18/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sprivate@sschubfach.nim.c -o c_code/6_18/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sformatfloat.nim.c -o c_code/6_18/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psystem@srepr_v2.nim.c -o c_code/6_18/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psystem.nim.c -o c_code/6_18/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pparseutils.nim.c -o c_code/6_18/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pmath.nim.c -o c_code/6_18/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@palgorithm.nim.c -o c_code/6_18/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@senumutils.nim.c -o c_code/2_18/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@senumutils.nim.c -o c_code/6_18/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@punicode.nim.c -o c_code/6_18/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstrutils.nim.c -o c_code/6_18/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@ppathnorm.nim.c -o c_code/6_18/@ppathnorm.nim.o
@@ -19139,7 +19167,7 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@scmdline.nim.c -o c_code/6_18/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pos.nim.c -o c_code/6_18/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pparseopt.nim.c -o c_code/6_18/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psequtils.nim.c -o c_code/2_18/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psequtils.nim.c -o c_code/6_18/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@phashes.nim.c -o c_code/6_18/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstrtabs.nim.c -o c_code/6_18/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@ptables.nim.c -o c_code/6_18/@ptables.nim.o
@@ -19152,8 +19180,8 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mprefixmatches.nim.c -o c_code/6_18/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mnimpaths.nim.c -o c_code/6_18/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psets.nim.c -o c_code/6_18/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sobjectdollar.nim.c -o c_code/2_18/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sglobs.nim.c -o c_code/2_18/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sobjectdollar.nim.c -o c_code/6_18/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sprivate@sglobs.nim.c -o c_code/6_18/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@moptions.nim.c -o c_code/6_18/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mmsgs.nim.c -o c_code/6_18/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mcondsyms.nim.c -o c_code/6_18/@mcondsyms.nim.o
@@ -19199,11 +19227,10 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mic@sic.nim.c -o c_code/6_18/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mmodulegraphs.nim.c -o c_code/6_18/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mmagicsys.nim.c -o c_code/6_18/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mbitsets.nim.c -o c_code/2_18/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mbitsets.nim.c -o c_code/6_18/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mastmsgs.nim.c -o c_code/6_18/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mtypes.nim.c -o c_code/6_18/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mnimsets.nim.c -o c_code/6_18/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mcbuilderbase.nim.c -o c_code/6_18/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mcgendata.nim.c -o c_code/6_18/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mmangleutils.nim.c -o c_code/6_18/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mccgutils.nim.c -o c_code/6_18/@mccgutils.nim.o
@@ -19273,11 +19300,6 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@msem.nim.c -o c_code/6_18/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mreorder.nim.c -o c_code/6_18/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mdepends.nim.c -o c_code/6_18/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/6_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/6_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/6_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mnifgen.nim.c -o c_code/6_18/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@msourcemap.nim.c -o c_code/6_18/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mjsgen.nim.c -o c_code/6_18/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@plists.nim.c -o c_code/6_18/@plists.nim.o
@@ -19312,15 +19334,17 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
 c_code/6_18/@psystem@sexceptions.nim.o \
 c_code/6_18/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/6_18/@pstd@sassertions.nim.o \
+c_code/2_18/@psystem@siterators.nim.o \
 c_code/6_18/@psystem@sdollars.nim.o \
 c_code/6_18/@pstd@sprivate@sdragonbox.nim.o \
 c_code/6_18/@pstd@sprivate@sschubfach.nim.o \
 c_code/6_18/@pstd@sformatfloat.nim.o \
+c_code/6_18/@psystem@srepr_v2.nim.o \
 c_code/6_18/@psystem.nim.o \
 c_code/6_18/@pparseutils.nim.o \
 c_code/6_18/@pmath.nim.o \
 c_code/6_18/@palgorithm.nim.o \
-c_code/2_18/@pstd@senumutils.nim.o \
+c_code/6_18/@pstd@senumutils.nim.o \
 c_code/6_18/@punicode.nim.o \
 c_code/6_18/@pstrutils.nim.o \
 c_code/6_18/@ppathnorm.nim.o \
@@ -19338,7 +19362,7 @@ c_code/6_18/@pstd@sprivate@sosappdirs.nim.o \
 c_code/6_18/@pstd@scmdline.nim.o \
 c_code/6_18/@pos.nim.o \
 c_code/6_18/@pparseopt.nim.o \
-c_code/2_18/@psequtils.nim.o \
+c_code/6_18/@psequtils.nim.o \
 c_code/6_18/@phashes.nim.o \
 c_code/6_18/@pstrtabs.nim.o \
 c_code/6_18/@ptables.nim.o \
@@ -19351,8 +19375,8 @@ c_code/6_18/@mplatform.nim.o \
 c_code/6_18/@mprefixmatches.nim.o \
 c_code/6_18/@mnimpaths.nim.o \
 c_code/6_18/@psets.nim.o \
-c_code/2_18/@pstd@sobjectdollar.nim.o \
-c_code/2_18/@pstd@sprivate@sglobs.nim.o \
+c_code/6_18/@pstd@sobjectdollar.nim.o \
+c_code/6_18/@pstd@sprivate@sglobs.nim.o \
 c_code/6_18/@moptions.nim.o \
 c_code/6_18/@mmsgs.nim.o \
 c_code/6_18/@mcondsyms.nim.o \
@@ -19398,11 +19422,10 @@ c_code/6_18/@mic@spacked_ast.nim.o \
 c_code/6_18/@mic@sic.nim.o \
 c_code/6_18/@mmodulegraphs.nim.o \
 c_code/6_18/@mmagicsys.nim.o \
-c_code/2_18/@mbitsets.nim.o \
+c_code/6_18/@mbitsets.nim.o \
 c_code/6_18/@mastmsgs.nim.o \
 c_code/6_18/@mtypes.nim.o \
 c_code/6_18/@mnimsets.nim.o \
-c_code/6_18/@mcbuilderbase.nim.o \
 c_code/6_18/@mcgendata.nim.o \
 c_code/6_18/@mmangleutils.nim.o \
 c_code/6_18/@mccgutils.nim.o \
@@ -19472,11 +19495,6 @@ c_code/6_18/@mvtables.nim.o \
 c_code/6_18/@msem.nim.o \
 c_code/6_18/@mreorder.nim.o \
 c_code/6_18/@mdepends.nim.o \
-c_code/6_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/6_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/6_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/6_18/@mnifgen.nim.o \
 c_code/6_18/@msourcemap.nim.o \
 c_code/6_18/@mjsgen.nim.o \
 c_code/6_18/@plists.nim.o \
@@ -19539,15 +19557,17 @@ openbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem@sexceptions.nim.c -o c_code/6_1/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/6_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sassertions.nim.c -o c_code/6_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem@sdollars.nim.c -o c_code/6_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/6_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sschubfach.nim.c -o c_code/6_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sformatfloat.nim.c -o c_code/6_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem@srepr_v2.nim.c -o c_code/6_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem.nim.c -o c_code/6_1/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pparseutils.nim.c -o c_code/6_1/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pmath.nim.c -o c_code/6_1/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@palgorithm.nim.c -o c_code/6_1/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@senumutils.nim.c -o c_code/6_1/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@punicode.nim.c -o c_code/6_1/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstrutils.nim.c -o c_code/6_1/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@ppathnorm.nim.c -o c_code/6_1/@ppathnorm.nim.o
@@ -19565,7 +19585,7 @@ openbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@scmdline.nim.c -o c_code/6_1/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_1/@pos.nim.c -o c_code/7_1/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pparseopt.nim.c -o c_code/6_1/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psequtils.nim.c -o c_code/6_1/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@phashes.nim.c -o c_code/6_1/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstrtabs.nim.c -o c_code/6_1/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@ptables.nim.c -o c_code/6_1/@ptables.nim.o
@@ -19578,8 +19598,8 @@ openbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mprefixmatches.nim.c -o c_code/6_1/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mnimpaths.nim.c -o c_code/6_1/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psets.nim.c -o c_code/6_1/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sobjectdollar.nim.c -o c_code/6_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sglobs.nim.c -o c_code/6_1/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_1/@moptions.nim.c -o c_code/7_1/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmsgs.nim.c -o c_code/6_1/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mcondsyms.nim.c -o c_code/6_1/@mcondsyms.nim.o
@@ -19625,16 +19645,15 @@ openbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mic@sic.nim.c -o c_code/6_1/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmodulegraphs.nim.c -o c_code/6_1/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmagicsys.nim.c -o c_code/6_1/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mbitsets.nim.c -o c_code/6_1/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mastmsgs.nim.c -o c_code/6_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mtypes.nim.c -o c_code/6_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mnimsets.nim.c -o c_code/6_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mcbuilderbase.nim.c -o c_code/6_1/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mcgendata.nim.c -o c_code/6_1/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmangleutils.nim.c -o c_code/6_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mccgutils.nim.c -o c_code/6_1/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mtreetab.nim.c -o c_code/6_1/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msaturate.nim.c -o c_code/6_1/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mguards.nim.c -o c_code/6_1/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msemfold.nim.c -o c_code/6_1/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mvmdef.nim.c -o c_code/6_1/@mvmdef.nim.o
@@ -19699,11 +19718,6 @@ openbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msem.nim.c -o c_code/6_1/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mreorder.nim.c -o c_code/6_1/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_1/@mdepends.nim.c -o c_code/7_1/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/6_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/6_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/7_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/7_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mnifgen.nim.c -o c_code/6_1/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msourcemap.nim.c -o c_code/6_1/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mjsgen.nim.c -o c_code/6_1/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@plists.nim.c -o c_code/6_1/@plists.nim.o
@@ -19738,15 +19752,17 @@ openbsd)
 c_code/6_1/@psystem@sexceptions.nim.o \
 c_code/6_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/6_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/6_1/@psystem@sdollars.nim.o \
 c_code/6_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/6_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/6_1/@pstd@sformatfloat.nim.o \
+c_code/6_1/@psystem@srepr_v2.nim.o \
 c_code/6_1/@psystem.nim.o \
 c_code/6_1/@pparseutils.nim.o \
 c_code/6_1/@pmath.nim.o \
 c_code/6_1/@palgorithm.nim.o \
-c_code/1_1/@pstd@senumutils.nim.o \
+c_code/6_1/@pstd@senumutils.nim.o \
 c_code/6_1/@punicode.nim.o \
 c_code/6_1/@pstrutils.nim.o \
 c_code/6_1/@ppathnorm.nim.o \
@@ -19764,7 +19780,7 @@ c_code/6_1/@pstd@sprivate@sosappdirs.nim.o \
 c_code/6_1/@pstd@scmdline.nim.o \
 c_code/7_1/@pos.nim.o \
 c_code/6_1/@pparseopt.nim.o \
-c_code/1_1/@psequtils.nim.o \
+c_code/6_1/@psequtils.nim.o \
 c_code/6_1/@phashes.nim.o \
 c_code/6_1/@pstrtabs.nim.o \
 c_code/6_1/@ptables.nim.o \
@@ -19777,8 +19793,8 @@ c_code/7_1/@mplatform.nim.o \
 c_code/6_1/@mprefixmatches.nim.o \
 c_code/6_1/@mnimpaths.nim.o \
 c_code/6_1/@psets.nim.o \
-c_code/1_1/@pstd@sobjectdollar.nim.o \
-c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/6_1/@pstd@sobjectdollar.nim.o \
+c_code/6_1/@pstd@sprivate@sglobs.nim.o \
 c_code/7_1/@moptions.nim.o \
 c_code/6_1/@mmsgs.nim.o \
 c_code/6_1/@mcondsyms.nim.o \
@@ -19824,16 +19840,15 @@ c_code/6_1/@mic@spacked_ast.nim.o \
 c_code/6_1/@mic@sic.nim.o \
 c_code/6_1/@mmodulegraphs.nim.o \
 c_code/6_1/@mmagicsys.nim.o \
-c_code/1_1/@mbitsets.nim.o \
+c_code/6_1/@mbitsets.nim.o \
 c_code/6_1/@mastmsgs.nim.o \
 c_code/6_1/@mtypes.nim.o \
 c_code/6_1/@mnimsets.nim.o \
-c_code/6_1/@mcbuilderbase.nim.o \
 c_code/6_1/@mcgendata.nim.o \
 c_code/6_1/@mmangleutils.nim.o \
 c_code/6_1/@mccgutils.nim.o \
 c_code/6_1/@mtreetab.nim.o \
-c_code/2_1/@msaturate.nim.o \
+c_code/6_1/@msaturate.nim.o \
 c_code/6_1/@mguards.nim.o \
 c_code/6_1/@msemfold.nim.o \
 c_code/6_1/@mvmdef.nim.o \
@@ -19898,11 +19913,6 @@ c_code/6_1/@mvtables.nim.o \
 c_code/6_1/@msem.nim.o \
 c_code/6_1/@mreorder.nim.o \
 c_code/7_1/@mdepends.nim.o \
-c_code/6_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/6_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/7_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/6_1/@mnifgen.nim.o \
 c_code/6_1/@msourcemap.nim.o \
 c_code/6_1/@mjsgen.nim.o \
 c_code/6_1/@plists.nim.o \
@@ -19936,15 +19946,17 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem@sexceptions.nim.c -o c_code/6_2/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/6_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sassertions.nim.c -o c_code/6_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem@sdollars.nim.c -o c_code/6_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/6_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sschubfach.nim.c -o c_code/6_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sformatfloat.nim.c -o c_code/6_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem@srepr_v2.nim.c -o c_code/6_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem.nim.c -o c_code/6_2/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pparseutils.nim.c -o c_code/6_2/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pmath.nim.c -o c_code/6_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@palgorithm.nim.c -o c_code/6_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@senumutils.nim.c -o c_code/6_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@punicode.nim.c -o c_code/6_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstrutils.nim.c -o c_code/6_2/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@ppathnorm.nim.c -o c_code/6_2/@ppathnorm.nim.o
@@ -19962,7 +19974,7 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@scmdline.nim.c -o c_code/6_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_2/@pos.nim.c -o c_code/7_2/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pparseopt.nim.c -o c_code/6_2/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psequtils.nim.c -o c_code/6_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@phashes.nim.c -o c_code/6_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstrtabs.nim.c -o c_code/6_2/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@ptables.nim.c -o c_code/6_2/@ptables.nim.o
@@ -19975,8 +19987,8 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mprefixmatches.nim.c -o c_code/6_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mnimpaths.nim.c -o c_code/6_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psets.nim.c -o c_code/6_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sobjectdollar.nim.c -o c_code/6_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sglobs.nim.c -o c_code/6_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_2/@moptions.nim.c -o c_code/7_2/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmsgs.nim.c -o c_code/6_2/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mcondsyms.nim.c -o c_code/6_2/@mcondsyms.nim.o
@@ -20022,16 +20034,15 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mic@sic.nim.c -o c_code/6_2/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmodulegraphs.nim.c -o c_code/6_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmagicsys.nim.c -o c_code/6_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mbitsets.nim.c -o c_code/6_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mastmsgs.nim.c -o c_code/6_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mtypes.nim.c -o c_code/6_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mnimsets.nim.c -o c_code/6_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mcbuilderbase.nim.c -o c_code/6_2/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mcgendata.nim.c -o c_code/6_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmangleutils.nim.c -o c_code/6_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mccgutils.nim.c -o c_code/6_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mtreetab.nim.c -o c_code/6_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msaturate.nim.c -o c_code/6_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mguards.nim.c -o c_code/6_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msemfold.nim.c -o c_code/6_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mvmdef.nim.c -o c_code/6_2/@mvmdef.nim.o
@@ -20096,11 +20107,6 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msem.nim.c -o c_code/6_2/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mreorder.nim.c -o c_code/6_2/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_2/@mdepends.nim.c -o c_code/7_2/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/6_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/6_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/7_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/7_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mnifgen.nim.c -o c_code/6_2/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msourcemap.nim.c -o c_code/6_2/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mjsgen.nim.c -o c_code/6_2/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@plists.nim.c -o c_code/6_2/@plists.nim.o
@@ -20135,15 +20141,17 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
 c_code/6_2/@psystem@sexceptions.nim.o \
 c_code/6_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/6_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/6_2/@psystem@sdollars.nim.o \
 c_code/6_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/6_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/6_2/@pstd@sformatfloat.nim.o \
+c_code/6_2/@psystem@srepr_v2.nim.o \
 c_code/6_2/@psystem.nim.o \
 c_code/6_2/@pparseutils.nim.o \
 c_code/6_2/@pmath.nim.o \
 c_code/6_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/6_2/@pstd@senumutils.nim.o \
 c_code/6_2/@punicode.nim.o \
 c_code/6_2/@pstrutils.nim.o \
 c_code/6_2/@ppathnorm.nim.o \
@@ -20161,7 +20169,7 @@ c_code/6_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/6_2/@pstd@scmdline.nim.o \
 c_code/7_2/@pos.nim.o \
 c_code/6_2/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/6_2/@psequtils.nim.o \
 c_code/6_2/@phashes.nim.o \
 c_code/6_2/@pstrtabs.nim.o \
 c_code/6_2/@ptables.nim.o \
@@ -20174,8 +20182,8 @@ c_code/7_2/@mplatform.nim.o \
 c_code/6_2/@mprefixmatches.nim.o \
 c_code/6_2/@mnimpaths.nim.o \
 c_code/6_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/6_2/@pstd@sobjectdollar.nim.o \
+c_code/6_2/@pstd@sprivate@sglobs.nim.o \
 c_code/7_2/@moptions.nim.o \
 c_code/6_2/@mmsgs.nim.o \
 c_code/6_2/@mcondsyms.nim.o \
@@ -20221,16 +20229,15 @@ c_code/6_2/@mic@spacked_ast.nim.o \
 c_code/6_2/@mic@sic.nim.o \
 c_code/6_2/@mmodulegraphs.nim.o \
 c_code/6_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/6_2/@mbitsets.nim.o \
 c_code/6_2/@mastmsgs.nim.o \
 c_code/6_2/@mtypes.nim.o \
 c_code/6_2/@mnimsets.nim.o \
-c_code/6_2/@mcbuilderbase.nim.o \
 c_code/6_2/@mcgendata.nim.o \
 c_code/6_2/@mmangleutils.nim.o \
 c_code/6_2/@mccgutils.nim.o \
 c_code/6_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/6_2/@msaturate.nim.o \
 c_code/6_2/@mguards.nim.o \
 c_code/6_2/@msemfold.nim.o \
 c_code/6_2/@mvmdef.nim.o \
@@ -20295,11 +20302,6 @@ c_code/6_2/@mvtables.nim.o \
 c_code/6_2/@msem.nim.o \
 c_code/6_2/@mreorder.nim.o \
 c_code/7_2/@mdepends.nim.o \
-c_code/6_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/6_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/7_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/6_2/@mnifgen.nim.o \
 c_code/6_2/@msourcemap.nim.o \
 c_code/6_2/@mjsgen.nim.o \
 c_code/6_2/@plists.nim.o \
@@ -20361,15 +20363,17 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@psystem@sexceptions.nim.c -o c_code/7_7/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstd@sprivate@sdigitsutils.nim.c -o c_code/7_7/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstd@sassertions.nim.c -o c_code/7_7/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem@siterators.nim.c -o c_code/2_7/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@psystem@sdollars.nim.c -o c_code/7_7/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstd@sprivate@sdragonbox.nim.c -o c_code/7_7/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstd@sprivate@sschubfach.nim.c -o c_code/7_7/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstd@sformatfloat.nim.c -o c_code/7_7/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@psystem@srepr_v2.nim.c -o c_code/7_7/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@psystem.nim.c -o c_code/7_7/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pparseutils.nim.c -o c_code/7_7/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pmath.nim.c -o c_code/7_7/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@palgorithm.nim.c -o c_code/7_7/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@senumutils.nim.c -o c_code/2_7/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstd@senumutils.nim.c -o c_code/7_7/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@punicode.nim.c -o c_code/7_7/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstrutils.nim.c -o c_code/7_7/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@ppathnorm.nim.c -o c_code/7_7/@ppathnorm.nim.o
@@ -20387,7 +20391,7 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstd@scmdline.nim.c -o c_code/7_7/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pos.nim.c -o c_code/7_7/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pparseopt.nim.c -o c_code/7_7/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psequtils.nim.c -o c_code/2_7/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@psequtils.nim.c -o c_code/7_7/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@phashes.nim.c -o c_code/7_7/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstrtabs.nim.c -o c_code/7_7/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@ptables.nim.c -o c_code/7_7/@ptables.nim.o
@@ -20400,8 +20404,8 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mprefixmatches.nim.c -o c_code/7_7/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mnimpaths.nim.c -o c_code/7_7/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@psets.nim.c -o c_code/7_7/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sobjectdollar.nim.c -o c_code/2_7/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sprivate@sglobs.nim.c -o c_code/2_7/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstd@sobjectdollar.nim.c -o c_code/7_7/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@pstd@sprivate@sglobs.nim.c -o c_code/7_7/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@moptions.nim.c -o c_code/7_7/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mmsgs.nim.c -o c_code/7_7/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mcondsyms.nim.c -o c_code/7_7/@mcondsyms.nim.o
@@ -20447,11 +20451,10 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mic@sic.nim.c -o c_code/7_7/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mmodulegraphs.nim.c -o c_code/7_7/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mmagicsys.nim.c -o c_code/7_7/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mbitsets.nim.c -o c_code/2_7/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mbitsets.nim.c -o c_code/7_7/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mastmsgs.nim.c -o c_code/7_7/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mtypes.nim.c -o c_code/7_7/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mnimsets.nim.c -o c_code/7_7/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mcbuilderbase.nim.c -o c_code/7_7/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mcgendata.nim.c -o c_code/7_7/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mmangleutils.nim.c -o c_code/7_7/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mccgutils.nim.c -o c_code/7_7/@mccgutils.nim.o
@@ -20521,11 +20524,6 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@msem.nim.c -o c_code/7_7/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mreorder.nim.c -o c_code/7_7/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mdepends.nim.c -o c_code/7_7/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/7_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/7_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/7_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mnifgen.nim.c -o c_code/7_7/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@msourcemap.nim.c -o c_code/7_7/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@mjsgen.nim.c -o c_code/7_7/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_7/@plists.nim.c -o c_code/7_7/@plists.nim.o
@@ -20560,15 +20558,17 @@ c_code/6_2/@mnim.nim.o $LINK_FLAGS
 c_code/7_7/@psystem@sexceptions.nim.o \
 c_code/7_7/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/7_7/@pstd@sassertions.nim.o \
+c_code/2_7/@psystem@siterators.nim.o \
 c_code/7_7/@psystem@sdollars.nim.o \
 c_code/7_7/@pstd@sprivate@sdragonbox.nim.o \
 c_code/7_7/@pstd@sprivate@sschubfach.nim.o \
 c_code/7_7/@pstd@sformatfloat.nim.o \
+c_code/7_7/@psystem@srepr_v2.nim.o \
 c_code/7_7/@psystem.nim.o \
 c_code/7_7/@pparseutils.nim.o \
 c_code/7_7/@pmath.nim.o \
 c_code/7_7/@palgorithm.nim.o \
-c_code/2_7/@pstd@senumutils.nim.o \
+c_code/7_7/@pstd@senumutils.nim.o \
 c_code/7_7/@punicode.nim.o \
 c_code/7_7/@pstrutils.nim.o \
 c_code/7_7/@ppathnorm.nim.o \
@@ -20586,7 +20586,7 @@ c_code/7_7/@pstd@sprivate@sosappdirs.nim.o \
 c_code/7_7/@pstd@scmdline.nim.o \
 c_code/7_7/@pos.nim.o \
 c_code/7_7/@pparseopt.nim.o \
-c_code/2_7/@psequtils.nim.o \
+c_code/7_7/@psequtils.nim.o \
 c_code/7_7/@phashes.nim.o \
 c_code/7_7/@pstrtabs.nim.o \
 c_code/7_7/@ptables.nim.o \
@@ -20599,8 +20599,8 @@ c_code/7_7/@mplatform.nim.o \
 c_code/7_7/@mprefixmatches.nim.o \
 c_code/7_7/@mnimpaths.nim.o \
 c_code/7_7/@psets.nim.o \
-c_code/2_7/@pstd@sobjectdollar.nim.o \
-c_code/2_7/@pstd@sprivate@sglobs.nim.o \
+c_code/7_7/@pstd@sobjectdollar.nim.o \
+c_code/7_7/@pstd@sprivate@sglobs.nim.o \
 c_code/7_7/@moptions.nim.o \
 c_code/7_7/@mmsgs.nim.o \
 c_code/7_7/@mcondsyms.nim.o \
@@ -20646,11 +20646,10 @@ c_code/7_7/@mic@spacked_ast.nim.o \
 c_code/7_7/@mic@sic.nim.o \
 c_code/7_7/@mmodulegraphs.nim.o \
 c_code/7_7/@mmagicsys.nim.o \
-c_code/2_7/@mbitsets.nim.o \
+c_code/7_7/@mbitsets.nim.o \
 c_code/7_7/@mastmsgs.nim.o \
 c_code/7_7/@mtypes.nim.o \
 c_code/7_7/@mnimsets.nim.o \
-c_code/7_7/@mcbuilderbase.nim.o \
 c_code/7_7/@mcgendata.nim.o \
 c_code/7_7/@mmangleutils.nim.o \
 c_code/7_7/@mccgutils.nim.o \
@@ -20720,11 +20719,6 @@ c_code/7_7/@mvtables.nim.o \
 c_code/7_7/@msem.nim.o \
 c_code/7_7/@mreorder.nim.o \
 c_code/7_7/@mdepends.nim.o \
-c_code/7_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/7_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/7_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/7_7/@mnifgen.nim.o \
 c_code/7_7/@msourcemap.nim.o \
 c_code/7_7/@mjsgen.nim.o \
 c_code/7_7/@plists.nim.o \
@@ -20828,15 +20822,17 @@ c_code/7_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psystem@sexceptions.nim.c -o c_code/6_18/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sprivate@sdigitsutils.nim.c -o c_code/6_18/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sassertions.nim.c -o c_code/6_18/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@siterators.nim.c -o c_code/2_18/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psystem@sdollars.nim.c -o c_code/6_18/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sprivate@sdragonbox.nim.c -o c_code/6_18/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sprivate@sschubfach.nim.c -o c_code/6_18/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sformatfloat.nim.c -o c_code/6_18/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psystem@srepr_v2.nim.c -o c_code/6_18/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psystem.nim.c -o c_code/6_18/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pparseutils.nim.c -o c_code/6_18/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pmath.nim.c -o c_code/6_18/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@palgorithm.nim.c -o c_code/6_18/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@senumutils.nim.c -o c_code/2_18/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@senumutils.nim.c -o c_code/6_18/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@punicode.nim.c -o c_code/6_18/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstrutils.nim.c -o c_code/6_18/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@ppathnorm.nim.c -o c_code/6_18/@ppathnorm.nim.o
@@ -20854,7 +20850,7 @@ c_code/7_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@scmdline.nim.c -o c_code/6_18/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_18/@pos.nim.c -o c_code/7_18/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pparseopt.nim.c -o c_code/6_18/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psequtils.nim.c -o c_code/2_18/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psequtils.nim.c -o c_code/6_18/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@phashes.nim.c -o c_code/6_18/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstrtabs.nim.c -o c_code/6_18/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@ptables.nim.c -o c_code/6_18/@ptables.nim.o
@@ -20867,8 +20863,8 @@ c_code/7_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mprefixmatches.nim.c -o c_code/6_18/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mnimpaths.nim.c -o c_code/6_18/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@psets.nim.c -o c_code/6_18/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sobjectdollar.nim.c -o c_code/2_18/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sglobs.nim.c -o c_code/2_18/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sobjectdollar.nim.c -o c_code/6_18/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@pstd@sprivate@sglobs.nim.c -o c_code/6_18/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_18/@moptions.nim.c -o c_code/7_18/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mmsgs.nim.c -o c_code/6_18/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mcondsyms.nim.c -o c_code/6_18/@mcondsyms.nim.o
@@ -20914,11 +20910,10 @@ c_code/7_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mic@sic.nim.c -o c_code/6_18/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mmodulegraphs.nim.c -o c_code/6_18/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mmagicsys.nim.c -o c_code/6_18/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mbitsets.nim.c -o c_code/2_18/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mbitsets.nim.c -o c_code/6_18/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mastmsgs.nim.c -o c_code/6_18/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mtypes.nim.c -o c_code/6_18/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mnimsets.nim.c -o c_code/6_18/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mcbuilderbase.nim.c -o c_code/6_18/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mcgendata.nim.c -o c_code/6_18/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mmangleutils.nim.c -o c_code/6_18/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mccgutils.nim.c -o c_code/6_18/@mccgutils.nim.o
@@ -20988,11 +20983,6 @@ c_code/7_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@msem.nim.c -o c_code/6_18/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mreorder.nim.c -o c_code/6_18/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/7_18/@mdepends.nim.c -o c_code/7_18/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/6_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/6_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/7_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/7_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mnifgen.nim.c -o c_code/6_18/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@msourcemap.nim.c -o c_code/6_18/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@mjsgen.nim.c -o c_code/6_18/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_18/@plists.nim.c -o c_code/6_18/@plists.nim.o
@@ -21027,15 +21017,17 @@ c_code/7_7/@mnim.nim.o $LINK_FLAGS
 c_code/6_18/@psystem@sexceptions.nim.o \
 c_code/6_18/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/6_18/@pstd@sassertions.nim.o \
+c_code/2_18/@psystem@siterators.nim.o \
 c_code/6_18/@psystem@sdollars.nim.o \
 c_code/6_18/@pstd@sprivate@sdragonbox.nim.o \
 c_code/6_18/@pstd@sprivate@sschubfach.nim.o \
 c_code/6_18/@pstd@sformatfloat.nim.o \
+c_code/6_18/@psystem@srepr_v2.nim.o \
 c_code/6_18/@psystem.nim.o \
 c_code/6_18/@pparseutils.nim.o \
 c_code/6_18/@pmath.nim.o \
 c_code/6_18/@palgorithm.nim.o \
-c_code/2_18/@pstd@senumutils.nim.o \
+c_code/6_18/@pstd@senumutils.nim.o \
 c_code/6_18/@punicode.nim.o \
 c_code/6_18/@pstrutils.nim.o \
 c_code/6_18/@ppathnorm.nim.o \
@@ -21053,7 +21045,7 @@ c_code/6_18/@pstd@sprivate@sosappdirs.nim.o \
 c_code/6_18/@pstd@scmdline.nim.o \
 c_code/7_18/@pos.nim.o \
 c_code/6_18/@pparseopt.nim.o \
-c_code/2_18/@psequtils.nim.o \
+c_code/6_18/@psequtils.nim.o \
 c_code/6_18/@phashes.nim.o \
 c_code/6_18/@pstrtabs.nim.o \
 c_code/6_18/@ptables.nim.o \
@@ -21066,8 +21058,8 @@ c_code/7_18/@mplatform.nim.o \
 c_code/6_18/@mprefixmatches.nim.o \
 c_code/6_18/@mnimpaths.nim.o \
 c_code/6_18/@psets.nim.o \
-c_code/2_18/@pstd@sobjectdollar.nim.o \
-c_code/2_18/@pstd@sprivate@sglobs.nim.o \
+c_code/6_18/@pstd@sobjectdollar.nim.o \
+c_code/6_18/@pstd@sprivate@sglobs.nim.o \
 c_code/7_18/@moptions.nim.o \
 c_code/6_18/@mmsgs.nim.o \
 c_code/6_18/@mcondsyms.nim.o \
@@ -21113,11 +21105,10 @@ c_code/6_18/@mic@spacked_ast.nim.o \
 c_code/6_18/@mic@sic.nim.o \
 c_code/6_18/@mmodulegraphs.nim.o \
 c_code/6_18/@mmagicsys.nim.o \
-c_code/2_18/@mbitsets.nim.o \
+c_code/6_18/@mbitsets.nim.o \
 c_code/6_18/@mastmsgs.nim.o \
 c_code/6_18/@mtypes.nim.o \
 c_code/6_18/@mnimsets.nim.o \
-c_code/6_18/@mcbuilderbase.nim.o \
 c_code/6_18/@mcgendata.nim.o \
 c_code/6_18/@mmangleutils.nim.o \
 c_code/6_18/@mccgutils.nim.o \
@@ -21187,11 +21178,6 @@ c_code/6_18/@mvtables.nim.o \
 c_code/6_18/@msem.nim.o \
 c_code/6_18/@mreorder.nim.o \
 c_code/7_18/@mdepends.nim.o \
-c_code/6_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/6_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/7_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/6_18/@mnifgen.nim.o \
 c_code/6_18/@msourcemap.nim.o \
 c_code/6_18/@mjsgen.nim.o \
 c_code/6_18/@plists.nim.o \
@@ -21254,15 +21240,17 @@ dragonfly)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem@sexceptions.nim.c -o c_code/6_1/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/6_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sassertions.nim.c -o c_code/6_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem@sdollars.nim.c -o c_code/6_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/6_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sschubfach.nim.c -o c_code/6_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sformatfloat.nim.c -o c_code/6_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psystem@srepr_v2.nim.c -o c_code/6_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_1/@psystem.nim.c -o c_code/8_1/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pparseutils.nim.c -o c_code/6_1/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pmath.nim.c -o c_code/6_1/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@palgorithm.nim.c -o c_code/6_1/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@senumutils.nim.c -o c_code/6_1/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@punicode.nim.c -o c_code/6_1/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstrutils.nim.c -o c_code/6_1/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@ppathnorm.nim.c -o c_code/6_1/@ppathnorm.nim.o
@@ -21280,7 +21268,7 @@ dragonfly)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@scmdline.nim.c -o c_code/6_1/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_1/@pos.nim.c -o c_code/8_1/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pparseopt.nim.c -o c_code/6_1/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psequtils.nim.c -o c_code/6_1/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@phashes.nim.c -o c_code/6_1/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstrtabs.nim.c -o c_code/6_1/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@ptables.nim.c -o c_code/6_1/@ptables.nim.o
@@ -21293,8 +21281,8 @@ dragonfly)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mprefixmatches.nim.c -o c_code/6_1/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mnimpaths.nim.c -o c_code/6_1/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@psets.nim.c -o c_code/6_1/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sobjectdollar.nim.c -o c_code/6_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sglobs.nim.c -o c_code/6_1/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_1/@moptions.nim.c -o c_code/8_1/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_1/@mmsgs.nim.c -o c_code/8_1/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mcondsyms.nim.c -o c_code/6_1/@mcondsyms.nim.o
@@ -21340,16 +21328,15 @@ dragonfly)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mic@sic.nim.c -o c_code/6_1/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmodulegraphs.nim.c -o c_code/6_1/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmagicsys.nim.c -o c_code/6_1/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mbitsets.nim.c -o c_code/6_1/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mastmsgs.nim.c -o c_code/6_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mtypes.nim.c -o c_code/6_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mnimsets.nim.c -o c_code/6_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mcbuilderbase.nim.c -o c_code/6_1/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mcgendata.nim.c -o c_code/6_1/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mmangleutils.nim.c -o c_code/6_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mccgutils.nim.c -o c_code/6_1/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mtreetab.nim.c -o c_code/6_1/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msaturate.nim.c -o c_code/6_1/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mguards.nim.c -o c_code/6_1/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msemfold.nim.c -o c_code/6_1/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mvmdef.nim.c -o c_code/6_1/@mvmdef.nim.o
@@ -21414,11 +21401,6 @@ dragonfly)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msem.nim.c -o c_code/6_1/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mreorder.nim.c -o c_code/6_1/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_1/@mdepends.nim.c -o c_code/8_1/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/6_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/6_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/8_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/8_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mnifgen.nim.c -o c_code/6_1/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@msourcemap.nim.c -o c_code/6_1/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@mjsgen.nim.c -o c_code/6_1/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@plists.nim.c -o c_code/6_1/@plists.nim.o
@@ -21453,15 +21435,17 @@ dragonfly)
 c_code/6_1/@psystem@sexceptions.nim.o \
 c_code/6_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/6_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/6_1/@psystem@sdollars.nim.o \
 c_code/6_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/6_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/6_1/@pstd@sformatfloat.nim.o \
+c_code/6_1/@psystem@srepr_v2.nim.o \
 c_code/8_1/@psystem.nim.o \
 c_code/6_1/@pparseutils.nim.o \
 c_code/6_1/@pmath.nim.o \
 c_code/6_1/@palgorithm.nim.o \
-c_code/1_1/@pstd@senumutils.nim.o \
+c_code/6_1/@pstd@senumutils.nim.o \
 c_code/6_1/@punicode.nim.o \
 c_code/6_1/@pstrutils.nim.o \
 c_code/6_1/@ppathnorm.nim.o \
@@ -21479,7 +21463,7 @@ c_code/6_1/@pstd@sprivate@sosappdirs.nim.o \
 c_code/6_1/@pstd@scmdline.nim.o \
 c_code/8_1/@pos.nim.o \
 c_code/6_1/@pparseopt.nim.o \
-c_code/1_1/@psequtils.nim.o \
+c_code/6_1/@psequtils.nim.o \
 c_code/6_1/@phashes.nim.o \
 c_code/6_1/@pstrtabs.nim.o \
 c_code/6_1/@ptables.nim.o \
@@ -21492,8 +21476,8 @@ c_code/8_1/@mplatform.nim.o \
 c_code/6_1/@mprefixmatches.nim.o \
 c_code/6_1/@mnimpaths.nim.o \
 c_code/6_1/@psets.nim.o \
-c_code/1_1/@pstd@sobjectdollar.nim.o \
-c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/6_1/@pstd@sobjectdollar.nim.o \
+c_code/6_1/@pstd@sprivate@sglobs.nim.o \
 c_code/8_1/@moptions.nim.o \
 c_code/8_1/@mmsgs.nim.o \
 c_code/6_1/@mcondsyms.nim.o \
@@ -21539,16 +21523,15 @@ c_code/6_1/@mic@spacked_ast.nim.o \
 c_code/6_1/@mic@sic.nim.o \
 c_code/6_1/@mmodulegraphs.nim.o \
 c_code/6_1/@mmagicsys.nim.o \
-c_code/1_1/@mbitsets.nim.o \
+c_code/6_1/@mbitsets.nim.o \
 c_code/6_1/@mastmsgs.nim.o \
 c_code/6_1/@mtypes.nim.o \
 c_code/6_1/@mnimsets.nim.o \
-c_code/6_1/@mcbuilderbase.nim.o \
 c_code/6_1/@mcgendata.nim.o \
 c_code/6_1/@mmangleutils.nim.o \
 c_code/6_1/@mccgutils.nim.o \
 c_code/6_1/@mtreetab.nim.o \
-c_code/2_1/@msaturate.nim.o \
+c_code/6_1/@msaturate.nim.o \
 c_code/6_1/@mguards.nim.o \
 c_code/6_1/@msemfold.nim.o \
 c_code/6_1/@mvmdef.nim.o \
@@ -21613,11 +21596,6 @@ c_code/6_1/@mvtables.nim.o \
 c_code/6_1/@msem.nim.o \
 c_code/6_1/@mreorder.nim.o \
 c_code/8_1/@mdepends.nim.o \
-c_code/6_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/6_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/8_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/6_1/@mnifgen.nim.o \
 c_code/6_1/@msourcemap.nim.o \
 c_code/6_1/@mjsgen.nim.o \
 c_code/6_1/@plists.nim.o \
@@ -21651,15 +21629,17 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem@sexceptions.nim.c -o c_code/6_2/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/6_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sassertions.nim.c -o c_code/6_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem@sdollars.nim.c -o c_code/6_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/6_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sschubfach.nim.c -o c_code/6_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sformatfloat.nim.c -o c_code/6_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psystem@srepr_v2.nim.c -o c_code/6_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_2/@psystem.nim.c -o c_code/8_2/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pparseutils.nim.c -o c_code/6_2/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pmath.nim.c -o c_code/6_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@palgorithm.nim.c -o c_code/6_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@senumutils.nim.c -o c_code/6_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@punicode.nim.c -o c_code/6_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstrutils.nim.c -o c_code/6_2/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@ppathnorm.nim.c -o c_code/6_2/@ppathnorm.nim.o
@@ -21677,7 +21657,7 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@scmdline.nim.c -o c_code/6_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_2/@pos.nim.c -o c_code/8_2/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pparseopt.nim.c -o c_code/6_2/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psequtils.nim.c -o c_code/6_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@phashes.nim.c -o c_code/6_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstrtabs.nim.c -o c_code/6_2/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@ptables.nim.c -o c_code/6_2/@ptables.nim.o
@@ -21690,8 +21670,8 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mprefixmatches.nim.c -o c_code/6_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mnimpaths.nim.c -o c_code/6_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@psets.nim.c -o c_code/6_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sobjectdollar.nim.c -o c_code/6_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@pstd@sprivate@sglobs.nim.c -o c_code/6_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_2/@moptions.nim.c -o c_code/8_2/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_2/@mmsgs.nim.c -o c_code/8_2/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mcondsyms.nim.c -o c_code/6_2/@mcondsyms.nim.o
@@ -21737,16 +21717,15 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mic@sic.nim.c -o c_code/6_2/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmodulegraphs.nim.c -o c_code/6_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmagicsys.nim.c -o c_code/6_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mbitsets.nim.c -o c_code/6_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mastmsgs.nim.c -o c_code/6_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mtypes.nim.c -o c_code/6_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mnimsets.nim.c -o c_code/6_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mcbuilderbase.nim.c -o c_code/6_2/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mcgendata.nim.c -o c_code/6_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mmangleutils.nim.c -o c_code/6_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mccgutils.nim.c -o c_code/6_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mtreetab.nim.c -o c_code/6_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msaturate.nim.c -o c_code/6_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mguards.nim.c -o c_code/6_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msemfold.nim.c -o c_code/6_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mvmdef.nim.c -o c_code/6_2/@mvmdef.nim.o
@@ -21811,11 +21790,6 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msem.nim.c -o c_code/6_2/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mreorder.nim.c -o c_code/6_2/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_2/@mdepends.nim.c -o c_code/8_2/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/6_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/6_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/8_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/8_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mnifgen.nim.c -o c_code/6_2/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@msourcemap.nim.c -o c_code/6_2/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@mjsgen.nim.c -o c_code/6_2/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_2/@plists.nim.c -o c_code/6_2/@plists.nim.o
@@ -21850,15 +21824,17 @@ c_code/6_1/@mnim.nim.o $LINK_FLAGS
 c_code/6_2/@psystem@sexceptions.nim.o \
 c_code/6_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/6_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/6_2/@psystem@sdollars.nim.o \
 c_code/6_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/6_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/6_2/@pstd@sformatfloat.nim.o \
+c_code/6_2/@psystem@srepr_v2.nim.o \
 c_code/8_2/@psystem.nim.o \
 c_code/6_2/@pparseutils.nim.o \
 c_code/6_2/@pmath.nim.o \
 c_code/6_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/6_2/@pstd@senumutils.nim.o \
 c_code/6_2/@punicode.nim.o \
 c_code/6_2/@pstrutils.nim.o \
 c_code/6_2/@ppathnorm.nim.o \
@@ -21876,7 +21852,7 @@ c_code/6_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/6_2/@pstd@scmdline.nim.o \
 c_code/8_2/@pos.nim.o \
 c_code/6_2/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/6_2/@psequtils.nim.o \
 c_code/6_2/@phashes.nim.o \
 c_code/6_2/@pstrtabs.nim.o \
 c_code/6_2/@ptables.nim.o \
@@ -21889,8 +21865,8 @@ c_code/8_2/@mplatform.nim.o \
 c_code/6_2/@mprefixmatches.nim.o \
 c_code/6_2/@mnimpaths.nim.o \
 c_code/6_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/6_2/@pstd@sobjectdollar.nim.o \
+c_code/6_2/@pstd@sprivate@sglobs.nim.o \
 c_code/8_2/@moptions.nim.o \
 c_code/8_2/@mmsgs.nim.o \
 c_code/6_2/@mcondsyms.nim.o \
@@ -21936,16 +21912,15 @@ c_code/6_2/@mic@spacked_ast.nim.o \
 c_code/6_2/@mic@sic.nim.o \
 c_code/6_2/@mmodulegraphs.nim.o \
 c_code/6_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/6_2/@mbitsets.nim.o \
 c_code/6_2/@mastmsgs.nim.o \
 c_code/6_2/@mtypes.nim.o \
 c_code/6_2/@mnimsets.nim.o \
-c_code/6_2/@mcbuilderbase.nim.o \
 c_code/6_2/@mcgendata.nim.o \
 c_code/6_2/@mmangleutils.nim.o \
 c_code/6_2/@mccgutils.nim.o \
 c_code/6_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/6_2/@msaturate.nim.o \
 c_code/6_2/@mguards.nim.o \
 c_code/6_2/@msemfold.nim.o \
 c_code/6_2/@mvmdef.nim.o \
@@ -22010,11 +21985,6 @@ c_code/6_2/@mvtables.nim.o \
 c_code/6_2/@msem.nim.o \
 c_code/6_2/@mreorder.nim.o \
 c_code/8_2/@mdepends.nim.o \
-c_code/6_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/6_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/8_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/6_2/@mnifgen.nim.o \
 c_code/6_2/@msourcemap.nim.o \
 c_code/6_2/@mjsgen.nim.o \
 c_code/6_2/@plists.nim.o \
@@ -22196,15 +22166,17 @@ crossos)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@sexceptions.nim.c -o c_code/5_2/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sassertions.nim.c -o c_code/5_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@sdollars.nim.c -o c_code/5_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/5_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sschubfach.nim.c -o c_code/5_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sformatfloat.nim.c -o c_code/5_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem@srepr_v2.nim.c -o c_code/5_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psystem.nim.c -o c_code/5_2/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pparseutils.nim.c -o c_code/5_2/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pmath.nim.c -o c_code/5_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@palgorithm.nim.c -o c_code/5_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@senumutils.nim.c -o c_code/5_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@punicode.nim.c -o c_code/5_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstrutils.nim.c -o c_code/5_2/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@ppathnorm.nim.c -o c_code/5_2/@ppathnorm.nim.o
@@ -22222,7 +22194,7 @@ crossos)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@scmdline.nim.c -o c_code/5_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pos.nim.c -o c_code/5_2/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pparseopt.nim.c -o c_code/5_2/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstrtabs.nim.c -o c_code/5_2/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@ptables.nim.c -o c_code/5_2/@ptables.nim.o
@@ -22235,8 +22207,8 @@ crossos)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mprefixmatches.nim.c -o c_code/5_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimpaths.nim.c -o c_code/5_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psets.nim.c -o c_code/5_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sobjectdollar.nim.c -o c_code/5_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstd@sprivate@sglobs.nim.c -o c_code/5_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@moptions.nim.c -o c_code/5_2/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmsgs.nim.c -o c_code/5_2/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcondsyms.nim.c -o c_code/5_2/@mcondsyms.nim.o
@@ -22282,16 +22254,15 @@ crossos)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mic@sic.nim.c -o c_code/5_2/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmodulegraphs.nim.c -o c_code/5_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmagicsys.nim.c -o c_code/5_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mbitsets.nim.c -o c_code/5_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mastmsgs.nim.c -o c_code/5_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtypes.nim.c -o c_code/5_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnimsets.nim.c -o c_code/5_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcbuilderbase.nim.c -o c_code/5_2/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mcgendata.nim.c -o c_code/5_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mmangleutils.nim.c -o c_code/5_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mccgutils.nim.c -o c_code/5_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mtreetab.nim.c -o c_code/5_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msaturate.nim.c -o c_code/5_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mguards.nim.c -o c_code/5_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msemfold.nim.c -o c_code/5_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mvmdef.nim.c -o c_code/5_2/@mvmdef.nim.o
@@ -22356,11 +22327,6 @@ crossos)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msem.nim.c -o c_code/5_2/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mreorder.nim.c -o c_code/5_2/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mdepends.nim.c -o c_code/5_2/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mnifgen.nim.c -o c_code/5_2/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@msourcemap.nim.c -o c_code/5_2/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@mjsgen.nim.c -o c_code/5_2/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@plists.nim.c -o c_code/5_2/@plists.nim.o
@@ -22395,15 +22361,17 @@ crossos)
 c_code/5_2/@psystem@sexceptions.nim.o \
 c_code/5_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/5_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/5_2/@psystem@sdollars.nim.o \
 c_code/5_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/5_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/5_2/@pstd@sformatfloat.nim.o \
+c_code/5_2/@psystem@srepr_v2.nim.o \
 c_code/5_2/@psystem.nim.o \
 c_code/5_2/@pparseutils.nim.o \
 c_code/5_2/@pmath.nim.o \
 c_code/5_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/5_2/@pstd@senumutils.nim.o \
 c_code/5_2/@punicode.nim.o \
 c_code/5_2/@pstrutils.nim.o \
 c_code/5_2/@ppathnorm.nim.o \
@@ -22421,7 +22389,7 @@ c_code/5_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_2/@pos.nim.o \
 c_code/5_2/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/5_2/@psequtils.nim.o \
 c_code/5_2/@phashes.nim.o \
 c_code/5_2/@pstrtabs.nim.o \
 c_code/5_2/@ptables.nim.o \
@@ -22434,8 +22402,8 @@ c_code/9_2/@mplatform.nim.o \
 c_code/5_2/@mprefixmatches.nim.o \
 c_code/5_2/@mnimpaths.nim.o \
 c_code/5_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/5_2/@pstd@sobjectdollar.nim.o \
+c_code/5_2/@pstd@sprivate@sglobs.nim.o \
 c_code/5_2/@moptions.nim.o \
 c_code/5_2/@mmsgs.nim.o \
 c_code/5_2/@mcondsyms.nim.o \
@@ -22481,16 +22449,15 @@ c_code/5_2/@mic@spacked_ast.nim.o \
 c_code/5_2/@mic@sic.nim.o \
 c_code/5_2/@mmodulegraphs.nim.o \
 c_code/5_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/5_2/@mbitsets.nim.o \
 c_code/5_2/@mastmsgs.nim.o \
 c_code/5_2/@mtypes.nim.o \
 c_code/5_2/@mnimsets.nim.o \
-c_code/5_2/@mcbuilderbase.nim.o \
 c_code/5_2/@mcgendata.nim.o \
 c_code/5_2/@mmangleutils.nim.o \
 c_code/5_2/@mccgutils.nim.o \
 c_code/5_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/5_2/@msaturate.nim.o \
 c_code/5_2/@mguards.nim.o \
 c_code/5_2/@msemfold.nim.o \
 c_code/5_2/@mvmdef.nim.o \
@@ -22555,11 +22522,6 @@ c_code/5_2/@mvtables.nim.o \
 c_code/5_2/@msem.nim.o \
 c_code/5_2/@mreorder.nim.o \
 c_code/5_2/@mdepends.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/5_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/5_2/@mnifgen.nim.o \
 c_code/5_2/@msourcemap.nim.o \
 c_code/5_2/@mjsgen.nim.o \
 c_code/5_2/@plists.nim.o \
@@ -22734,15 +22696,17 @@ haiku)
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@psystem@sexceptions.nim.c -o c_code/10_1/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/10_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstd@sassertions.nim.c -o c_code/10_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@psystem@sdollars.nim.c -o c_code/10_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/10_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstd@sprivate@sschubfach.nim.c -o c_code/10_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstd@sformatfloat.nim.c -o c_code/10_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@psystem@srepr_v2.nim.c -o c_code/10_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@psystem.nim.c -o c_code/10_1/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pparseutils.nim.c -o c_code/10_1/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pmath.nim.c -o c_code/10_1/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@palgorithm.nim.c -o c_code/10_1/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@senumutils.nim.c -o c_code/1_1/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstd@senumutils.nim.c -o c_code/10_1/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@punicode.nim.c -o c_code/10_1/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstrutils.nim.c -o c_code/10_1/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@ppathnorm.nim.c -o c_code/10_1/@ppathnorm.nim.o
@@ -22760,7 +22724,7 @@ haiku)
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstd@scmdline.nim.c -o c_code/10_1/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pos.nim.c -o c_code/10_1/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pparseopt.nim.c -o c_code/10_1/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@psequtils.nim.c -o c_code/10_1/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@phashes.nim.c -o c_code/10_1/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstrtabs.nim.c -o c_code/10_1/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@ptables.nim.c -o c_code/10_1/@ptables.nim.o
@@ -22773,8 +22737,8 @@ haiku)
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mprefixmatches.nim.c -o c_code/10_1/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mnimpaths.nim.c -o c_code/10_1/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@psets.nim.c -o c_code/10_1/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sobjectdollar.nim.c -o c_code/1_1/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstd@sprivate@sglobs.nim.c -o c_code/2_1/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstd@sobjectdollar.nim.c -o c_code/10_1/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@pstd@sprivate@sglobs.nim.c -o c_code/10_1/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@moptions.nim.c -o c_code/10_1/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mmsgs.nim.c -o c_code/10_1/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mcondsyms.nim.c -o c_code/10_1/@mcondsyms.nim.o
@@ -22820,16 +22784,15 @@ haiku)
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mic@sic.nim.c -o c_code/10_1/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mmodulegraphs.nim.c -o c_code/10_1/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mmagicsys.nim.c -o c_code/10_1/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@mbitsets.nim.c -o c_code/1_1/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mbitsets.nim.c -o c_code/10_1/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mastmsgs.nim.c -o c_code/10_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mtypes.nim.c -o c_code/10_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mnimsets.nim.c -o c_code/10_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mcbuilderbase.nim.c -o c_code/10_1/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mcgendata.nim.c -o c_code/10_1/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mmangleutils.nim.c -o c_code/10_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mccgutils.nim.c -o c_code/10_1/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mtreetab.nim.c -o c_code/10_1/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msaturate.nim.c -o c_code/2_1/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@msaturate.nim.c -o c_code/10_1/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mguards.nim.c -o c_code/10_1/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@msemfold.nim.c -o c_code/10_1/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mvmdef.nim.c -o c_code/10_1/@mvmdef.nim.o
@@ -22894,11 +22857,6 @@ haiku)
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@msem.nim.c -o c_code/10_1/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mreorder.nim.c -o c_code/10_1/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mdepends.nim.c -o c_code/10_1/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/10_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/10_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/10_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mnifgen.nim.c -o c_code/10_1/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@msourcemap.nim.c -o c_code/10_1/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@mjsgen.nim.c -o c_code/10_1/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_1/@plists.nim.c -o c_code/10_1/@plists.nim.o
@@ -22933,15 +22891,17 @@ haiku)
 c_code/10_1/@psystem@sexceptions.nim.o \
 c_code/10_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/10_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/10_1/@psystem@sdollars.nim.o \
 c_code/10_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/10_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/10_1/@pstd@sformatfloat.nim.o \
+c_code/10_1/@psystem@srepr_v2.nim.o \
 c_code/10_1/@psystem.nim.o \
 c_code/10_1/@pparseutils.nim.o \
 c_code/10_1/@pmath.nim.o \
 c_code/10_1/@palgorithm.nim.o \
-c_code/1_1/@pstd@senumutils.nim.o \
+c_code/10_1/@pstd@senumutils.nim.o \
 c_code/10_1/@punicode.nim.o \
 c_code/10_1/@pstrutils.nim.o \
 c_code/10_1/@ppathnorm.nim.o \
@@ -22959,7 +22919,7 @@ c_code/10_1/@pstd@sprivate@sosappdirs.nim.o \
 c_code/10_1/@pstd@scmdline.nim.o \
 c_code/10_1/@pos.nim.o \
 c_code/10_1/@pparseopt.nim.o \
-c_code/1_1/@psequtils.nim.o \
+c_code/10_1/@psequtils.nim.o \
 c_code/10_1/@phashes.nim.o \
 c_code/10_1/@pstrtabs.nim.o \
 c_code/10_1/@ptables.nim.o \
@@ -22972,8 +22932,8 @@ c_code/10_1/@mplatform.nim.o \
 c_code/10_1/@mprefixmatches.nim.o \
 c_code/10_1/@mnimpaths.nim.o \
 c_code/10_1/@psets.nim.o \
-c_code/1_1/@pstd@sobjectdollar.nim.o \
-c_code/2_1/@pstd@sprivate@sglobs.nim.o \
+c_code/10_1/@pstd@sobjectdollar.nim.o \
+c_code/10_1/@pstd@sprivate@sglobs.nim.o \
 c_code/10_1/@moptions.nim.o \
 c_code/10_1/@mmsgs.nim.o \
 c_code/10_1/@mcondsyms.nim.o \
@@ -23019,16 +22979,15 @@ c_code/10_1/@mic@spacked_ast.nim.o \
 c_code/10_1/@mic@sic.nim.o \
 c_code/10_1/@mmodulegraphs.nim.o \
 c_code/10_1/@mmagicsys.nim.o \
-c_code/1_1/@mbitsets.nim.o \
+c_code/10_1/@mbitsets.nim.o \
 c_code/10_1/@mastmsgs.nim.o \
 c_code/10_1/@mtypes.nim.o \
 c_code/10_1/@mnimsets.nim.o \
-c_code/10_1/@mcbuilderbase.nim.o \
 c_code/10_1/@mcgendata.nim.o \
 c_code/10_1/@mmangleutils.nim.o \
 c_code/10_1/@mccgutils.nim.o \
 c_code/10_1/@mtreetab.nim.o \
-c_code/2_1/@msaturate.nim.o \
+c_code/10_1/@msaturate.nim.o \
 c_code/10_1/@mguards.nim.o \
 c_code/10_1/@msemfold.nim.o \
 c_code/10_1/@mvmdef.nim.o \
@@ -23093,11 +23052,6 @@ c_code/10_1/@mvtables.nim.o \
 c_code/10_1/@msem.nim.o \
 c_code/10_1/@mreorder.nim.o \
 c_code/10_1/@mdepends.nim.o \
-c_code/10_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/10_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/10_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/10_1/@mnifgen.nim.o \
 c_code/10_1/@msourcemap.nim.o \
 c_code/10_1/@mjsgen.nim.o \
 c_code/10_1/@plists.nim.o \
@@ -23131,15 +23085,17 @@ c_code/10_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@psystem@sexceptions.nim.c -o c_code/10_2/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstd@sprivate@sdigitsutils.nim.c -o c_code/10_2/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstd@sassertions.nim.c -o c_code/10_2/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psystem@siterators.nim.c -o c_code/1_2/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@psystem@sdollars.nim.c -o c_code/10_2/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstd@sprivate@sdragonbox.nim.c -o c_code/10_2/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstd@sprivate@sschubfach.nim.c -o c_code/10_2/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstd@sformatfloat.nim.c -o c_code/10_2/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@psystem@srepr_v2.nim.c -o c_code/10_2/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@psystem.nim.c -o c_code/10_2/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pparseutils.nim.c -o c_code/10_2/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pmath.nim.c -o c_code/10_2/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@palgorithm.nim.c -o c_code/10_2/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@senumutils.nim.c -o c_code/1_2/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstd@senumutils.nim.c -o c_code/10_2/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@punicode.nim.c -o c_code/10_2/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstrutils.nim.c -o c_code/10_2/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@ppathnorm.nim.c -o c_code/10_2/@ppathnorm.nim.o
@@ -23157,7 +23113,7 @@ c_code/10_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstd@scmdline.nim.c -o c_code/10_2/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pos.nim.c -o c_code/10_2/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pparseopt.nim.c -o c_code/10_2/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@psequtils.nim.c -o c_code/10_2/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@phashes.nim.c -o c_code/10_2/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstrtabs.nim.c -o c_code/10_2/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@ptables.nim.c -o c_code/10_2/@ptables.nim.o
@@ -23170,8 +23126,8 @@ c_code/10_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mprefixmatches.nim.c -o c_code/10_2/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mnimpaths.nim.c -o c_code/10_2/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@psets.nim.c -o c_code/10_2/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@pstd@sobjectdollar.nim.c -o c_code/1_2/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstd@sprivate@sglobs.nim.c -o c_code/2_2/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstd@sobjectdollar.nim.c -o c_code/10_2/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@pstd@sprivate@sglobs.nim.c -o c_code/10_2/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@moptions.nim.c -o c_code/10_2/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mmsgs.nim.c -o c_code/10_2/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mcondsyms.nim.c -o c_code/10_2/@mcondsyms.nim.o
@@ -23217,16 +23173,15 @@ c_code/10_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mic@sic.nim.c -o c_code/10_2/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mmodulegraphs.nim.c -o c_code/10_2/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mmagicsys.nim.c -o c_code/10_2/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@mbitsets.nim.c -o c_code/1_2/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mbitsets.nim.c -o c_code/10_2/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mastmsgs.nim.c -o c_code/10_2/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mtypes.nim.c -o c_code/10_2/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mnimsets.nim.c -o c_code/10_2/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mcbuilderbase.nim.c -o c_code/10_2/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mcgendata.nim.c -o c_code/10_2/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mmangleutils.nim.c -o c_code/10_2/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mccgutils.nim.c -o c_code/10_2/@mccgutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mtreetab.nim.c -o c_code/10_2/@mtreetab.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@msaturate.nim.c -o c_code/2_2/@msaturate.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@msaturate.nim.c -o c_code/10_2/@msaturate.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mguards.nim.c -o c_code/10_2/@mguards.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@msemfold.nim.c -o c_code/10_2/@msemfold.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mvmdef.nim.c -o c_code/10_2/@mvmdef.nim.o
@@ -23291,11 +23246,6 @@ c_code/10_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@msem.nim.c -o c_code/10_2/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mreorder.nim.c -o c_code/10_2/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mdepends.nim.c -o c_code/10_2/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/10_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/10_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/10_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mnifgen.nim.c -o c_code/10_2/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@msourcemap.nim.c -o c_code/10_2/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@mjsgen.nim.c -o c_code/10_2/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/10_2/@plists.nim.c -o c_code/10_2/@plists.nim.o
@@ -23330,15 +23280,17 @@ c_code/10_1/@mnim.nim.o $LINK_FLAGS
 c_code/10_2/@psystem@sexceptions.nim.o \
 c_code/10_2/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/10_2/@pstd@sassertions.nim.o \
+c_code/1_2/@psystem@siterators.nim.o \
 c_code/10_2/@psystem@sdollars.nim.o \
 c_code/10_2/@pstd@sprivate@sdragonbox.nim.o \
 c_code/10_2/@pstd@sprivate@sschubfach.nim.o \
 c_code/10_2/@pstd@sformatfloat.nim.o \
+c_code/10_2/@psystem@srepr_v2.nim.o \
 c_code/10_2/@psystem.nim.o \
 c_code/10_2/@pparseutils.nim.o \
 c_code/10_2/@pmath.nim.o \
 c_code/10_2/@palgorithm.nim.o \
-c_code/1_2/@pstd@senumutils.nim.o \
+c_code/10_2/@pstd@senumutils.nim.o \
 c_code/10_2/@punicode.nim.o \
 c_code/10_2/@pstrutils.nim.o \
 c_code/10_2/@ppathnorm.nim.o \
@@ -23356,7 +23308,7 @@ c_code/10_2/@pstd@sprivate@sosappdirs.nim.o \
 c_code/10_2/@pstd@scmdline.nim.o \
 c_code/10_2/@pos.nim.o \
 c_code/10_2/@pparseopt.nim.o \
-c_code/1_2/@psequtils.nim.o \
+c_code/10_2/@psequtils.nim.o \
 c_code/10_2/@phashes.nim.o \
 c_code/10_2/@pstrtabs.nim.o \
 c_code/10_2/@ptables.nim.o \
@@ -23369,8 +23321,8 @@ c_code/10_2/@mplatform.nim.o \
 c_code/10_2/@mprefixmatches.nim.o \
 c_code/10_2/@mnimpaths.nim.o \
 c_code/10_2/@psets.nim.o \
-c_code/1_2/@pstd@sobjectdollar.nim.o \
-c_code/2_2/@pstd@sprivate@sglobs.nim.o \
+c_code/10_2/@pstd@sobjectdollar.nim.o \
+c_code/10_2/@pstd@sprivate@sglobs.nim.o \
 c_code/10_2/@moptions.nim.o \
 c_code/10_2/@mmsgs.nim.o \
 c_code/10_2/@mcondsyms.nim.o \
@@ -23416,16 +23368,15 @@ c_code/10_2/@mic@spacked_ast.nim.o \
 c_code/10_2/@mic@sic.nim.o \
 c_code/10_2/@mmodulegraphs.nim.o \
 c_code/10_2/@mmagicsys.nim.o \
-c_code/1_2/@mbitsets.nim.o \
+c_code/10_2/@mbitsets.nim.o \
 c_code/10_2/@mastmsgs.nim.o \
 c_code/10_2/@mtypes.nim.o \
 c_code/10_2/@mnimsets.nim.o \
-c_code/10_2/@mcbuilderbase.nim.o \
 c_code/10_2/@mcgendata.nim.o \
 c_code/10_2/@mmangleutils.nim.o \
 c_code/10_2/@mccgutils.nim.o \
 c_code/10_2/@mtreetab.nim.o \
-c_code/2_2/@msaturate.nim.o \
+c_code/10_2/@msaturate.nim.o \
 c_code/10_2/@mguards.nim.o \
 c_code/10_2/@msemfold.nim.o \
 c_code/10_2/@mvmdef.nim.o \
@@ -23490,11 +23441,6 @@ c_code/10_2/@mvtables.nim.o \
 c_code/10_2/@msem.nim.o \
 c_code/10_2/@mreorder.nim.o \
 c_code/10_2/@mdepends.nim.o \
-c_code/10_2/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_2/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/10_2/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/10_2/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/10_2/@mnifgen.nim.o \
 c_code/10_2/@msourcemap.nim.o \
 c_code/10_2/@mjsgen.nim.o \
 c_code/10_2/@plists.nim.o \
@@ -23669,10 +23615,12 @@ android)
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sexceptions.nim.c -o c_code/2_1/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdigitsutils.nim.c -o c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sassertions.nim.c -o c_code/1_1/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@siterators.nim.c -o c_code/1_1/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem@sdollars.nim.c -o c_code/2_1/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sdragonbox.nim.c -o c_code/1_1/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sprivate@sschubfach.nim.c -o c_code/1_1/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@pstd@sformatfloat.nim.c -o c_code/1_1/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psystem@srepr_v2.nim.c -o c_code/1_1/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@psystem.nim.c -o c_code/2_1/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pparseutils.nim.c -o c_code/2_1/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pmath.nim.c -o c_code/2_1/@pmath.nim.o
@@ -23759,7 +23707,6 @@ android)
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mastmsgs.nim.c -o c_code/2_1/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mtypes.nim.c -o c_code/2_1/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnimsets.nim.c -o c_code/2_1/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mcbuilderbase.nim.c -o c_code/2_1/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mcgendata.nim.c -o c_code/2_1/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mmangleutils.nim.c -o c_code/2_1/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mccgutils.nim.c -o c_code/2_1/@mccgutils.nim.o
@@ -23829,11 +23776,6 @@ android)
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msem.nim.c -o c_code/2_1/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mreorder.nim.c -o c_code/2_1/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mdepends.nim.c -o c_code/2_1/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mnifgen.nim.c -o c_code/2_1/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@msourcemap.nim.c -o c_code/2_1/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@mjsgen.nim.c -o c_code/2_1/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@plists.nim.c -o c_code/2_1/@plists.nim.o
@@ -23868,10 +23810,12 @@ android)
 c_code/2_1/@psystem@sexceptions.nim.o \
 c_code/1_1/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/1_1/@pstd@sassertions.nim.o \
+c_code/1_1/@psystem@siterators.nim.o \
 c_code/2_1/@psystem@sdollars.nim.o \
 c_code/1_1/@pstd@sprivate@sdragonbox.nim.o \
 c_code/1_1/@pstd@sprivate@sschubfach.nim.o \
 c_code/1_1/@pstd@sformatfloat.nim.o \
+c_code/1_1/@psystem@srepr_v2.nim.o \
 c_code/2_1/@psystem.nim.o \
 c_code/2_1/@pparseutils.nim.o \
 c_code/2_1/@pmath.nim.o \
@@ -23958,7 +23902,6 @@ c_code/1_1/@mbitsets.nim.o \
 c_code/2_1/@mastmsgs.nim.o \
 c_code/2_1/@mtypes.nim.o \
 c_code/2_1/@mnimsets.nim.o \
-c_code/2_1/@mcbuilderbase.nim.o \
 c_code/2_1/@mcgendata.nim.o \
 c_code/2_1/@mmangleutils.nim.o \
 c_code/2_1/@mccgutils.nim.o \
@@ -24028,11 +23971,6 @@ c_code/2_1/@mvtables.nim.o \
 c_code/2_1/@msem.nim.o \
 c_code/2_1/@mreorder.nim.o \
 c_code/2_1/@mdepends.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/1_1/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_1/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_1/@mnifgen.nim.o \
 c_code/2_1/@msourcemap.nim.o \
 c_code/2_1/@mjsgen.nim.o \
 c_code/2_1/@plists.nim.o \
@@ -24101,10 +24039,12 @@ c_code/2_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem@sexceptions.nim.c -o c_code/2_7/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sprivate@sdigitsutils.nim.c -o c_code/2_7/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sassertions.nim.c -o c_code/2_7/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem@siterators.nim.c -o c_code/2_7/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem@sdollars.nim.c -o c_code/2_7/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sprivate@sdragonbox.nim.c -o c_code/2_7/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sprivate@sschubfach.nim.c -o c_code/2_7/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pstd@sformatfloat.nim.c -o c_code/2_7/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem@srepr_v2.nim.c -o c_code/2_7/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@psystem.nim.c -o c_code/2_7/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pparseutils.nim.c -o c_code/2_7/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@pmath.nim.c -o c_code/2_7/@pmath.nim.o
@@ -24191,7 +24131,6 @@ c_code/2_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mastmsgs.nim.c -o c_code/2_7/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mtypes.nim.c -o c_code/2_7/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mnimsets.nim.c -o c_code/2_7/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mcbuilderbase.nim.c -o c_code/2_7/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mcgendata.nim.c -o c_code/2_7/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mmangleutils.nim.c -o c_code/2_7/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mccgutils.nim.c -o c_code/2_7/@mccgutils.nim.o
@@ -24261,11 +24200,6 @@ c_code/2_1/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@msem.nim.c -o c_code/2_7/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mreorder.nim.c -o c_code/2_7/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mdepends.nim.c -o c_code/2_7/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/2_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mnifgen.nim.c -o c_code/2_7/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@msourcemap.nim.c -o c_code/2_7/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@mjsgen.nim.c -o c_code/2_7/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_7/@plists.nim.c -o c_code/2_7/@plists.nim.o
@@ -24300,10 +24234,12 @@ c_code/2_1/@mnim.nim.o $LINK_FLAGS
 c_code/2_7/@psystem@sexceptions.nim.o \
 c_code/2_7/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/2_7/@pstd@sassertions.nim.o \
+c_code/2_7/@psystem@siterators.nim.o \
 c_code/2_7/@psystem@sdollars.nim.o \
 c_code/2_7/@pstd@sprivate@sdragonbox.nim.o \
 c_code/2_7/@pstd@sprivate@sschubfach.nim.o \
 c_code/2_7/@pstd@sformatfloat.nim.o \
+c_code/2_7/@psystem@srepr_v2.nim.o \
 c_code/2_7/@psystem.nim.o \
 c_code/2_7/@pparseutils.nim.o \
 c_code/2_7/@pmath.nim.o \
@@ -24390,7 +24326,6 @@ c_code/2_7/@mbitsets.nim.o \
 c_code/2_7/@mastmsgs.nim.o \
 c_code/2_7/@mtypes.nim.o \
 c_code/2_7/@mnimsets.nim.o \
-c_code/2_7/@mcbuilderbase.nim.o \
 c_code/2_7/@mcgendata.nim.o \
 c_code/2_7/@mmangleutils.nim.o \
 c_code/2_7/@mccgutils.nim.o \
@@ -24460,11 +24395,6 @@ c_code/2_7/@mvtables.nim.o \
 c_code/2_7/@msem.nim.o \
 c_code/2_7/@mreorder.nim.o \
 c_code/2_7/@mdepends.nim.o \
-c_code/2_7/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_7/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/2_7/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_7/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_7/@mnifgen.nim.o \
 c_code/2_7/@msourcemap.nim.o \
 c_code/2_7/@mjsgen.nim.o \
 c_code/2_7/@plists.nim.o \
@@ -24568,10 +24498,12 @@ c_code/2_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@sexceptions.nim.c -o c_code/2_18/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sdigitsutils.nim.c -o c_code/2_18/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sassertions.nim.c -o c_code/2_18/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@siterators.nim.c -o c_code/2_18/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@sdollars.nim.c -o c_code/2_18/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sdragonbox.nim.c -o c_code/2_18/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sschubfach.nim.c -o c_code/2_18/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sformatfloat.nim.c -o c_code/2_18/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@srepr_v2.nim.c -o c_code/2_18/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem.nim.c -o c_code/2_18/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pparseutils.nim.c -o c_code/2_18/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pmath.nim.c -o c_code/2_18/@pmath.nim.o
@@ -24658,7 +24590,6 @@ c_code/2_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mastmsgs.nim.c -o c_code/2_18/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mtypes.nim.c -o c_code/2_18/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mnimsets.nim.c -o c_code/2_18/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mcbuilderbase.nim.c -o c_code/2_18/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mcgendata.nim.c -o c_code/2_18/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mmangleutils.nim.c -o c_code/2_18/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mccgutils.nim.c -o c_code/2_18/@mccgutils.nim.o
@@ -24728,11 +24659,6 @@ c_code/2_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@msem.nim.c -o c_code/2_18/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mreorder.nim.c -o c_code/2_18/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mdepends.nim.c -o c_code/2_18/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mnifgen.nim.c -o c_code/2_18/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@msourcemap.nim.c -o c_code/2_18/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mjsgen.nim.c -o c_code/2_18/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@plists.nim.c -o c_code/2_18/@plists.nim.o
@@ -24767,10 +24693,12 @@ c_code/2_7/@mnim.nim.o $LINK_FLAGS
 c_code/2_18/@psystem@sexceptions.nim.o \
 c_code/2_18/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/2_18/@pstd@sassertions.nim.o \
+c_code/2_18/@psystem@siterators.nim.o \
 c_code/2_18/@psystem@sdollars.nim.o \
 c_code/2_18/@pstd@sprivate@sdragonbox.nim.o \
 c_code/2_18/@pstd@sprivate@sschubfach.nim.o \
 c_code/2_18/@pstd@sformatfloat.nim.o \
+c_code/2_18/@psystem@srepr_v2.nim.o \
 c_code/2_18/@psystem.nim.o \
 c_code/2_18/@pparseutils.nim.o \
 c_code/2_18/@pmath.nim.o \
@@ -24857,7 +24785,6 @@ c_code/2_18/@mbitsets.nim.o \
 c_code/2_18/@mastmsgs.nim.o \
 c_code/2_18/@mtypes.nim.o \
 c_code/2_18/@mnimsets.nim.o \
-c_code/2_18/@mcbuilderbase.nim.o \
 c_code/2_18/@mcgendata.nim.o \
 c_code/2_18/@mmangleutils.nim.o \
 c_code/2_18/@mccgutils.nim.o \
@@ -24927,11 +24854,6 @@ c_code/2_18/@mvtables.nim.o \
 c_code/2_18/@msem.nim.o \
 c_code/2_18/@mreorder.nim.o \
 c_code/2_18/@mdepends.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/2_18/@mnifgen.nim.o \
 c_code/2_18/@msourcemap.nim.o \
 c_code/2_18/@mjsgen.nim.o \
 c_code/2_18/@plists.nim.o \
@@ -25113,15 +25035,17 @@ nintendoswitch)
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@psystem@sexceptions.nim.c -o c_code/12_18/@psystem@sexceptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstd@sprivate@sdigitsutils.nim.c -o c_code/12_18/@pstd@sprivate@sdigitsutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstd@sassertions.nim.c -o c_code/12_18/@pstd@sassertions.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psystem@siterators.nim.c -o c_code/2_18/@psystem@siterators.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@psystem@sdollars.nim.c -o c_code/12_18/@psystem@sdollars.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstd@sprivate@sdragonbox.nim.c -o c_code/12_18/@pstd@sprivate@sdragonbox.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstd@sprivate@sschubfach.nim.c -o c_code/12_18/@pstd@sprivate@sschubfach.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstd@sformatfloat.nim.c -o c_code/12_18/@pstd@sformatfloat.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@psystem@srepr_v2.nim.c -o c_code/12_18/@psystem@srepr_v2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@psystem.nim.c -o c_code/12_18/@psystem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pparseutils.nim.c -o c_code/12_18/@pparseutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pmath.nim.c -o c_code/12_18/@pmath.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@palgorithm.nim.c -o c_code/12_18/@palgorithm.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@senumutils.nim.c -o c_code/2_18/@pstd@senumutils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstd@senumutils.nim.c -o c_code/12_18/@pstd@senumutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@punicode.nim.c -o c_code/12_18/@punicode.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstrutils.nim.c -o c_code/12_18/@pstrutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@ppathnorm.nim.c -o c_code/12_18/@ppathnorm.nim.o
@@ -25139,7 +25063,7 @@ nintendoswitch)
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstd@scmdline.nim.c -o c_code/12_18/@pstd@scmdline.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pos.nim.c -o c_code/12_18/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pparseopt.nim.c -o c_code/12_18/@pparseopt.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@psequtils.nim.c -o c_code/2_18/@psequtils.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@psequtils.nim.c -o c_code/12_18/@psequtils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@phashes.nim.c -o c_code/12_18/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstrtabs.nim.c -o c_code/12_18/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@ptables.nim.c -o c_code/12_18/@ptables.nim.o
@@ -25152,8 +25076,8 @@ nintendoswitch)
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mprefixmatches.nim.c -o c_code/12_18/@mprefixmatches.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mnimpaths.nim.c -o c_code/12_18/@mnimpaths.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@psets.nim.c -o c_code/12_18/@psets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sobjectdollar.nim.c -o c_code/2_18/@pstd@sobjectdollar.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@pstd@sprivate@sglobs.nim.c -o c_code/2_18/@pstd@sprivate@sglobs.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstd@sobjectdollar.nim.c -o c_code/12_18/@pstd@sobjectdollar.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@pstd@sprivate@sglobs.nim.c -o c_code/12_18/@pstd@sprivate@sglobs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@moptions.nim.c -o c_code/12_18/@moptions.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mmsgs.nim.c -o c_code/12_18/@mmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mcondsyms.nim.c -o c_code/12_18/@mcondsyms.nim.o
@@ -25200,11 +25124,10 @@ nintendoswitch)
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mic@sic.nim.c -o c_code/12_18/@mic@sic.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mmodulegraphs.nim.c -o c_code/12_18/@mmodulegraphs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mmagicsys.nim.c -o c_code/12_18/@mmagicsys.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@mbitsets.nim.c -o c_code/2_18/@mbitsets.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mbitsets.nim.c -o c_code/12_18/@mbitsets.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mastmsgs.nim.c -o c_code/12_18/@mastmsgs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mtypes.nim.c -o c_code/12_18/@mtypes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mnimsets.nim.c -o c_code/12_18/@mnimsets.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mcbuilderbase.nim.c -o c_code/12_18/@mcbuilderbase.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mcgendata.nim.c -o c_code/12_18/@mcgendata.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mmangleutils.nim.c -o c_code/12_18/@mmangleutils.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mccgutils.nim.c -o c_code/12_18/@mccgutils.nim.o
@@ -25274,11 +25197,6 @@ nintendoswitch)
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@msem.nim.c -o c_code/12_18/@msem.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mreorder.nim.c -o c_code/12_18/@mreorder.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mdepends.nim.c -o c_code/12_18/@mdepends.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.c -o c_code/12_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.c -o c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.c -o c_code/12_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.c -o c_code/12_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mnifgen.nim.c -o c_code/12_18/@mnifgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@msourcemap.nim.c -o c_code/12_18/@msourcemap.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@mjsgen.nim.c -o c_code/12_18/@mjsgen.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/12_18/@plists.nim.c -o c_code/12_18/@plists.nim.o
@@ -25313,15 +25231,17 @@ nintendoswitch)
 c_code/12_18/@psystem@sexceptions.nim.o \
 c_code/12_18/@pstd@sprivate@sdigitsutils.nim.o \
 c_code/12_18/@pstd@sassertions.nim.o \
+c_code/2_18/@psystem@siterators.nim.o \
 c_code/12_18/@psystem@sdollars.nim.o \
 c_code/12_18/@pstd@sprivate@sdragonbox.nim.o \
 c_code/12_18/@pstd@sprivate@sschubfach.nim.o \
 c_code/12_18/@pstd@sformatfloat.nim.o \
+c_code/12_18/@psystem@srepr_v2.nim.o \
 c_code/12_18/@psystem.nim.o \
 c_code/12_18/@pparseutils.nim.o \
 c_code/12_18/@pmath.nim.o \
 c_code/12_18/@palgorithm.nim.o \
-c_code/2_18/@pstd@senumutils.nim.o \
+c_code/12_18/@pstd@senumutils.nim.o \
 c_code/12_18/@punicode.nim.o \
 c_code/12_18/@pstrutils.nim.o \
 c_code/12_18/@ppathnorm.nim.o \
@@ -25339,7 +25259,7 @@ c_code/12_18/@pstd@sprivate@sosappdirs.nim.o \
 c_code/12_18/@pstd@scmdline.nim.o \
 c_code/12_18/@pos.nim.o \
 c_code/12_18/@pparseopt.nim.o \
-c_code/2_18/@psequtils.nim.o \
+c_code/12_18/@psequtils.nim.o \
 c_code/12_18/@phashes.nim.o \
 c_code/12_18/@pstrtabs.nim.o \
 c_code/12_18/@ptables.nim.o \
@@ -25352,8 +25272,8 @@ c_code/12_18/@mplatform.nim.o \
 c_code/12_18/@mprefixmatches.nim.o \
 c_code/12_18/@mnimpaths.nim.o \
 c_code/12_18/@psets.nim.o \
-c_code/2_18/@pstd@sobjectdollar.nim.o \
-c_code/2_18/@pstd@sprivate@sglobs.nim.o \
+c_code/12_18/@pstd@sobjectdollar.nim.o \
+c_code/12_18/@pstd@sprivate@sglobs.nim.o \
 c_code/12_18/@moptions.nim.o \
 c_code/12_18/@mmsgs.nim.o \
 c_code/12_18/@mcondsyms.nim.o \
@@ -25400,11 +25320,10 @@ c_code/12_18/@mic@spacked_ast.nim.o \
 c_code/12_18/@mic@sic.nim.o \
 c_code/12_18/@mmodulegraphs.nim.o \
 c_code/12_18/@mmagicsys.nim.o \
-c_code/2_18/@mbitsets.nim.o \
+c_code/12_18/@mbitsets.nim.o \
 c_code/12_18/@mastmsgs.nim.o \
 c_code/12_18/@mtypes.nim.o \
 c_code/12_18/@mnimsets.nim.o \
-c_code/12_18/@mcbuilderbase.nim.o \
 c_code/12_18/@mcgendata.nim.o \
 c_code/12_18/@mmangleutils.nim.o \
 c_code/12_18/@mccgutils.nim.o \
@@ -25474,11 +25393,6 @@ c_code/12_18/@mvtables.nim.o \
 c_code/12_18/@msem.nim.o \
 c_code/12_18/@mreorder.nim.o \
 c_code/12_18/@mdepends.nim.o \
-c_code/12_18/@m..@sdist@snimony@ssrc@slib@snifbuilder.nim.o \
-c_code/2_18/@m..@sdist@snimony@ssrc@smodels@snifler_tags.nim.o \
-c_code/12_18/@m..@sdist@snimony@ssrc@slib@stinyhashes.nim.o \
-c_code/12_18/@m..@sdist@snimony@ssrc@sgear2@smodnames.nim.o \
-c_code/12_18/@mnifgen.nim.o \
 c_code/12_18/@msourcemap.nim.o \
 c_code/12_18/@mjsgen.nim.o \
 c_code/12_18/@plists.nim.o \

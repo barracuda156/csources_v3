@@ -133,7 +133,7 @@ static __inline double elapsed(ticks t1, ticks t0) /* time in nanoseconds */
 /*
  * PowerPC ``cycle'' counter using the time base register.
  */
-#if ((((defined(__GNUC__) && (defined(__powerpc__) || defined(__ppc__))) || (defined(__MWERKS__) && defined(macintosh)))) || (defined(__IBM_GCC_ASM) && (defined(__powerpc__) || defined(__ppc__))))  && !defined(HAVE_TICK_COUNTER)
+#if ((((defined(__GNUC__) && (defined(__powerpc__) || defined(__POWERPC__))) || (defined(__MWERKS__) && defined(macintosh)))) || (defined(__IBM_GCC_ASM) && (defined(__powerpc__) || defined(__ppc__))))  && !defined(HAVE_TICK_COUNTER)
 typedef unsigned long long ticks;
 
 static __inline__ ticks getticks(void)
