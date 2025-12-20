@@ -29,7 +29,7 @@
 
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
-typedef struct tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ;
+typedef struct tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg;
 struct NimStrPayload {
 	NI cap;
 	NIM_CHAR data[SEQ_DECL_SIZE];
@@ -38,12 +38,12 @@ struct NimStringV2 {
 	NI len;
 	NimStrPayload* p;
 };
-struct tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ {
+struct tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg {
 	NU16 line;
 	NI16 col;
 	NI32 fileIndex;
 };
-N_LIB_PRIVATE N_NIMCALL(void, reprObject__packages_u45)(NimStringV2* res_p0, tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ x_p1);
+N_LIB_PRIVATE N_NIMCALL(void, reprObject__packages_u45)(NimStringV2* res_p0, tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg x_p1);
 static N_INLINE(void, nimAddCharV1)(NimStringV2* s_p0, NIM_CHAR c_p1);
 N_LIB_PRIVATE N_NIMCALL(void, prepareAdd)(NimStringV2* s_p0, NI addLen_p1);
 static N_INLINE(NIM_BOOL, nimAddInt)(NI a_p0, NI b_p1, NI* res_p2);
@@ -212,7 +212,7 @@ NIM_BOOL* nimErr_;
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(void, reprObject__packages_u45)(NimStringV2* res_p0, tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ x_p1) {
+N_LIB_PRIVATE N_NIMCALL(void, reprObject__packages_u45)(NimStringV2* res_p0, tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg x_p1) {
 	NIM_BOOL firstElement_1;
 NIM_BOOL* nimErr_;
 	nimfr_("reprObject", "/opt/local/lib/nim/lib/system/repr_v2.nim");
@@ -289,7 +289,7 @@ LA19_: ;
 	}BeforeRet_: ;
 	popFrame();
 }
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, repr__packages_u37)(tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ x_p0) {
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, repr__packages_u37)(tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg x_p0) {
 	NimStringV2 result;
 NIM_BOOL* nimErr_;
 	nimfr_("repr", "/opt/local/lib/nim/lib/system/repr_v2.nim");

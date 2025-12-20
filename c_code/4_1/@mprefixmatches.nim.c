@@ -27,7 +27,7 @@
 
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
-typedef NU8 tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg;
+typedef NU8 tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ;
 struct NimStrPayload {
 	NI cap;
 	NIM_CHAR data[SEQ_DECL_SIZE];
@@ -92,16 +92,16 @@ LA8_: ;
 static N_INLINE(void, popFrame)(void) {
 	framePtr__system_u2667 = (*framePtr__system_u2667).prev;
 }
-N_LIB_PRIVATE N_NIMCALL(tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg, prefixMatch__prefixmatches_u10)(NimStringV2 p_p0, NimStringV2 s_p1) {
-	tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg result;
+N_LIB_PRIVATE N_NIMCALL(tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ, prefixMatch__prefixmatches_u10)(NimStringV2 p_p0, NimStringV2 s_p1) {
+	tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ result;
 	NI i_1;
 NIM_BOOL* nimErr_;
-	nimfr_("prefixMatch", "/Users/svacchanda/Dev/nimv2/compiler/prefixmatches.nim");
+	nimfr_("prefixMatch", "/Users/svacchanda/Dev/nim-2.2.6/compiler/prefixmatches.nim");
 {nimErr_ = nimErrorFlag();
-	result = (tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)0;
-	nimlf_(21, "/Users/svacchanda/Dev/nimv2/compiler/prefixmatches.nim");	{
+	result = (tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)0;
+	nimlf_(21, "/Users/svacchanda/Dev/nim-2.2.6/compiler/prefixmatches.nim");	{
 		if (!(s_p1.len < p_p0.len)) goto LA3_;
-		nimln_(19);		nimln_(21);		result = ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)0);
+		nimln_(19);		nimln_(21);		result = ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)0);
 		goto BeforeRet_;
 	}
 LA3_: ;
@@ -207,13 +207,13 @@ LA35_: ;
 					if (!(p_p0.len <= jj_1)) goto LA39_;
 					nimln_(37);					{
 						if (!(i_1 == ((NI)0))) goto LA43_;
-						nimln_(19);						nimln_(37);						result = ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)3);
+						nimln_(19);						nimln_(37);						result = ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)3);
 						goto BeforeRet_;
 					}
 					goto LA41_;
 LA43_: ;
 					{
-						nimln_(38);						nimln_(19);						nimln_(38);						result = ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)2);
+						nimln_(38);						nimln_(19);						nimln_(38);						result = ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)2);
 						goto BeforeRet_;
 					}
 LA41_: ;
@@ -291,7 +291,7 @@ LA63_: ;
 					goto LA60_;
 LA66_: ;
 					{
-						nimln_(47);						nimln_(19);						nimln_(47);						result = ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)0);
+						nimln_(47);						nimln_(19);						nimln_(47);						result = ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)0);
 						goto BeforeRet_;
 					}
 LA60_: ;
@@ -346,7 +346,7 @@ LA80_: ;
 					goto LA77_;
 LA83_: ;
 					{
-						nimln_(50);						nimln_(19);						nimln_(50);						result = ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)0);
+						nimln_(50);						nimln_(19);						nimln_(50);						result = ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)0);
 						goto BeforeRet_;
 					}
 LA77_: ;
@@ -359,43 +359,43 @@ LA75_: ;
 		}
 		nimln_(52);		{
 			if (!(p_p0.len <= j_1)) goto LA88_;
-			nimln_(53);			nimln_(19);			nimln_(53);			result = ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)1);
+			nimln_(53);			nimln_(19);			nimln_(53);			result = ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)1);
 			goto BeforeRet_;
 		}
 		goto LA86_;
 LA88_: ;
 		{
-			nimln_(55);			nimln_(19);			nimln_(55);			result = ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)0);
+			nimln_(55);			nimln_(19);			nimln_(55);			result = ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)0);
 			goto BeforeRet_;
 		}
 LA86_: ;
 	}
 LA50_: ;
-	nimln_(56);	nimln_(19);	nimln_(56);	result = ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)0);
+	nimln_(56);	nimln_(19);	nimln_(56);	result = ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)0);
 	goto BeforeRet_;
 	}BeforeRet_: ;
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___prefixmatches_u7)(tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg e_p0) {
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___prefixmatches_u7)(tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ e_p0) {
 	NimStringV2 result;
 	switch (e_p0) {
-	case ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)0):
+	case ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)0):
 	{
 		result = TM__P9b9adRChs9cbzL6i5n3jD9b9ag_16;
 	}
 	break;
-	case ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)1):
+	case ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)1):
 	{
 		result = TM__P9b9adRChs9cbzL6i5n3jD9b9ag_18;
 	}
 	break;
-	case ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)2):
+	case ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)2):
 	{
 		result = TM__P9b9adRChs9cbzL6i5n3jD9b9ag_20;
 	}
 	break;
-	case ((tyEnum_PrefixMatch__RXLfYHGlzjwubDMsL56sDg)3):
+	case ((tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ)3):
 	{
 		result = TM__P9b9adRChs9cbzL6i5n3jD9b9ag_22;
 	}

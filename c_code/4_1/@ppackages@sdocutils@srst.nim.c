@@ -7771,7 +7771,7 @@ appendString((&T27_), colontmpD__3);
 								nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");								eqdestroy___system_u2629(colontmpD__4);
 								eqdestroy___system_u2629(colontmpD__3);
 								eqdestroy___system_u2629(quoteSym_1);
-								nimlf_(626, "/Users/svacchanda/Dev/nimv2/compiler/msgs.nim");								eqdestroy___msgs_u1581(tmpTuple_1);
+								nimlf_(626, "/Users/svacchanda/Dev/nim-2.2.6/compiler/msgs.nim");								eqdestroy___msgs_u1581(tmpTuple_1);
 								nimlf_(2480, "/opt/local/lib/nim/lib/packages/docutils/rst.nim");								goto LA2;
 								{
 									LA26_:;
@@ -7842,7 +7842,7 @@ LA39_: ;
 LA18_: ;
 						{
 							nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");							eqdestroy___system_u2629(quoteSym_1);
-							nimlf_(626, "/Users/svacchanda/Dev/nimv2/compiler/msgs.nim");							eqdestroy___msgs_u1581(tmpTuple_1);
+							nimlf_(626, "/Users/svacchanda/Dev/nim-2.2.6/compiler/msgs.nim");							eqdestroy___msgs_u1581(tmpTuple_1);
 							nimlf_(2493, "/opt/local/lib/nim/lib/packages/docutils/rst.nim");							goto LA2;
 						}
 LA16_: ;
@@ -7851,7 +7851,7 @@ LA16_: ;
 						}
 						{
 							nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");							eqdestroy___system_u2629(quoteSym_1);
-							nimlf_(626, "/Users/svacchanda/Dev/nimv2/compiler/msgs.nim");							eqdestroy___msgs_u1581(tmpTuple_1);
+							nimlf_(626, "/Users/svacchanda/Dev/nim-2.2.6/compiler/msgs.nim");							eqdestroy___msgs_u1581(tmpTuple_1);
 						}
 						if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 					}
@@ -8098,7 +8098,7 @@ LA10_: ;
 	}
 	{
 		nimln_(1699);		eqdestroy___system_u2629(curSym_1);
-		nimlf_(626, "/Users/svacchanda/Dev/nimv2/compiler/msgs.nim");		eqdestroy___msgs_u1581(tmpTuple_1);
+		nimlf_(626, "/Users/svacchanda/Dev/nim-2.2.6/compiler/msgs.nim");		eqdestroy___msgs_u1581(tmpTuple_1);
 	}
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
@@ -10689,7 +10689,7 @@ NIM_BOOL* nimErr_;
 				if (nimAddInt(idx_1, resLen_2, &TM__6mNpeIAN05DnDNzb9b3611A_688)) { raiseOverflow(); goto BeforeRet_;
 				};
 				idx_1 = (NI)(TM__6mNpeIAN05DnDNzb9b3611A_688);
-				nimlf_(332, "/opt/local/lib/nim/lib/pure/strscans.nim");				nimlf_(898, "/Users/svacchanda/Dev/nimv2/compiler/guards.nim");				res_1 = NIM_TRUE;
+				nimlf_(332, "/opt/local/lib/nim/lib/pure/strscans.nim");				nimlf_(898, "/Users/svacchanda/Dev/nim-2.2.6/compiler/guards.nim");				res_1 = NIM_TRUE;
 			}
 LA9_: ;
 		}
@@ -19355,10 +19355,10 @@ NIM_BOOL* nimErr_;
 	nimfr_("parseRow", "/opt/local/lib/nim/lib/packages/docutils/rst.nim");
 {nimErr_ = nimErrorFlag();
 	colonenvP__1 = (tyObject_Env_rstdotnim_parseMarkdownTable___l8XklB83s0FoffHhfjNrOQ*) ClE_0;
-	nimlf_(1018, "/Users/svacchanda/Dev/nimv2/compiler/types.nim");	nimlf_(2864, "/opt/local/lib/nim/lib/packages/docutils/rst.nim");	T1_.len = 0; T1_.p = NIM_NIL;
+	nimlf_(1018, "/Users/svacchanda/Dev/nim-2.2.6/compiler/types.nim");	nimlf_(2864, "/opt/local/lib/nim/lib/packages/docutils/rst.nim");	T1_.len = 0; T1_.p = NIM_NIL;
 	T1_ = readTableRow__packagesZdocutilsZrst_u13360(p_p0);
 	if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___types_u1587(T1_); goto BeforeRet_;}
-	nimlf_(1018, "/Users/svacchanda/Dev/nimv2/compiler/types.nim");	eqsink___types_u1596((&(*colonenvP__1).row0), T1_);
+	nimlf_(1018, "/Users/svacchanda/Dev/nim-2.2.6/compiler/types.nim");	eqsink___types_u1596((&(*colonenvP__1).row0), T1_);
 	nimlf_(2865, "/opt/local/lib/nim/lib/packages/docutils/rst.nim");	{
 		NI T6_;
 		if (!(((TM__6mNpeIAN05DnDNzb9b3611A_1141[(NU)(((*result_p2).kind))>>3] &(1U<<((NU)(((*result_p2).kind))&7U)))!=0))) 		{ raiseFieldErrorStr(TM__6mNpeIAN05DnDNzb9b3611A_1187, dollar___packagesZdocutilsZrstast_u88((*result_p2).kind)); goto BeforeRet_;
@@ -19485,7 +19485,7 @@ NIM_BOOL* nimErr_;
 		T4_ = row_1.len;
 		if (!!((T4_ == colNum_p1))) goto LA5_;
 		nimln_(2847);		nimln_(2849);		result = NIM_FALSE;
-		nimlf_(1018, "/Users/svacchanda/Dev/nimv2/compiler/types.nim");		eqdestroy___types_u1587(row_1);
+		nimlf_(1018, "/Users/svacchanda/Dev/nim-2.2.6/compiler/types.nim");		eqdestroy___types_u1587(row_1);
 		goto BeforeRet_;
 	}
 LA5_: ;
@@ -19526,7 +19526,7 @@ LA15_: ;
 					if (!T14_) goto LA18_;
 					nimln_(2853);					nimln_(2847);					nimln_(2853);					result = NIM_FALSE;
 					nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");					eqdestroy___system_u2629(content_1);
-					nimlf_(1018, "/Users/svacchanda/Dev/nimv2/compiler/types.nim");					eqdestroy___types_u1587(row_1);
+					nimlf_(1018, "/Users/svacchanda/Dev/nim-2.2.6/compiler/types.nim");					eqdestroy___types_u1587(row_1);
 					goto BeforeRet_;
 				}
 LA18_: ;
@@ -19550,7 +19550,7 @@ LA23_: ;
 		}
 	}
 	nimlf_(2854, "/opt/local/lib/nim/lib/packages/docutils/rst.nim");	nimln_(2847);	nimln_(2854);	result = NIM_TRUE;
-	nimlf_(1018, "/Users/svacchanda/Dev/nimv2/compiler/types.nim");	eqdestroy___types_u1587(row_1);
+	nimlf_(1018, "/Users/svacchanda/Dev/nim-2.2.6/compiler/types.nim");	eqdestroy___types_u1587(row_1);
 	goto BeforeRet_;
 	{
 		LA1_:;

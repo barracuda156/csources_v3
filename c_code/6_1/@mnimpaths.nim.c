@@ -73,9 +73,9 @@ static const struct {
 } TM__O9aA9byHYLJvQWppK9cdLra6Q_2 = { 4 | NIM_STRLIT_FLAG, "nimr" };
 static const NimStringV2 TM__O9aA9byHYLJvQWppK9cdLra6Q_3 = {4, (NimStrPayload*)&TM__O9aA9byHYLJvQWppK9cdLra6Q_2};
 static const struct {
-  NI cap; NIM_CHAR data[76+1];
-} TM__O9aA9byHYLJvQWppK9cdLra6Q_5 = { 76 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimpaths.nim(43, 3) `\'$\' notin result` " };
-static const NimStringV2 TM__O9aA9byHYLJvQWppK9cdLra6Q_6 = {76, (NimStrPayload*)&TM__O9aA9byHYLJvQWppK9cdLra6Q_5};
+  NI cap; NIM_CHAR data[80+1];
+} TM__O9aA9byHYLJvQWppK9cdLra6Q_5 = { 80 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimpaths.nim(43, 3) `\'$\' notin result` " };
+static const NimStringV2 TM__O9aA9byHYLJvQWppK9cdLra6Q_6 = {80, (NimStrPayload*)&TM__O9aA9byHYLJvQWppK9cdLra6Q_5};
 static const struct {
   NI cap; NIM_CHAR data[30+1];
 } TM__O9aA9byHYLJvQWppK9cdLra6Q_8 = { 30 | NIM_STRLIT_FLAG, "$nimr/tools/dochack/dochack.js" };
@@ -101,13 +101,13 @@ static const struct {
 } TM__O9aA9byHYLJvQWppK9cdLra6Q_18 = { 20 | NIM_STRLIT_FLAG, "getDocHacksJs: cmd: " };
 static const NimStringV2 TM__O9aA9byHYLJvQWppK9cdLra6Q_19 = {20, (NimStrPayload*)&TM__O9aA9byHYLJvQWppK9cdLra6Q_18};
 static const struct {
-  NI cap; NIM_CHAR data[82+1];
-} TM__O9aA9byHYLJvQWppK9cdLra6Q_20 = { 82 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimpaths.nim(52, 5) `execShellCmd(cmd) == 0` " };
-static const NimStringV2 TM__O9aA9byHYLJvQWppK9cdLra6Q_21 = {82, (NimStrPayload*)&TM__O9aA9byHYLJvQWppK9cdLra6Q_20};
+  NI cap; NIM_CHAR data[86+1];
+} TM__O9aA9byHYLJvQWppK9cdLra6Q_20 = { 86 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimpaths.nim(52, 5) `execShellCmd(cmd) == 0` " };
+static const NimStringV2 TM__O9aA9byHYLJvQWppK9cdLra6Q_21 = {86, (NimStrPayload*)&TM__O9aA9byHYLJvQWppK9cdLra6Q_20};
 static const struct {
-  NI cap; NIM_CHAR data[81+1];
-} TM__O9aA9byHYLJvQWppK9cdLra6Q_22 = { 81 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimpaths.nim(53, 3) `docHackJs2.fileExists` " };
-static const NimStringV2 TM__O9aA9byHYLJvQWppK9cdLra6Q_23 = {81, (NimStrPayload*)&TM__O9aA9byHYLJvQWppK9cdLra6Q_22};
+  NI cap; NIM_CHAR data[85+1];
+} TM__O9aA9byHYLJvQWppK9cdLra6Q_22 = { 85 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimpaths.nim(53, 3) `docHackJs2.fileExists` " };
+static const NimStringV2 TM__O9aA9byHYLJvQWppK9cdLra6Q_23 = {85, (NimStrPayload*)&TM__O9aA9byHYLJvQWppK9cdLra6Q_22};
 extern TFrame* framePtr__system_u2667;
 extern NIM_BOOL nimInErrorMode__system_u4259;
 static N_INLINE(void, nimFrame)(TFrame* s_p0) {
@@ -209,10 +209,10 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, interp__nimpaths_u27)(NimStringV2 path_p0, 
 	NimStringV2 result;
 	tyArray__Re75IspeoxXy2oCZHwcRrA T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("interp", "/Users/svacchanda/Dev/nimv2/compiler/nimpaths.nim");
+	nimfr_("interp", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimpaths.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
-	nimlf_(42, "/Users/svacchanda/Dev/nimv2/compiler/nimpaths.nim");	T1_[0] = TM__O9aA9byHYLJvQWppK9cdLra6Q_3;
+	nimlf_(42, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimpaths.nim");	T1_[0] = TM__O9aA9byHYLJvQWppK9cdLra6Q_3;
 	T1_[1] = nimr_p1;
 	result = nsuFormatOpenArray(path_p0, T1_, 2);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
@@ -233,7 +233,7 @@ NIM_BOOL* nimErr_;
 		T8_.Field2 = result;
 		colontmpD_ = dollar___nimpaths_u31(T8_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T7_ = rawNewString(colontmpD_.len + 76);
+		T7_ = rawNewString(colontmpD_.len + 80);
 appendString((&T7_), TM__O9aA9byHYLJvQWppK9cdLra6Q_6);
 appendString((&T7_), colontmpD_);
 		colontmpD__2 = T7_;
@@ -251,11 +251,11 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, getDocHacksJs__nimpaths_u94)(NimStringV2 ni
 	NimStringV2 result;
 	NimStringV2 docHackJs2_1;
 NIM_BOOL* nimErr_;
-	nimfr_("getDocHacksJs", "/Users/svacchanda/Dev/nimv2/compiler/nimpaths.nim");
+	nimfr_("getDocHacksJs", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimpaths.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
 	docHackJs2_1.len = 0; docHackJs2_1.p = NIM_NIL;
-	nimlf_(48, "/Users/svacchanda/Dev/nimv2/compiler/nimpaths.nim");	docHackJs2_1 = interp__nimpaths_u27(TM__O9aA9byHYLJvQWppK9cdLra6Q_9, nimr_p0);
+	nimlf_(48, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimpaths.nim");	docHackJs2_1 = interp__nimpaths_u27(TM__O9aA9byHYLJvQWppK9cdLra6Q_9, nimr_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	nimln_(49);	{
 		NIM_BOOL T4_;
@@ -311,7 +311,7 @@ appendString((&T12_), cmd_1);
 			if (!!((T15_ == ((NI)0)))) goto LA16_;
 			colontmpD__5.len = 0; colontmpD__5.p = NIM_NIL;
 			T18_.len = 0; T18_.p = NIM_NIL;
-			T18_ = rawNewString(cmd_1.len + 82);
+			T18_ = rawNewString(cmd_1.len + 86);
 appendString((&T18_), TM__O9aA9byHYLJvQWppK9cdLra6Q_21);
 appendString((&T18_), cmd_1);
 			colontmpD__5 = T18_;
@@ -333,7 +333,7 @@ LA16_: ;
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	}
 LA7_: ;
-	nimlf_(53, "/Users/svacchanda/Dev/nimv2/compiler/nimpaths.nim");	{
+	nimlf_(53, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimpaths.nim");	{
 		NIM_BOOL T23_;
 		T23_ = (NIM_BOOL)0;
 		T23_ = nosfileExists(docHackJs2_1);

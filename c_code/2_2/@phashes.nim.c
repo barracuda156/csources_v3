@@ -29,8 +29,8 @@
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
 typedef struct tyTuple__GviMuKbe9c3Hsi9c4x4m9avrw tyTuple__GviMuKbe9c3Hsi9c4x4m9avrw;
-typedef struct tyTuple__IKgJbVQKps1P39arHoc9aO2A tyTuple__IKgJbVQKps1P39arHoc9aO2A;
-typedef struct tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ;
+typedef struct tyTuple__jNwe3lt9cWavnoo5IWXBV1w tyTuple__jNwe3lt9cWavnoo5IWXBV1w;
+typedef struct tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg;
 typedef struct tyTuple__47w2DboNEPf69aPgubZdd7Q tyTuple__47w2DboNEPf69aPgubZdd7Q;
 typedef struct tyTuple__1v9bKyksXWMsm0vNwmZ4EuQ tyTuple__1v9bKyksXWMsm0vNwmZ4EuQ;
 typedef struct tyTuple__UV3llMMYFckfui8YMBuUZA tyTuple__UV3llMMYFckfui8YMBuUZA;
@@ -46,13 +46,13 @@ struct tyTuple__GviMuKbe9c3Hsi9c4x4m9avrw {
 	NU64 Field0;
 	NU64 Field1;
 };
-struct tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ {
+struct tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg {
 	NU16 line;
 	NI16 col;
 	NI32 fileIndex;
 };
-struct tyTuple__IKgJbVQKps1P39arHoc9aO2A {
-	tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ Field0;
+struct tyTuple__jNwe3lt9cWavnoo5IWXBV1w {
+	tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg Field0;
 	NI Field1;
 };
 struct tyTuple__47w2DboNEPf69aPgubZdd7Q {
@@ -94,7 +94,7 @@ N_LIB_PRIVATE N_NOINLINE(void, raiseIndexError4)(NI l1_p0, NI h1_p1, NI h2_p2);
 N_LIB_PRIVATE N_NOINLINE(void, raiseRangeErrorI)(NI64 i_p0, NI64 a_p1, NI64 b_p2);
 static N_INLINE(NI, emarkamp___pureZhashes_u5)(NI h_p0, NI val_p1);
 static N_INLINE(NI, emarkdollar___pureZhashes_u20)(NI h_p0);
-N_LIB_PRIVATE N_NIMCALL(NI, hash__lineinfos_u258)(tyObject_TLineInfo__20X1VdZ9aU0ckVGBxHntCQQ i_p0);
+N_LIB_PRIVATE N_NIMCALL(NI, hash__lineinfos_u258)(tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg i_p0);
 static N_INLINE(NI, hash__pureZhashes_u132)(NI x_p0);
 static N_INLINE(NI, hashWangYi1__pureZhashes_u140)(NU64 x_p0);
 static N_INLINE(NU64, hiXorLo__pureZhashes_u81)(NU64 a_p0, NU64 b_p1);
@@ -1022,7 +1022,7 @@ LA13_: ;
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NI, hash__lookups_u1091)(tyTuple__IKgJbVQKps1P39arHoc9aO2A x_p0) {
+N_LIB_PRIVATE N_NIMCALL(NI, hash__lookups_u1091)(tyTuple__jNwe3lt9cWavnoo5IWXBV1w x_p0) {
 	NI result;
 NIM_BOOL* nimErr_;
 	nimfr_("hash", "/opt/local/lib/nim/lib/pure/hashes.nim");

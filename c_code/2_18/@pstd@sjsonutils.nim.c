@@ -27,7 +27,7 @@
 #define nimlf_(n, file) \
   FR_.line = n; FR_.filename = file;
 
-typedef struct tyObject_BuildCache__Di5dAgq54FSvK6t5aJcZUA tyObject_BuildCache__Di5dAgq54FSvK6t5aJcZUA;
+typedef struct tyObject_BuildCache__cQ4uaPxDoOUCXdRKSoARoQ tyObject_BuildCache__cQ4uaPxDoOUCXdRKSoARoQ;
 typedef struct tyObject_JsonNodeObj__JbesMAaxH49a9aJq3v0jP0oA tyObject_JsonNodeObj__JbesMAaxH49a9aJq3v0jP0oA;
 typedef struct tyObject_Joptions__R0TCd9chpCHSlpUpqwVHdWQ tyObject_Joptions__R0TCd9chpCHSlpUpqwVHdWQ;
 typedef struct NimStrPayload NimStrPayload;
@@ -143,7 +143,7 @@ struct tySequence__4eQHGndY6XBYpFOH09apV8Q {
 struct tySequence__sM4lkSb7zS6F7OVMvW9cffQ {
   NI len; tySequence__sM4lkSb7zS6F7OVMvW9cffQ_Content* p;
 };
-struct tyObject_BuildCache__Di5dAgq54FSvK6t5aJcZUA {
+struct tyObject_BuildCache__cQ4uaPxDoOUCXdRKSoARoQ {
 	NimStringV2 cacheVersion;
 	NimStringV2 outputFile;
 	NimStringV2 outputLastModificationTime;
@@ -1059,7 +1059,7 @@ LA4_: ;
 	}BeforeRet_: ;
 	popFrame();
 }
-N_LIB_PRIVATE N_NIMCALL(void, fromJson__extccomp_u2395)(tyObject_BuildCache__Di5dAgq54FSvK6t5aJcZUA* a_p0, tyObject_JsonNodeObj__JbesMAaxH49a9aJq3v0jP0oA* b_p1, tyObject_Joptions__R0TCd9chpCHSlpUpqwVHdWQ opt_p2) {
+N_LIB_PRIVATE N_NIMCALL(void, fromJson__extccomp_u2395)(tyObject_BuildCache__cQ4uaPxDoOUCXdRKSoARoQ* a_p0, tyObject_JsonNodeObj__JbesMAaxH49a9aJq3v0jP0oA* b_p1, tyObject_Joptions__R0TCd9chpCHSlpUpqwVHdWQ opt_p2) {
 	NIM_BOOL colontmpD_;
 	NIM_BOOL colontmpD__2;
 	NIM_BOOL colontmpD__3;
@@ -2468,7 +2468,7 @@ NIM_BOOL* nimErr_;
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(tyObject_JsonNodeObj__JbesMAaxH49a9aJq3v0jP0oA*, toJson__extccomp_u2164)(tyObject_BuildCache__Di5dAgq54FSvK6t5aJcZUA* a_p0, tyObject_ToJsonOptions__9cmGDytnnOkHbc9bSA2r1a2Q opt_p1) {
+N_LIB_PRIVATE N_NIMCALL(tyObject_JsonNodeObj__JbesMAaxH49a9aJq3v0jP0oA*, toJson__extccomp_u2164)(tyObject_BuildCache__cQ4uaPxDoOUCXdRKSoARoQ* a_p0, tyObject_ToJsonOptions__9cmGDytnnOkHbc9bSA2r1a2Q opt_p1) {
 	tyObject_JsonNodeObj__JbesMAaxH49a9aJq3v0jP0oA* result;
 NIM_BOOL* nimErr_;
 	nimfr_("toJson", "/opt/local/lib/nim/lib/std/jsonutils.nim");

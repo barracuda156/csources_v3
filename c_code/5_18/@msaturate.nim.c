@@ -67,8 +67,8 @@ static N_INLINE(NI64, pluspercent___system_u801)(NI64 x_p0, NI64 y_p1) {
 }
 N_LIB_PRIVATE N_NIMCALL(NI64, barplusbar___saturate_u1)(NI64 a_p0, NI64 b_p1) {
 	NI64 result;
-	nimfr_("|+|", "/Users/svacchanda/Dev/nimv2/compiler/saturate.nim");
-{	nimlf_(14, "/Users/svacchanda/Dev/nimv2/compiler/saturate.nim");	result = pluspercent___system_u801(a_p0, b_p1);
+	nimfr_("|+|", "/Users/svacchanda/Dev/nim-2.2.6/compiler/saturate.nim");
+{	nimlf_(14, "/Users/svacchanda/Dev/nim-2.2.6/compiler/saturate.nim");	result = pluspercent___system_u801(a_p0, b_p1);
 	nimln_(15);	{
 		NIM_BOOL T3_;
 		T3_ = (NIM_BOOL)0;
@@ -125,10 +125,10 @@ N_LIB_PRIVATE N_NIMCALL(NI64, barstarbar___saturate_u52)(NI64 a_p0, NI64 b_p1) {
 	NF resAsFloat_1;
 	NF floatProd_1;
 	NF T1_;
-	nimfr_("|*|", "/Users/svacchanda/Dev/nimv2/compiler/saturate.nim");
+	nimfr_("|*|", "/Users/svacchanda/Dev/nim-2.2.6/compiler/saturate.nim");
 {	resAsFloat_1 = (NF)0;
 	floatProd_1 = (NF)0;
-	nimlf_(57, "/Users/svacchanda/Dev/nimv2/compiler/saturate.nim");	result = starpercent___system_u841(a_p0, b_p1);
+	nimlf_(57, "/Users/svacchanda/Dev/nim-2.2.6/compiler/saturate.nim");	result = starpercent___system_u841(a_p0, b_p1);
 	nimln_(58);	floatProd_1 = toBiggestFloat__system_u1684(a_p0);
 	nimln_(59);	T1_ = (NF)0;
 	T1_ = toBiggestFloat__system_u1684(b_p1);
@@ -173,7 +173,7 @@ static N_INLINE(NI64, minuspercent___system_u821)(NI64 x_p0, NI64 y_p1) {
 }
 N_LIB_PRIVATE N_NIMCALL(NI64, barminusbar___saturate_u13)(NI64 a_p0, NI64 b_p1) {
 	NI64 result;
-	nimfr_("|-|", "/Users/svacchanda/Dev/nimv2/compiler/saturate.nim");
+	nimfr_("|-|", "/Users/svacchanda/Dev/nim-2.2.6/compiler/saturate.nim");
 {	nimln_(23);	result = minuspercent___system_u821(a_p0, b_p1);
 	nimln_(24);	{
 		NIM_BOOL T3_;

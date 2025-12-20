@@ -6427,7 +6427,7 @@ appendString((&(*result_p2)), TM__vYBWrr780p7faFzauVMtPg_515);
 					LA147_:;
 				}
 				{
-					nimlf_(1018, "/Users/svacchanda/Dev/nimv2/compiler/types.nim");					eqdestroy___types_u1601(spanLines_1);
+					nimlf_(1018, "/Users/svacchanda/Dev/nim-2.2.6/compiler/types.nim");					eqdestroy___types_u1601(spanLines_1);
 				}
 				if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 			}

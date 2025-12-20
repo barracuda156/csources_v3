@@ -163,9 +163,9 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, toStrMaxPrecision__astyaml_u670)(NF f_p0) {
 	NimStringV2 result;
 	tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("toStrMaxPrecision", "/Users/svacchanda/Dev/nimv2/compiler/rodutils.nim");
+	nimfr_("toStrMaxPrecision", "/Users/svacchanda/Dev/nim-2.2.6/compiler/rodutils.nim");
 {nimErr_ = nimErrorFlag();
-	nimlf_(49, "/Users/svacchanda/Dev/nimv2/compiler/rodutils.nim");	T1_ = (tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)0;
+	nimlf_(49, "/Users/svacchanda/Dev/nim-2.2.6/compiler/rodutils.nim");	T1_ = (tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)0;
 	T1_ = classify__pureZmath_u205(f_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	switch (T1_) {
@@ -233,7 +233,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, toStrMaxPrecision__cgen_u20635)(NF32 f_p0) 
 	NimStringV2 result;
 	tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("toStrMaxPrecision", "/Users/svacchanda/Dev/nimv2/compiler/rodutils.nim");
+	nimfr_("toStrMaxPrecision", "/Users/svacchanda/Dev/nim-2.2.6/compiler/rodutils.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(49);	T1_ = (tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)0;
 	T1_ = classify__pureZmath_u205(((NF) (f_p0)));

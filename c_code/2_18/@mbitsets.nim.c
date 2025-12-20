@@ -59,9 +59,9 @@ static N_INLINE(NIM_BOOL, nimMulInt)(NI a_p0, NI b_p1, NI* res_p2);
 static N_INLINE(NF, toFloat__system_u1681)(NI i_p0);
 static N_INLINE(NF, abs__system_u5197)(NF x_p0);
 static const struct {
-  NI cap; NIM_CHAR data[68+1];
-} TM__sZxD5iFo9aFCaIja9a9bnYnuw_2 = { 68 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim(33, 9) `elem >= 0` " };
-static const NimStringV2 TM__sZxD5iFo9aFCaIja9a9bnYnuw_3 = {68, (NimStrPayload*)&TM__sZxD5iFo9aFCaIja9a9bnYnuw_2};
+  NI cap; NIM_CHAR data[72+1];
+} TM__sZxD5iFo9aFCaIja9a9bnYnuw_2 = { 72 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim(33, 9) `elem >= 0` " };
+static const NimStringV2 TM__sZxD5iFo9aFCaIja9a9bnYnuw_3 = {72, (NimStrPayload*)&TM__sZxD5iFo9aFCaIja9a9bnYnuw_2};
 static const struct {
   NI cap; NIM_CHAR data[120+1];
 } TM__sZxD5iFo9aFCaIja9a9bnYnuw_5 = { 120 | NIM_STRLIT_FLAG, "/opt/local/lib/nim/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it" };
@@ -348,8 +348,8 @@ static N_INLINE(void, popFrame)(void) {
 	framePtr__system_u2667 = (*framePtr__system_u2667).prev;
 }
 N_LIB_PRIVATE N_NIMCALL(void, bitSetInit__bitsets_u58)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ* b_p0, NI length_p1) {
-	nimfr_("bitSetInit", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
-{	nimlf_(42, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");	if ((length_p1) < ((NI)0) || (length_p1) > ((NI)IL64(9223372036854775807))){ raiseRangeErrorI(length_p1, ((NI)0), ((NI)IL64(9223372036854775807))); goto BeforeRet_;
+	nimfr_("bitSetInit", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
+{	nimlf_(42, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");	if ((length_p1) < ((NI)0) || (length_p1) > ((NI)IL64(9223372036854775807))){ raiseRangeErrorI(length_p1, ((NI)0), ((NI)IL64(9223372036854775807))); goto BeforeRet_;
 	}
 	newSeq__bitsets_u61((&(*b_p0)), (length_p1));
 	}BeforeRet_: ;
@@ -362,7 +362,7 @@ static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
 }
 N_LIB_PRIVATE N_NIMCALL(void, bitSetIncl__bitsets_u23)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ* x_p0, NI64 elem_p1) {
 NIM_BOOL* nimErr_;
-	nimfr_("bitSetIncl", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
+	nimfr_("bitSetIncl", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(33);	{
 		if (!!((IL64(0) <= elem_p1))) goto LA3_;
@@ -404,7 +404,7 @@ LA1_: ;
 N_LIB_PRIVATE N_NIMCALL(NI64, bitSetCard__bitsets_u192)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ x_p0) {
 	NI64 result;
 NIM_BOOL* nimErr_;
-	nimfr_("bitSetCard", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
+	nimfr_("bitSetCard", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(90);	result = IL64(0);
 	{
@@ -420,7 +420,7 @@ NIM_BOOL* nimErr_;
 			nimln_(251);			while (1) {
 				NI64 TM__sZxD5iFo9aFCaIja9a9bnYnuw_4;
 				if (!(i_1 < L_1)) goto LA4;
-				nimlf_(91, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");				if (i_1 < 0 || i_1 >= x_p0.len){ raiseIndexError2(i_1,x_p0.len-1); goto BeforeRet_;
+				nimlf_(91, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");				if (i_1 < 0 || i_1 >= x_p0.len){ raiseIndexError2(i_1,x_p0.len-1); goto BeforeRet_;
 				}
 				it_1 = (&x_p0.p->data[i_1]);
 				nimln_(92);				if (nimAddInt64(result, ((NI) (populationCount__bitsets_u191[((*it_1))- 0])), &TM__sZxD5iFo9aFCaIja9a9bnYnuw_4)) { raiseOverflow(); goto BeforeRet_;
@@ -467,7 +467,7 @@ LA1_: ;
 }
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, bitSetContains__bitsets_u129)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ x_p0, tySequence__6H5Oh5UUvVCLiakt9aTwtUQ y_p1) {
 	NIM_BOOL result;
-	nimfr_("bitSetContains", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
+	nimfr_("bitSetContains", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
 {	{
 		NI i_1;
 		NI colontmp_;
@@ -475,14 +475,14 @@ N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, bitSetContains__bitsets_u129)(tySequence__6H5O
 		NI res_1;
 		i_1 = (NI)0;
 		colontmp_ = (NI)0;
-		nimlf_(81, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(63, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");		T2_ = (x_p0.len-1);
+		nimlf_(81, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(63, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");		T2_ = (x_p0.len-1);
 		colontmp_ = T2_;
 		nimlf_(96, "/opt/local/lib/nim/lib/system/iterators_1.nim");		res_1 = ((NI)0);
 		{
 			nimln_(97);			while (1) {
 				NI TM__sZxD5iFo9aFCaIja9a9bnYnuw_7;
 				if (!(res_1 <= colontmp_)) goto LA4;
-				nimlf_(63, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
+				nimlf_(63, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
 				nimln_(64);				{
 					if (i_1 < 0 || i_1 >= x_p0.len){ raiseIndexError2(i_1,x_p0.len-1); goto BeforeRet_;
 					}
@@ -499,14 +499,14 @@ LA7_: ;
 			} LA4: ;
 		}
 	}
-	nimlf_(66, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");	result = NIM_TRUE;
+	nimlf_(66, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");	result = NIM_TRUE;
 	}BeforeRet_: ;
 	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, bitSetEquals__bitsets_u117)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ x_p0, tySequence__6H5Oh5UUvVCLiakt9aTwtUQ y_p1) {
 	NIM_BOOL result;
-	nimfr_("bitSetEquals", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
+	nimfr_("bitSetEquals", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
 {	{
 		NI i_1;
 		NI colontmp_;
@@ -514,14 +514,14 @@ N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, bitSetEquals__bitsets_u117)(tySequence__6H5Oh5
 		NI res_1;
 		i_1 = (NI)0;
 		colontmp_ = (NI)0;
-		nimlf_(81, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(57, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");		T2_ = (x_p0.len-1);
+		nimlf_(81, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(57, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");		T2_ = (x_p0.len-1);
 		colontmp_ = T2_;
 		nimlf_(96, "/opt/local/lib/nim/lib/system/iterators_1.nim");		res_1 = ((NI)0);
 		{
 			nimln_(97);			while (1) {
 				NI TM__sZxD5iFo9aFCaIja9a9bnYnuw_8;
 				if (!(res_1 <= colontmp_)) goto LA4;
-				nimlf_(57, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
+				nimlf_(57, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
 				nimln_(58);				{
 					if (i_1 < 0 || i_1 >= x_p0.len){ raiseIndexError2(i_1,x_p0.len-1); goto BeforeRet_;
 					}
@@ -538,13 +538,13 @@ LA7_: ;
 			} LA4: ;
 		}
 	}
-	nimlf_(60, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");	result = NIM_TRUE;
+	nimlf_(60, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");	result = NIM_TRUE;
 	}BeforeRet_: ;
 	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(void, bitSetIntersect__bitsets_u106)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ* x_p0, tySequence__6H5Oh5UUvVCLiakt9aTwtUQ y_p1) {
-	nimfr_("bitSetIntersect", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
+	nimfr_("bitSetIntersect", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
 {	{
 		NI i_1;
 		NI colontmp_;
@@ -552,14 +552,14 @@ N_LIB_PRIVATE N_NIMCALL(void, bitSetIntersect__bitsets_u106)(tySequence__6H5Oh5U
 		NI res_1;
 		i_1 = (NI)0;
 		colontmp_ = (NI)0;
-		nimlf_(81, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(54, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");		T2_ = ((*x_p0).len-1);
+		nimlf_(81, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(54, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");		T2_ = ((*x_p0).len-1);
 		colontmp_ = T2_;
 		nimlf_(96, "/opt/local/lib/nim/lib/system/iterators_1.nim");		res_1 = ((NI)0);
 		{
 			nimln_(97);			while (1) {
 				NI TM__sZxD5iFo9aFCaIja9a9bnYnuw_9;
 				if (!(res_1 <= colontmp_)) goto LA4;
-				nimlf_(54, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
+				nimlf_(54, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
 				if (i_1 < 0 || i_1 >= (*x_p0).len){ raiseIndexError2(i_1,(*x_p0).len-1); goto BeforeRet_;
 				}
 				if (i_1 < 0 || i_1 >= (*x_p0).len){ raiseIndexError2(i_1,(*x_p0).len-1); goto BeforeRet_;
@@ -578,8 +578,8 @@ N_LIB_PRIVATE N_NIMCALL(void, bitSetIntersect__bitsets_u106)(tySequence__6H5Oh5U
 }
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, bitSetIn__bitsets_u11)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ x_p0, NI64 e_p1) {
 	NIM_BOOL result;
-	nimfr_("bitSetIn", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
-{	nimlf_(30, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");	if (((NI) ((NI64)((NI64)(e_p1) >> (NU64)(((NI)3))))) < 0 || ((NI) ((NI64)((NI64)(e_p1) >> (NU64)(((NI)3))))) >= x_p0.len){ raiseIndexError2(((NI) ((NI64)((NI64)(e_p1) >> (NU64)(((NI)3))))),x_p0.len-1); goto BeforeRet_;
+	nimfr_("bitSetIn", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
+{	nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");	if (((NI) ((NI64)((NI64)(e_p1) >> (NU64)(((NI)3))))) < 0 || ((NI) ((NI64)((NI64)(e_p1) >> (NU64)(((NI)3))))) >= x_p0.len){ raiseIndexError2(((NI) ((NI64)((NI64)(e_p1) >> (NU64)(((NI)3))))),x_p0.len-1); goto BeforeRet_;
 	}
 	result = !(((NU8)(x_p0.p->data[((NI) ((NI64)((NI64)(e_p1) >> (NU64)(((NI)3)))))] & (NU8)((NU64)(((NU8)1)) << (NU64)((NI64)(e_p1 & IL64(7))))) == ((NU8)0)));
 	}BeforeRet_: ;
@@ -587,7 +587,7 @@ N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, bitSetIn__bitsets_u11)(tySequence__6H5Oh5UUvVC
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(void, bitSetUnion__bitsets_u73)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ* x_p0, tySequence__6H5Oh5UUvVCLiakt9aTwtUQ y_p1) {
-	nimfr_("bitSetUnion", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
+	nimfr_("bitSetUnion", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
 {	{
 		NI i_1;
 		NI colontmp_;
@@ -595,14 +595,14 @@ N_LIB_PRIVATE N_NIMCALL(void, bitSetUnion__bitsets_u73)(tySequence__6H5Oh5UUvVCL
 		NI res_1;
 		i_1 = (NI)0;
 		colontmp_ = (NI)0;
-		nimlf_(81, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(45, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");		T2_ = ((*x_p0).len-1);
+		nimlf_(81, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(45, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");		T2_ = ((*x_p0).len-1);
 		colontmp_ = T2_;
 		nimlf_(96, "/opt/local/lib/nim/lib/system/iterators_1.nim");		res_1 = ((NI)0);
 		{
 			nimln_(97);			while (1) {
 				NI TM__sZxD5iFo9aFCaIja9a9bnYnuw_10;
 				if (!(res_1 <= colontmp_)) goto LA4;
-				nimlf_(45, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
+				nimlf_(45, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
 				if (i_1 < 0 || i_1 >= (*x_p0).len){ raiseIndexError2(i_1,(*x_p0).len-1); goto BeforeRet_;
 				}
 				if (i_1 < 0 || i_1 >= (*x_p0).len){ raiseIndexError2(i_1,(*x_p0).len-1); goto BeforeRet_;
@@ -620,7 +620,7 @@ N_LIB_PRIVATE N_NIMCALL(void, bitSetUnion__bitsets_u73)(tySequence__6H5Oh5UUvVCL
 	popFrame();
 }
 N_LIB_PRIVATE N_NIMCALL(void, bitSetDiff__bitsets_u84)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ* x_p0, tySequence__6H5Oh5UUvVCLiakt9aTwtUQ y_p1) {
-	nimfr_("bitSetDiff", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
+	nimfr_("bitSetDiff", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
 {	{
 		NI i_1;
 		NI colontmp_;
@@ -628,14 +628,14 @@ N_LIB_PRIVATE N_NIMCALL(void, bitSetDiff__bitsets_u84)(tySequence__6H5Oh5UUvVCLi
 		NI res_1;
 		i_1 = (NI)0;
 		colontmp_ = (NI)0;
-		nimln_(81);		nimlf_(48, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");		T2_ = ((*x_p0).len-1);
+		nimln_(81);		nimlf_(48, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");		T2_ = ((*x_p0).len-1);
 		colontmp_ = T2_;
 		nimlf_(96, "/opt/local/lib/nim/lib/system/iterators_1.nim");		res_1 = ((NI)0);
 		{
 			nimln_(97);			while (1) {
 				NI TM__sZxD5iFo9aFCaIja9a9bnYnuw_11;
 				if (!(res_1 <= colontmp_)) goto LA4;
-				nimlf_(48, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
+				nimlf_(48, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
 				if (i_1 < 0 || i_1 >= (*x_p0).len){ raiseIndexError2(i_1,(*x_p0).len-1); goto BeforeRet_;
 				}
 				if (i_1 < 0 || i_1 >= (*x_p0).len){ raiseIndexError2(i_1,(*x_p0).len-1); goto BeforeRet_;
@@ -653,7 +653,7 @@ N_LIB_PRIVATE N_NIMCALL(void, bitSetDiff__bitsets_u84)(tySequence__6H5Oh5UUvVCLi
 	popFrame();
 }
 N_LIB_PRIVATE N_NIMCALL(void, bitSetSymDiff__bitsets_u95)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ* x_p0, tySequence__6H5Oh5UUvVCLiakt9aTwtUQ y_p1) {
-	nimfr_("bitSetSymDiff", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
+	nimfr_("bitSetSymDiff", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
 {	{
 		NI i_1;
 		NI colontmp_;
@@ -661,14 +661,14 @@ N_LIB_PRIVATE N_NIMCALL(void, bitSetSymDiff__bitsets_u95)(tySequence__6H5Oh5UUvV
 		NI res_1;
 		i_1 = (NI)0;
 		colontmp_ = (NI)0;
-		nimln_(81);		nimlf_(51, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");		T2_ = ((*x_p0).len-1);
+		nimln_(81);		nimlf_(51, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");		T2_ = ((*x_p0).len-1);
 		colontmp_ = T2_;
 		nimlf_(96, "/opt/local/lib/nim/lib/system/iterators_1.nim");		res_1 = ((NI)0);
 		{
 			nimln_(97);			while (1) {
 				NI TM__sZxD5iFo9aFCaIja9a9bnYnuw_12;
 				if (!(res_1 <= colontmp_)) goto LA4;
-				nimlf_(51, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
+				nimlf_(51, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");				i_1 = ((NI) (res_1));
 				if (i_1 < 0 || i_1 >= (*x_p0).len){ raiseIndexError2(i_1,(*x_p0).len-1); goto BeforeRet_;
 				}
 				if (i_1 < 0 || i_1 >= (*x_p0).len){ raiseIndexError2(i_1,(*x_p0).len-1); goto BeforeRet_;
@@ -742,8 +742,8 @@ LA3_: ;
 }
 N_LIB_PRIVATE N_NIMCALL(NU64, bitSetToWord__bitsets_u241)(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ s_p0, NI size_p1) {
 	NU64 result;
-	nimfr_("bitSetToWord", "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");
-{	nimlf_(95, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");	result = 0ULL;
+	nimfr_("bitSetToWord", "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");
+{	nimlf_(95, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");	result = 0ULL;
 	{
 		NI j_1;
 		NI i_1;
@@ -753,7 +753,7 @@ N_LIB_PRIVATE N_NIMCALL(NU64, bitSetToWord__bitsets_u241)(tySequence__6H5Oh5UUvV
 			nimln_(129);			while (1) {
 				NI TM__sZxD5iFo9aFCaIja9a9bnYnuw_14;
 				if (!(i_1 < size_p1)) goto LA3;
-				nimlf_(96, "/Users/svacchanda/Dev/nimv2/compiler/bitsets.nim");				j_1 = i_1;
+				nimlf_(96, "/Users/svacchanda/Dev/nim-2.2.6/compiler/bitsets.nim");				j_1 = i_1;
 				nimln_(97);				{
 					NI T6_;
 					NI TM__sZxD5iFo9aFCaIja9a9bnYnuw_13;

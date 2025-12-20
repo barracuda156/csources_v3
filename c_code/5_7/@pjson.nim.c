@@ -44,7 +44,7 @@ typedef struct tySequence__SFipDZIkFtPcrLs0AGBBjQ_Content tySequence__SFipDZIkFt
 typedef struct tyTuple__8ZxhPt1NwfElsJs8zUSV9bg tyTuple__8ZxhPt1NwfElsJs8zUSV9bg;
 typedef struct tyTuple__C09aJBIdgNA79cOtlfFn9bnVQ tyTuple__C09aJBIdgNA79cOtlfFn9bnVQ;
 typedef struct tyObject_NimRawSeq__I6tHjwvItOmIZPOqPGobBQ tyObject_NimRawSeq__I6tHjwvItOmIZPOqPGobBQ;
-typedef struct tyObject_SourceMap__ndgl8EX6p66229aRslBKeCg tyObject_SourceMap__ndgl8EX6p66229aRslBKeCg;
+typedef struct tyObject_SourceMap__P6NkS2IiXTxth9c9c6vVT9brQ tyObject_SourceMap__P6NkS2IiXTxth9c9c6vVT9brQ;
 typedef struct tySequence__sM4lkSb7zS6F7OVMvW9cffQ tySequence__sM4lkSb7zS6F7OVMvW9cffQ;
 typedef struct tySequence__sM4lkSb7zS6F7OVMvW9cffQ_Content tySequence__sM4lkSb7zS6F7OVMvW9cffQ_Content;
 typedef struct tyObject_KeyError__nMnbx2629a9cbEcZ2JRBEMgA tyObject_KeyError__nMnbx2629a9cbEcZ2JRBEMgA;
@@ -144,7 +144,7 @@ struct tyObject_NimRawSeq__I6tHjwvItOmIZPOqPGobBQ {
 struct tySequence__sM4lkSb7zS6F7OVMvW9cffQ {
   NI len; tySequence__sM4lkSb7zS6F7OVMvW9cffQ_Content* p;
 };
-struct tyObject_SourceMap__ndgl8EX6p66229aRslBKeCg {
+struct tyObject_SourceMap__P6NkS2IiXTxth9c9c6vVT9brQ {
 	NI version;
 	tySequence__sM4lkSb7zS6F7OVMvW9cffQ sources;
 	tySequence__sM4lkSb7zS6F7OVMvW9cffQ names;
@@ -2041,7 +2041,7 @@ NIM_BOOL* nimErr_;
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(tyObject_JsonNodeObj__JbesMAaxH49a9aJq3v0jP0oA*, percent___jsgen_u8366)(tyObject_SourceMap__ndgl8EX6p66229aRslBKeCg* o_p0) {
+N_LIB_PRIVATE N_NIMCALL(tyObject_JsonNodeObj__JbesMAaxH49a9aJq3v0jP0oA*, percent___jsgen_u8366)(tyObject_SourceMap__P6NkS2IiXTxth9c9c6vVT9brQ* o_p0) {
 	tyObject_JsonNodeObj__JbesMAaxH49a9aJq3v0jP0oA* result;
 NIM_BOOL* nimErr_;
 	nimfr_("%", "/opt/local/lib/nim/lib/pure/json.nim");

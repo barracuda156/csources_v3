@@ -27,14 +27,14 @@
 #define nimlf_(n, file) \
   FR_.line = n; FR_.filename = file;
 
-typedef struct tyObject_TNode__ICIckkJXnoKwBNT189aT0Pg tyObject_TNode__ICIckkJXnoKwBNT189aT0Pg;
-typedef struct tyObject_TContext__7o25R1eLhZZP3xzfuqE0OA tyObject_TContext__7o25R1eLhZZP3xzfuqE0OA;
-typedef struct tyObject_IdentCachecolonObjectType___WuCY09aDmf8N6jKp7krOoTQ tyObject_IdentCachecolonObjectType___WuCY09aDmf8N6jKp7krOoTQ;
-typedef struct tyObject_TSym__P20oQ2ehYnPErV5x8ASQ9cQ tyObject_TSym__P20oQ2ehYnPErV5x8ASQ9cQ;
-typedef struct tyTuple__WC8oWjU9ba3bRWtrpDsnEQw tyTuple__WC8oWjU9ba3bRWtrpDsnEQw;
+typedef struct tyObject_TNode__glIoDmeM2cKACf9btlenMgA tyObject_TNode__glIoDmeM2cKACf9btlenMgA;
+typedef struct tyObject_TContext__9c7SSA5WJss9aY087ea34tpg tyObject_TContext__9c7SSA5WJss9aY087ea34tpg;
+typedef struct tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw;
+typedef struct tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ;
+typedef struct tyTuple__9bPTSXSYKMIi9c6PdnYSxkGg tyTuple__9bPTSXSYKMIi9c6PdnYSxkGg;
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
-typedef N_NIMCALL_PTR(tyObject_TNode__ICIckkJXnoKwBNT189aT0Pg*, tyProc__6sDDL9acn0CXuaVjW0cIXWg) (tyObject_TContext__7o25R1eLhZZP3xzfuqE0OA* c_p0, tyObject_TNode__ICIckkJXnoKwBNT189aT0Pg* n_p1);
+typedef N_NIMCALL_PTR(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, tyProc__VrZ7fULLfkxiVQRzoT9c4Dg) (tyObject_TContext__9c7SSA5WJss9aY087ea34tpg* c_p0, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p1);
 struct NimStrPayload {
 	NI cap;
 	NIM_CHAR data[SEQ_DECL_SIZE];
@@ -43,19 +43,19 @@ struct NimStringV2 {
 	NI len;
 	NimStrPayload* p;
 };
-struct tyTuple__WC8oWjU9ba3bRWtrpDsnEQw {
+struct tyTuple__9bPTSXSYKMIi9c6PdnYSxkGg {
 	NimStringV2 Field0;
 	NimStringV2 Field1;
 	NimStringV2 Field2;
-	tyProc__6sDDL9acn0CXuaVjW0cIXWg Field3;
+	tyProc__VrZ7fULLfkxiVQRzoT9c4Dg Field3;
 };
-typedef tyTuple__WC8oWjU9ba3bRWtrpDsnEQw tyArray__f7zUyCqL9bUB9cjFYO1PwXlA[2];
+typedef tyTuple__9bPTSXSYKMIi9c6PdnYSxkGg tyArray__j9b5HX5BdhRuNA2fE9a8YFsw[2];
 static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1);
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
-N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__ICIckkJXnoKwBNT189aT0Pg*, iterToProcImpl__pluginsZitersgen_u7)(tyObject_TContext__7o25R1eLhZZP3xzfuqE0OA* c_p0, tyObject_TNode__ICIckkJXnoKwBNT189aT0Pg* n_p1);
-N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__ICIckkJXnoKwBNT189aT0Pg*, semLocals__pluginsZlocals_u7)(tyObject_TContext__7o25R1eLhZZP3xzfuqE0OA* c_p0, tyObject_TNode__ICIckkJXnoKwBNT189aT0Pg* n_p1);
-N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, pluginMatches__pluginsupport_u18)(tyObject_IdentCachecolonObjectType___WuCY09aDmf8N6jKp7krOoTQ* ic_p0, tyTuple__WC8oWjU9ba3bRWtrpDsnEQw* p_p1, tyObject_TSym__P20oQ2ehYnPErV5x8ASQ9cQ* s_p2);
+N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, iterToProcImpl__pluginsZitersgen_u7)(tyObject_TContext__9c7SSA5WJss9aY087ea34tpg* c_p0, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p1);
+N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, semLocals__pluginsZlocals_u7)(tyObject_TContext__9c7SSA5WJss9aY087ea34tpg* c_p0, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p1);
+N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, pluginMatches__pluginsupport_u18)(tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw* ic_p0, tyTuple__9bPTSXSYKMIi9c6PdnYSxkGg* p_p1, tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* s_p2);
 static N_INLINE(void, nimFrame)(TFrame* s_p0);
 N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached__system_u4477)(void);
 static N_INLINE(void, popFrame)(void);
@@ -71,7 +71,7 @@ static const struct {
 static const struct {
   NI cap; NIM_CHAR data[6+1];
 } TM__UiphbyIkFgNr76Jpl4n42w_5 = { 6 | NIM_STRLIT_FLAG, "locals" };
-N_LIB_PRIVATE NIM_CONST tyArray__f7zUyCqL9bUB9cjFYO1PwXlA plugins__pluginsZactive_u6 = {{{6, (NimStrPayload*)&TM__UiphbyIkFgNr76Jpl4n42w_2},
+N_LIB_PRIVATE NIM_CONST tyArray__j9b5HX5BdhRuNA2fE9a8YFsw plugins__pluginsZactive_u6 = {{{6, (NimStrPayload*)&TM__UiphbyIkFgNr76Jpl4n42w_2},
 {6, (NimStrPayload*)&TM__UiphbyIkFgNr76Jpl4n42w_3},
 {10, (NimStrPayload*)&TM__UiphbyIkFgNr76Jpl4n42w_4},
 iterToProcImpl__pluginsZitersgen_u7}
@@ -123,19 +123,19 @@ LA8_: ;
 static N_INLINE(void, popFrame)(void) {
 	framePtr__system_u2667 = (*framePtr__system_u2667).prev;
 }
-N_LIB_PRIVATE N_NIMCALL(tyProc__6sDDL9acn0CXuaVjW0cIXWg, getPlugin__pluginsZactive_u7)(tyObject_IdentCachecolonObjectType___WuCY09aDmf8N6jKp7krOoTQ* ic_p0, tyObject_TSym__P20oQ2ehYnPErV5x8ASQ9cQ* fn_p1) {
-	tyProc__6sDDL9acn0CXuaVjW0cIXWg result;
+N_LIB_PRIVATE N_NIMCALL(tyProc__VrZ7fULLfkxiVQRzoT9c4Dg, getPlugin__pluginsZactive_u7)(tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw* ic_p0, tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* fn_p1) {
+	tyProc__VrZ7fULLfkxiVQRzoT9c4Dg result;
 NIM_BOOL* nimErr_;
-	nimfr_("getPlugin", "/Users/svacchanda/Dev/nimv2/compiler/plugins/active.nim");
+	nimfr_("getPlugin", "/Users/svacchanda/Dev/nim-2.2.6/compiler/plugins/active.nim");
 {nimErr_ = nimErrorFlag();
 	{
-		tyTuple__WC8oWjU9ba3bRWtrpDsnEQw p_1;
+		tyTuple__9bPTSXSYKMIi9c6PdnYSxkGg p_1;
 		NI i_1;
-		nimZeroMem((void*)(&p_1), sizeof(tyTuple__WC8oWjU9ba3bRWtrpDsnEQw));
+		nimZeroMem((void*)(&p_1), sizeof(tyTuple__9bPTSXSYKMIi9c6PdnYSxkGg));
 		nimlf_(43, "/opt/local/lib/nim/lib/system/iterators.nim");		i_1 = ((NI)0);
 		{
 			nimln_(44);			while (1) {
-				nimlf_(22, "/Users/svacchanda/Dev/nimv2/compiler/plugins/active.nim");				p_1 = plugins__pluginsZactive_u6[(i_1)- 0];
+				nimlf_(22, "/Users/svacchanda/Dev/nim-2.2.6/compiler/plugins/active.nim");				p_1 = plugins__pluginsZactive_u6[(i_1)- 0];
 				nimln_(23);				{
 					NIM_BOOL T6_;
 					T6_ = (NIM_BOOL)0;
@@ -155,7 +155,7 @@ LA11_: ;
 			}
 		} LA2: ;
 	}
-	nimlf_(24, "/Users/svacchanda/Dev/nimv2/compiler/plugins/active.nim");	nimln_(21);	nimln_(24);	result = NIM_NIL;
+	nimlf_(24, "/Users/svacchanda/Dev/nim-2.2.6/compiler/plugins/active.nim");	nimln_(21);	nimln_(24);	result = NIM_NIL;
 	goto BeforeRet_;
 	}BeforeRet_: ;
 	popFrame();

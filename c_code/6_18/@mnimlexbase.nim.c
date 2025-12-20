@@ -28,8 +28,8 @@
 #define nimlf_(n, file) \
   FR_.line = n; FR_.filename = file;
 
-typedef struct tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw;
-typedef struct tyObject_TLLStream__dkxvvfuFzn2aw6fDG3Q8MA tyObject_TLLStream__dkxvvfuFzn2aw6fDG3Q8MA;
+typedef struct tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA;
+typedef struct tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA;
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
 typedef struct RootObj RootObj;
@@ -56,13 +56,13 @@ struct TNimTypeV2 {
 struct RootObj {
 	TNimTypeV2* m_type;
 };
-struct tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw {
+struct tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA {
 	RootObj Sup;
 	NI bufpos;
 	NCSTRING buf;
 	NimStringV2 bufStorage;
 	NI bufLen;
-	tyObject_TLLStream__dkxvvfuFzn2aw6fDG3Q8MA* stream;
+	tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA* stream;
 	NI lineNumber;
 	NI sentinel;
 	NI lineStart;
@@ -75,11 +75,11 @@ N_LIB_PRIVATE N_NOINLINE(void, raiseRangeErrorI)(NI64 i_p0, NI64 a_p1, NI64 b_p2
 static N_INLINE(NCSTRING, nimToCStringConv)(NimStringV2 s_p0);
 static N_INLINE(NIM_BOOL, nimSubInt)(NI a_p0, NI b_p1, NI* res_p2);
 N_LIB_PRIVATE N_NOINLINE(void, raiseOverflow)(void);
-N_LIB_PRIVATE N_NIMCALL(void, eqcopy___llstream_u115)(tyObject_TLLStream__dkxvvfuFzn2aw6fDG3Q8MA** dest_p0, tyObject_TLLStream__dkxvvfuFzn2aw6fDG3Q8MA* src_p1, NIM_BOOL cyclic_p2);
-N_LIB_PRIVATE N_NIMCALL(void, fillBuffer__nimlexbase_u46)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0);
+N_LIB_PRIVATE N_NIMCALL(void, eqcopy___llstream_u115)(tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA** dest_p0, tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA* src_p1, NIM_BOOL cyclic_p2);
+N_LIB_PRIVATE N_NIMCALL(void, fillBuffer__nimlexbase_u46)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0);
 static N_INLINE(void, moveMem__system_u1732)(void* dest_p0, void* source_p1, NI size_p2);
 static N_INLINE(NIM_BOOL, nimAddInt)(NI a_p0, NI b_p1, NI* res_p2);
-N_LIB_PRIVATE N_NIMCALL(NI, llStreamRead__llstream_u469)(tyObject_TLLStream__dkxvvfuFzn2aw6fDG3Q8MA* s_p0, void* buf_p1, NI bufLen_p2);
+N_LIB_PRIVATE N_NIMCALL(NI, llStreamRead__llstream_u469)(tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA* s_p0, void* buf_p1, NI bufLen_p2);
 static N_INLINE(NIM_BOOL, nimMulInt)(NI a_p0, NI b_p1, NI* res_p2);
 static N_INLINE(NF, toFloat__system_u1681)(NI i_p0);
 static N_INLINE(void, nimFrame)(TFrame* s_p0);
@@ -88,41 +88,41 @@ static N_INLINE(void, popFrame)(void);
 static N_INLINE(NF, abs__system_u5195)(NF x_p0);
 N_LIB_PRIVATE N_NIMCALL(void, setLengthStrV2)(NimStringV2* s_p0, NI newLen_p1);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
-N_LIB_PRIVATE N_NIMCALL(void, skipUTF8BOM__nimlexbase_u127)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0);
-N_LIB_PRIVATE N_NIMCALL(NI, fillBaseLexer__nimlexbase_u86)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0, NI pos_p1);
-N_LIB_PRIVATE N_NIMCALL(void, llStreamClose__llstream_u214)(tyObject_TLLStream__dkxvvfuFzn2aw6fDG3Q8MA* s_p0);
+N_LIB_PRIVATE N_NIMCALL(void, skipUTF8BOM__nimlexbase_u127)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0);
+N_LIB_PRIVATE N_NIMCALL(NI, fillBaseLexer__nimlexbase_u86)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0, NI pos_p1);
+N_LIB_PRIVATE N_NIMCALL(void, llStreamClose__llstream_u214)(tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA* s_p0);
 static const struct {
-  NI cap; NIM_CHAR data[73+1];
-} TM__jNFaG9cOzyJSKBcIonhGRGw_2 = { 73 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim(150, 9) `bufLen > 0` " };
-static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_3 = {73, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_2};
+  NI cap; NIM_CHAR data[77+1];
+} TM__jNFaG9cOzyJSKBcIonhGRGw_2 = { 77 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim(150, 9) `bufLen > 0` " };
+static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_3 = {77, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_2};
+static const struct {
+  NI cap; NIM_CHAR data[87+1];
+} TM__jNFaG9cOzyJSKBcIonhGRGw_5 = { 87 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim(84, 9) `L.sentinel < L.bufLen` " };
+static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_6 = {87, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_5};
+static const struct {
+  NI cap; NIM_CHAR data[77+1];
+} TM__jNFaG9cOzyJSKBcIonhGRGw_9 = { 77 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim(86, 9) `toCopy >= 0` " };
+static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_10 = {77, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_9};
+static const struct {
+  NI cap; NIM_CHAR data[79+1];
+} TM__jNFaG9cOzyJSKBcIonhGRGw_16 = { 79 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim(99, 13) `s < L.bufLen` " };
+static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_17 = {79, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_16};
+static const struct {
+  NI cap; NIM_CHAR data[101+1];
+} TM__jNFaG9cOzyJSKBcIonhGRGw_21 = { 101 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim(112, 15) `L.bufLen - oldBufLen == oldBufLen` " };
+static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_22 = {101, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_21};
 static const struct {
   NI cap; NIM_CHAR data[83+1];
-} TM__jNFaG9cOzyJSKBcIonhGRGw_5 = { 83 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim(84, 9) `L.sentinel < L.bufLen` " };
-static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_6 = {83, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_5};
+} TM__jNFaG9cOzyJSKBcIonhGRGw_29 = { 83 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim(133, 9) `L.buf[pos] == CR` " };
+static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_30 = {83, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_29};
 static const struct {
-  NI cap; NIM_CHAR data[73+1];
-} TM__jNFaG9cOzyJSKBcIonhGRGw_9 = { 73 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim(86, 9) `toCopy >= 0` " };
-static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_10 = {73, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_9};
+  NI cap; NIM_CHAR data[84+1];
+} TM__jNFaG9cOzyJSKBcIonhGRGw_32 = { 84 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim(122, 9) `pos <= L.sentinel` " };
+static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_33 = {84, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_32};
 static const struct {
-  NI cap; NIM_CHAR data[75+1];
-} TM__jNFaG9cOzyJSKBcIonhGRGw_16 = { 75 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim(99, 13) `s < L.bufLen` " };
-static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_17 = {75, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_16};
-static const struct {
-  NI cap; NIM_CHAR data[97+1];
-} TM__jNFaG9cOzyJSKBcIonhGRGw_21 = { 97 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim(112, 15) `L.bufLen - oldBufLen == oldBufLen` " };
-static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_22 = {97, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_21};
-static const struct {
-  NI cap; NIM_CHAR data[79+1];
-} TM__jNFaG9cOzyJSKBcIonhGRGw_29 = { 79 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim(133, 9) `L.buf[pos] == CR` " };
-static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_30 = {79, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_29};
-static const struct {
-  NI cap; NIM_CHAR data[80+1];
-} TM__jNFaG9cOzyJSKBcIonhGRGw_32 = { 80 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim(122, 9) `pos <= L.sentinel` " };
-static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_33 = {80, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_32};
-static const struct {
-  NI cap; NIM_CHAR data[79+1];
-} TM__jNFaG9cOzyJSKBcIonhGRGw_37 = { 79 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim(140, 9) `L.buf[pos] == LF` " };
-static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_38 = {79, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_37};
+  NI cap; NIM_CHAR data[83+1];
+} TM__jNFaG9cOzyJSKBcIonhGRGw_37 = { 83 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim(140, 9) `L.buf[pos] == LF` " };
+static const NimStringV2 TM__jNFaG9cOzyJSKBcIonhGRGw_38 = {83, (NimStrPayload*)&TM__jNFaG9cOzyJSKBcIonhGRGw_37};
 extern TFrame* framePtr__system_u2667;
 extern NIM_BOOL nimInErrorMode__system_u4259;
 static N_INLINE(NCSTRING, nimToCStringConv)(NimStringV2 s_p0) {
@@ -272,24 +272,24 @@ static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
 	result = (&nimInErrorMode__system_u4259);
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(void, fillBuffer__nimlexbase_u46)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0) {
+N_LIB_PRIVATE N_NIMCALL(void, fillBuffer__nimlexbase_u46)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0) {
 	NI charsRead_1;
 	NI toCopy_1;
 	NI s_1;
 	NI oldBufLen_1;
 	NI TM__jNFaG9cOzyJSKBcIonhGRGw_7;
 	NI TM__jNFaG9cOzyJSKBcIonhGRGw_8;
-	tyObject_TLLStream__dkxvvfuFzn2aw6fDG3Q8MA* T14_;
+	tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA* T14_;
 	NI TM__jNFaG9cOzyJSKBcIonhGRGw_12;
 	NI TM__jNFaG9cOzyJSKBcIonhGRGw_13;
 NIM_BOOL* nimErr_;
-	nimfr_("fillBuffer", "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");
+	nimfr_("fillBuffer", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");
 {nimErr_ = nimErrorFlag();
 	charsRead_1 = (NI)0;
 	toCopy_1 = (NI)0;
 	s_1 = (NI)0;
 	oldBufLen_1 = (NI)0;
-	nimlf_(84, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");	{
+	nimlf_(84, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");	{
 		if (!!(((*L_p0).sentinel < (*L_p0).bufLen))) goto LA3_;
 		failedAssertImpl__stdZassertions_u242(TM__jNFaG9cOzyJSKBcIonhGRGw_6);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
@@ -375,7 +375,7 @@ LA29_: ;
 LA32_: ;
 				{
 					NI TM__jNFaG9cOzyJSKBcIonhGRGw_19;
-					tyObject_TLLStream__dkxvvfuFzn2aw6fDG3Q8MA* T39_;
+					tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA* T39_;
 					NI TM__jNFaG9cOzyJSKBcIonhGRGw_25;
 					nimln_(108);					oldBufLen_1 = (*L_p0).bufLen;
 					nimln_(109);					if (nimMulInt((*L_p0).bufLen, ((NI)2), &TM__jNFaG9cOzyJSKBcIonhGRGw_19)) { raiseOverflow(); goto BeforeRet_;
@@ -423,8 +423,8 @@ LA15_: ;
 	}BeforeRet_: ;
 	popFrame();
 }
-N_LIB_PRIVATE N_NIMCALL(void, skipUTF8BOM__nimlexbase_u127)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0) {
-	nimfr_("skipUTF8BOM", "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");
+N_LIB_PRIVATE N_NIMCALL(void, skipUTF8BOM__nimlexbase_u127)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0) {
+	nimfr_("skipUTF8BOM", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");
 {	nimln_(145);	{
 		NIM_BOOL T3_;
 		NIM_BOOL T4_;
@@ -452,11 +452,11 @@ LA7_: ;
 	}BeforeRet_: ;
 	popFrame();
 }
-N_LIB_PRIVATE N_NIMCALL(void, openBaseLexer__nimlexbase_u26)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0, tyObject_TLLStream__dkxvvfuFzn2aw6fDG3Q8MA* inputstream_p1, NI bufLen_p2) {
+N_LIB_PRIVATE N_NIMCALL(void, openBaseLexer__nimlexbase_u26)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0, tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA* inputstream_p1, NI bufLen_p2) {
 	NimStringV2 T5_;
 	NI TM__jNFaG9cOzyJSKBcIonhGRGw_4;
 NIM_BOOL* nimErr_;
-	nimfr_("openBaseLexer", "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");
+	nimfr_("openBaseLexer", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(150);	{
 		if (!!((((NI)0) < bufLen_p2))) goto LA3_;
@@ -466,30 +466,30 @@ NIM_BOOL* nimErr_;
 LA3_: ;
 	nimln_(151);	(*L_p0).bufpos = ((NI)0);
 	nimln_(152);	(*L_p0).offsetBase = ((NI)0);
-	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	nimlf_(153, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");	if ((bufLen_p2) < ((NI)0) || (bufLen_p2) > ((NI)IL64(9223372036854775807))){ raiseRangeErrorI(bufLen_p2, ((NI)0), ((NI)IL64(9223372036854775807))); goto BeforeRet_;
+	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	nimlf_(153, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");	if ((bufLen_p2) < ((NI)0) || (bufLen_p2) > ((NI)IL64(9223372036854775807))){ raiseRangeErrorI(bufLen_p2, ((NI)0), ((NI)IL64(9223372036854775807))); goto BeforeRet_;
 	}
 	T5_.len = 0; T5_.p = NIM_NIL;
 	T5_ = mnewString((bufLen_p2));
 	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqsink___system_u2638((&(*L_p0).bufStorage), T5_);
-	nimlf_(154, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");	(*L_p0).buf = nimToCStringConv((*L_p0).bufStorage);
+	nimlf_(154, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");	(*L_p0).buf = nimToCStringConv((*L_p0).bufStorage);
 	nimln_(155);	(*L_p0).bufLen = bufLen_p2;
 	nimln_(156);	if (nimSubInt(bufLen_p2, ((NI)1), &TM__jNFaG9cOzyJSKBcIonhGRGw_4)) { raiseOverflow(); goto BeforeRet_;
 	};
 	(*L_p0).sentinel = (NI)(TM__jNFaG9cOzyJSKBcIonhGRGw_4);
 	nimln_(157);	(*L_p0).lineStart = ((NI)0);
 	nimln_(158);	(*L_p0).lineNumber = ((NI)1);
-	nimlf_(44, "/Users/svacchanda/Dev/nimv2/compiler/llstream.nim");	eqcopy___llstream_u115(&(*L_p0).stream, inputstream_p1, NIM_TRUE);
-	nimlf_(160, "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");	fillBuffer__nimlexbase_u46(L_p0);
+	nimlf_(44, "/Users/svacchanda/Dev/nim-2.2.6/compiler/llstream.nim");	eqcopy___llstream_u115(&(*L_p0).stream, inputstream_p1, NIM_TRUE);
+	nimlf_(160, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");	fillBuffer__nimlexbase_u46(L_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	nimln_(161);	skipUTF8BOM__nimlexbase_u127(L_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
 	popFrame();
 }
-N_LIB_PRIVATE N_NIMCALL(NI, getColNumber__nimlexbase_u35)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0, NI pos_p1) {
+N_LIB_PRIVATE N_NIMCALL(NI, getColNumber__nimlexbase_u35)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0, NI pos_p1) {
 	NI result;
 	NI TM__jNFaG9cOzyJSKBcIonhGRGw_28;
-	nimfr_("getColNumber", "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");
+	nimfr_("getColNumber", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");
 {	result = (NI)0;
 	nimln_(164);	if (nimSubInt(pos_p1, (*L_p0).lineStart, &TM__jNFaG9cOzyJSKBcIonhGRGw_28)) { raiseOverflow(); goto BeforeRet_;
 	};
@@ -500,10 +500,10 @@ N_LIB_PRIVATE N_NIMCALL(NI, getColNumber__nimlexbase_u35)(tyObject_TBaseLexer__9
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NI, fillBaseLexer__nimlexbase_u86)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0, NI pos_p1) {
+N_LIB_PRIVATE N_NIMCALL(NI, fillBaseLexer__nimlexbase_u86)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0, NI pos_p1) {
 	NI result;
 NIM_BOOL* nimErr_;
-	nimfr_("fillBaseLexer", "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");
+	nimfr_("fillBaseLexer", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(122);	{
@@ -540,11 +540,11 @@ LA5_: ;
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NI, handleCR__nimlexbase_u38)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0, NI pos_p1) {
+N_LIB_PRIVATE N_NIMCALL(NI, handleCR__nimlexbase_u38)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0, NI pos_p1) {
 	NI result;
 	NI TM__jNFaG9cOzyJSKBcIonhGRGw_31;
 NIM_BOOL* nimErr_;
-	nimfr_("handleCR", "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");
+	nimfr_("handleCR", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(133);	{
@@ -568,11 +568,11 @@ LA7_: ;
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NI, handleLF__nimlexbase_u41)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0, NI pos_p1) {
+N_LIB_PRIVATE N_NIMCALL(NI, handleLF__nimlexbase_u41)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0, NI pos_p1) {
 	NI result;
 	NI TM__jNFaG9cOzyJSKBcIonhGRGw_39;
 NIM_BOOL* nimErr_;
-	nimfr_("handleLF", "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");
+	nimfr_("handleLF", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(140);	{
@@ -590,9 +590,9 @@ LA3_: ;
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(void, closeBaseLexer__nimlexbase_u30)(tyObject_TBaseLexer__9cSONlNLuVgFnH7xk9c6drzw* L_p0) {
+N_LIB_PRIVATE N_NIMCALL(void, closeBaseLexer__nimlexbase_u30)(tyObject_TBaseLexer__sEs9c1b3kPQ9aXO16N3ILWzA* L_p0) {
 NIM_BOOL* nimErr_;
-	nimfr_("closeBaseLexer", "/Users/svacchanda/Dev/nimv2/compiler/nimlexbase.nim");
+	nimfr_("closeBaseLexer", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimlexbase.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(74);	llStreamClose__llstream_u214((*L_p0).stream);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;

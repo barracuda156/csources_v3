@@ -80,13 +80,13 @@ static N_INLINE(void, nimAddCharV1)(NimStringV2* s_p0, NIM_CHAR c_p1);
 N_LIB_PRIVATE N_NIMCALL(void, prepareAdd)(NimStringV2* s_p0, NI addLen_p1);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, slash___pathutils_u135)(NimStringV2 base_p0, NimStringV2 f_p1);
 static const struct {
-  NI cap; NIM_CHAR data[86+1];
-} TM__r4WvUOkTx4ylahJtpRE9aTQ_2 = { 86 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim(81, 11) `not isAbsolute(f.string)` " };
-static const NimStringV2 TM__r4WvUOkTx4ylahJtpRE9aTQ_3 = {86, (NimStrPayload*)&TM__r4WvUOkTx4ylahJtpRE9aTQ_2};
+  NI cap; NIM_CHAR data[90+1];
+} TM__r4WvUOkTx4ylahJtpRE9aTQ_2 = { 90 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim(81, 11) `not isAbsolute(f.string)` " };
+static const NimStringV2 TM__r4WvUOkTx4ylahJtpRE9aTQ_3 = {90, (NimStrPayload*)&TM__r4WvUOkTx4ylahJtpRE9aTQ_2};
 static const struct {
-  NI cap; NIM_CHAR data[86+1];
-} TM__r4WvUOkTx4ylahJtpRE9aTQ_5 = { 86 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim(73, 11) `not isAbsolute(f.string)` " };
-static const NimStringV2 TM__r4WvUOkTx4ylahJtpRE9aTQ_6 = {86, (NimStrPayload*)&TM__r4WvUOkTx4ylahJtpRE9aTQ_5};
+  NI cap; NIM_CHAR data[90+1];
+} TM__r4WvUOkTx4ylahJtpRE9aTQ_5 = { 90 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim(73, 11) `not isAbsolute(f.string)` " };
+static const NimStringV2 TM__r4WvUOkTx4ylahJtpRE9aTQ_6 = {90, (NimStrPayload*)&TM__r4WvUOkTx4ylahJtpRE9aTQ_5};
 static const struct {
   NI cap; NIM_CHAR data[6+1];
 } TM__r4WvUOkTx4ylahJtpRE9aTQ_9 = { 6 | NIM_STRLIT_FLAG, "/home/" };
@@ -131,7 +131,7 @@ static N_INLINE(void, popFrame)(void) {
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u3945)(NimStringV2 x_p0) {
 	NimStringV2 result;
 	NimStringV2 colontmpD_;
-	nimfr_("$", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("$", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 	colontmpD_.len = 0; colontmpD_.p = NIM_NIL;
 	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	colontmpD_ = eqdup___system_u2635(x_p0);
 	result = colontmpD_;
@@ -141,7 +141,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u3945)(NimStringV2 x_p0) {
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u4035)(NimStringV2 x_p0) {
 	NimStringV2 result;
 	NimStringV2 colontmpD_;
-	nimfr_("$", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("$", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 	colontmpD_.len = 0; colontmpD_.p = NIM_NIL;
 	nimln_(1699);	colontmpD_ = eqdup___system_u2635(x_p0);
 	result = colontmpD_;
@@ -156,10 +156,10 @@ static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, relativeTo__pathutils_u200)(NimStringV2 fullPath_p0, NimStringV2 baseFilename_p1, NIM_CHAR sep_p2) {
 	NimStringV2 result;
 NIM_BOOL* nimErr_;
-	nimfr_("relativeTo", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("relativeTo", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
-	nimlf_(92, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	result = nosrelativePath(fullPath_p0, baseFilename_p1, sep_p2);
+	nimlf_(92, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	result = nosrelativePath(fullPath_p0, baseFilename_p1, sep_p2);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
 	popFrame();
@@ -169,7 +169,7 @@ static N_INLINE(NIM_BOOL, eqImpl__pathutils_u124)(NimStringV2 x_p0, NimStringV2 
 	NIM_BOOL result;
 	NI T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("eqImpl", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("eqImpl", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NIM_BOOL)0;
 	nimln_(56);	T1_ = (NI)0;
@@ -183,7 +183,7 @@ NIM_BOOL* nimErr_;
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, eqeq___options_u3654)(NimStringV2 x_p0, NimStringV2 y_p1) {
 	NIM_BOOL result;
 NIM_BOOL* nimErr_;
-	nimfr_("==", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("==", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NIM_BOOL)0;
 	result = eqImpl__pathutils_u124(x_p0, y_p1);
@@ -194,7 +194,7 @@ NIM_BOOL* nimErr_;
 }
 static N_INLINE(NIM_BOOL, isEmpty__pathutils_u139)(NimStringV2 x_p0) {
 	NIM_BOOL result;
-	nimfr_("isEmpty", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("isEmpty", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 	result = (x_p0.len == ((NI)0));
 	popFrame();
 	return result;
@@ -208,7 +208,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, slash___pathutils_u168)(NimStringV2 base_p0
 	NimStringV2 T14_;
 	NimStringV2 T15_;
 NIM_BOOL* nimErr_;
-	nimfr_("/", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("/", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
 	base_2.len = 0; base_2.p = NIM_NIL;
@@ -228,7 +228,7 @@ LA6_: ;
 		nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");		eqcopy___system_u2632((&base_2), base_p0);
 	}
 LA3_: ;
-	nimlf_(81, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	{
+	nimlf_(81, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	{
 		NIM_BOOL T11_;
 		T11_ = (NIM_BOOL)0;
 		T11_ = nosisAbsolute(f_p1);
@@ -279,11 +279,11 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, toAbsoluteDir__pathutils_u117)(NimStringV2 
 	NimStringV2 result;
 	NimStringV2 T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("toAbsoluteDir", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("toAbsoluteDir", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
 	T1_.len = 0; T1_.p = NIM_NIL;
-	nimlf_(49, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	{
+	nimlf_(49, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	{
 		NIM_BOOL T4_;
 		NimStringV2 colontmpD_;
 		T4_ = (NIM_BOOL)0;
@@ -299,7 +299,7 @@ LA5_: ;
 	{
 		NimStringV2 colontmpD__2;
 		colontmpD__2.len = 0; colontmpD__2.p = NIM_NIL;
-		nimlf_(49, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");		nimln_(50);		colontmpD__2 = nosgetCurrentDir();
+		nimlf_(49, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");		nimln_(50);		colontmpD__2 = nosgetCurrentDir();
 		if (NIM_UNLIKELY(*nimErr_)) goto LA8_;
 		result = slash___stdZprivateZospaths2_u91(colontmpD__2, path_p0);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA8_;
@@ -348,12 +348,12 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, slash___pathutils_u135)(NimStringV2 base_p0
 	NimStringV2 T15_;
 	NimStringV2 T16_;
 NIM_BOOL* nimErr_;
-	nimfr_("/", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("/", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
 	base_2.len = 0; base_2.p = NIM_NIL;
 	T2_.len = 0; T2_.p = NIM_NIL;
-	nimlf_(72, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	{
+	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	{
 		NIM_BOOL T5_;
 		nimln_(69);		T5_ = (NIM_BOOL)0;
 		T5_ = isEmpty__pathutils_u139(base_p0);
@@ -368,7 +368,7 @@ LA6_: ;
 		nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");		eqcopy___system_u2632((&base_2), base_p0);
 	}
 LA3_: ;
-	nimlf_(73, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	{
+	nimlf_(73, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	{
 		NIM_BOOL T11_;
 		NimStringV2 colontmpD_;
 		NimStringV2 T14_;
@@ -378,7 +378,7 @@ LA3_: ;
 		if (!!(!(T11_))) goto LA12_;
 		colontmpD_.len = 0; colontmpD_.p = NIM_NIL;
 		T14_.len = 0; T14_.p = NIM_NIL;
-		T14_ = rawNewString(f_p1.len + 86);
+		T14_ = rawNewString(f_p1.len + 90);
 appendString((&T14_), TM__r4WvUOkTx4ylahJtpRE9aTQ_6);
 appendString((&T14_), f_p1);
 		colontmpD_ = T14_;
@@ -387,7 +387,7 @@ appendString((&T14_), f_p1);
 		nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");		eqdestroy___system_u2629(colontmpD_);
 	}
 LA12_: ;
-	nimlf_(74, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	if (nimAddInt(base_2.len, f_p1.len, &TM__r4WvUOkTx4ylahJtpRE9aTQ_8)) { raiseOverflow(); goto LA1_;
+	nimlf_(74, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	if (nimAddInt(base_2.len, f_p1.len, &TM__r4WvUOkTx4ylahJtpRE9aTQ_8)) { raiseOverflow(); goto LA1_;
 	};
 	if (((NI)(TM__r4WvUOkTx4ylahJtpRE9aTQ_8)) < ((NI)0) || ((NI)(TM__r4WvUOkTx4ylahJtpRE9aTQ_8)) > ((NI)2147483647)){ raiseRangeErrorI((NI)(TM__r4WvUOkTx4ylahJtpRE9aTQ_8), ((NI)0), ((NI)2147483647)); goto LA1_;
 	}
@@ -438,7 +438,7 @@ N_LIB_PRIVATE N_NIMCALL(tyTuple__7q7q3E6Oj24ZNVJb9aonhAg, splitFile__pathutils_u
 	NimStringV2 blitTmp_3;
 	NimStringV2 blitTmp_4;
 NIM_BOOL* nimErr_;
-	nimfr_("splitFile", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("splitFile", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	nimZeroMem((void*)(&result), sizeof(tyTuple__7q7q3E6Oj24ZNVJb9aonhAg));
 	nimZeroMem((void*)(&tmpTuple_1), sizeof(tyTuple__7q7q3E6Oj24ZNVJb9aonhAg));
@@ -448,15 +448,15 @@ NIM_BOOL* nimErr_;
 	colontmp_.len = 0; colontmp_.p = NIM_NIL;
 	colontmp__2.len = 0; colontmp__2.p = NIM_NIL;
 	colontmp__3.len = 0; colontmp__3.p = NIM_NIL;
-	nimlf_(33, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	tmpTuple_1 = nossplitFile(x_p0);
+	nimlf_(33, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	tmpTuple_1 = nossplitFile(x_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	a_1 = tmpTuple_1.Field0;
 	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqwasMoved___system_u2626((&tmpTuple_1.Field0));
-	nimlf_(33, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	b_1 = tmpTuple_1.Field1;
+	nimlf_(33, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	b_1 = tmpTuple_1.Field1;
 	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqwasMoved___system_u2626((&tmpTuple_1.Field1));
-	nimlf_(33, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	c_1 = tmpTuple_1.Field2;
+	nimlf_(33, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	c_1 = tmpTuple_1.Field2;
 	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqwasMoved___system_u2626((&tmpTuple_1.Field2));
-	nimlf_(34, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	blitTmp_1 = a_1;
+	nimlf_(34, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	blitTmp_1 = a_1;
 	colontmp_ = blitTmp_1;
 	colontmp__2 = b_1;
 	colontmp__3 = c_1;
@@ -479,7 +479,7 @@ N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pathutils_u73)(tyTuple__7q7q3E6Oj24ZNV
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, eqeq___nimconf_u332)(NimStringV2 x_p0, NimStringV2 y_p1) {
 	NIM_BOOL result;
 NIM_BOOL* nimErr_;
-	nimfr_("==", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("==", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NIM_BOOL)0;
 	result = eqImpl__pathutils_u124(x_p0, y_p1);
@@ -491,9 +491,9 @@ NIM_BOOL* nimErr_;
 N_LIB_PRIVATE N_NIMCALL(NI, skipHomeDir__pathutils_u234)(NimStringV2 x_p0) {
 	NI result;
 NIM_BOOL* nimErr_;
-	nimfr_("skipHomeDir", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("skipHomeDir", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
-	nimlf_(113, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	{
+	nimlf_(113, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	{
 		NIM_BOOL T3_;
 		T3_ = (NIM_BOOL)0;
 		T3_ = nsuStartsWith(x_p0, TM__r4WvUOkTx4ylahJtpRE9aTQ_10);
@@ -543,7 +543,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, relevantPart__pathutils_u237)(NimStringV2 s
 	NimStringV2 result;
 	NI TM__r4WvUOkTx4ylahJtpRE9aTQ_18;
 	NI slashes_1;
-	nimfr_("relevantPart", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("relevantPart", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {	result.len = 0; result.p = NIM_NIL;
 	nimln_(121);	if (nimSubInt(s_p0.len, ((NI)8), &TM__r4WvUOkTx4ylahJtpRE9aTQ_18)) { raiseOverflow(); goto BeforeRet_;
 	};
@@ -557,13 +557,13 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, relevantPart__pathutils_u237)(NimStringV2 s
 		NI i_2;
 		i_1 = (NI)0;
 		colontmp_ = (NI)0;
-		nimlf_(126, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(123, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");		colontmp_ = s_p0.len;
+		nimlf_(126, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(123, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");		colontmp_ = s_p0.len;
 		nimlf_(128, "/opt/local/lib/nim/lib/system/iterators_1.nim");		i_2 = ((NI)0);
 		{
 			nimln_(129);			while (1) {
 				NI TM__r4WvUOkTx4ylahJtpRE9aTQ_21;
 				if (!(i_2 < colontmp_)) goto LA3;
-				nimlf_(123, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");				i_1 = i_2;
+				nimlf_(123, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");				i_1 = i_2;
 				nimln_(124);				{
 					if (!(slashes_1 == ((NI)0))) goto LA6_;
 					nimln_(125);					if (i_1 < 0 || i_1 >= s_p0.len){ raiseIndexError2(i_1,s_p0.len-1); goto BeforeRet_;
@@ -597,10 +597,10 @@ LA4_: ;
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, customPathImpl__pathutils_u254)(NimStringV2 x_p0) {
 	NimStringV2 result;
 NIM_BOOL* nimErr_;
-	nimfr_("customPathImpl", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("customPathImpl", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
-	nimlf_(143, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	{
+	nimlf_(143, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	{
 		NIM_BOOL T3_;
 		NimStringV2 colontmpD_;
 		NimStringV2 colontmpD__2;
@@ -629,7 +629,7 @@ NIM_BOOL* nimErr_;
 LA4_: ;
 	{
 		NI slashes_1;
-		nimlf_(146, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");		slashes_1 = skipHomeDir__pathutils_u234(x_p0);
+		nimlf_(146, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");		slashes_1 = skipHomeDir__pathutils_u234(x_p0);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimln_(147);		{
 			NimStringV2 colontmpD__3;
@@ -660,10 +660,10 @@ LA1_: ;
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, customPath__pathutils_u258)(NimStringV2 x_p0) {
 	NimStringV2 result;
 NIM_BOOL* nimErr_;
-	nimfr_("customPath", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("customPath", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
-	nimlf_(153, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	result = customPathImpl__pathutils_u254(x_p0);
+	nimlf_(153, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	result = customPathImpl__pathutils_u254(x_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
 	popFrame();
@@ -672,7 +672,7 @@ NIM_BOOL* nimErr_;
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___docgen_u13335)(NimStringV2 x_p0) {
 	NimStringV2 result;
 	NimStringV2 colontmpD_;
-	nimfr_("$", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("$", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 	colontmpD_.len = 0; colontmpD_.p = NIM_NIL;
 	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	colontmpD_ = eqdup___system_u2635(x_p0);
 	result = colontmpD_;
@@ -682,7 +682,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___docgen_u13335)(NimStringV2 x_p0) {
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, eqeq___nimconf_u472)(NimStringV2 x_p0, NimStringV2 y_p1) {
 	NIM_BOOL result;
 NIM_BOOL* nimErr_;
-	nimfr_("==", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("==", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NIM_BOOL)0;
 	result = eqImpl__pathutils_u124(x_p0, y_p1);
@@ -694,10 +694,10 @@ NIM_BOOL* nimErr_;
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, toAbsolute__pathutils_u205)(NimStringV2 file_p0, NimStringV2 base_p1) {
 	NimStringV2 result;
 NIM_BOOL* nimErr_;
-	nimfr_("toAbsolute", "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");
+	nimfr_("toAbsolute", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
-	nimlf_(95, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");	{
+	nimlf_(95, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");	{
 		NIM_BOOL T3_;
 		NimStringV2 colontmpD_;
 		T3_ = (NIM_BOOL)0;
@@ -711,7 +711,7 @@ NIM_BOOL* nimErr_;
 	goto LA1_;
 LA4_: ;
 	{
-		nimlf_(96, "/Users/svacchanda/Dev/nimv2/compiler/pathutils.nim");		result = slash___pathutils_u135(base_p1, file_p0);
+		nimlf_(96, "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");		result = slash___pathutils_u135(base_p1, file_p0);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 LA1_: ;

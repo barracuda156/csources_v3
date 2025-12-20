@@ -124,6 +124,8 @@ if [ $# -eq 1 ] ; then
   chmod 644 "$libdir/wrappers/openssl.nim"
   cp "lib/posix/posix_macos_amd64.nim" "$libdir/posix/posix_macos_amd64.nim"
   chmod 644 "$libdir/posix/posix_macos_amd64.nim"
+  cp "lib/posix/posix.nim.orig" "$libdir/posix/posix.nim.orig"
+  chmod 644 "$libdir/posix/posix.nim.orig"
   cp "lib/posix/linux.nim" "$libdir/posix/linux.nim"
   chmod 644 "$libdir/posix/linux.nim"
   cp "lib/posix/posix_other.nim" "$libdir/posix/posix_other.nim"

@@ -29,12 +29,12 @@
 
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
-typedef struct tyObject_IdGeneratorcolonObjectType___PoMCJ5hAWC6V9btoMgk4Ieg tyObject_IdGeneratorcolonObjectType___PoMCJ5hAWC6V9btoMgk4Ieg;
-typedef struct tyObject_CountTable__wjTlk1kHyVlLDhtpJTNang tyObject_CountTable__wjTlk1kHyVlLDhtpJTNang;
-typedef struct tySequence__14eaenldYvaMipHPmyNPjQ tySequence__14eaenldYvaMipHPmyNPjQ;
-typedef struct tySequence__14eaenldYvaMipHPmyNPjQ_Content tySequence__14eaenldYvaMipHPmyNPjQ_Content;
-typedef struct tyTuple__m0WV9c6zw9bvNqarbA9c7ZT4g tyTuple__m0WV9c6zw9bvNqarbA9c7ZT4g;
-typedef struct tyObject_TIdent__TgS4DVxBWxH1nCMTH4oGgw tyObject_TIdent__TgS4DVxBWxH1nCMTH4oGgw;
+typedef struct tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ;
+typedef struct tyObject_CountTable__ZUQTV3NdcOy5HMhgHydlKQ tyObject_CountTable__ZUQTV3NdcOy5HMhgHydlKQ;
+typedef struct tySequence__eEiJh1AF9cWpSMsPnnEJHUA tySequence__eEiJh1AF9cWpSMsPnnEJHUA;
+typedef struct tySequence__eEiJh1AF9cWpSMsPnnEJHUA_Content tySequence__eEiJh1AF9cWpSMsPnnEJHUA_Content;
+typedef struct tyTuple__laVYaQKiGnj9czxi1t6CkRQ tyTuple__laVYaQKiGnj9czxi1t6CkRQ;
+typedef struct tyObject_TIdent__QYkDa9cS0Nii6pHQECIVbTQ tyObject_TIdent__QYkDa9cS0Nii6pHQECIVbTQ;
 struct NimStrPayload {
 	NI cap;
 	NIM_CHAR data[SEQ_DECL_SIZE];
@@ -43,26 +43,26 @@ struct NimStringV2 {
 	NI len;
 	NimStrPayload* p;
 };
-struct tySequence__14eaenldYvaMipHPmyNPjQ {
-  NI len; tySequence__14eaenldYvaMipHPmyNPjQ_Content* p;
+struct tySequence__eEiJh1AF9cWpSMsPnnEJHUA {
+  NI len; tySequence__eEiJh1AF9cWpSMsPnnEJHUA_Content* p;
 };
-struct tyObject_CountTable__wjTlk1kHyVlLDhtpJTNang {
-	tySequence__14eaenldYvaMipHPmyNPjQ data;
+struct tyObject_CountTable__ZUQTV3NdcOy5HMhgHydlKQ {
+	tySequence__eEiJh1AF9cWpSMsPnnEJHUA data;
 	NI counter;
 	NIM_BOOL isSorted;
 };
-struct tyObject_IdGeneratorcolonObjectType___PoMCJ5hAWC6V9btoMgk4Ieg {
+struct tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ {
 	NI32 module;
 	NI32 symId;
 	NI32 typeId_0;
 	NIM_BOOL sealed;
-	tyObject_CountTable__wjTlk1kHyVlLDhtpJTNang disambTable;
+	tyObject_CountTable__ZUQTV3NdcOy5HMhgHydlKQ disambTable;
 };
-struct tyTuple__m0WV9c6zw9bvNqarbA9c7ZT4g {
-	tyObject_TIdent__TgS4DVxBWxH1nCMTH4oGgw* Field0;
+struct tyTuple__laVYaQKiGnj9czxi1t6CkRQ {
+	tyObject_TIdent__QYkDa9cS0Nii6pHQECIVbTQ* Field0;
 	NI Field1;
 };
-struct tySequence__14eaenldYvaMipHPmyNPjQ_Content { NI cap; tyTuple__m0WV9c6zw9bvNqarbA9c7ZT4g data[SEQ_DECL_SIZE]; };
+struct tySequence__eEiJh1AF9cWpSMsPnnEJHUA_Content { NI cap; tyTuple__laVYaQKiGnj9czxi1t6CkRQ data[SEQ_DECL_SIZE]; };
 static N_INLINE(void, appendString)(NimStringV2* dest_p0, NimStringV2 src_p1);
 static N_INLINE(void, copyMem__system_u1728)(void* dest_p0, void* source_p1, NI size_p2);
 static N_INLINE(void, nimCopyMem)(void* dest_p0, void* source_p1, NI size_p2);
@@ -192,7 +192,7 @@ LA8_: ;
 static N_INLINE(void, popFrame)(void) {
 	framePtr__system_u2667 = (*framePtr__system_u2667).prev;
 }
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___pipelines_u82)(tyObject_IdGeneratorcolonObjectType___PoMCJ5hAWC6V9btoMgk4Ieg* x_p0) {
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___pipelines_u82)(tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ* x_p0) {
 	NimStringV2 result;
 	NI countX60gensym3__1;
 	nimfr_("$", "/opt/local/lib/nim/lib/std/objectdollar.nim");

@@ -316,9 +316,6 @@ namespace USE_NIM_NAMESPACE {
 #endif
 
 /* bool types (C++ has it): */
-#ifdef __ppc__
-typedef unsigned char NIM_BOOL; // In Darwin ppc ABI bool is 4-bytes.
-#else
 #ifdef __cplusplus
 #define NIM_BOOL bool
 #elif (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901)
@@ -326,7 +323,6 @@ typedef unsigned char NIM_BOOL; // In Darwin ppc ABI bool is 4-bytes.
 #define NIM_BOOL _Bool
 #else
 typedef unsigned char NIM_BOOL; // best effort
-#endif
 #endif
 
 NIM_STATIC_ASSERT(sizeof(NIM_BOOL) == 1, ""); // check whether really needed
