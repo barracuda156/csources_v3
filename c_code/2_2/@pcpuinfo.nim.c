@@ -57,8 +57,8 @@ static N_INLINE(void, popFrame)(void) {
 }
 static N_INLINE(NI, countProcessorsImpl__pureZconcurrencyZcpuinfo_u6)(void) {
 	NI result;
-	nimfr_("countProcessorsImpl", "/opt/local/lib/nim/lib/pure/concurrency/cpuinfo.nim");
-	nimlf_(102, "/opt/local/lib/nim/lib/pure/concurrency/cpuinfo.nim");	result = sysconf(((int)84));
+	nimfr_("countProcessorsImpl", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/concurrency/cpuinfo.nim");
+	nimlf_(102, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/concurrency/cpuinfo.nim");	result = sysconf(((int)84));
 	nimln_(103);	{
 		if (!(result < ((NI)0))) goto LA3_;
 		result = ((NI)0);
@@ -75,7 +75,7 @@ static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
 N_LIB_PRIVATE N_NIMCALL(NI, ncpicountProcessors)(void) {
 	NI result;
 NIM_BOOL* nimErr_;
-	nimfr_("countProcessors", "/opt/local/lib/nim/lib/pure/concurrency/cpuinfo.nim");
+	nimfr_("countProcessors", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/concurrency/cpuinfo.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(108);	nimln_(110);	result = countProcessorsImpl__pureZconcurrencyZcpuinfo_u6();

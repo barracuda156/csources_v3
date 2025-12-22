@@ -28,14 +28,14 @@
 
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
-typedef struct tyObject_AssertionDefect__IZC9adwUX9bXgJG9anfba0ylw tyObject_AssertionDefect__IZC9adwUX9bXgJG9anfba0ylw;
-typedef struct tyObject_Defect__JsCzlwHygAeX0418RpHXSg tyObject_Defect__JsCzlwHygAeX0418RpHXSg;
+typedef struct tyObject_AssertionDefect__u9aTbhrJIp8pA1qIOGfcLpA tyObject_AssertionDefect__u9aTbhrJIp8pA1qIOGfcLpA;
+typedef struct tyObject_Defect__viKwxOXuqj8dy06CzsCqwg tyObject_Defect__viKwxOXuqj8dy06CzsCqwg;
 typedef struct Exception Exception;
 typedef struct RootObj RootObj;
 typedef struct TNimTypeV2 TNimTypeV2;
-typedef struct tySequence__f7YBphMHQpYkXxdgcmYR9ag tySequence__f7YBphMHQpYkXxdgcmYR9ag;
-typedef struct tySequence__f7YBphMHQpYkXxdgcmYR9ag_Content tySequence__f7YBphMHQpYkXxdgcmYR9ag_Content;
-typedef struct tyObject_StackTraceEntry__h8IR3RITjQD6HkwTcrhm2A tyObject_StackTraceEntry__h8IR3RITjQD6HkwTcrhm2A;
+typedef struct tySequence__It5hvoRRnX7uWJ2c1mTgjQ tySequence__It5hvoRRnX7uWJ2c1mTgjQ;
+typedef struct tySequence__It5hvoRRnX7uWJ2c1mTgjQ_Content tySequence__It5hvoRRnX7uWJ2c1mTgjQ_Content;
+typedef struct tyObject_StackTraceEntry__06lVBeC8bx0SpmekbUn72Q tyObject_StackTraceEntry__06lVBeC8bx0SpmekbUn72Q;
 struct NimStrPayload {
 	NI cap;
 	NIM_CHAR data[SEQ_DECL_SIZE];
@@ -58,29 +58,29 @@ struct TNimTypeV2 {
 struct RootObj {
 	TNimTypeV2* m_type;
 };
-struct tySequence__f7YBphMHQpYkXxdgcmYR9ag {
-  NI len; tySequence__f7YBphMHQpYkXxdgcmYR9ag_Content* p;
+struct tySequence__It5hvoRRnX7uWJ2c1mTgjQ {
+  NI len; tySequence__It5hvoRRnX7uWJ2c1mTgjQ_Content* p;
 };
 struct Exception {
 	RootObj Sup;
 	Exception* parent;
 	NCSTRING name;
 	NimStringV2 message;
-	tySequence__f7YBphMHQpYkXxdgcmYR9ag trace;
+	tySequence__It5hvoRRnX7uWJ2c1mTgjQ trace;
 	Exception* up;
 };
-struct tyObject_Defect__JsCzlwHygAeX0418RpHXSg {
+struct tyObject_Defect__viKwxOXuqj8dy06CzsCqwg {
 	Exception Sup;
 };
-struct tyObject_AssertionDefect__IZC9adwUX9bXgJG9anfba0ylw {
-	tyObject_Defect__JsCzlwHygAeX0418RpHXSg Sup;
+struct tyObject_AssertionDefect__u9aTbhrJIp8pA1qIOGfcLpA {
+	tyObject_Defect__viKwxOXuqj8dy06CzsCqwg Sup;
 };
-struct tyObject_StackTraceEntry__h8IR3RITjQD6HkwTcrhm2A {
+struct tyObject_StackTraceEntry__06lVBeC8bx0SpmekbUn72Q {
 	NCSTRING procname;
 	NI line;
 	NCSTRING filename;
 };
-struct tySequence__f7YBphMHQpYkXxdgcmYR9ag_Content { NI cap; tyObject_StackTraceEntry__h8IR3RITjQD6HkwTcrhm2A data[SEQ_DECL_SIZE]; };
+struct tySequence__It5hvoRRnX7uWJ2c1mTgjQ_Content { NI cap; tyObject_StackTraceEntry__06lVBeC8bx0SpmekbUn72Q data[SEQ_DECL_SIZE]; };
 N_LIB_PRIVATE N_NOINLINE(void, raiseAssert__stdZassertions_u13)(NimStringV2 msg_p0);
 N_LIB_PRIVATE N_NIMCALL(void*, nimNewObj)(NI size_p0, NI alignment_p1);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, eqdup___system_u2635)(NimStringV2 src_p0);
@@ -89,7 +89,7 @@ static N_INLINE(void, nimFrame)(TFrame* s_p0);
 N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached__system_u4477)(void);
 static N_INLINE(void, popFrame)(void);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
-extern TNimTypeV2 NTIv2__IZC9adwUX9bXgJG9anfba0ylw_;
+extern TNimTypeV2 NTIv2__u9aTbhrJIp8pA1qIOGfcLpA_;
 extern TFrame* framePtr__system_u2667;
 extern NIM_BOOL nimInErrorMode__system_u4259;
 static N_INLINE(void, nimFrame)(TFrame* s_p0) {
@@ -116,17 +116,17 @@ static N_INLINE(void, popFrame)(void) {
 }
 N_LIB_PRIVATE N_NOINLINE(void, raiseAssert__stdZassertions_u13)(NimStringV2 msg_p0) {
 	NimStringV2 colontmpD_;
-	tyObject_AssertionDefect__IZC9adwUX9bXgJG9anfba0ylw* T1_;
-	nimfr_("raiseAssert", "/opt/local/lib/nim/lib/std/assertions.nim");
+	tyObject_AssertionDefect__u9aTbhrJIp8pA1qIOGfcLpA* T1_;
+	nimfr_("raiseAssert", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/assertions.nim");
 {	colontmpD_.len = 0; colontmpD_.p = NIM_NIL;
 	T1_ = NIM_NIL;
-	T1_ = (tyObject_AssertionDefect__IZC9adwUX9bXgJG9anfba0ylw*) nimNewObj(sizeof(tyObject_AssertionDefect__IZC9adwUX9bXgJG9anfba0ylw), NIM_ALIGNOF(tyObject_AssertionDefect__IZC9adwUX9bXgJG9anfba0ylw));
-	(*T1_).Sup.Sup.Sup.m_type = (&NTIv2__IZC9adwUX9bXgJG9anfba0ylw_);
+	T1_ = (tyObject_AssertionDefect__u9aTbhrJIp8pA1qIOGfcLpA*) nimNewObj(sizeof(tyObject_AssertionDefect__u9aTbhrJIp8pA1qIOGfcLpA), NIM_ALIGNOF(tyObject_AssertionDefect__u9aTbhrJIp8pA1qIOGfcLpA));
+	(*T1_).Sup.Sup.Sup.m_type = (&NTIv2__u9aTbhrJIp8pA1qIOGfcLpA_);
 	(*T1_).Sup.Sup.name = "AssertionDefect";
-	nimlf_(34, "/opt/local/lib/nim/lib/std/assertions.nim");	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	colontmpD_ = eqdup___system_u2635(msg_p0);
+	nimlf_(34, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/assertions.nim");	nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	colontmpD_ = eqdup___system_u2635(msg_p0);
 	(*T1_).Sup.Sup.message = colontmpD_;
 	(*T1_).Sup.Sup.parent = ((Exception*) NIM_NIL);
-	nimlf_(34, "/opt/local/lib/nim/lib/std/assertions.nim");	raiseExceptionEx((Exception*)T1_, "AssertionDefect", "raiseAssert", "/opt/local/lib/nim/lib/std/assertions.nim", 34);
+	nimlf_(34, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/assertions.nim");	raiseExceptionEx((Exception*)T1_, "AssertionDefect", "raiseAssert", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/assertions.nim", 34);
 goto BeforeRet_;
 	}BeforeRet_: ;
 	popFrame();
@@ -138,7 +138,7 @@ static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
 }
 N_LIB_PRIVATE N_NIMCALL(void, failedAssertImpl__stdZassertions_u242)(NimStringV2 msg_p0) {
 NIM_BOOL* nimErr_;
-	nimfr_("failedAssertImpl", "/opt/local/lib/nim/lib/std/assertions.nim");
+	nimfr_("failedAssertImpl", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/assertions.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(41);	raiseAssert__stdZassertions_u13(msg_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;

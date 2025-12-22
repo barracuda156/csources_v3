@@ -1707,8 +1707,8 @@ static N_INLINE(NIM_BOOL, eqStrings)(NimStringV2 a_p0, NimStringV2 b_p1) {
 	NIM_BOOL result;
 	NI alen_1;
 	NI blen_1;
-	nimfr_("eqStrings", "/opt/local/lib/nim/lib/system/strmantle.nim");
-{	nimlf_(33, "/opt/local/lib/nim/lib/system/strmantle.nim");	result = NIM_FALSE;
+	nimfr_("eqStrings", "/Users/svacchanda/Dev/nim-2.2.6/lib/system/strmantle.nim");
+{	nimlf_(33, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/strmantle.nim");	result = NIM_FALSE;
 	nimln_(34);	alen_1 = a_p0.len;
 	nimln_(35);	blen_1 = b_p1.len;
 	nimln_(36);	{
@@ -1811,7 +1811,7 @@ NIM_BOOL* nimErr_;
 	colontmpD__35 = (tyEnum_TMsgKind__GZWe5A9aRIaMRem7QvLPmrg)0;
 	colontmpD__36 = (tyEnum_TMsgKind__GZWe5A9aRIaMRem7QvLPmrg)0;
 	colontmpD__37 = (tyEnum_TMsgKind__GZWe5A9aRIaMRem7QvLPmrg)0;
-	nimlf_(150, "/Users/svacchanda/Dev/nim-2.2.6/compiler/wordrecg.nim");	nimlf_(28, "/opt/local/lib/nim/lib/std/enumutils.nim");	colontmpD_ = nsuNormalize(s_p2);
+	nimlf_(150, "/Users/svacchanda/Dev/nim-2.2.6/compiler/wordrecg.nim");	nimlf_(28, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/enumutils.nim");	colontmpD_ = nsuNormalize(s_p2);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	switch (hashString(colontmpD_) & 63) {
 	case 1: 
@@ -2121,7 +2121,7 @@ break;
 		result = colontmpD__37;
 	}
 LA37_: ;
-	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqdestroy___system_u2629(colontmpD_);
+	nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	eqdestroy___system_u2629(colontmpD_);
 	}BeforeRet_: ;
 	popFrame();
 	return result;
@@ -2267,7 +2267,7 @@ NIM_BOOL* nimErr_;
 	colontmpD__66 = (tyEnum_TMsgKind__GZWe5A9aRIaMRem7QvLPmrg)0;
 	colontmpD__67 = (tyEnum_TMsgKind__GZWe5A9aRIaMRem7QvLPmrg)0;
 	colontmpD__68 = (tyEnum_TMsgKind__GZWe5A9aRIaMRem7QvLPmrg)0;
-	nimlf_(150, "/Users/svacchanda/Dev/nim-2.2.6/compiler/wordrecg.nim");	nimlf_(28, "/opt/local/lib/nim/lib/std/enumutils.nim");	colontmpD_ = nsuNormalize(s_p2);
+	nimlf_(150, "/Users/svacchanda/Dev/nim-2.2.6/compiler/wordrecg.nim");	nimlf_(28, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/enumutils.nim");	colontmpD_ = nsuNormalize(s_p2);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	switch (hashString(colontmpD_) & 127) {
 	case 1: 
@@ -2836,7 +2836,7 @@ break;
 		result = colontmpD__68;
 	}
 LA68_: ;
-	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqdestroy___system_u2629(colontmpD_);
+	nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	eqdestroy___system_u2629(colontmpD_);
 	}BeforeRet_: ;
 	popFrame();
 	return result;

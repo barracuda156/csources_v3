@@ -131,7 +131,7 @@ NIM_BOOL* nimErr_;
 		tyTuple__9bPTSXSYKMIi9c6PdnYSxkGg p_1;
 		NI i_1;
 		nimZeroMem((void*)(&p_1), sizeof(tyTuple__9bPTSXSYKMIi9c6PdnYSxkGg));
-		nimlf_(43, "/opt/local/lib/nim/lib/system/iterators.nim");		i_1 = ((NI)0);
+		nimlf_(43, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators.nim");		i_1 = ((NI)0);
 		{
 			nimln_(44);			while (1) {
 				nimlf_(22, "/Users/svacchanda/Dev/nim-2.2.6/compiler/plugins/active.nim");				p_1 = plugins__pluginsZactive_u6[(i_1)- 0];
@@ -145,7 +145,7 @@ NIM_BOOL* nimErr_;
 					goto BeforeRet_;
 				}
 LA7_: ;
-				nimlf_(46, "/opt/local/lib/nim/lib/system/iterators.nim");				{
+				nimlf_(46, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators.nim");				{
 					if (!(((NI)1) <= i_1)) goto LA11_;
 					goto LA2;
 				}

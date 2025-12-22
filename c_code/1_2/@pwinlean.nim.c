@@ -25,16 +25,16 @@
 #define nimlf_(n, file) \
   FR_.line = n; FR_.filename = file;
 
-typedef struct tyObject_GUID__RpAQQkO8oWld0Vi22PLrEA tyObject_GUID__RpAQQkO8oWld0Vi22PLrEA;
+typedef struct tyObject_GUID__Rau7lTvmFPGT9a9bRkWNoTOQ tyObject_GUID__Rau7lTvmFPGT9a9bRkWNoTOQ;
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
-typedef struct tyObject_WIN32_FIND_DATA__C3WluUu2vYjQqMsqNZnfVA tyObject_WIN32_FIND_DATA__C3WluUu2vYjQqMsqNZnfVA;
-typedef struct tyObject_SECURITY_ATTRIBUTES__9b7h1BB89c4iuZDp2MFy2cDQ tyObject_SECURITY_ATTRIBUTES__9b7h1BB89c4iuZDp2MFy2cDQ;
-typedef struct tyObject_STARTUPINFO__4cH18RlLGWSscs6z717LBQ tyObject_STARTUPINFO__4cH18RlLGWSscs6z717LBQ;
-typedef struct tyObject_PROCESS_INFORMATION__q0GtI9aWTFUMyO9a9cLfQtRwA tyObject_PROCESS_INFORMATION__q0GtI9aWTFUMyO9a9cLfQtRwA;
-typedef struct tyObject_FILETIME__OHkMWP2R7enTVPnYul9c57w tyObject_FILETIME__OHkMWP2R7enTVPnYul9c57w;
+typedef struct tyObject_WIN32_FIND_DATA__3IfOnfQMymsj9ad9c9aMoH5wg tyObject_WIN32_FIND_DATA__3IfOnfQMymsj9ad9c9aMoH5wg;
+typedef struct tyObject_SECURITY_ATTRIBUTES__9chQlH1QclcJGacmefRK1UQ tyObject_SECURITY_ATTRIBUTES__9chQlH1QclcJGacmefRK1UQ;
+typedef struct tyObject_STARTUPINFO__9aAyBWKCd7O27CCvU9cIeUIw tyObject_STARTUPINFO__9aAyBWKCd7O27CCvU9cIeUIw;
+typedef struct tyObject_PROCESS_INFORMATION__39cu9awA6kG2xrOO9bbopgzwg tyObject_PROCESS_INFORMATION__39cu9awA6kG2xrOO9bbopgzwg;
+typedef struct tyObject_FILETIME__KRECmc9b6zjq0DwWGcRczeA tyObject_FILETIME__KRECmc9b6zjq0DwWGcRczeA;
 typedef NI8 tyArray__9cWG514ToTTjfTPLhXXV0IQ[8];
-struct tyObject_GUID__RpAQQkO8oWld0Vi22PLrEA {
+struct tyObject_GUID__Rau7lTvmFPGT9a9bRkWNoTOQ {
 	NI32 D1;
 	NI16 D2;
 	NI16 D3;
@@ -54,29 +54,29 @@ typedef N_STDCALL_PTR(NI32, tyProc__aMOow6Lp4fo8dW2ko9aU3pg) (NI32 nBufferLength
 typedef N_STDCALL_PTR(NI32, tyProc__aO673xGTLLxou7P7GxoCXA) (NI32 dwFlags_p0, void* lpSource_p1, NI32 dwMessageId_p2, NI32 dwLanguageId_p3, void* lpBuffer_p4, NI32 nSize_p5, void* arguments_p6);
 typedef N_STDCALL_PTR(void, tyProc__im9buRnIvptJfzdASYMEbBA) (void* p_p0);
 typedef N_STDCALL_PTR(NI32, tyProc__9bXer9a4ps9aSGctILcxWReVw) (void);
-typedef N_STDCALL_PTR(NI, tyProc__BFuQwGNjTrcDLAs9cVkTsqg) (NI16* lpFileName_p0, tyObject_WIN32_FIND_DATA__C3WluUu2vYjQqMsqNZnfVA* lpFindFileData_p1);
+typedef N_STDCALL_PTR(NI, tyProc__AXr3YDbpz9bQ1nYrrTcyD9bA) (NI16* lpFileName_p0, tyObject_WIN32_FIND_DATA__3IfOnfQMymsj9ad9c9aMoH5wg* lpFindFileData_p1);
 typedef N_STDCALL_PTR(void, tyProc__ofoySXaAAlxxs9bQS9a1etlg) (NI hFindFile_p0);
-typedef N_STDCALL_PTR(NI32, tyProc__eXp8sVYSssiKB7GcEkH49aA) (NI hFindFile_p0, tyObject_WIN32_FIND_DATA__C3WluUu2vYjQqMsqNZnfVA* lpFindFileData_p1);
+typedef N_STDCALL_PTR(NI32, tyProc__9b1Qw1e9cn4hcE4odQ88j1Dw) (NI hFindFile_p0, tyObject_WIN32_FIND_DATA__3IfOnfQMymsj9ad9c9aMoH5wg* lpFindFileData_p1);
 typedef N_STDCALL_PTR(NI, tyProc__zP2zGemcuVRvOUE82f9a0Pw) (NI32 nStdHandle_p0);
 typedef N_STDCALL_PTR(NI32, tyProc__G0MNqLrkAnRVz4cDlgVcRg) (NI handle_p0, NI16* buf_p1, NI32 size_p2);
 typedef N_STDCALL_PTR(NI32, tyProc__5sqIMptsyAfPn3c9cPj4DOA) (NI16* lpFileName_p0);
 typedef N_STDCALL_PTR(NI32, tyProc__Rzv0SS9bu3vYSxhvPQEKMBQ) (NI16* lpFileName_p0, NI32 nBufferLength_p1, NI16* lpBuffer_p2, NI16** lpFilePart_p3);
 typedef N_STDCALL_PTR(NI32, tyProc__uBkkHOkdpyfFusi9cbg9cHww) (NI16* pathName_p0, void* security_p1);
 typedef N_STDCALL_PTR(NI32, tyProc__aOhJuXP2rSFzW5eC9bSzvwg) (NI16* lpFileName_p0, NI32 dwFileAttributes_p1);
-typedef N_STDCALL_PTR(NI32, tyProc__clh9cr5MYd62oiAL9a6EFb9aw) (NI* hReadPipe_p0, NI* hWritePipe_p1, tyObject_SECURITY_ATTRIBUTES__9b7h1BB89c4iuZDp2MFy2cDQ* lpPipeAttributes_p2, NI32 nSize_p3);
+typedef N_STDCALL_PTR(NI32, tyProc__iIHXPR5z2y09a7BNW6IU8BQ) (NI* hReadPipe_p0, NI* hWritePipe_p1, tyObject_SECURITY_ATTRIBUTES__9chQlH1QclcJGacmefRK1UQ* lpPipeAttributes_p2, NI32 nSize_p3);
 typedef N_STDCALL_PTR(NI32, tyProc__mBVOPXmpGfUrrbA9a5K9cMbQ) (NI hObject_p0, NI32 dwMask_p1, NI32 dwFlags_p2);
-typedef N_STDCALL_PTR(NI, tyProc__NceU3kP7mdCansmUFwxZ9cg) (NI16* lpName_p0, NI32 dwOpenMode_p1, NI32 dwPipeMode_p2, NI32 nMaxInstances_p3, NI32 nOutBufferSize_p4, NI32 nInBufferSize_p5, NI32 nDefaultTimeOut_p6, tyObject_SECURITY_ATTRIBUTES__9b7h1BB89c4iuZDp2MFy2cDQ* lpSecurityAttributes_p7);
+typedef N_STDCALL_PTR(NI, tyProc__8HOIjp2LIbRLDjrw9aLEwlA) (NI16* lpName_p0, NI32 dwOpenMode_p1, NI32 dwPipeMode_p2, NI32 nMaxInstances_p3, NI32 nOutBufferSize_p4, NI32 nInBufferSize_p5, NI32 nDefaultTimeOut_p6, tyObject_SECURITY_ATTRIBUTES__9chQlH1QclcJGacmefRK1UQ* lpSecurityAttributes_p7);
 typedef N_STDCALL_PTR(NI, tyProc__Q9box9as0S1hHKH9cSO3MGDDA) (NI16* lpFileName_p0, NI32 dwDesiredAccess_p1, NI32 dwShareMode_p2, void* lpSecurityAttributes_p3, NI32 dwCreationDisposition_p4, NI32 dwFlagsAndAttributes_p5, NI hTemplateFile_p6);
 typedef N_STDCALL_PTR(NI, tyProc__uryidYWkntM7ddjZSyxvyQ) (void);
 typedef N_STDCALL_PTR(NI32, tyProc__oew1DfaGl5XhHmnBK0HYXQ) (NI hSourceProcessHandle_p0, NI hSourceHandle_p1, NI hTargetProcessHandle_p2, NI* lpTargetHandle_p3, NI32 dwDesiredAccess_p4, NI32 bInheritHandle_p5, NI32 dwOptions_p6);
 typedef N_STDCALL_PTR(NI32, tyProc__P13srMBg9b3d3yEV9aW4NCoA) (NI hObject_p0);
-typedef N_STDCALL_PTR(NI32, tyProc__w9bGYUHqMm3IYgPRrFVfDbQ) (NI16* lpApplicationName_p0, NI16* lpCommandLine_p1, tyObject_SECURITY_ATTRIBUTES__9b7h1BB89c4iuZDp2MFy2cDQ* lpProcessAttributes_p2, tyObject_SECURITY_ATTRIBUTES__9b7h1BB89c4iuZDp2MFy2cDQ* lpThreadAttributes_p3, NI32 bInheritHandles_p4, NI32 dwCreationFlags_p5, NI16* lpEnvironment_p6, NI16* lpCurrentDirectory_p7, tyObject_STARTUPINFO__4cH18RlLGWSscs6z717LBQ* lpStartupInfo_p8, tyObject_PROCESS_INFORMATION__q0GtI9aWTFUMyO9a9cLfQtRwA* lpProcessInformation_p9);
+typedef N_STDCALL_PTR(NI32, tyProc__U9alqPOADl4LipVsRUxdOwA) (NI16* lpApplicationName_p0, NI16* lpCommandLine_p1, tyObject_SECURITY_ATTRIBUTES__9chQlH1QclcJGacmefRK1UQ* lpProcessAttributes_p2, tyObject_SECURITY_ATTRIBUTES__9chQlH1QclcJGacmefRK1UQ* lpThreadAttributes_p3, NI32 bInheritHandles_p4, NI32 dwCreationFlags_p5, NI16* lpEnvironment_p6, NI16* lpCurrentDirectory_p7, tyObject_STARTUPINFO__9aAyBWKCd7O27CCvU9cIeUIw* lpStartupInfo_p8, tyObject_PROCESS_INFORMATION__39cu9awA6kG2xrOO9bbopgzwg* lpProcessInformation_p9);
 typedef N_STDCALL_PTR(NI32, tyProc__9ajZYMGL5GqiRFqiCC367oA) (NI hFile_p0, void* buffer_p1, NI32 nNumberOfBytesToRead_p2, NI32* lpNumberOfBytesRead_p3, void* lpOverlapped_p4);
 typedef N_STDCALL_PTR(NI32, tyProc__FprzxJFfqQdWyyGxiUsmeQ) (NI hHandle_p0, NI32 dwMilliseconds_p1);
 typedef N_STDCALL_PTR(NI32, tyProc__7S2vVNF4dlY59blFohNWnHg) (NI hProcess_p0, NI uExitCode_p1);
 typedef N_STDCALL_PTR(NI32, tyProc__KxeGXN001TReCr89ca9c5bng) (NI hProcess_p0, NI32* lpExitCode_p1);
-typedef N_STDCALL_PTR(void, tyProc__ZtYj9cS6JFj30JEJa4GEdNw) (tyObject_FILETIME__OHkMWP2R7enTVPnYul9c57w* lpSystemTimeAsFileTime_p0);
-struct tyObject_FILETIME__OHkMWP2R7enTVPnYul9c57w {
+typedef N_STDCALL_PTR(void, tyProc__hX2EC9c3LrIsu4r7u9by6K3Q) (tyObject_FILETIME__KRECmc9b6zjq0DwWGcRczeA* lpSystemTimeAsFileTime_p0);
+struct tyObject_FILETIME__KRECmc9b6zjq0DwWGcRczeA {
 	NI32 dwLowDateTime;
 	NI32 dwHighDateTime;
 };
@@ -113,7 +113,7 @@ static const struct {
   NI cap; NIM_CHAR data[11+1];
 } TM__k6kyf4Co79a84IkK9blFuQVA_86 = { 11 | NIM_STRLIT_FLAG, "shell32.dll" };
 static const NimStringV2 TM__k6kyf4Co79a84IkK9blFuQVA_87 = {11, (NimStrPayload*)&TM__k6kyf4Co79a84IkK9blFuQVA_86};
-N_LIB_PRIVATE tyObject_GUID__RpAQQkO8oWld0Vi22PLrEA WSAID_CONNECTEX__windowsZwinlean_u725 = {((NI32)631375801), ((NI16)-8717), ((NI16)18016), {((NI8)-114),
+N_LIB_PRIVATE tyObject_GUID__Rau7lTvmFPGT9a9bRkWNoTOQ WSAID_CONNECTEX__windowsZwinlean_u725 = {((NI32)631375801), ((NI16)-8717), ((NI16)18016), {((NI8)-114),
 ((NI8)-23),
 ((NI8)118),
 ((NI8)-27),
@@ -123,7 +123,7 @@ N_LIB_PRIVATE tyObject_GUID__RpAQQkO8oWld0Vi22PLrEA WSAID_CONNECTEX__windowsZwin
 ((NI8)62)}
 }
 ;
-N_LIB_PRIVATE tyObject_GUID__RpAQQkO8oWld0Vi22PLrEA WSAID_ACCEPTEX__windowsZwinlean_u726 = {((NI32)-1254720015), ((NI16)-13396), ((NI16)4559), {((NI8)-107),
+N_LIB_PRIVATE tyObject_GUID__Rau7lTvmFPGT9a9bRkWNoTOQ WSAID_ACCEPTEX__windowsZwinlean_u726 = {((NI32)-1254720015), ((NI16)-13396), ((NI16)4559), {((NI8)-107),
 ((NI8)-54),
 ((NI8)0),
 ((NI8)-128),
@@ -133,7 +133,7 @@ N_LIB_PRIVATE tyObject_GUID__RpAQQkO8oWld0Vi22PLrEA WSAID_ACCEPTEX__windowsZwinl
 ((NI8)-110)}
 }
 ;
-N_LIB_PRIVATE tyObject_GUID__RpAQQkO8oWld0Vi22PLrEA WSAID_GETACCEPTEXSOCKADDRS__windowsZwinlean_u727 = {((NI32)-1254720014), ((NI16)-13396), ((NI16)4559), {((NI8)-107),
+N_LIB_PRIVATE tyObject_GUID__Rau7lTvmFPGT9a9bRkWNoTOQ WSAID_GETACCEPTEXSOCKADDRS__windowsZwinlean_u727 = {((NI32)-1254720014), ((NI16)-13396), ((NI16)4559), {((NI8)-107),
 ((NI8)-54),
 ((NI8)0),
 ((NI8)-128),
@@ -152,9 +152,9 @@ tyProc__aMOow6Lp4fo8dW2ko9aU3pg Dl_1409286328_;
 tyProc__aO673xGTLLxou7P7GxoCXA Dl_1409286318_;
 tyProc__im9buRnIvptJfzdASYMEbBA Dl_1409286326_;
 tyProc__9bXer9a4ps9aSGctILcxWReVw Dl_1409286315_;
-tyProc__BFuQwGNjTrcDLAs9cVkTsqg Dl_1409286395_;
+tyProc__AXr3YDbpz9bQ1nYrrTcyD9bA Dl_1409286395_;
 tyProc__ofoySXaAAlxxs9bQS9a1etlg Dl_1409286401_;
-tyProc__eXp8sVYSssiKB7GcEkH49aA Dl_1409286398_;
+tyProc__9b1Qw1e9cn4hcE4odQ88j1Dw Dl_1409286398_;
 tyProc__zP2zGemcuVRvOUE82f9a0Pw Dl_1409286308_;
 tyProc__G0MNqLrkAnRVz4cDlgVcRg Dl_1409286341_;
 tyProc__5sqIMptsyAfPn3c9cPj4DOA Dl_1409286408_;
@@ -162,20 +162,20 @@ tyProc__Rzv0SS9bu3vYSxhvPQEKMBQ Dl_1409286403_;
 tyProc__uBkkHOkdpyfFusi9cbg9cHww Dl_1409286333_;
 tyProc__5sqIMptsyAfPn3c9cPj4DOA Dl_1409286763_;
 tyProc__aOhJuXP2rSFzW5eC9bSzvwg Dl_1409286410_;
-tyProc__clh9cr5MYd62oiAL9a6EFb9aw Dl_1409286263_;
+tyProc__iIHXPR5z2y09a7BNW6IU8BQ Dl_1409286263_;
 tyProc__mBVOPXmpGfUrrbA9a5K9cMbQ Dl_1409286750_;
-tyProc__NceU3kP7mdCansmUFwxZ9cg Dl_1409286268_;
+tyProc__8HOIjp2LIbRLDjrw9aLEwlA Dl_1409286268_;
 tyProc__Q9box9as0S1hHKH9cSO3MGDDA Dl_1409286755_;
 tyProc__uryidYWkntM7ddjZSyxvyQ Dl_1409286754_;
 tyProc__oew1DfaGl5XhHmnBK0HYXQ Dl_1409286739_;
 tyProc__P13srMBg9b3d3yEV9aW4NCoA Dl_1409286249_;
-tyProc__w9bGYUHqMm3IYgPRrFVfDbQ Dl_1409286284_;
+tyProc__U9alqPOADl4LipVsRUxdOwA Dl_1409286284_;
 tyProc__9ajZYMGL5GqiRFqiCC367oA Dl_1409286251_;
 tyProc__9ajZYMGL5GqiRFqiCC367oA Dl_1409286257_;
 tyProc__FprzxJFfqQdWyyGxiUsmeQ Dl_1409286299_;
 tyProc__7S2vVNF4dlY59blFohNWnHg Dl_1409286302_;
 tyProc__KxeGXN001TReCr89ca9c5bng Dl_1409286305_;
-tyProc__ZtYj9cS6JFj30JEJa4GEdNw Dl_1409286442_;
+tyProc__hX2EC9c3LrIsu4r7u9by6K3Q Dl_1409286442_;
 extern TFrame* framePtr__system_u2667;
 tyProc__9bXHKfH08cKXphxNi5GYejg Dl_1409286424_;
 tyProc__5sqIMptsyAfPn3c9cPj4DOA Dl_1409286425_;
@@ -213,10 +213,10 @@ LA8_: ;
 static N_INLINE(void, popFrame)(void) {
 	framePtr__system_u2667 = (*framePtr__system_u2667).prev;
 }
-N_LIB_PRIVATE N_NIMCALL(NI64, rdFileTime__windowsZwinlean_u284)(tyObject_FILETIME__OHkMWP2R7enTVPnYul9c57w f_p0) {
+N_LIB_PRIVATE N_NIMCALL(NI64, rdFileTime__windowsZwinlean_u284)(tyObject_FILETIME__KRECmc9b6zjq0DwWGcRczeA f_p0) {
 	NI64 result;
-	nimfr_("rdFileTime", "/opt/local/lib/nim/lib/windows/winlean.nim");
-	nimlf_(339, "/opt/local/lib/nim/lib/windows/winlean.nim");	result = (NI64)(((NI64) (((NU32) (f_p0.dwLowDateTime)))) | (NI64)((NU64)(((NI64) (((NU32) (f_p0.dwHighDateTime))))) << (NU64)(((NI)32))));
+	nimfr_("rdFileTime", "/Users/svacchanda/Dev/nim-2.2.6/lib/windows/winlean.nim");
+	nimlf_(339, "/Users/svacchanda/Dev/nim-2.2.6/lib/windows/winlean.nim");	result = (NI64)(((NI64) (((NU32) (f_p0.dwLowDateTime)))) | (NI64)((NU64)(((NI64) (((NU32) (f_p0.dwHighDateTime))))) << (NU64)(((NI)32))));
 	popFrame();
 	return result;
 }
@@ -224,7 +224,7 @@ N_LIB_PRIVATE N_NIMCALL(void, atpwinleandotnim_Init000)(void) {
 {
 	void* T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("winlean", "/opt/local/lib/nim/lib/windows/winlean.nim");
+	nimfr_("winlean", "/Users/svacchanda/Dev/nim-2.2.6/lib/windows/winlean.nim");
 nimErr_ = nimErrorFlag();
 	nimln_(837);	T1_ = (void*)0;
 	T1_ = loadLib__pureZdynlib_u3(TM__k6kyf4Co79a84IkK9blFuQVA_3, NIM_FALSE);
@@ -253,9 +253,9 @@ if (!((TM__k6kyf4Co79a84IkK9blFuQVA_4 = nimLoadLibrary(TM__k6kyf4Co79a84IkK9blFu
 	Dl_1409286318_ = (tyProc__aO673xGTLLxou7P7GxoCXA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "FormatMessageW");
 	Dl_1409286326_ = (tyProc__im9buRnIvptJfzdASYMEbBA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "LocalFree");
 	Dl_1409286315_ = (tyProc__9bXer9a4ps9aSGctILcxWReVw) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "GetLastError");
-	Dl_1409286395_ = (tyProc__BFuQwGNjTrcDLAs9cVkTsqg) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "FindFirstFileW");
+	Dl_1409286395_ = (tyProc__AXr3YDbpz9bQ1nYrrTcyD9bA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "FindFirstFileW");
 	Dl_1409286401_ = (tyProc__ofoySXaAAlxxs9bQS9a1etlg) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "FindClose");
-	Dl_1409286398_ = (tyProc__eXp8sVYSssiKB7GcEkH49aA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "FindNextFileW");
+	Dl_1409286398_ = (tyProc__9b1Qw1e9cn4hcE4odQ88j1Dw) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "FindNextFileW");
 	Dl_1409286308_ = (tyProc__zP2zGemcuVRvOUE82f9a0Pw) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "GetStdHandle");
 	Dl_1409286341_ = (tyProc__G0MNqLrkAnRVz4cDlgVcRg) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "GetModuleFileNameW");
 	Dl_1409286408_ = (tyProc__5sqIMptsyAfPn3c9cPj4DOA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "GetFileAttributesW");
@@ -263,20 +263,20 @@ if (!((TM__k6kyf4Co79a84IkK9blFuQVA_4 = nimLoadLibrary(TM__k6kyf4Co79a84IkK9blFu
 	Dl_1409286333_ = (tyProc__uBkkHOkdpyfFusi9cbg9cHww) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "CreateDirectoryW");
 	Dl_1409286763_ = (tyProc__5sqIMptsyAfPn3c9cPj4DOA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "DeleteFileW");
 	Dl_1409286410_ = (tyProc__aOhJuXP2rSFzW5eC9bSzvwg) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "SetFileAttributesW");
-	Dl_1409286263_ = (tyProc__clh9cr5MYd62oiAL9a6EFb9aw) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "CreatePipe");
+	Dl_1409286263_ = (tyProc__iIHXPR5z2y09a7BNW6IU8BQ) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "CreatePipe");
 	Dl_1409286750_ = (tyProc__mBVOPXmpGfUrrbA9a5K9cMbQ) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "SetHandleInformation");
-	Dl_1409286268_ = (tyProc__NceU3kP7mdCansmUFwxZ9cg) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "CreateNamedPipeW");
+	Dl_1409286268_ = (tyProc__8HOIjp2LIbRLDjrw9aLEwlA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "CreateNamedPipeW");
 	Dl_1409286755_ = (tyProc__Q9box9as0S1hHKH9cSO3MGDDA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "CreateFileW");
 	Dl_1409286754_ = (tyProc__uryidYWkntM7ddjZSyxvyQ) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "GetCurrentProcess");
 	Dl_1409286739_ = (tyProc__oew1DfaGl5XhHmnBK0HYXQ) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "DuplicateHandle");
 	Dl_1409286249_ = (tyProc__P13srMBg9b3d3yEV9aW4NCoA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "CloseHandle");
-	Dl_1409286284_ = (tyProc__w9bGYUHqMm3IYgPRrFVfDbQ) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "CreateProcessW");
+	Dl_1409286284_ = (tyProc__U9alqPOADl4LipVsRUxdOwA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "CreateProcessW");
 	Dl_1409286251_ = (tyProc__9ajZYMGL5GqiRFqiCC367oA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "ReadFile");
 	Dl_1409286257_ = (tyProc__9ajZYMGL5GqiRFqiCC367oA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "WriteFile");
 	Dl_1409286299_ = (tyProc__FprzxJFfqQdWyyGxiUsmeQ) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "WaitForSingleObject");
 	Dl_1409286302_ = (tyProc__7S2vVNF4dlY59blFohNWnHg) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "TerminateProcess");
 	Dl_1409286305_ = (tyProc__KxeGXN001TReCr89ca9c5bng) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "GetExitCodeProcess");
-	Dl_1409286442_ = (tyProc__ZtYj9cS6JFj30JEJa4GEdNw) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "GetSystemTimeAsFileTime");
+	Dl_1409286442_ = (tyProc__hX2EC9c3LrIsu4r7u9by6K3Q) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "GetSystemTimeAsFileTime");
 	Dl_1409286424_ = (tyProc__9bXHKfH08cKXphxNi5GYejg) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "GetEnvironmentStringsW");
 	Dl_1409286425_ = (tyProc__5sqIMptsyAfPn3c9cPj4DOA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "FreeEnvironmentStringsW");
 	Dl_1409286413_ = (tyProc__29cQilB9cqahn5yPQZH66TkA) nimGetProcAddr(TM__k6kyf4Co79a84IkK9blFuQVA_4, "CopyFileW");

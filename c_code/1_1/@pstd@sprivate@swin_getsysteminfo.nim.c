@@ -17,7 +17,7 @@
 #undef unix
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
-typedef struct tyObject_SystemInfo__UCWjDiKsClxMr6IztB8Prg tyObject_SystemInfo__UCWjDiKsClxMr6IztB8Prg;
+typedef struct tyObject_SystemInfo__IeUcgIg9ah6chOCfxb9caEfQ tyObject_SystemInfo__IeUcgIg9ah6chOCfxb9caEfQ;
 struct NimStrPayload {
 	NI cap;
 	NIM_CHAR data[SEQ_DECL_SIZE];
@@ -26,7 +26,7 @@ struct NimStringV2 {
 	NI len;
 	NimStrPayload* p;
 };
-typedef N_STDCALL_PTR(void, tyProc__NettfIpR7CqaupRkMbr7Nw) (tyObject_SystemInfo__UCWjDiKsClxMr6IztB8Prg* lpSystemInfo_p0);
+typedef N_STDCALL_PTR(void, tyProc__rqDB0lSi1Vc0javF8wle7Q) (tyObject_SystemInfo__IeUcgIg9ah6chOCfxb9caEfQ* lpSystemInfo_p0);
 N_LIB_PRIVATE N_NIMCALL(void*, nimLoadLibrary)(NimStringV2 path_p0);
 N_LIB_PRIVATE N_NIMCALL(void, nimLoadLibraryError)(NimStringV2 path_p0);
 N_LIB_PRIVATE N_NIMCALL(void*, nimGetProcAddr)(void* lib_p0, NCSTRING name_p1);
@@ -39,10 +39,10 @@ static const struct {
 } TM__SF9bmOn6gWc1K49aIR3JF9a2A_6 = { 8 | NIM_STRLIT_FLAG, "kernel32" };
 static const NimStringV2 TM__SF9bmOn6gWc1K49aIR3JF9a2A_7 = {8, (NimStrPayload*)&TM__SF9bmOn6gWc1K49aIR3JF9a2A_6};
 static void* TM__SF9bmOn6gWc1K49aIR3JF9a2A_2;
-tyProc__NettfIpR7CqaupRkMbr7Nw Dl_2382364684_;
+tyProc__rqDB0lSi1Vc0javF8wle7Q Dl_2382364684_;
 N_LIB_PRIVATE N_NIMCALL(void, atpstdatsprivateatswin_getsysteminfodotnim_DatInit000)(void) {
 if (!((TM__SF9bmOn6gWc1K49aIR3JF9a2A_2 = nimLoadLibrary(TM__SF9bmOn6gWc1K49aIR3JF9a2A_5))
 )) nimLoadLibraryError(TM__SF9bmOn6gWc1K49aIR3JF9a2A_7);
-	Dl_2382364684_ = (tyProc__NettfIpR7CqaupRkMbr7Nw) nimGetProcAddr(TM__SF9bmOn6gWc1K49aIR3JF9a2A_2, "GetSystemInfo");
+	Dl_2382364684_ = (tyProc__rqDB0lSi1Vc0javF8wle7Q) nimGetProcAddr(TM__SF9bmOn6gWc1K49aIR3JF9a2A_2, "GetSystemInfo");
 }
 

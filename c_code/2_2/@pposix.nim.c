@@ -58,7 +58,7 @@ static N_INLINE(void, popFrame)(void) {
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, WIFSIGNALED__posixZposix_u1080)(int s_p0) {
 	NIM_BOOL result;
 	NI TM__mJPr4mHlDfNAl9asG6X7NFA_2;
-	nimfr_("WIFSIGNALED", "/opt/local/lib/nim/lib/posix/posix_linux_amd64.nim");
+	nimfr_("WIFSIGNALED", "/Users/svacchanda/Dev/nim-2.2.6/lib/posix/posix_linux_amd64.nim");
 {	result = (NIM_BOOL)0;
 	if (nimAddInt((NI32)(s_p0 & ((NI32)127)), ((NI32)1), &TM__mJPr4mHlDfNAl9asG6X7NFA_2)) { raiseOverflow(); goto BeforeRet_;
 	};
@@ -71,14 +71,14 @@ N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, WIFSIGNALED__posixZposix_u1080)(int s_p0) {
 }
 N_LIB_PRIVATE N_NIMCALL(int, WTERMSIG__posixZposix_u1071)(int s_p0) {
 	int result;
-	nimfr_("WTERMSIG", "/opt/local/lib/nim/lib/posix/posix_linux_amd64.nim");
+	nimfr_("WTERMSIG", "/Users/svacchanda/Dev/nim-2.2.6/lib/posix/posix_linux_amd64.nim");
 	result = (NI32)(s_p0 & ((NI32)127));
 	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(int, WEXITSTATUS__posixZposix_u1064)(int s_p0) {
 	int result;
-	nimfr_("WEXITSTATUS", "/opt/local/lib/nim/lib/posix/posix_linux_amd64.nim");
+	nimfr_("WEXITSTATUS", "/Users/svacchanda/Dev/nim-2.2.6/lib/posix/posix_linux_amd64.nim");
 	result = (NI32)((NI64)((NI32)(s_p0 & ((NI32)65280))) >> (NU64)(((NI)8)));
 	popFrame();
 	return result;
@@ -92,7 +92,7 @@ N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, WIFEXITED__posixZposix_u1077)(int s_p0) {
 	NIM_BOOL result;
 	int T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("WIFEXITED", "/opt/local/lib/nim/lib/posix/posix_linux_amd64.nim");
+	nimfr_("WIFEXITED", "/Users/svacchanda/Dev/nim-2.2.6/lib/posix/posix_linux_amd64.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NIM_BOOL)0;
 	T1_ = (int)0;

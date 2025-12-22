@@ -206,15 +206,6 @@ case $ucpu in
         powerpc64le)
         mycpu="powerpc64el"
       esac
-    elif [ "$myos" = "macosx" ] ; then
-      mycpu="$("$CC" -dumpmachine | sed 's/-.*//')"
-      if [ "$mycpu" = "powerpc64" ] ; then
-        COMP_FLAGS="$COMP_FLAGS -arch ppc64"
-        LINK_FLAGS="$LINK_FLAGS -arch ppc64"
-      else
-        COMP_FLAGS="$COMP_FLAGS -arch ppc"
-        LINK_FLAGS="$LINK_FLAGS -arch ppc"
-      fi
     else
       mycpu="powerpc"
     fi
@@ -13151,7 +13142,7 @@ freebsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@ppathnorm.nim.c -o c_code/5_1/@ppathnorm.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@soserrors.nim.c -o c_code/5_1/@pstd@soserrors.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@ssyncio.nim.c -o c_code/5_1/@pstd@ssyncio.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pposix.nim.c -o c_code/3_1/@pposix.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pposix.nim.c -o c_code/5_1/@pposix.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@soscommon.nim.c -o c_code/5_1/@pstd@sprivate@soscommon.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sospaths2.nim.c -o c_code/5_1/@pstd@sprivate@sospaths2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sossymlinks.nim.c -o c_code/5_1/@pstd@sprivate@sossymlinks.nim.o
@@ -13346,7 +13337,7 @@ c_code/5_1/@pstrutils.nim.o \
 c_code/5_1/@ppathnorm.nim.o \
 c_code/5_1/@pstd@soserrors.nim.o \
 c_code/5_1/@pstd@ssyncio.nim.o \
-c_code/3_1/@pposix.nim.o \
+c_code/5_1/@pposix.nim.o \
 c_code/5_1/@pstd@sprivate@soscommon.nim.o \
 c_code/5_1/@pstd@sprivate@sospaths2.nim.o \
 c_code/5_1/@pstd@sprivate@sossymlinks.nim.o \
@@ -15138,7 +15129,7 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ppathnorm.nim.c -o c_code/5_12/@ppathnorm.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstd@soserrors.nim.c -o c_code/5_12/@pstd@soserrors.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstd@ssyncio.nim.c -o c_code/5_12/@pstd@ssyncio.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pposix.nim.c -o c_code/3_1/@pposix.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pposix.nim.c -o c_code/5_1/@pposix.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@soscommon.nim.c -o c_code/5_1/@pstd@sprivate@soscommon.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstd@sprivate@sospaths2.nim.c -o c_code/5_12/@pstd@sprivate@sospaths2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sossymlinks.nim.c -o c_code/5_1/@pstd@sprivate@sossymlinks.nim.o
@@ -15333,7 +15324,7 @@ c_code/5_12/@pstrutils.nim.o \
 c_code/5_12/@ppathnorm.nim.o \
 c_code/5_12/@pstd@soserrors.nim.o \
 c_code/5_12/@pstd@ssyncio.nim.o \
-c_code/3_1/@pposix.nim.o \
+c_code/5_1/@pposix.nim.o \
 c_code/5_1/@pstd@sprivate@soscommon.nim.o \
 c_code/5_12/@pstd@sprivate@sospaths2.nim.o \
 c_code/5_1/@pstd@sprivate@sossymlinks.nim.o \
@@ -15527,7 +15518,7 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ppathnorm.nim.c -o c_code/5_12/@ppathnorm.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstd@soserrors.nim.c -o c_code/5_12/@pstd@soserrors.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstd@ssyncio.nim.c -o c_code/5_12/@pstd@ssyncio.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pposix.nim.c -o c_code/3_1/@pposix.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pposix.nim.c -o c_code/5_1/@pposix.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@soscommon.nim.c -o c_code/5_1/@pstd@sprivate@soscommon.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstd@sprivate@sospaths2.nim.c -o c_code/5_12/@pstd@sprivate@sospaths2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sossymlinks.nim.c -o c_code/5_1/@pstd@sprivate@sossymlinks.nim.o
@@ -15722,7 +15713,7 @@ c_code/5_12/@pstrutils.nim.o \
 c_code/5_12/@ppathnorm.nim.o \
 c_code/5_12/@pstd@soserrors.nim.o \
 c_code/5_12/@pstd@ssyncio.nim.o \
-c_code/3_1/@pposix.nim.o \
+c_code/5_1/@pposix.nim.o \
 c_code/5_1/@pstd@sprivate@soscommon.nim.o \
 c_code/5_12/@pstd@sprivate@sospaths2.nim.o \
 c_code/5_1/@pstd@sprivate@sossymlinks.nim.o \
@@ -16694,7 +16685,7 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ppathnorm.nim.c -o c_code/5_12/@ppathnorm.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstd@soserrors.nim.c -o c_code/5_12/@pstd@soserrors.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstd@ssyncio.nim.c -o c_code/5_12/@pstd@ssyncio.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pposix.nim.c -o c_code/3_1/@pposix.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pposix.nim.c -o c_code/5_1/@pposix.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@soscommon.nim.c -o c_code/5_1/@pstd@sprivate@soscommon.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstd@sprivate@sospaths2.nim.c -o c_code/5_12/@pstd@sprivate@sospaths2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstd@sprivate@sossymlinks.nim.c -o c_code/5_1/@pstd@sprivate@sossymlinks.nim.o
@@ -16889,7 +16880,7 @@ c_code/5_12/@pstrutils.nim.o \
 c_code/5_12/@ppathnorm.nim.o \
 c_code/5_12/@pstd@soserrors.nim.o \
 c_code/5_12/@pstd@ssyncio.nim.o \
-c_code/3_1/@pposix.nim.o \
+c_code/5_1/@pposix.nim.o \
 c_code/5_1/@pstd@sprivate@soscommon.nim.o \
 c_code/5_12/@pstd@sprivate@sospaths2.nim.o \
 c_code/5_1/@pstd@sprivate@sossymlinks.nim.o \
@@ -18272,7 +18263,7 @@ netbsd)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@ppathnorm.nim.c -o c_code/6_1/@ppathnorm.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@soserrors.nim.c -o c_code/6_1/@pstd@soserrors.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@ssyncio.nim.c -o c_code/6_1/@pstd@ssyncio.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@pposix.nim.c -o c_code/3_1/@pposix.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pposix.nim.c -o c_code/5_1/@pposix.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@soscommon.nim.c -o c_code/6_1/@pstd@sprivate@soscommon.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sospaths2.nim.c -o c_code/6_1/@pstd@sprivate@sospaths2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sossymlinks.nim.c -o c_code/6_1/@pstd@sprivate@sossymlinks.nim.o
@@ -18467,7 +18458,7 @@ c_code/6_1/@pstrutils.nim.o \
 c_code/6_1/@ppathnorm.nim.o \
 c_code/6_1/@pstd@soserrors.nim.o \
 c_code/6_1/@pstd@ssyncio.nim.o \
-c_code/3_1/@pposix.nim.o \
+c_code/5_1/@pposix.nim.o \
 c_code/6_1/@pstd@sprivate@soscommon.nim.o \
 c_code/6_1/@pstd@sprivate@sospaths2.nim.o \
 c_code/6_1/@pstd@sprivate@sossymlinks.nim.o \
@@ -21256,7 +21247,7 @@ dragonfly)
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@ppathnorm.nim.c -o c_code/6_1/@ppathnorm.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@soserrors.nim.c -o c_code/6_1/@pstd@soserrors.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_1/@pstd@ssyncio.nim.c -o c_code/8_1/@pstd@ssyncio.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/8_1/@pposix.nim.c -o c_code/8_1/@pposix.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pposix.nim.c -o c_code/4_1/@pposix.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@soscommon.nim.c -o c_code/6_1/@pstd@sprivate@soscommon.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/8_1/@pstd@sprivate@sospaths2.nim.c -o c_code/8_1/@pstd@sprivate@sospaths2.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/6_1/@pstd@sprivate@sossymlinks.nim.c -o c_code/6_1/@pstd@sprivate@sossymlinks.nim.o
@@ -21451,7 +21442,7 @@ c_code/6_1/@pstrutils.nim.o \
 c_code/6_1/@ppathnorm.nim.o \
 c_code/6_1/@pstd@soserrors.nim.o \
 c_code/8_1/@pstd@ssyncio.nim.o \
-c_code/8_1/@pposix.nim.o \
+c_code/4_1/@pposix.nim.o \
 c_code/6_1/@pstd@sprivate@soscommon.nim.o \
 c_code/8_1/@pstd@sprivate@sospaths2.nim.o \
 c_code/6_1/@pstd@sprivate@sossymlinks.nim.o \

@@ -320,7 +320,7 @@ LA9_: ;
 			LA13_:;
 		}
 		{
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			eqdestroy___system_u2629(colontmpD_);
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD_);
 		}
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	}
@@ -377,9 +377,9 @@ LA9_: ;
 			NI i_2;
 			i_1 = (NI)0;
 			colontmp_ = (NI)0;
-			nimlf_(126, "/opt/local/lib/nim/lib/system/iterators_1.nim");			nimlf_(78, "/Users/svacchanda/Dev/nim-2.2.6/compiler/errorhandling.nim");			colontmp_ = len__ast_u3197(wrongNode_1);
+			nimlf_(126, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");			nimlf_(78, "/Users/svacchanda/Dev/nim-2.2.6/compiler/errorhandling.nim");			colontmp_ = len__ast_u3197(wrongNode_1);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA20_;
-			nimlf_(128, "/opt/local/lib/nim/lib/system/iterators_1.nim");			i_2 = ((NI)1);
+			nimlf_(128, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");			i_2 = ((NI)1);
 			{
 				nimln_(129);				while (1) {
 					NimStringV2 colontmpD__4;
@@ -401,14 +401,14 @@ LA27_: ;
 					if (NIM_UNLIKELY(*nimErr_)) goto LA24_;
 					prepareAdd((&args_1), colontmpD__4.len + 0);
 appendString((&args_1), colontmpD__4);
-					nimlf_(131, "/opt/local/lib/nim/lib/system/iterators_1.nim");					if (nimAddInt(i_2, ((NI)1), &TM__NsPKjREfpp5Tqi9bANLLP9aw_37)) { raiseOverflow(); goto LA24_;
+					nimlf_(131, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");					if (nimAddInt(i_2, ((NI)1), &TM__NsPKjREfpp5Tqi9bANLLP9aw_37)) { raiseOverflow(); goto LA24_;
 					};
 					i_2 = (NI)(TM__NsPKjREfpp5Tqi9bANLLP9aw_37);
 					{
 						LA24_:;
 					}
 					{
-						nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");						eqdestroy___system_u2629(colontmpD__4);
+						nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");						eqdestroy___system_u2629(colontmpD__4);
 					}
 					if (NIM_UNLIKELY(*nimErr_)) goto LA20_;
 				} LA23: ;
@@ -430,7 +430,7 @@ appendString((&args_1), TM__NsPKjREfpp5Tqi9bANLLP9aw_39);
 		}
 		{
 			oldNimErrFin20_ = *nimErr_; *nimErr_ = NIM_FALSE;
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			eqdestroy___system_u2629(colontmpD__3);
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__3);
 			eqdestroy___system_u2629(colontmpD__2);
 			eqdestroy___system_u2629(args_1);
 			nimlf_(1222, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqdestroy___ast_u4595(b_1);

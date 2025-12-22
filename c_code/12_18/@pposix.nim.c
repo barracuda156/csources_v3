@@ -55,7 +55,7 @@ static N_INLINE(void, popFrame)(void) {
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, WIFSIGNALED__posixZposix_u866)(int s_p0) {
 	NIM_BOOL result;
 	NIM_BOOL T1_;
-	nimfr_("WIFSIGNALED", "/opt/local/lib/nim/lib/posix/posix_nintendoswitch.nim");
+	nimfr_("WIFSIGNALED", "/Users/svacchanda/Dev/nim-2.2.6/lib/posix/posix_nintendoswitch.nim");
 	T1_ = (NIM_BOOL)0;
 	T1_ = (((NI32)0) < (NI32)(s_p0 & ((NI32)127)));
 	if (!(T1_)) goto LA2_;
@@ -67,28 +67,28 @@ LA2_: ;
 }
 N_LIB_PRIVATE N_NIMCALL(int, WTERMSIG__posixZposix_u860)(int s_p0) {
 	int result;
-	nimfr_("WTERMSIG", "/opt/local/lib/nim/lib/posix/posix_nintendoswitch.nim");
+	nimfr_("WTERMSIG", "/Users/svacchanda/Dev/nim-2.2.6/lib/posix/posix_nintendoswitch.nim");
 	result = (NI32)(s_p0 & ((NI32)127));
 	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(int, WEXITSTATUS__posixZposix_u850)(int s_p0) {
 	int result;
-	nimfr_("WEXITSTATUS", "/opt/local/lib/nim/lib/posix/posix_nintendoswitch.nim");
+	nimfr_("WEXITSTATUS", "/Users/svacchanda/Dev/nim-2.2.6/lib/posix/posix_nintendoswitch.nim");
 	result = (NI32)((NI32)((NI64)(s_p0) >> (NU64)(((NI)8))) & ((NI32)255));
 	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, WIFEXITED__posixZposix_u857)(int s_p0) {
 	NIM_BOOL result;
-	nimfr_("WIFEXITED", "/opt/local/lib/nim/lib/posix/posix_nintendoswitch.nim");
+	nimfr_("WIFEXITED", "/Users/svacchanda/Dev/nim-2.2.6/lib/posix/posix_nintendoswitch.nim");
 	result = ((NI32)(s_p0 & ((NI32)255)) == ((NI32)0));
 	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(int, symlink__posixZposix_u1543)(NCSTRING a1_p0, NCSTRING a2_p1) {
 	int result;
-	nimfr_("symlink", "/opt/local/lib/nim/lib/posix/posix.nim");
+	nimfr_("symlink", "/Users/svacchanda/Dev/nim-2.2.6/lib/posix/posix.nim");
 	result = ((int)-1);
 	popFrame();
 	return result;

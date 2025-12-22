@@ -28,7 +28,7 @@
 
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
-typedef struct tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA;
+typedef struct tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw;
 typedef struct tyTuple__UV3llMMYFckfui8YMBuUZA tyTuple__UV3llMMYFckfui8YMBuUZA;
 struct NimStrPayload {
 	NI cap;
@@ -38,7 +38,7 @@ struct NimStringV2 {
 	NI len;
 	NimStrPayload* p;
 };
-struct tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA {
+struct tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw {
 	NI bytes;
 	NI16* data;
 };
@@ -46,8 +46,8 @@ typedef N_STDCALL_PTR(NI32, tyProc__5sqIMptsyAfPn3c9cPj4DOA) (NI16* pathName_p0)
 typedef NI16 tyUncheckedArray__Tyd4y3haUOOHTj71TPIRag[1];
 typedef N_STDCALL_PTR(NI32, tyProc__9bXer9a4ps9aSGctILcxWReVw) (void);
 typedef N_STDCALL_PTR(NI32, tyProc__aOhJuXP2rSFzW5eC9bSzvwg) (NI16* lpFileName_p0, NI32 dwFileAttributes_p1);
-typedef NU8 tySet_tyEnum_CopyFlag__fXl9ckXiCdmp1CRmOkjkhIA;
-typedef NU8 tyEnum_CopyFlag__fXl9ckXiCdmp1CRmOkjkhIA;
+typedef NU8 tySet_tyEnum_CopyFlag__6EK3o85j4WNwSNgz8A9bbwg;
+typedef NU8 tyEnum_CopyFlag__6EK3o85j4WNwSNgz8A9bbwg;
 typedef N_STDCALL_PTR(NI32, tyProc__29cQilB9cqahn5yPQZH66TkA) (NI16* lpExistingFileName_p0, NI16* lpNewFileName_p1, NI32 bFailIfExists_p2);
 struct tyTuple__UV3llMMYFckfui8YMBuUZA {
 	NimStringV2 Field0;
@@ -56,12 +56,12 @@ struct tyTuple__UV3llMMYFckfui8YMBuUZA {
 static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1);
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
-N_LIB_PRIVATE N_NIMCALL(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA, newWideCString__stdZwidestrs_u325)(NimStringV2 s_p0);
-static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA x_p0);
+N_LIB_PRIVATE N_NIMCALL(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw, newWideCString__stdZwidestrs_u325)(NimStringV2 s_p0);
+static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw x_p0);
 static N_INLINE(void, nimFrame)(TFrame* s_p0);
 N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached__system_u4479)(void);
 static N_INLINE(void, popFrame)(void);
-N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___stdZwidestrs_u7)(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA a_p0);
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___stdZwidestrs_u7)(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw a_p0);
 static N_INLINE(NI, countBits32)(NU32 n_p0);
 static N_INLINE(NI, countSetBitsImpl__systemZcountbits95impl_u26)(NU32 x_p0);
 N_CDECL(int, __builtin_popcount)(unsigned int x_p0);
@@ -74,11 +74,11 @@ N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___system_u2629)(NimStringV2 dest_p0);
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, nostryRemoveFile)(NimStringV2 file_p0);
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, tryMoveFSObject__stdZprivateZoscommon_u62)(NimStringV2 source_p0, NimStringV2 dest_p1, NIM_BOOL isDir_p2);
 N_LIB_PRIVATE N_NOINLINE(void, raiseAssert__stdZassertions_u13)(NimStringV2 msg_p0);
-N_LIB_PRIVATE N_NIMCALL(void, noscopyFile)(NimStringV2 source_p0, NimStringV2 dest_p1, tySet_tyEnum_CopyFlag__fXl9ckXiCdmp1CRmOkjkhIA options_p2, NI bufferSize_p3);
+N_LIB_PRIVATE N_NIMCALL(void, noscopyFile)(NimStringV2 source_p0, NimStringV2 dest_p1, tySet_tyEnum_CopyFlag__6EK3o85j4WNwSNgz8A9bbwg options_p2, NI bufferSize_p3);
 static const struct {
-  NI cap; NIM_CHAR data[143+1];
-} TM__CMIme9a8i2wZOUbxErcFpJA_2 = { 143 | NIM_STRLIT_FLAG, "/opt/local/lib/nim/lib/std/private/osfiles.nim(213, 3) `card(copyFlagSymlink * options) == 1` There should be exactly one cfSymlink* in options" };
-static const NimStringV2 TM__CMIme9a8i2wZOUbxErcFpJA_3 = {143, (NimStrPayload*)&TM__CMIme9a8i2wZOUbxErcFpJA_2};
+  NI cap; NIM_CHAR data[156+1];
+} TM__CMIme9a8i2wZOUbxErcFpJA_2 = { 156 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osfiles.nim(213, 3) `card(copyFlagSymlink * options) == 1` There should be exactly one cfSymlink* in options" };
+static const NimStringV2 TM__CMIme9a8i2wZOUbxErcFpJA_3 = {156, (NimStrPayload*)&TM__CMIme9a8i2wZOUbxErcFpJA_2};
 static const struct {
   NI cap; NIM_CHAR data[11+1];
 } TM__CMIme9a8i2wZOUbxErcFpJA_4 = { 11 | NIM_STRLIT_FLAG, "unreachable" };
@@ -128,21 +128,21 @@ LA8_: ;
 static N_INLINE(void, popFrame)(void) {
 	framePtr__system_u2667 = (*framePtr__system_u2667).prev;
 }
-static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA x_p0) {
+static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw x_p0) {
 	NI16* result;
-	nimfr_("toWideCString", "/opt/local/lib/nim/lib/std/widestrs.nim");
-	nimlf_(63, "/opt/local/lib/nim/lib/std/widestrs.nim");	result = x_p0.data;
+	nimfr_("toWideCString", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");
+	nimlf_(63, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");	result = x_p0.data;
 	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, nostryRemoveFile)(NimStringV2 file_p0) {
 	NIM_BOOL result;
-	tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA f_1;
+	tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw f_1;
 NIM_BOOL* nimErr_;
-	nimfr_("tryRemoveFile", "/opt/local/lib/nim/lib/std/private/osfiles.nim");
+	nimfr_("tryRemoveFile", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osfiles.nim");
 {nimErr_ = nimErrorFlag();
-	nimZeroMem((void*)(&f_1), sizeof(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA));
-	nimlf_(352, "/opt/local/lib/nim/lib/std/private/osfiles.nim");	result = NIM_TRUE;
+	nimZeroMem((void*)(&f_1), sizeof(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw));
+	nimlf_(352, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osfiles.nim");	result = NIM_TRUE;
 	nimln_(354);	f_1 = newWideCString__stdZwidestrs_u325(file_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	nimln_(355);	{
@@ -204,7 +204,7 @@ LA22_: ;
 LA7_: ;
 	}
 LA5_: ;
-	nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");	eqdestroy___stdZwidestrs_u7(f_1);
+	nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");	eqdestroy___stdZwidestrs_u7(f_1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
 	popFrame();
@@ -214,9 +214,9 @@ static N_INLINE(NI, countSetBitsImpl__systemZcountbits95impl_u26)(NU32 x_p0) {
 	NI result;
 	NU32 x_2;
 	int T1_;
-	nimfr_("countSetBitsImpl", "/opt/local/lib/nim/lib/system/countbits_impl.nim");
+	nimfr_("countSetBitsImpl", "/Users/svacchanda/Dev/nim-2.2.6/lib/system/countbits_impl.nim");
 	result = (NI)0;
-	nimlf_(67, "/opt/local/lib/nim/lib/system/countbits_impl.nim");	x_2 = x_p0;
+	nimlf_(67, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/countbits_impl.nim");	x_2 = x_p0;
 	nimln_(72);	T1_ = (int)0;
 	T1_ = __builtin_popcount(((unsigned int) (x_2)));
 	result = ((NI) (T1_));
@@ -226,7 +226,7 @@ static N_INLINE(NI, countSetBitsImpl__systemZcountbits95impl_u26)(NU32 x_p0) {
 static N_INLINE(NI, countBits32)(NU32 n_p0) {
 	NI result;
 NIM_BOOL* nimErr_;
-	nimfr_("countBits32", "/opt/local/lib/nim/lib/system/countbits_impl.nim");
+	nimfr_("countBits32", "/Users/svacchanda/Dev/nim-2.2.6/lib/system/countbits_impl.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(90);	result = countSetBitsImpl__systemZcountbits95impl_u26(n_p0);
@@ -235,17 +235,17 @@ NIM_BOOL* nimErr_;
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(void, noscopyFile)(NimStringV2 source_p0, NimStringV2 dest_p1, tySet_tyEnum_CopyFlag__fXl9ckXiCdmp1CRmOkjkhIA options_p2, NI bufferSize_p3) {
-	tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA s_1;
-	tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA d_1;
+N_LIB_PRIVATE N_NIMCALL(void, noscopyFile)(NimStringV2 source_p0, NimStringV2 dest_p1, tySet_tyEnum_CopyFlag__6EK3o85j4WNwSNgz8A9bbwg options_p2, NI bufferSize_p3) {
+	tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw s_1;
+	tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw d_1;
 	NIM_BOOL isSymlink_1;
 NIM_BOOL oldNimErrFin1_;
 NIM_BOOL* nimErr_;
-	nimfr_("copyFile", "/opt/local/lib/nim/lib/std/private/osfiles.nim");
+	nimfr_("copyFile", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osfiles.nim");
 {nimErr_ = nimErrorFlag();
-	nimZeroMem((void*)(&s_1), sizeof(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA));
-	nimZeroMem((void*)(&d_1), sizeof(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA));
-	nimlf_(213, "/opt/local/lib/nim/lib/std/private/osfiles.nim");	{
+	nimZeroMem((void*)(&s_1), sizeof(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw));
+	nimZeroMem((void*)(&d_1), sizeof(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw));
+	nimlf_(213, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osfiles.nim");	{
 		if (!!((countBits32((7 & options_p2)) == ((NI)1)))) goto LA4_;
 		failedAssertImpl__stdZassertions_u242(TM__CMIme9a8i2wZOUbxErcFpJA_3);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
@@ -260,21 +260,21 @@ LA4_: ;
 		T8_ = isSymlink_1;
 		if (!(T8_)) goto LA9_;
 		T10_ = (NIM_BOOL)0;
-		T10_ = ((options_p2 &((NU8)1<<((NU)((((tyEnum_CopyFlag__fXl9ckXiCdmp1CRmOkjkhIA)2)))&7U)))!=0);
+		T10_ = ((options_p2 &((NU8)1<<((NU)((((tyEnum_CopyFlag__6EK3o85j4WNwSNgz8A9bbwg)2)))&7U)))!=0);
 		if (T10_) goto LA11_;
 		T10_ = NIM_TRUE;
 LA11_: ;
 		T8_ = T10_;
 LA9_: ;
 		if (!T8_) goto LA12_;
-		nimln_(216);		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(d_1);
+		nimln_(216);		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(d_1);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		eqdestroy___stdZwidestrs_u7(s_1);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		goto BeforeRet_;
 	}
 LA12_: ;
-	nimlf_(218, "/opt/local/lib/nim/lib/std/private/osfiles.nim");	s_1 = newWideCString__stdZwidestrs_u325(source_p0);
+	nimlf_(218, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osfiles.nim");	s_1 = newWideCString__stdZwidestrs_u325(source_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	nimln_(219);	d_1 = newWideCString__stdZwidestrs_u325(dest_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
@@ -308,7 +308,7 @@ LA12_: ;
 			LA21_:;
 		}
 		{
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			eqdestroy___system_u2629(colontmpD_);
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD_);
 		}
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	}
@@ -318,7 +318,7 @@ LA19_: ;
 	}
 	{
 		oldNimErrFin1_ = *nimErr_; *nimErr_ = NIM_FALSE;
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(d_1);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(d_1);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		eqdestroy___stdZwidestrs_u7(s_1);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
@@ -330,9 +330,9 @@ LA19_: ;
 }
 N_LIB_PRIVATE N_NIMCALL(void, nosremoveFile)(NimStringV2 file_p0) {
 NIM_BOOL* nimErr_;
-	nimfr_("removeFile", "/opt/local/lib/nim/lib/std/private/osfiles.nim");
+	nimfr_("removeFile", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osfiles.nim");
 {nimErr_ = nimErrorFlag();
-	nimlf_(382, "/opt/local/lib/nim/lib/std/private/osfiles.nim");	{
+	nimlf_(382, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osfiles.nim");	{
 		NIM_BOOL T3_;
 		NI32 T6_;
 		T3_ = (NIM_BOOL)0;
@@ -351,7 +351,7 @@ LA4_: ;
 }
 N_LIB_PRIVATE N_NIMCALL(void, nosmoveFile)(NimStringV2 source_p0, NimStringV2 dest_p1) {
 NIM_BOOL* nimErr_;
-	nimfr_("moveFile", "/opt/local/lib/nim/lib/std/private/osfiles.nim");
+	nimfr_("moveFile", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osfiles.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(404);	{
 		NIM_BOOL T3_;
@@ -366,9 +366,9 @@ LA4_: ;
 	}BeforeRet_: ;
 	popFrame();
 }
-N_LIB_PRIVATE N_NIMCALL(void, copyFileWithPermissions__stdZprivateZosfiles_u288)(NimStringV2 source_p0, NimStringV2 dest_p1, NIM_BOOL ignorePermissionErrors_p2, tySet_tyEnum_CopyFlag__fXl9ckXiCdmp1CRmOkjkhIA options_p3) {
+N_LIB_PRIVATE N_NIMCALL(void, copyFileWithPermissions__stdZprivateZosfiles_u288)(NimStringV2 source_p0, NimStringV2 dest_p1, NIM_BOOL ignorePermissionErrors_p2, tySet_tyEnum_CopyFlag__6EK3o85j4WNwSNgz8A9bbwg options_p3) {
 NIM_BOOL* nimErr_;
-	nimfr_("copyFileWithPermissions", "/opt/local/lib/nim/lib/std/private/osfiles.nim");
+	nimfr_("copyFileWithPermissions", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osfiles.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(316);	noscopyFile(source_p0, dest_p1, options_p3, ((NI)16384));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;

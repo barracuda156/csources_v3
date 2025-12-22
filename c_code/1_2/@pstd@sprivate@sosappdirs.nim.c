@@ -123,18 +123,18 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, nosgetHomeDir)(void) {
 	NimStringV2 colontmpD_;
 	NimStringV2 T2_;
 NIM_BOOL* nimErr_;
-	nimfr_("getHomeDir", "/opt/local/lib/nim/lib/std/private/osappdirs.nim");
+	nimfr_("getHomeDir", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osappdirs.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
 	colontmpD_.len = 0; colontmpD_.p = NIM_NIL;
-	nimlf_(25, "/opt/local/lib/nim/lib/std/private/osappdirs.nim");	nimln_(7);	nimln_(25);	T2_.len = 0; T2_.p = NIM_NIL;
+	nimlf_(25, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osappdirs.nim");	nimln_(7);	nimln_(25);	T2_.len = 0; T2_.p = NIM_NIL;
 	colontmpD_ = getEnv__stdZenvvars_u36(TM__XnRPlAiwKKY6TokjvYVCvw_3, TM__XnRPlAiwKKY6TokjvYVCvw_5);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	T2_ = rawNewString(colontmpD_.len + 1);
 appendString((&T2_), colontmpD_);
 appendString((&T2_), TM__XnRPlAiwKKY6TokjvYVCvw_8);
 	result = T2_;
-	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqdestroy___system_u2629(colontmpD_);
+	nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	eqdestroy___system_u2629(colontmpD_);
 	goto BeforeRet_;
 	{
 		LA1_:;
@@ -150,10 +150,10 @@ appendString((&T2_), TM__XnRPlAiwKKY6TokjvYVCvw_8);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, nosgetConfigDir)(void) {
 	NimStringV2 result;
 NIM_BOOL* nimErr_;
-	nimfr_("getConfigDir", "/opt/local/lib/nim/lib/std/private/osappdirs.nim");
+	nimfr_("getConfigDir", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osappdirs.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
-	nimlf_(72, "/opt/local/lib/nim/lib/std/private/osappdirs.nim");	result = getEnv__stdZenvvars_u36(TM__XnRPlAiwKKY6TokjvYVCvw_10, TM__XnRPlAiwKKY6TokjvYVCvw_11);
+	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/osappdirs.nim");	result = getEnv__stdZenvvars_u36(TM__XnRPlAiwKKY6TokjvYVCvw_10, TM__XnRPlAiwKKY6TokjvYVCvw_11);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	nimln_(75);	normalizePathEnd__stdZprivateZospaths2_u22((&result), NIM_TRUE);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;

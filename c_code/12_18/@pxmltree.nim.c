@@ -74,9 +74,9 @@ static const struct {
 } TM__qYyKc6OpDWHHaBXL9bX9aQ2A_11 = { 6 | NIM_STRLIT_FLAG, "&apos;" };
 static const NimStringV2 TM__qYyKc6OpDWHHaBXL9bX9aQ2A_12 = {6, (NimStrPayload*)&TM__qYyKc6OpDWHHaBXL9bX9aQ2A_11};
 static const struct {
-  NI cap; NIM_CHAR data[123+1];
-} TM__qYyKc6OpDWHHaBXL9bX9aQ2A_14 = { 123 | NIM_STRLIT_FLAG, "/opt/local/lib/nim/lib/system/iterators.nim(272, 11) `len(a) == L` the length of the string changed while iterating over it" };
-static const NimStringV2 TM__qYyKc6OpDWHHaBXL9bX9aQ2A_15 = {123, (NimStrPayload*)&TM__qYyKc6OpDWHHaBXL9bX9aQ2A_14};
+  NI cap; NIM_CHAR data[136+1];
+} TM__qYyKc6OpDWHHaBXL9bX9aQ2A_14 = { 136 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators.nim(272, 11) `len(a) == L` the length of the string changed while iterating over it" };
+static const NimStringV2 TM__qYyKc6OpDWHHaBXL9bX9aQ2A_15 = {136, (NimStrPayload*)&TM__qYyKc6OpDWHHaBXL9bX9aQ2A_14};
 extern NIM_BOOL nimInErrorMode__system_u4256;
 extern TFrame* framePtr__system_u2667;
 static N_INLINE(void, nimCopyMem)(void* dest_p0, void* source_p1, NI size_p2) {
@@ -164,19 +164,19 @@ static N_INLINE(void, popFrame)(void) {
 }
 N_LIB_PRIVATE N_NIMCALL(void, addEscaped__pureZxmltree_u1122)(NimStringV2* result_p0, NimStringV2 s_p1) {
 NIM_BOOL* nimErr_;
-	nimfr_("addEscaped", "/opt/local/lib/nim/lib/pure/xmltree.nim");
+	nimfr_("addEscaped", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/xmltree.nim");
 {nimErr_ = nimErrorFlag();
 	{
 		NIM_CHAR c_1;
 		NI i_1;
 		NI L_1;
 		c_1 = (NIM_CHAR)0;
-		nimlf_(267, "/opt/local/lib/nim/lib/system/iterators.nim");		i_1 = ((NI)0);
+		nimlf_(267, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators.nim");		i_1 = ((NI)0);
 		nimln_(268);		L_1 = s_p1.len;
 		{
 			nimln_(269);			while (1) {
 				if (!(i_1 < L_1)) goto LA3;
-				nimlf_(702, "/opt/local/lib/nim/lib/pure/xmltree.nim");				if (i_1 < 0 || i_1 >= s_p1.len){ raiseIndexError2(i_1,s_p1.len-1); goto BeforeRet_;
+				nimlf_(702, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/xmltree.nim");				if (i_1 < 0 || i_1 >= s_p1.len){ raiseIndexError2(i_1,s_p1.len-1); goto BeforeRet_;
 				}
 				c_1 = s_p1.p->data[i_1];
 				nimln_(703);				switch (((NU8)(c_1))) {
@@ -216,7 +216,7 @@ appendString((&(*result_p0)), TM__qYyKc6OpDWHHaBXL9bX9aQ2A_12);
 				}
 				break;
 				}
-				nimlf_(13, "/opt/local/lib/nim/lib/system/iterators.nim");				i_1 += ((NI)1);
+				nimlf_(13, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators.nim");				i_1 += ((NI)1);
 				nimln_(272);				{
 					if (!!((s_p1.len == L_1))) goto LA12_;
 					failedAssertImpl__stdZassertions_u242(TM__qYyKc6OpDWHHaBXL9bX9aQ2A_15);
@@ -232,10 +232,10 @@ LA12_: ;
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, escape__pureZxmltree_u1126)(NimStringV2 s_p0) {
 	NimStringV2 result;
 NIM_BOOL* nimErr_;
-	nimfr_("escape", "/opt/local/lib/nim/lib/pure/xmltree.nim");
+	nimfr_("escape", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/xmltree.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
-	nimlf_(727, "/opt/local/lib/nim/lib/pure/xmltree.nim");	if ((s_p0.len) < ((NI)0) || (s_p0.len) > ((NI)IL64(9223372036854775807))){ raiseRangeErrorI(s_p0.len, ((NI)0), ((NI)IL64(9223372036854775807))); goto BeforeRet_;
+	nimlf_(727, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/xmltree.nim");	if ((s_p0.len) < ((NI)0) || (s_p0.len) > ((NI)IL64(9223372036854775807))){ raiseRangeErrorI(s_p0.len, ((NI)0), ((NI)IL64(9223372036854775807))); goto BeforeRet_;
 	}
 	result = rawNewString((s_p0.len));
 	nimln_(728);	addEscaped__pureZxmltree_u1122((&result), s_p0);

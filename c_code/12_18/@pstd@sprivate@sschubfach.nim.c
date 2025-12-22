@@ -17,8 +17,8 @@
 #undef far
 #undef powerpc
 #undef unix
-typedef struct tyObject_Single__OiUKvhPspju4BlbA4jNwqw tyObject_Single__OiUKvhPspju4BlbA4jNwqw;
-struct tyObject_Single__OiUKvhPspju4BlbA4jNwqw {
+typedef struct tyObject_Single__JEjdT6mw0wuSc84tc2pDZw tyObject_Single__JEjdT6mw0wuSc84tc2pDZw;
+struct tyObject_Single__JEjdT6mw0wuSc84tc2pDZw {
 	NU32 bits;
 };
 typedef NU64 tyArray__ocdlWeLAycDNOOtB9cadACA[77];
@@ -104,7 +104,7 @@ N_LIB_PRIVATE NIM_CONST tyArray__ocdlWeLAycDNOOtB9cadACA g__stdZprivateZschubfac
 12924697071141057420ULL}
 ;
 extern NIM_BOOL nimInErrorMode__system_u4256;
-N_LIB_PRIVATE N_NIMCALL(NU32, physicalSignificand__stdZprivateZschubfach_u54)(tyObject_Single__OiUKvhPspju4BlbA4jNwqw this_p0) {
+N_LIB_PRIVATE N_NIMCALL(NU32, physicalSignificand__stdZprivateZschubfach_u54)(tyObject_Single__JEjdT6mw0wuSc84tc2pDZw this_p0) {
 	NU32 result;
 {	result = (NU32)(this_p0.bits & ((NU32)8388607));
 	goto BeforeRet_;
@@ -128,25 +128,25 @@ NIM_BOOL* nimErr_;
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
 }
-N_LIB_PRIVATE N_NIMCALL(tyObject_Single__OiUKvhPspju4BlbA4jNwqw, constructSingle__stdZprivateZschubfach_u51)(NF32 value_p0) {
-	tyObject_Single__OiUKvhPspju4BlbA4jNwqw result;
+N_LIB_PRIVATE N_NIMCALL(tyObject_Single__JEjdT6mw0wuSc84tc2pDZw, constructSingle__stdZprivateZschubfach_u51)(NF32 value_p0) {
+	tyObject_Single__JEjdT6mw0wuSc84tc2pDZw result;
 	NU32 colontmpD_;
 	union { NF32 source; NU32 dest; } LOC1;
-	nimZeroMem((void*)(&result), sizeof(tyObject_Single__OiUKvhPspju4BlbA4jNwqw));
+	nimZeroMem((void*)(&result), sizeof(tyObject_Single__JEjdT6mw0wuSc84tc2pDZw));
 	colontmpD_ = (NU32)0;
 	LOC1.source = value_p0;
 	colontmpD_ = LOC1.dest;
 	result.bits = colontmpD_;
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NU32, physicalExponent__stdZprivateZschubfach_u57)(tyObject_Single__OiUKvhPspju4BlbA4jNwqw this_p0) {
+N_LIB_PRIVATE N_NIMCALL(NU32, physicalExponent__stdZprivateZschubfach_u57)(tyObject_Single__JEjdT6mw0wuSc84tc2pDZw this_p0) {
 	NU32 result;
 {	result = (NU32)((NU32)((NU32)(this_p0.bits & ((NU32)2139095040))) >> (NU32)(((NI32)23)));
 	goto BeforeRet_;
 	}BeforeRet_: ;
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NI, signBit__stdZprivateZschubfach_u76)(tyObject_Single__OiUKvhPspju4BlbA4jNwqw this_p0) {
+N_LIB_PRIVATE N_NIMCALL(NI, signBit__stdZprivateZschubfach_u76)(tyObject_Single__JEjdT6mw0wuSc84tc2pDZw this_p0) {
 	NI result;
 {	result = ((NI) (!(((NU32)(this_p0.bits & ((NU32)IL64(2147483648))) == ((NU32)0)))));
 	goto BeforeRet_;

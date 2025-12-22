@@ -451,8 +451,8 @@ static N_INLINE(void, popFrame)(void) {
 static N_INLINE(void, addChars__stdZprivateZdigitsutils_u104)(NimStringV2* result_p0, tyArray__PbS9a6gkxCuxWEnFq4lOU9aw x_p1, NI start_p2, NI n_p3) {
 	NI old_1;
 	NI TM__J7BLF9cgvwzEso7aEL9cCOKw_8;
-	nimfr_("addChars", "/opt/local/lib/nim/lib/std/private/digitsutils.nim");
-{	nimlf_(44, "/opt/local/lib/nim/lib/std/private/digitsutils.nim");	old_1 = (*result_p0).len;
+	nimfr_("addChars", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/digitsutils.nim");
+{	nimlf_(44, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/digitsutils.nim");	old_1 = (*result_p0).len;
 	nimln_(45);	if (nimAddInt(old_1, n_p3, &TM__J7BLF9cgvwzEso7aEL9cCOKw_8)) { raiseOverflow(); goto BeforeRet_;
 	};
 	if (((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_8)) < ((NI)0) || ((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_8)) > ((NI)IL64(9223372036854775807))){ raiseRangeErrorI((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_8), ((NI)0), ((NI)IL64(9223372036854775807))); goto BeforeRet_;
@@ -479,7 +479,7 @@ static N_INLINE(void, addIntImpl__stdZprivateZdigitsutils_u61)(NimStringV2* resu
 	NI next_1;
 	NI TM__J7BLF9cgvwzEso7aEL9cCOKw_9;
 NIM_BOOL* nimErr_;
-	nimfr_("addIntImpl", "/opt/local/lib/nim/lib/std/private/digitsutils.nim");
+	nimfr_("addIntImpl", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/digitsutils.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(60);	num_1 = x_p1;
 	nimln_(61);	next_1 = ((NI)23);
@@ -556,7 +556,7 @@ LA3_: ;
 }
 N_LIB_PRIVATE N_NIMCALL(void, addInt__stdZprivateZdigitsutils_u184)(NimStringV2* result_p0, NU64 x_p1) {
 NIM_BOOL* nimErr_;
-	nimfr_("addInt", "/opt/local/lib/nim/lib/std/private/digitsutils.nim");
+	nimfr_("addInt", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/digitsutils.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(88);	addIntImpl__stdZprivateZdigitsutils_u61(result_p0, x_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
@@ -565,7 +565,7 @@ NIM_BOOL* nimErr_;
 }
 N_LIB_PRIVATE N_NIMCALL(void, addInt__stdZprivateZdigitsutils_u187)(NimStringV2* result_p0, NI64 x_p1) {
 	NU64 numX60gensym3__1;
-	nimfr_("addInt", "/opt/local/lib/nim/lib/std/private/digitsutils.nim");
+	nimfr_("addInt", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/digitsutils.nim");
 {	numX60gensym3__1 = (NU64)0;
 	nimln_(100);	{
 		if (!(x_p1 < IL64(0))) goto LA3_;

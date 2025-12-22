@@ -125,7 +125,7 @@ static N_INLINE(void, popFrame)(void) {
 }
 static N_INLINE(NU64, lenU__pureZhashes_u340)(NU8* s_p0, NI s_p0Len_0) {
 	NU64 result;
-	nimfr_("lenU", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("lenU", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 	result = ((NU64) (s_p0Len_0));
 	popFrame();
 	return result;
@@ -140,9 +140,9 @@ static N_INLINE(void, copyMem__system_u1728)(void* dest_p0, void* source_p1, NI 
 }
 static N_INLINE(NU64, load8__pureZhashes_u336)(NU8* s_p0, NI s_p0Len_0, NI o_p1) {
 	NU64 result;
-	nimfr_("load8", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("load8", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {	result = (NU64)0;
-	nimlf_(409, "/opt/local/lib/nim/lib/pure/hashes.nim");	result = 0ULL;
+	nimlf_(409, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");	result = 0ULL;
 	nimln_(410);	if (o_p1 < 0 || o_p1 >= s_p0Len_0){ raiseIndexError2(o_p1,s_p0Len_0-1); goto BeforeRet_;
 	}
 	copyMem__system_u1728(((void*) ((&result))), ((void*) ((&s_p0[o_p1]))), ((NI)8));
@@ -153,7 +153,7 @@ static N_INLINE(NU64, load8__pureZhashes_u336)(NU8* s_p0, NI s_p0Len_0, NI o_p1)
 static N_INLINE(NU64, rotR__pureZhashes_u353)(NU64 v_p0, int bits_p1) {
 	NU64 result;
 	NI TM__7tkD9cFJSchVDwHuwaY9bP9bA_3;
-	nimfr_("rotR", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("rotR", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {	result = (NU64)0;
 	nimln_(418);	if (nimSubInt(((NI32)64), bits_p1, &TM__7tkD9cFJSchVDwHuwaY9bP9bA_3)) { raiseOverflow(); goto BeforeRet_;
 	};
@@ -168,7 +168,7 @@ static N_INLINE(NU64, len16__pureZhashes_u365)(NU64 u_p0, NU64 v_p1, NU64 mul_p2
 	NU64 result;
 	NU64 a_1;
 	NU64 b_1;
-	nimfr_("len16", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("len16", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 	nimln_(421);	a_1 = (NU64)((NU64)((NU64)(u_p0 ^ v_p1)) * (NU64)(mul_p2));
 	nimln_(422);	a_1 = (NU64)(a_1 ^ (NU64)((NU64)(a_1) >> (NU64)(((NI)47))));
 	nimln_(423);	b_1 = (NU64)((NU64)((NU64)(v_p1 ^ a_1)) * (NU64)(mul_p2));
@@ -179,7 +179,7 @@ static N_INLINE(NU64, len16__pureZhashes_u365)(NU64 u_p0, NU64 v_p1, NU64 mul_p2
 }
 static N_INLINE(NU32, load4__pureZhashes_u332)(NU8* s_p0, NI s_p0Len_0, NI o_p1) {
 	NU32 result;
-	nimfr_("load4", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("load4", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {	result = (NU32)0;
 	nimln_(401);	result = ((NU32)0);
 	nimln_(402);	if (o_p1 < 0 || o_p1 >= s_p0Len_0){ raiseIndexError2(o_p1,s_p0Len_0-1); goto BeforeRet_;
@@ -191,7 +191,7 @@ static N_INLINE(NU32, load4__pureZhashes_u332)(NU8* s_p0, NI s_p0Len_0, NI o_p1)
 }
 static N_INLINE(NU64, shiftMix__pureZhashes_u346)(NU64 v_p0) {
 	NU64 result;
-	nimfr_("shiftMix", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("shiftMix", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 	result = (NU64)(v_p0 ^ (NU64)((NU64)(v_p0) >> (NU64)(((NI)47))));
 	popFrame();
 	return result;
@@ -208,7 +208,7 @@ static N_INLINE(NU64, len016__pureZhashes_u380)(NU8* s_p0, NI s_p0Len_0) {
 	NU64 colontmpD__3;
 	NU64 colontmpD__4;
 NIM_BOOL* nimErr_;
-	nimfr_("len0_16", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("len0_16", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NU64)0;
 	colontmpD_ = (NU64)0;
@@ -344,7 +344,7 @@ static N_INLINE(NU64, len1732__pureZhashes_u432)(NU8* s_p0, NI s_p0Len_0) {
 	NU64 T6_;
 	NU64 T7_;
 NIM_BOOL* nimErr_;
-	nimfr_("len17_32", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("len17_32", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NU64)0;
 	nimln_(449);	T1_ = (NU64)0;
@@ -415,7 +415,7 @@ static N_INLINE(NU64, len3364__pureZhashes_u446)(NU8* s_p0, NI s_p0Len_0) {
 	NU64 T12_;
 	NU64 T13_;
 NIM_BOOL* nimErr_;
-	nimfr_("len33_64", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("len33_64", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NU64)0;
 	nimln_(457);	T1_ = (NU64)0;
@@ -504,7 +504,7 @@ static N_INLINE(tyTuple__GviMuKbe9c3Hsi9c4x4m9avrw, weakLen32withSeeds2__pureZha
 	NU64 c_1;
 	NU64 T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("weakLen32withSeeds2", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("weakLen32withSeeds2", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	nimZeroMem((void*)(&result), sizeof(tyTuple__GviMuKbe9c3Hsi9c4x4m9avrw));
 	nimln_(473);	a_2 = (NU64)((NU64)(a_p4) + (NU64)(w_p0));
@@ -533,7 +533,7 @@ static N_INLINE(tyTuple__GviMuKbe9c3Hsi9c4x4m9avrw, weakLen32withSeeds__pureZhas
 	NI TM__7tkD9cFJSchVDwHuwaY9bP9bA_22;
 	NU64 T4_;
 NIM_BOOL* nimErr_;
-	nimfr_("weakLen32withSeeds", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("weakLen32withSeeds", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	nimZeroMem((void*)(&result), sizeof(tyTuple__GviMuKbe9c3Hsi9c4x4m9avrw));
 	nimln_(483);	T1_ = (NU64)0;
@@ -597,7 +597,7 @@ static N_INLINE(NU64, hashFarm__pureZhashes_u526)(NU8* s_p0, NI s_p0Len_0) {
 	NU64 T39_;
 	NU64 T40_;
 NIM_BOOL* nimErr_;
-	nimfr_("hashFarm", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hashFarm", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NU64)0;
 	nimln_(487);	{
@@ -792,7 +792,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u602)(NimStringV2 x_p0) {
 	NI result;
 	NU64 T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("hash", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hash", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(542);	if ((x_p0.len-1)-((NI)0) != -1 && (((NI)0) < 0 || ((NI)0) >= x_p0.len || (x_p0.len-1) < 0 || (x_p0.len-1) >= x_p0.len)){ raiseIndexError4(((NI)0), (x_p0.len-1), x_p0.len); goto BeforeRet_;
@@ -810,7 +810,7 @@ static N_INLINE(NI, emarkamp___pureZhashes_u5)(NI h_p0, NI val_p1) {
 	NU h_2;
 	NU val_2;
 	NU res_1;
-	nimfr_("!&", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("!&", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 	nimln_(83);	h_2 = ((NU) (h_p0));
 	nimln_(84);	val_2 = ((NU) (val_p1));
 	nimln_(85);	res_1 = (NU)((NU64)(h_2) + (NU64)(val_2));
@@ -824,7 +824,7 @@ static N_INLINE(NI, emarkdollar___pureZhashes_u20)(NI h_p0) {
 	NI result;
 	NU h_2;
 	NU res_1;
-	nimfr_("!$", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("!$", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 	nimln_(94);	h_2 = ((NU) (h_p0));
 	nimln_(95);	res_1 = (NU)((NU64)(h_2) + (NU64)((NU)((NU64)(h_2) << (NU64)(((NI)3)))));
 	nimln_(96);	res_1 = (NU)(res_1 ^ (NU)((NU64)(res_1) >> (NU64)(((NI)11))));
@@ -837,7 +837,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, hashIgnoreCase__pureZhashes_u680)(NimStringV2 x_p0) 
 	NI result;
 	NI h_1;
 NIM_BOOL* nimErr_;
-	nimfr_("hashIgnoreCase", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hashIgnoreCase", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(649);	h_1 = ((NI)0);
@@ -848,16 +848,16 @@ NIM_BOOL* nimErr_;
 		NI res_1;
 		i_1 = (NI)0;
 		colontmp_ = (NI)0;
-		nimlf_(81, "/opt/local/lib/nim/lib/system/iterators_1.nim");		nimlf_(650, "/opt/local/lib/nim/lib/pure/hashes.nim");		if (nimSubInt(x_p0.len, ((NI)1), &TM__7tkD9cFJSchVDwHuwaY9bP9bA_33)) { raiseOverflow(); goto BeforeRet_;
+		nimlf_(81, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");		nimlf_(650, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");		if (nimSubInt(x_p0.len, ((NI)1), &TM__7tkD9cFJSchVDwHuwaY9bP9bA_33)) { raiseOverflow(); goto BeforeRet_;
 		};
 		colontmp_ = (NI)(TM__7tkD9cFJSchVDwHuwaY9bP9bA_33);
-		nimlf_(96, "/opt/local/lib/nim/lib/system/iterators_1.nim");		res_1 = ((NI)0);
+		nimlf_(96, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");		res_1 = ((NI)0);
 		{
 			nimln_(97);			while (1) {
 				NIM_CHAR c_1;
 				NI TM__7tkD9cFJSchVDwHuwaY9bP9bA_35;
 				if (!(res_1 <= colontmp_)) goto LA3;
-				nimlf_(650, "/opt/local/lib/nim/lib/pure/hashes.nim");				i_1 = ((NI) (res_1));
+				nimlf_(650, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");				i_1 = ((NI) (res_1));
 				nimln_(651);				if (i_1 < 0 || i_1 >= x_p0.len){ raiseIndexError2(i_1,x_p0.len-1); goto BeforeRet_;
 				}
 				c_1 = x_p0.p->data[i_1];
@@ -873,13 +873,13 @@ NIM_BOOL* nimErr_;
 LA6_: ;
 				nimln_(654);				h_1 = emarkamp___pureZhashes_u5(h_1, ((NU8)(c_1)));
 				if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-				nimlf_(102, "/opt/local/lib/nim/lib/system/iterators_1.nim");				if (nimAddInt(res_1, ((NI)1), &TM__7tkD9cFJSchVDwHuwaY9bP9bA_35)) { raiseOverflow(); goto BeforeRet_;
+				nimlf_(102, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");				if (nimAddInt(res_1, ((NI)1), &TM__7tkD9cFJSchVDwHuwaY9bP9bA_35)) { raiseOverflow(); goto BeforeRet_;
 				};
 				res_1 = (NI)(TM__7tkD9cFJSchVDwHuwaY9bP9bA_35);
 			} LA3: ;
 		}
 	}
-	nimlf_(655, "/opt/local/lib/nim/lib/pure/hashes.nim");	result = emarkdollar___pureZhashes_u20(h_1);
+	nimlf_(655, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");	result = emarkdollar___pureZhashes_u20(h_1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
 	popFrame();
@@ -891,7 +891,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, hashIgnoreStyle__pureZhashes_u613)(NimStringV2 x_p0)
 	NI i_1;
 	NI xLen_1;
 NIM_BOOL* nimErr_;
-	nimfr_("hashIgnoreStyle", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hashIgnoreStyle", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(599);	h_1 = ((NI)0);
@@ -942,7 +942,7 @@ LA3_: ;
 }
 static N_INLINE(NU64, hiXorLo__pureZhashes_u81)(NU64 a_p0, NU64 b_p1) {
 	NU64 result;
-	nimfr_("hiXorLo", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hiXorLo", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 	result = (NU64)0;
 	nimln_(125);	result = 0ULL;
 	nimln_(126);	__uint128_t r = a_p0; r *= b_p1; result = (r >> 64) ^ r;
@@ -954,7 +954,7 @@ static N_INLINE(NI, hashWangYi1__pureZhashes_u140)(NU64 x_p0) {
 	NU64 T1_;
 	NU64 T2_;
 NIM_BOOL* nimErr_;
-	nimfr_("hashWangYi1", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hashWangYi1", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(187);	nimln_(174);	T1_ = (NU64)0;
@@ -971,7 +971,7 @@ NIM_BOOL* nimErr_;
 static N_INLINE(NI, hash__pureZhashes_u132)(NI x_p0) {
 	NI result;
 NIM_BOOL* nimErr_;
-	nimfr_("hash", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hash", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(215);	nimln_(216);	result = hashWangYi1__pureZhashes_u140(((NU64) (x_p0)));
@@ -983,7 +983,7 @@ NIM_BOOL* nimErr_;
 N_LIB_PRIVATE N_NIMCALL(NI, hash__lineinfos_u280)(tyTuple__47w2DboNEPf69aPgubZdd7Q x_p0) {
 	NI result;
 NIM_BOOL* nimErr_;
-	nimfr_("hash", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hash", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(712);	result = ((NI)0);
 	{
@@ -1025,7 +1025,7 @@ LA13_: ;
 N_LIB_PRIVATE N_NIMCALL(NI, hash__lookups_u1091)(tyTuple__jNwe3lt9cWavnoo5IWXBV1w x_p0) {
 	NI result;
 NIM_BOOL* nimErr_;
-	nimfr_("hash", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hash", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(712);	result = ((NI)0);
 	{
@@ -1057,7 +1057,7 @@ LA8_: ;
 N_LIB_PRIVATE N_NIMCALL(NI, hash__sigmatch_u6827)(tyTuple__1v9bKyksXWMsm0vNwmZ4EuQ x_p0) {
 	NI result;
 NIM_BOOL* nimErr_;
-	nimfr_("hash", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hash", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(712);	result = ((NI)0);
 	{
@@ -1090,7 +1090,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u608)(NimStringV2 sBuf_p0, NI sPos
 	NI result;
 	NU64 T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("hash", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hash", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(584);	if (ePos_p2-sPos_p1 != -1 && (sPos_p1 < 0 || sPos_p1 >= sBuf_p0.len || ePos_p2 < 0 || ePos_p2 >= sBuf_p0.len)){ raiseIndexError4(sPos_p1, ePos_p2, sBuf_p0.len); goto BeforeRet_;
@@ -1107,7 +1107,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, hash__vm_u13936)(NU8* aBuf_p0, NI aBuf_p0Len_0, NI s
 	NI result;
 	NU64 T1_;
 NIM_BOOL* nimErr_;
-	nimfr_("hash", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hash", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(751);	if (ePos_p2-sPos_p1 != -1 && (sPos_p1 < 0 || sPos_p1 >= aBuf_p0Len_0 || ePos_p2 < 0 || ePos_p2 >= aBuf_p0Len_0)){ raiseIndexError4(sPos_p1, ePos_p2, aBuf_p0Len_0); goto BeforeRet_;
@@ -1123,7 +1123,7 @@ NIM_BOOL* nimErr_;
 N_LIB_PRIVATE N_NIMCALL(NI, hash__packagesZdocutilsZrst_u6496)(tyTuple__UV3llMMYFckfui8YMBuUZA* x_p0) {
 	NI result;
 NIM_BOOL* nimErr_;
-	nimfr_("hash", "/opt/local/lib/nim/lib/pure/hashes.nim");
+	nimfr_("hash", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
 {nimErr_ = nimErrorFlag();
 	nimln_(712);	result = ((NI)0);
 	{

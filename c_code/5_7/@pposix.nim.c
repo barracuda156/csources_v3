@@ -16,4 +16,4 @@
 #undef far
 #undef powerpc
 #undef unix
-N_LIB_PRIVATE int MAP_POPULATE__posixZposix_u1003 = ((int)0);
+N_LIB_PRIVATE int MAP_POPULATE__posixZposix_u1002 = ((int)0);

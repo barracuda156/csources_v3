@@ -26,8 +26,8 @@
 #define nimlf_(n, file) \
   FR_.line = n; FR_.filename = file;
 
-typedef struct tyObject_SystemInfo__UCWjDiKsClxMr6IztB8Prg tyObject_SystemInfo__UCWjDiKsClxMr6IztB8Prg;
-struct tyObject_SystemInfo__UCWjDiKsClxMr6IztB8Prg {
+typedef struct tyObject_SystemInfo__IeUcgIg9ah6chOCfxb9caEfQ tyObject_SystemInfo__IeUcgIg9ah6chOCfxb9caEfQ;
+struct tyObject_SystemInfo__IeUcgIg9ah6chOCfxb9caEfQ {
 	NU32 u1;
 	NU32 dwPageSize;
 	void* lpMinimumApplicationAddress;
@@ -39,7 +39,7 @@ struct tyObject_SystemInfo__UCWjDiKsClxMr6IztB8Prg {
 	NU16 wProcessorLevel;
 	NU16 wProcessorRevision;
 };
-typedef N_STDCALL_PTR(void, tyProc__NettfIpR7CqaupRkMbr7Nw) (tyObject_SystemInfo__UCWjDiKsClxMr6IztB8Prg* lpSystemInfo_p0);
+typedef N_STDCALL_PTR(void, tyProc__rqDB0lSi1Vc0javF8wle7Q) (tyObject_SystemInfo__IeUcgIg9ah6chOCfxb9caEfQ* lpSystemInfo_p0);
 static N_INLINE(NI, countProcessorsImpl__pureZconcurrencyZcpuinfo_u6)(void);
 static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1);
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2);
@@ -48,7 +48,7 @@ static N_INLINE(void, nimFrame)(TFrame* s_p0);
 N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached__system_u4479)(void);
 static N_INLINE(void, popFrame)(void);
 extern NIM_BOOL nimInErrorMode__system_u4261;
-extern tyProc__NettfIpR7CqaupRkMbr7Nw Dl_2382364684_;
+extern tyProc__rqDB0lSi1Vc0javF8wle7Q Dl_2382364684_;
 extern TFrame* framePtr__system_u2667;
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2) {
 	void* T1_;
@@ -91,10 +91,10 @@ static N_INLINE(void, popFrame)(void) {
 }
 static N_INLINE(NI, countProcessorsImpl__pureZconcurrencyZcpuinfo_u6)(void) {
 	NI result;
-	tyObject_SystemInfo__UCWjDiKsClxMr6IztB8Prg si_1;
-	nimfr_("countProcessorsImpl", "/opt/local/lib/nim/lib/pure/concurrency/cpuinfo.nim");
-	nimZeroMem((void*)(&si_1), sizeof(tyObject_SystemInfo__UCWjDiKsClxMr6IztB8Prg));
-	nimlf_(78, "/opt/local/lib/nim/lib/pure/concurrency/cpuinfo.nim");	Dl_2382364684_((&si_1));
+	tyObject_SystemInfo__IeUcgIg9ah6chOCfxb9caEfQ si_1;
+	nimfr_("countProcessorsImpl", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/concurrency/cpuinfo.nim");
+	nimZeroMem((void*)(&si_1), sizeof(tyObject_SystemInfo__IeUcgIg9ah6chOCfxb9caEfQ));
+	nimlf_(78, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/concurrency/cpuinfo.nim");	Dl_2382364684_((&si_1));
 	nimln_(79);	result = ((NI) (si_1.dwNumberOfProcessors));
 	nimln_(103);	{
 		if (!(result < ((NI)0))) goto LA3_;
@@ -107,7 +107,7 @@ LA3_: ;
 N_LIB_PRIVATE N_NIMCALL(NI, ncpicountProcessors)(void) {
 	NI result;
 NIM_BOOL* nimErr_;
-	nimfr_("countProcessors", "/opt/local/lib/nim/lib/pure/concurrency/cpuinfo.nim");
+	nimfr_("countProcessors", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/concurrency/cpuinfo.nim");
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(108);	nimln_(110);	result = countProcessorsImpl__pureZconcurrencyZcpuinfo_u6();

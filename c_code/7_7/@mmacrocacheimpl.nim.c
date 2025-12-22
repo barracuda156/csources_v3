@@ -56,7 +56,7 @@ typedef struct tySequence__rDTOutp0iyWnUTV1BChTsQ_Content tySequence__rDTOutp0iy
 typedef struct tyObject_PProccolonObjectType___NgHrAYrWcBJQVQlDxNo9ahg tyObject_PProccolonObjectType___NgHrAYrWcBJQVQlDxNo9ahg;
 typedef struct tySequence__CuQVevMiK9aYrfR9bhdX9bMbg tySequence__CuQVevMiK9aYrfR9bhdX9bMbg;
 typedef struct tySequence__CuQVevMiK9aYrfR9bhdX9bMbg_Content tySequence__CuQVevMiK9aYrfR9bhdX9bMbg_Content;
-typedef struct tyObject_Table__aOmWjgHle6LXqgZb9aNilKw tyObject_Table__aOmWjgHle6LXqgZb9aNilKw;
+typedef struct tyObject_Table__2VKipBI9ba3th164gDzQN9cA tyObject_Table__2VKipBI9ba3th164gDzQN9cA;
 typedef struct tySequence__pUxI6Ljo6IKKHXKOZkQ7Og tySequence__pUxI6Ljo6IKKHXKOZkQ7Og;
 typedef struct tySequence__pUxI6Ljo6IKKHXKOZkQ7Og_Content tySequence__pUxI6Ljo6IKKHXKOZkQ7Og_Content;
 typedef struct tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw;
@@ -64,13 +64,13 @@ typedef struct tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ tyObje
 typedef struct tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ;
 typedef struct tyObject_Profiler__R6Sr8LvbB7fLSOvpRPDaZg tyObject_Profiler__R6Sr8LvbB7fLSOvpRPDaZg;
 typedef struct tyObject_TStackFrame__N1mljdE9busWUtRTmlIvLdQ tyObject_TStackFrame__N1mljdE9busWUtRTmlIvLdQ;
-typedef struct tyObject_Table__YFSNMBOhLlpXNTdyBzHzng tyObject_Table__YFSNMBOhLlpXNTdyBzHzng;
+typedef struct tyObject_Table__K8awdNiEl6WnGlBlNz9aAUA tyObject_Table__K8awdNiEl6WnGlBlNz9aAUA;
 typedef struct tySequence__E8pi9b5QNahsURYzXMjh3qw tySequence__E8pi9b5QNahsURYzXMjh3qw;
 typedef struct tySequence__E8pi9b5QNahsURYzXMjh3qw_Content tySequence__E8pi9b5QNahsURYzXMjh3qw_Content;
-typedef struct tyObject_PackedSet__i3gtUlUrPDCqptv09aSM27Q tyObject_PackedSet__i3gtUlUrPDCqptv09aSM27Q;
-typedef struct tyObject_TrunkcolonObjectType___EmGe8hcg6AsRIlZP9cZUy2g tyObject_TrunkcolonObjectType___EmGe8hcg6AsRIlZP9cZUy2g;
-typedef struct tySequence__9bOP3XKJO9cduo72I9cSJSTGQ tySequence__9bOP3XKJO9cduo72I9cSJSTGQ;
-typedef struct tySequence__9bOP3XKJO9cduo72I9cSJSTGQ_Content tySequence__9bOP3XKJO9cduo72I9cSJSTGQ_Content;
+typedef struct tyObject_PackedSet__qA9cIf5S6ff7ZfqJQzs9c9avA tyObject_PackedSet__qA9cIf5S6ff7ZfqJQzs9c9avA;
+typedef struct tyObject_TrunkcolonObjectType___ecZ7vy9aTZqDLIE9bwV6IwSA tyObject_TrunkcolonObjectType___ecZ7vy9aTZqDLIE9bwV6IwSA;
+typedef struct tySequence__ytvCJAQEc0Ty0zxg9bATkEg tySequence__ytvCJAQEc0Ty0zxg9bATkEg;
+typedef struct tySequence__ytvCJAQEc0Ty0zxg9bATkEg_Content tySequence__ytvCJAQEc0Ty0zxg9bATkEg_Content;
 typedef struct tyObject_ItemId__DkNSdMzTJ9bdToiiR7vX1Fg tyObject_ItemId__DkNSdMzTJ9bdToiiR7vX1Fg;
 typedef struct tyObject_TLoc__YoXBCzFZiyHIknnSXRBVwQ tyObject_TLoc__YoXBCzFZiyHIknnSXRBVwQ;
 typedef struct tyObject_TLib__4ch8D7VkJ1kIZxt48FukTA tyObject_TLib__4ch8D7VkJ1kIZxt48FukTA;
@@ -173,7 +173,7 @@ struct tySequence__CuQVevMiK9aYrfR9bhdX9bMbg {
 struct tySequence__pUxI6Ljo6IKKHXKOZkQ7Og {
   NI len; tySequence__pUxI6Ljo6IKKHXKOZkQ7Og_Content* p;
 };
-struct tyObject_Table__aOmWjgHle6LXqgZb9aNilKw {
+struct tyObject_Table__2VKipBI9ba3th164gDzQN9cA {
 	tySequence__pUxI6Ljo6IKKHXKOZkQ7Og data;
 	NI counter;
 };
@@ -184,20 +184,20 @@ struct tyObject_Profiler__R6Sr8LvbB7fLSOvpRPDaZg {
 struct tySequence__E8pi9b5QNahsURYzXMjh3qw {
   NI len; tySequence__E8pi9b5QNahsURYzXMjh3qw_Content* p;
 };
-struct tyObject_Table__YFSNMBOhLlpXNTdyBzHzng {
+struct tyObject_Table__K8awdNiEl6WnGlBlNz9aAUA {
 	tySequence__E8pi9b5QNahsURYzXMjh3qw data;
 	NI counter;
 };
-struct tySequence__9bOP3XKJO9cduo72I9cSJSTGQ {
-  NI len; tySequence__9bOP3XKJO9cduo72I9cSJSTGQ_Content* p;
+struct tySequence__ytvCJAQEc0Ty0zxg9bATkEg {
+  NI len; tySequence__ytvCJAQEc0Ty0zxg9bATkEg_Content* p;
 };
 typedef NI tyArray__emiAJ8okywrJw7ZHLzlXbQ[34];
-struct tyObject_PackedSet__i3gtUlUrPDCqptv09aSM27Q {
+struct tyObject_PackedSet__qA9cIf5S6ff7ZfqJQzs9c9avA {
 	NI elems;
 	NI counter;
 	NI max;
-	tyObject_TrunkcolonObjectType___EmGe8hcg6AsRIlZP9cZUy2g* head;
-	tySequence__9bOP3XKJO9cduo72I9cSJSTGQ data;
+	tyObject_TrunkcolonObjectType___ecZ7vy9aTZqDLIE9bwV6IwSA* head;
+	tySequence__ytvCJAQEc0Ty0zxg9bATkEg data;
 	tyArray__emiAJ8okywrJw7ZHLzlXbQ a;
 };
 struct tyObject_TCtx__oUbgmd3pK69bNdxMLgj0ckA {
@@ -221,7 +221,7 @@ struct tyObject_TCtx__oUbgmd3pK69bNdxMLgj0ckA {
 	NI callDepth;
 	tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg comesFromHeuristic;
 	tySequence__CuQVevMiK9aYrfR9bhdX9bMbg callbacks;
-	tyObject_Table__aOmWjgHle6LXqgZb9aNilKw callbackIndex;
+	tyObject_Table__2VKipBI9ba3th164gDzQN9cA callbackIndex;
 	NimStringV2 errorFlag;
 	tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw* cache;
 	tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* config;
@@ -230,9 +230,9 @@ struct tyObject_TCtx__oUbgmd3pK69bNdxMLgj0ckA {
 	tyObject_Profiler__R6Sr8LvbB7fLSOvpRPDaZg profiler;
 	NI* templInstCounter;
 	tySequence__DJktJ9chlm8eZzFm7wl5ndg vmstateDiff;
-	tyObject_Table__YFSNMBOhLlpXNTdyBzHzng procToCodePos;
+	tyObject_Table__K8awdNiEl6WnGlBlNz9aAUA procToCodePos;
 	NIM_BOOL cannotEval;
-	tyObject_PackedSet__i3gtUlUrPDCqptv09aSM27Q locals;
+	tyObject_PackedSet__qA9cIf5S6ff7ZfqJQzs9c9avA locals;
 };
 struct tyObject_ItemId__DkNSdMzTJ9bdToiiR7vX1Fg {
 	NI32 module;
@@ -310,7 +310,7 @@ struct tyTuple__47w2DboNEPf69aPgubZdd7Q {
 	NI Field2;
 };
 struct tySequence__E8pi9b5QNahsURYzXMjh3qw_Content { NI cap; tyTuple__47w2DboNEPf69aPgubZdd7Q data[SEQ_DECL_SIZE]; };
-struct tySequence__9bOP3XKJO9cduo72I9cSJSTGQ_Content { NI cap; tyObject_TrunkcolonObjectType___EmGe8hcg6AsRIlZP9cZUy2g* data[SEQ_DECL_SIZE]; };
+struct tySequence__ytvCJAQEc0Ty0zxg9bATkEg_Content { NI cap; tyObject_TrunkcolonObjectType___ecZ7vy9aTZqDLIE9bwV6IwSA* data[SEQ_DECL_SIZE]; };
 struct tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA {
 	NI ra;
 	NI rb;

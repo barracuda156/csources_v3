@@ -17,7 +17,7 @@
 #undef far
 #undef powerpc
 #undef unix
-typedef NU8 tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg;
+typedef NU8 tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg;
 static N_INLINE(NIM_BOOL, isNaN__pureZmath_u218)(NF x_p0);
 static N_INLINE(NF, abs__system_u5200)(NF x_p0);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
@@ -52,8 +52,8 @@ static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
 	result = (&nimInErrorMode__system_u4264);
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg, classify__pureZmath_u215)(NF x_p0) {
-	tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg result;
+N_LIB_PRIVATE N_NIMCALL(tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg, classify__pureZmath_u215)(NF x_p0) {
+	tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg result;
 NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	{
@@ -62,7 +62,7 @@ NIM_BOOL* nimErr_;
 		T3_ = isNaN__pureZmath_u218(x_p0);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		if (!T3_) goto LA4_;
-		result = ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)4);
+		result = ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)4);
 		goto BeforeRet_;
 	}
 LA4_: ;
@@ -70,13 +70,13 @@ LA4_: ;
 		if (!(x_p0 == 0.0)) goto LA8_;
 		{
 			if (!(((NF)(1.0) / (NF)(x_p0)) == INF)) goto LA12_;
-			result = ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)2);
+			result = ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)2);
 			goto BeforeRet_;
 		}
 		goto LA10_;
 LA12_: ;
 		{
-			result = ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)3);
+			result = ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)3);
 			goto BeforeRet_;
 		}
 LA10_: ;
@@ -86,13 +86,13 @@ LA8_: ;
 		if (!(((NF)(x_p0) * (NF)(0.5)) == x_p0)) goto LA17_;
 		{
 			if (!(0.0 < x_p0)) goto LA21_;
-			result = ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)5);
+			result = ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)5);
 			goto BeforeRet_;
 		}
 		goto LA19_;
 LA21_: ;
 		{
-			result = ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)6);
+			result = ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)6);
 			goto BeforeRet_;
 		}
 LA19_: ;
@@ -103,11 +103,11 @@ LA17_: ;
 		T26_ = (NF)0;
 		T26_ = abs__system_u5200(x_p0);
 		if (!(T26_ < 2.225073858507201e-308)) goto LA27_;
-		result = ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)1);
+		result = ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)1);
 		goto BeforeRet_;
 	}
 LA27_: ;
-	result = ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)0);
+	result = ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)0);
 	goto BeforeRet_;
 	}BeforeRet_: ;
 	return result;

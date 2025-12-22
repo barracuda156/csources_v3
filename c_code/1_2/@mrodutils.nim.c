@@ -37,8 +37,8 @@ struct NimStringV2 {
 	NI len;
 	NimStrPayload* p;
 };
-typedef NU8 tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg;
-N_LIB_PRIVATE N_NIMCALL(tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg, classify__pureZmath_u205)(NF x_p0);
+typedef NU8 tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg;
+N_LIB_PRIVATE N_NIMCALL(tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg, classify__pureZmath_u205)(NF x_p0);
 static N_INLINE(NIM_BOOL, signbit__astyaml_u676)(NF x_p0);
 N_LIB_PRIVATE N_NIMCALL(void, addFloatRoundtrip__system_u4798)(NimStringV2* result_p0, NF x_p1);
 static N_INLINE(void, appendString)(NimStringV2* dest_p0, NimStringV2 src_p1);
@@ -161,15 +161,15 @@ static N_INLINE(void, popFrame)(void) {
 }
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, toStrMaxPrecision__astyaml_u670)(NF f_p0) {
 	NimStringV2 result;
-	tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg T1_;
+	tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg T1_;
 NIM_BOOL* nimErr_;
 	nimfr_("toStrMaxPrecision", "/Users/svacchanda/Dev/nim-2.2.6/compiler/rodutils.nim");
 {nimErr_ = nimErrorFlag();
-	nimlf_(49, "/Users/svacchanda/Dev/nim-2.2.6/compiler/rodutils.nim");	T1_ = (tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)0;
+	nimlf_(49, "/Users/svacchanda/Dev/nim-2.2.6/compiler/rodutils.nim");	T1_ = (tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)0;
 	T1_ = classify__pureZmath_u205(f_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	switch (T1_) {
-	case ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)4):
+	case ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)4):
 	{
 		nimln_(51);		{
 			NIM_BOOL T5_;
@@ -187,22 +187,22 @@ LA6_: ;
 LA3_: ;
 	}
 	break;
-	case ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)3):
+	case ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)3):
 	{
 		nimln_(56);		result = TM__mZLUkjbotQF2WK9bQcNKBCA_7;
 	}
 	break;
-	case ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)2):
+	case ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)2):
 	{
 		nimln_(58);		result = TM__mZLUkjbotQF2WK9bQcNKBCA_9;
 	}
 	break;
-	case ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)5):
+	case ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)5):
 	{
 		nimln_(60);		result = TM__mZLUkjbotQF2WK9bQcNKBCA_11;
 	}
 	break;
-	case ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)6):
+	case ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)6):
 	{
 		nimln_(62);		result = TM__mZLUkjbotQF2WK9bQcNKBCA_13;
 	}
@@ -231,15 +231,15 @@ static N_INLINE(NIM_BOOL, signbit__cgen_u20641)(NF32 x_p0) {
 }
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, toStrMaxPrecision__cgen_u20635)(NF32 f_p0) {
 	NimStringV2 result;
-	tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg T1_;
+	tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg T1_;
 NIM_BOOL* nimErr_;
 	nimfr_("toStrMaxPrecision", "/Users/svacchanda/Dev/nim-2.2.6/compiler/rodutils.nim");
 {nimErr_ = nimErrorFlag();
-	nimln_(49);	T1_ = (tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)0;
+	nimln_(49);	T1_ = (tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)0;
 	T1_ = classify__pureZmath_u205(((NF) (f_p0)));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	switch (T1_) {
-	case ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)4):
+	case ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)4):
 	{
 		nimln_(51);		{
 			NIM_BOOL T5_;
@@ -257,22 +257,22 @@ LA6_: ;
 LA3_: ;
 	}
 	break;
-	case ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)3):
+	case ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)3):
 	{
 		nimln_(56);		result = TM__mZLUkjbotQF2WK9bQcNKBCA_21;
 	}
 	break;
-	case ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)2):
+	case ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)2):
 	{
 		nimln_(58);		result = TM__mZLUkjbotQF2WK9bQcNKBCA_23;
 	}
 	break;
-	case ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)5):
+	case ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)5):
 	{
 		nimln_(60);		result = TM__mZLUkjbotQF2WK9bQcNKBCA_24;
 	}
 	break;
-	case ((tyEnum_FloatClass__VIVMhOvfqfbrw5IGjo3Q9cg)6):
+	case ((tyEnum_FloatClass__EWJ5gUqsQsqDTgplqhm0Zg)6):
 	{
 		nimln_(62);		result = TM__mZLUkjbotQF2WK9bQcNKBCA_25;
 	}

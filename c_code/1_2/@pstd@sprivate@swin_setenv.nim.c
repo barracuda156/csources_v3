@@ -30,7 +30,7 @@
 
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
-typedef struct tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA;
+typedef struct tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw;
 typedef struct tySequence__lBgZ7a89beZGYPl8PiANMTA tySequence__lBgZ7a89beZGYPl8PiANMTA;
 typedef struct tySequence__lBgZ7a89beZGYPl8PiANMTA_Content tySequence__lBgZ7a89beZGYPl8PiANMTA_Content;
 struct NimStrPayload {
@@ -41,7 +41,7 @@ struct NimStringV2 {
 	NI len;
 	NimStrPayload* p;
 };
-struct tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA {
+struct tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw {
 	NI bytes;
 	NI16* data;
 };
@@ -54,12 +54,12 @@ struct tySequence__lBgZ7a89beZGYPl8PiANMTA_Content { NI cap; NIM_CHAR data[SEQ_D
 static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1);
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
-static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA x_p0);
+static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw x_p0);
 static N_INLINE(void, nimFrame)(TFrame* s_p0);
 N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached__system_u4479)(void);
 static N_INLINE(void, popFrame)(void);
-N_LIB_PRIVATE N_NIMCALL(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA, newWideCString__stdZwidestrs_u325)(NimStringV2 s_p0);
-N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___stdZwidestrs_u7)(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA a_p0);
+N_LIB_PRIVATE N_NIMCALL(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw, newWideCString__stdZwidestrs_u325)(NimStringV2 s_p0);
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___stdZwidestrs_u7)(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw a_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___system_u2629)(NimStringV2 dest_p0);
 static N_INLINE(void, appendString)(NimStringV2* dest_p0, NimStringV2 src_p1);
 static N_INLINE(void, copyMem__system_u1728)(void* dest_p0, void* source_p1, NI size_p2);
@@ -134,10 +134,10 @@ LA8_: ;
 static N_INLINE(void, popFrame)(void) {
 	framePtr__system_u2667 = (*framePtr__system_u2667).prev;
 }
-static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA x_p0) {
+static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw x_p0) {
 	NI16* result;
-	nimfr_("toWideCString", "/opt/local/lib/nim/lib/std/widestrs.nim");
-	nimlf_(63, "/opt/local/lib/nim/lib/std/widestrs.nim");	result = x_p0.data;
+	nimfr_("toWideCString", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");
+	nimlf_(63, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");	result = x_p0.data;
 	popFrame();
 	return result;
 }
@@ -166,10 +166,10 @@ LA3_: ;
 }
 N_LIB_PRIVATE N_NIMCALL(int, setEnvImpl__stdZprivateZwin95setenv_u18)(NimStringV2 name_p0, NimStringV2 value_p1, int overwrite_p2) {
 	int result;
-	tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA colontmpD_;
+	tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw colontmpD_;
 	NimStringV2 colontmpD__2;
-	tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA colontmpD__3;
-	tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA colontmpD__4;
+	tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw colontmpD__3;
+	tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw colontmpD__4;
 	NI16* wideName_1;
 NIM_BOOL oldNimErrFin13_;
 	NI16* envstring_2;
@@ -179,14 +179,14 @@ NIM_BOOL oldNimErrFin13_;
 	wchar_t* T28_;
 NIM_BOOL oldNimErrFin1_;
 NIM_BOOL* nimErr_;
-	nimfr_("setEnvImpl", "/opt/local/lib/nim/lib/std/private/win_setenv.nim");
+	nimfr_("setEnvImpl", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/win_setenv.nim");
 {nimErr_ = nimErrorFlag();
 	result = (int)0;
-	nimZeroMem((void*)(&colontmpD_), sizeof(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA));
+	nimZeroMem((void*)(&colontmpD_), sizeof(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw));
 	colontmpD__2.len = 0; colontmpD__2.p = NIM_NIL;
-	nimZeroMem((void*)(&colontmpD__3), sizeof(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA));
-	nimZeroMem((void*)(&colontmpD__4), sizeof(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA));
-	nimlf_(48, "/opt/local/lib/nim/lib/std/private/win_setenv.nim");	colontmpD_ = newWideCString__stdZwidestrs_u325(name_p0);
+	nimZeroMem((void*)(&colontmpD__3), sizeof(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw));
+	nimZeroMem((void*)(&colontmpD__4), sizeof(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw));
+	nimlf_(48, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/win_setenv.nim");	colontmpD_ = newWideCString__stdZwidestrs_u325(name_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	wideName_1 = toWideCString__stdZwidestrs_u49(colontmpD_);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
@@ -202,25 +202,25 @@ NIM_BOOL* nimErr_;
 LA5_: ;
 		if (!T4_) goto LA7_;
 		nimln_(50);		nimln_(46);		nimln_(50);		result = ((int)0);
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD__4);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD__4);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		eqdestroy___stdZwidestrs_u7(colontmpD__3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");		eqdestroy___system_u2629(colontmpD__2);
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD_);
+		nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		eqdestroy___system_u2629(colontmpD__2);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		goto BeforeRet_;
 	}
 LA7_: ;
-	nimlf_(52, "/opt/local/lib/nim/lib/std/private/win_setenv.nim");	{
+	nimlf_(52, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/win_setenv.nim");	{
 		NimStringV2 colontmpD__5;
-		tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA colontmpD__6;
+		tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw colontmpD__6;
 		NI16* envstring_1;
 		NimStringV2 T14_;
 		int e_1;
 		if (!!((value_p1.len == 0))) goto LA11_;
 		colontmpD__5.len = 0; colontmpD__5.p = NIM_NIL;
-		nimZeroMem((void*)(&colontmpD__6), sizeof(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA));
+		nimZeroMem((void*)(&colontmpD__6), sizeof(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw));
 		nimln_(53);		T14_.len = 0; T14_.p = NIM_NIL;
 		T14_ = rawNewString(name_p0.len + value_p1.len + 1);
 appendString((&T14_), name_p0);
@@ -236,29 +236,29 @@ appendString((&T14_), value_p1);
 			if (!!((e_1 == ((NI32)0)))) goto LA17_;
 			nimln_(56);			errno = ((int)22);
 			nimln_(57);			nimln_(46);			nimln_(57);			result = ((int)-1);
-			nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");			eqdestroy___stdZwidestrs_u7(colontmpD__6);
+			nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");			eqdestroy___stdZwidestrs_u7(colontmpD__6);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			eqdestroy___system_u2629(colontmpD__5);
-			nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");			eqdestroy___stdZwidestrs_u7(colontmpD__4);
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__5);
+			nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");			eqdestroy___stdZwidestrs_u7(colontmpD__4);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 			eqdestroy___stdZwidestrs_u7(colontmpD__3);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			eqdestroy___system_u2629(colontmpD__2);
-			nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");			eqdestroy___stdZwidestrs_u7(colontmpD_);
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__2);
+			nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");			eqdestroy___stdZwidestrs_u7(colontmpD_);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 			goto BeforeRet_;
 		}
 LA17_: ;
-		nimlf_(58, "/opt/local/lib/nim/lib/std/private/win_setenv.nim");		nimln_(46);		nimln_(58);		result = ((int)0);
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD__6);
+		nimlf_(58, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/win_setenv.nim");		nimln_(46);		nimln_(58);		result = ((int)0);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD__6);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
-		nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");		eqdestroy___system_u2629(colontmpD__5);
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD__4);
+		nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		eqdestroy___system_u2629(colontmpD__5);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD__4);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		eqdestroy___stdZwidestrs_u7(colontmpD__3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");		eqdestroy___system_u2629(colontmpD__2);
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD_);
+		nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		eqdestroy___system_u2629(colontmpD__2);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		goto BeforeRet_;
 		{
@@ -268,13 +268,13 @@ LA17_: ;
 			oldNimErrFin13_ = *nimErr_; *nimErr_ = NIM_FALSE;
 			eqdestroy___stdZwidestrs_u7(colontmpD__6);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			eqdestroy___system_u2629(colontmpD__5);
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__5);
 			*nimErr_ = oldNimErrFin13_;
 		}
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	}
 LA11_: ;
-	nimlf_(65, "/opt/local/lib/nim/lib/std/private/win_setenv.nim");	T21_.len = 0; T21_.p = NIM_NIL;
+	nimlf_(65, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/win_setenv.nim");	T21_.len = 0; T21_.p = NIM_NIL;
 	T21_ = rawNewString(name_p0.len + 3);
 appendString((&T21_), name_p0);
 appendString((&T21_), TM__UOYsq9cbb0VE8vr3Xt181HA_6);
@@ -290,17 +290,17 @@ appendString((&T21_), TM__UOYsq9cbb0VE8vr3Xt181HA_6);
 		if (!!((T24_ == ((NI32)0)))) goto LA25_;
 		nimln_(67);		errno = ((int)22);
 		nimln_(68);		nimln_(46);		nimln_(68);		result = ((int)-1);
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD__4);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD__4);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		eqdestroy___stdZwidestrs_u7(colontmpD__3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");		eqdestroy___system_u2629(colontmpD__2);
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD_);
+		nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		eqdestroy___system_u2629(colontmpD__2);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		goto BeforeRet_;
 	}
 LA25_: ;
-	nimlf_(70, "/opt/local/lib/nim/lib/std/private/win_setenv.nim");	T27_ = (wchar_t*)0;
+	nimlf_(70, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/win_setenv.nim");	T27_ = (wchar_t*)0;
 	T27_ = _wgetenv(((wchar_t*) (wideName_1)));
 	s_1 = ((NI16*) (T27_));
 	nimln_(71);	s_1[((NI)0)] = ((NI16)0);
@@ -345,12 +345,12 @@ LA25_: ;
 				nimln_(100);				ptrToEnv_1[((NI)1)] = 61;
 			}
 LA40_: ;
-			nimlf_(651, "/opt/local/lib/nim/lib/system.nim");			eqdestroy___stdZprivateZwin95setenv_u144(buf_1);
+			nimlf_(651, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___stdZprivateZwin95setenv_u144(buf_1);
 		}
 LA35_: ;
 	}
 LA31_: ;
-	nimlf_(103, "/opt/local/lib/nim/lib/std/private/win_setenv.nim");	{
+	nimlf_(103, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/win_setenv.nim");	{
 		NI16* T44_;
 		NI32 T45_;
 		colontmpD__4 = newWideCString__stdZwidestrs_u325(value_p1);
@@ -363,23 +363,23 @@ LA31_: ;
 		if (!(T45_ == ((NI32)0))) goto LA46_;
 		nimln_(104);		errno = ((int)22);
 		nimln_(105);		nimln_(46);		nimln_(105);		result = ((int)-1);
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD__4);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD__4);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		eqdestroy___stdZwidestrs_u7(colontmpD__3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");		eqdestroy___system_u2629(colontmpD__2);
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD_);
+		nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		eqdestroy___system_u2629(colontmpD__2);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		goto BeforeRet_;
 	}
 LA46_: ;
-	nimlf_(106, "/opt/local/lib/nim/lib/std/private/win_setenv.nim");	nimln_(46);	nimln_(106);	result = ((int)0);
-	nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");	eqdestroy___stdZwidestrs_u7(colontmpD__4);
+	nimlf_(106, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/win_setenv.nim");	nimln_(46);	nimln_(106);	result = ((int)0);
+	nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");	eqdestroy___stdZwidestrs_u7(colontmpD__4);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	eqdestroy___stdZwidestrs_u7(colontmpD__3);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqdestroy___system_u2629(colontmpD__2);
-	nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");	eqdestroy___stdZwidestrs_u7(colontmpD_);
+	nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	eqdestroy___system_u2629(colontmpD__2);
+	nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");	eqdestroy___stdZwidestrs_u7(colontmpD_);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	goto BeforeRet_;
 	{
@@ -391,8 +391,8 @@ LA46_: ;
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		eqdestroy___stdZwidestrs_u7(colontmpD__3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");		eqdestroy___system_u2629(colontmpD__2);
-		nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD_);
+		nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		eqdestroy___system_u2629(colontmpD__2);
+		nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");		eqdestroy___stdZwidestrs_u7(colontmpD_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		*nimErr_ = oldNimErrFin1_;
 	}

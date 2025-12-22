@@ -28,7 +28,7 @@
 
 typedef struct NimStrPayload NimStrPayload;
 typedef struct NimStringV2 NimStringV2;
-typedef struct tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA;
+typedef struct tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw;
 struct NimStrPayload {
 	NI cap;
 	NIM_CHAR data[SEQ_DECL_SIZE];
@@ -37,7 +37,7 @@ struct NimStringV2 {
 	NI len;
 	NimStrPayload* p;
 };
-struct tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA {
+struct tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw {
 	NI bytes;
 	NI16* data;
 };
@@ -48,16 +48,16 @@ N_LIB_PRIVATE N_NIMCALL(void, openDefaultBrowserRaw__pureZbrowsers_u11)(NimStrin
 static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1);
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
-N_LIB_PRIVATE N_NIMCALL(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA, newWideCString__stdZwidestrs_u325)(NimStringV2 s_p0);
-static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA x_p0);
+N_LIB_PRIVATE N_NIMCALL(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw, newWideCString__stdZwidestrs_u325)(NimStringV2 s_p0);
+static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw x_p0);
 static N_INLINE(void, nimFrame)(TFrame* s_p0);
 N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached__system_u4479)(void);
 static N_INLINE(void, popFrame)(void);
-N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___stdZwidestrs_u7)(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA a_p0);
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___stdZwidestrs_u7)(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw a_p0);
 static const struct {
-  NI cap; NIM_CHAR data[90+1];
-} TM__CZNeKGdQ8AWxD1HSDIq5DQ_2 = { 90 | NIM_STRLIT_FLAG, "/opt/local/lib/nim/lib/pure/browsers.nim(77, 3) `url.len > 0` URL must not be empty string" };
-static const NimStringV2 TM__CZNeKGdQ8AWxD1HSDIq5DQ_3 = {90, (NimStrPayload*)&TM__CZNeKGdQ8AWxD1HSDIq5DQ_2};
+  NI cap; NIM_CHAR data[103+1];
+} TM__CZNeKGdQ8AWxD1HSDIq5DQ_2 = { 103 | NIM_STRLIT_FLAG, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/browsers.nim(77, 3) `url.len > 0` URL must not be empty string" };
+static const NimStringV2 TM__CZNeKGdQ8AWxD1HSDIq5DQ_3 = {103, (NimStrPayload*)&TM__CZNeKGdQ8AWxD1HSDIq5DQ_2};
 static const struct {
   NI cap; NIM_CHAR data[4+1];
 } TM__CZNeKGdQ8AWxD1HSDIq5DQ_4 = { 4 | NIM_STRLIT_FLAG, "open" };
@@ -104,25 +104,25 @@ LA8_: ;
 static N_INLINE(void, popFrame)(void) {
 	framePtr__system_u2667 = (*framePtr__system_u2667).prev;
 }
-static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA x_p0) {
+static N_INLINE(NI16*, toWideCString__stdZwidestrs_u49)(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw x_p0) {
 	NI16* result;
-	nimfr_("toWideCString", "/opt/local/lib/nim/lib/std/widestrs.nim");
-	nimlf_(63, "/opt/local/lib/nim/lib/std/widestrs.nim");	result = x_p0.data;
+	nimfr_("toWideCString", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");
+	nimlf_(63, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");	result = x_p0.data;
 	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(void, openDefaultBrowserRaw__pureZbrowsers_u11)(NimStringV2 url_p0) {
-	tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA o_1;
-	tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA u_1;
+	tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw o_1;
+	tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw u_1;
 	NI16* T1_;
 	NI16* T2_;
 	NI T3_;
 NIM_BOOL* nimErr_;
-	nimfr_("openDefaultBrowserRaw", "/opt/local/lib/nim/lib/pure/browsers.nim");
+	nimfr_("openDefaultBrowserRaw", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/browsers.nim");
 {nimErr_ = nimErrorFlag();
-	nimZeroMem((void*)(&o_1), sizeof(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA));
-	nimZeroMem((void*)(&u_1), sizeof(tyObject_WideCStringObj__vRdAkgHfNVQZqa59cpRfwQA));
-	nimlf_(47, "/opt/local/lib/nim/lib/pure/browsers.nim");	o_1 = newWideCString__stdZwidestrs_u325(TM__CZNeKGdQ8AWxD1HSDIq5DQ_5);
+	nimZeroMem((void*)(&o_1), sizeof(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw));
+	nimZeroMem((void*)(&u_1), sizeof(tyObject_WideCStringObj__PKahdDZVlVVy9aKbXKo0UFw));
+	nimlf_(47, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/browsers.nim");	o_1 = newWideCString__stdZwidestrs_u325(TM__CZNeKGdQ8AWxD1HSDIq5DQ_5);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	nimln_(48);	u_1 = newWideCString__stdZwidestrs_u325(url_p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
@@ -135,7 +135,7 @@ NIM_BOOL* nimErr_;
 	T3_ = (NI)0;
 	T3_ = Dl_1409286446_(((NI)0), T1_, T2_, ((NI16*) NIM_NIL), ((NI16*) NIM_NIL), ((NI32)1));
 	(void)(T3_);
-	nimlf_(30, "/opt/local/lib/nim/lib/std/widestrs.nim");	eqdestroy___stdZwidestrs_u7(u_1);
+	nimlf_(30, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/widestrs.nim");	eqdestroy___stdZwidestrs_u7(u_1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	eqdestroy___stdZwidestrs_u7(o_1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
@@ -144,9 +144,9 @@ NIM_BOOL* nimErr_;
 }
 N_LIB_PRIVATE N_NIMCALL(void, openDefaultBrowser__pureZbrowsers_u15)(NimStringV2 url_p0) {
 NIM_BOOL* nimErr_;
-	nimfr_("openDefaultBrowser", "/opt/local/lib/nim/lib/pure/browsers.nim");
+	nimfr_("openDefaultBrowser", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/browsers.nim");
 {nimErr_ = nimErrorFlag();
-	nimlf_(77, "/opt/local/lib/nim/lib/pure/browsers.nim");	{
+	nimlf_(77, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/browsers.nim");	{
 		if (!!((((NI)0) < url_p0.len))) goto LA3_;
 		failedAssertImpl__stdZassertions_u242(TM__CZNeKGdQ8AWxD1HSDIq5DQ_3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;

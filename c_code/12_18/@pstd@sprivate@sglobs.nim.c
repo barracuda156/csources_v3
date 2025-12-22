@@ -65,9 +65,9 @@ static N_INLINE(void, popFrame)(void) {
 }
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, nativeToUnixPath__stdZprivateZglobs_u96)(NimStringV2 path_p0) {
 	NimStringV2 result;
-	nimfr_("nativeToUnixPath", "/opt/local/lib/nim/lib/std/private/globs.nim");
+	nimfr_("nativeToUnixPath", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/globs.nim");
 	result.len = 0; result.p = NIM_NIL;
-	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqcopy___system_u2632((&result), path_p0);
+	nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	eqcopy___system_u2632((&result), path_p0);
 	popFrame();
 	return result;
 }

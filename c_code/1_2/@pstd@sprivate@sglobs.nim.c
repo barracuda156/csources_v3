@@ -127,11 +127,11 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, nativeToUnixPath__stdZprivateZglobs_u97)(Ni
 	NimStringV2 result;
 	NimStringV2 T16_;
 NIM_BOOL* nimErr_;
-	nimfr_("nativeToUnixPath", "/opt/local/lib/nim/lib/std/private/globs.nim");
+	nimfr_("nativeToUnixPath", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/globs.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
-	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqcopy___system_u2632((&result), path_p0);
-	nimlf_(59, "/opt/local/lib/nim/lib/std/private/globs.nim");	{
+	nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	eqcopy___system_u2632((&result), path_p0);
+	nimlf_(59, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/globs.nim");	{
 		NIM_BOOL T3_;
 		NIM_BOOL T4_;
 		T3_ = (NIM_BOOL)0;
@@ -179,15 +179,15 @@ appendString((&T15_), path_p0);
 			colontmpD_ = T15_;
 			raiseAssert__stdZassertions_u13(colontmpD_);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			eqdestroy___system_u2629(colontmpD_);
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD_);
 		}
 LA13_: ;
 	}
 LA7_: ;
-	nimlf_(65, "/opt/local/lib/nim/lib/std/private/globs.nim");	T16_.len = 0; T16_.p = NIM_NIL;
+	nimlf_(65, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/globs.nim");	T16_.len = 0; T16_.p = NIM_NIL;
 	T16_ = nsuReplaceChar(result, 92, 47);
 	if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___system_u2629(T16_); goto BeforeRet_;}
-	nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");	eqsink___system_u2638((&result), T16_);
+	nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	eqsink___system_u2638((&result), T16_);
 	}BeforeRet_: ;
 	popFrame();
 	return result;

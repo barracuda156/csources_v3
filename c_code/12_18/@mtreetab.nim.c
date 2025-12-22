@@ -301,8 +301,8 @@ static N_INLINE(NI, emarkamp___pureZhashes_u5)(NI h_p0, NI val_p1) {
 	NU h_2;
 	NU val_2;
 	NU res_1;
-	nimfr_("!&", "/opt/local/lib/nim/lib/pure/hashes.nim");
-	nimlf_(83, "/opt/local/lib/nim/lib/pure/hashes.nim");	h_2 = ((NU) (h_p0));
+	nimfr_("!&", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
+	nimlf_(83, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");	h_2 = ((NU) (h_p0));
 	nimln_(84);	val_2 = ((NU) (val_p1));
 	nimln_(85);	res_1 = (NU)((NU64)(h_2) + (NU64)(val_2));
 	nimln_(86);	res_1 = (NU)((NU64)(res_1) + (NU64)((NU)((NU64)(res_1) << (NU64)(((NI)10)))));
@@ -350,8 +350,8 @@ static N_INLINE(NI, emarkdollar___pureZhashes_u20)(NI h_p0) {
 	NI result;
 	NU h_2;
 	NU res_1;
-	nimfr_("!$", "/opt/local/lib/nim/lib/pure/hashes.nim");
-	nimlf_(94, "/opt/local/lib/nim/lib/pure/hashes.nim");	h_2 = ((NU) (h_p0));
+	nimfr_("!$", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");
+	nimlf_(94, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/hashes.nim");	h_2 = ((NU) (h_p0));
 	nimln_(95);	res_1 = (NU)((NU64)(h_2) + (NU64)((NU)((NU64)(h_2) << (NU64)(((NI)3)))));
 	nimln_(96);	res_1 = (NU)(res_1 ^ (NU)((NU64)(res_1) >> (NU64)(((NI)11))));
 	nimln_(97);	res_1 = (NU)((NU64)(res_1) + (NU64)((NU)((NU64)(res_1) << (NU64)(((NI)15)))));
@@ -471,9 +471,9 @@ LA20_: ;
 			NI i_2;
 			i_1 = (NI)0;
 			colontmp_ = (NI)0;
-			nimlf_(126, "/opt/local/lib/nim/lib/system/iterators_1.nim");			nimlf_(39, "/Users/svacchanda/Dev/nim-2.2.6/compiler/treetab.nim");			colontmp_ = len__ast_u3197(n_p0);
+			nimlf_(126, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");			nimlf_(39, "/Users/svacchanda/Dev/nim-2.2.6/compiler/treetab.nim");			colontmp_ = len__ast_u3197(n_p0);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			nimlf_(128, "/opt/local/lib/nim/lib/system/iterators_1.nim");			i_2 = ((NI)0);
+			nimlf_(128, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");			i_2 = ((NI)0);
 			{
 				nimln_(129);				while (1) {
 					NI T29_;
@@ -489,7 +489,7 @@ LA20_: ;
 					if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 					result = emarkamp___pureZhashes_u5(result, T29_);
 					if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-					nimlf_(131, "/opt/local/lib/nim/lib/system/iterators_1.nim");					if (nimAddInt(i_2, ((NI)1), &TM__i0pupOlr9bomnd8TcZjCBKw_26)) { raiseOverflow(); goto BeforeRet_;
+					nimlf_(131, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");					if (nimAddInt(i_2, ((NI)1), &TM__i0pupOlr9bomnd8TcZjCBKw_26)) { raiseOverflow(); goto BeforeRet_;
 					};
 					i_2 = (NI)(TM__i0pupOlr9bomnd8TcZjCBKw_26);
 				} LA28: ;
@@ -521,8 +521,8 @@ static N_INLINE(NIM_BOOL, eqStrings)(NimStringV2 a_p0, NimStringV2 b_p1) {
 	NIM_BOOL result;
 	NI alen_1;
 	NI blen_1;
-	nimfr_("eqStrings", "/opt/local/lib/nim/lib/system/strmantle.nim");
-{	nimlf_(33, "/opt/local/lib/nim/lib/system/strmantle.nim");	result = NIM_FALSE;
+	nimfr_("eqStrings", "/Users/svacchanda/Dev/nim-2.2.6/lib/system/strmantle.nim");
+{	nimlf_(33, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/strmantle.nim");	result = NIM_FALSE;
 	nimln_(34);	alen_1 = a_p0.len;
 	nimln_(35);	blen_1 = b_p1.len;
 	nimln_(36);	{
@@ -656,9 +656,9 @@ LA9_: ;
 					NI i_2;
 					i_1 = (NI)0;
 					colontmp_ = (NI)0;
-					nimlf_(126, "/opt/local/lib/nim/lib/system/iterators_1.nim");					nimlf_(62, "/Users/svacchanda/Dev/nim-2.2.6/compiler/treetab.nim");					colontmp_ = len__ast_u3197(a_p0);
+					nimlf_(126, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");					nimlf_(62, "/Users/svacchanda/Dev/nim-2.2.6/compiler/treetab.nim");					colontmp_ = len__ast_u3197(a_p0);
 					if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-					nimlf_(128, "/opt/local/lib/nim/lib/system/iterators_1.nim");					i_2 = ((NI)0);
+					nimlf_(128, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");					i_2 = ((NI)0);
 					{
 						nimln_(129);						while (1) {
 							NI TM__i0pupOlr9bomnd8TcZjCBKw_41;
@@ -681,7 +681,7 @@ LA9_: ;
 								goto BeforeRet_;
 							}
 LA34_: ;
-							nimlf_(131, "/opt/local/lib/nim/lib/system/iterators_1.nim");							if (nimAddInt(i_2, ((NI)1), &TM__i0pupOlr9bomnd8TcZjCBKw_41)) { raiseOverflow(); goto BeforeRet_;
+							nimlf_(131, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");							if (nimAddInt(i_2, ((NI)1), &TM__i0pupOlr9bomnd8TcZjCBKw_41)) { raiseOverflow(); goto BeforeRet_;
 							};
 							i_2 = (NI)(TM__i0pupOlr9bomnd8TcZjCBKw_41);
 						} LA30: ;
@@ -725,8 +725,8 @@ LA1_: ;
 }
 static N_INLINE(NF, toFloat__system_u1681)(NI i_p0) {
 	NF result;
-	nimfr_("toFloat", "/opt/local/lib/nim/lib/system.nim");
-	nimlf_(1286, "/opt/local/lib/nim/lib/system.nim");	result = ((NF) (i_p0));
+	nimfr_("toFloat", "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");
+	nimlf_(1286, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	result = ((NF) (i_p0));
 	popFrame();
 	return result;
 }
@@ -932,9 +932,9 @@ LA3_: ;
 				NI res_1;
 				i_1 = (NI)0;
 				colontmp_ = (NI)0;
-				nimlf_(81, "/opt/local/lib/nim/lib/system/iterators_1.nim");				nimlf_(119, "/Users/svacchanda/Dev/nim-2.2.6/compiler/treetab.nim");				T18_ = ((*t_p0).data.len-1);
+				nimlf_(81, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");				nimlf_(119, "/Users/svacchanda/Dev/nim-2.2.6/compiler/treetab.nim");				T18_ = ((*t_p0).data.len-1);
 				colontmp_ = T18_;
-				nimlf_(96, "/opt/local/lib/nim/lib/system/iterators_1.nim");				res_1 = ((NI)0);
+				nimlf_(96, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");				res_1 = ((NI)0);
 				{
 					nimln_(97);					while (1) {
 						NI TM__i0pupOlr9bomnd8TcZjCBKw_49;
@@ -954,7 +954,7 @@ LA3_: ;
 							if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 						}
 LA23_: ;
-						nimlf_(102, "/opt/local/lib/nim/lib/system/iterators_1.nim");						if (nimAddInt(res_1, ((NI)1), &TM__i0pupOlr9bomnd8TcZjCBKw_49)) { raiseOverflow(); goto BeforeRet_;
+						nimlf_(102, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators_1.nim");						if (nimAddInt(res_1, ((NI)1), &TM__i0pupOlr9bomnd8TcZjCBKw_49)) { raiseOverflow(); goto BeforeRet_;
 						};
 						res_1 = (NI)(TM__i0pupOlr9bomnd8TcZjCBKw_49);
 					} LA20: ;

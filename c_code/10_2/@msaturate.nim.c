@@ -59,7 +59,7 @@ static N_INLINE(void, popFrame)(void) {
 }
 static N_INLINE(NI64, pluspercent___system_u801)(NI64 x_p0, NI64 y_p1) {
 	NI64 result;
-	nimfr_("+%", "/opt/local/lib/nim/lib/system/arithmetics.nim");
+	nimfr_("+%", "/Users/svacchanda/Dev/nim-2.2.6/lib/system/arithmetics.nim");
 	result = ((NI64) ((NU64)((NU64)(((NU64) (x_p0))) + (NU64)(((NU64) (y_p1))))));
 	popFrame();
 	return result;
@@ -101,15 +101,15 @@ LA7_: ;
 }
 static N_INLINE(NI64, starpercent___system_u841)(NI64 x_p0, NI64 y_p1) {
 	NI64 result;
-	nimfr_("*%", "/opt/local/lib/nim/lib/system/arithmetics.nim");
+	nimfr_("*%", "/Users/svacchanda/Dev/nim-2.2.6/lib/system/arithmetics.nim");
 	result = ((NI64) ((NU64)((NU64)(((NU64) (x_p0))) * (NU64)(((NU64) (y_p1))))));
 	popFrame();
 	return result;
 }
 static N_INLINE(NF, toBiggestFloat__system_u1684)(NI64 i_p0) {
 	NF result;
-	nimfr_("toBiggestFloat", "/opt/local/lib/nim/lib/system.nim");
-	nimlf_(1301, "/opt/local/lib/nim/lib/system.nim");	result = ((NF) (i_p0));
+	nimfr_("toBiggestFloat", "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");
+	nimlf_(1301, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	result = ((NF) (i_p0));
 	popFrame();
 	return result;
 }
@@ -165,7 +165,7 @@ LA12_: ;
 }
 static N_INLINE(NI64, minuspercent___system_u821)(NI64 x_p0, NI64 y_p1) {
 	NI64 result;
-	nimfr_("-%", "/opt/local/lib/nim/lib/system/arithmetics.nim");
+	nimfr_("-%", "/Users/svacchanda/Dev/nim-2.2.6/lib/system/arithmetics.nim");
 	result = ((NI64) ((NU64)((NU64)(((NU64) (x_p0))) - (NU64)(((NU64) (y_p1))))));
 	popFrame();
 	return result;

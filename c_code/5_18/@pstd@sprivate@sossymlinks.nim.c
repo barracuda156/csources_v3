@@ -100,9 +100,9 @@ static N_INLINE(void, popFrame)(void) {
 }
 N_LIB_PRIVATE N_NIMCALL(void, createSymlink__stdZprivateZossymlinks_u13)(NimStringV2 src_p0, NimStringV2 dest_p1) {
 NIM_BOOL* nimErr_;
-	nimfr_("createSymlink", "/opt/local/lib/nim/lib/std/private/ossymlinks.nim");
+	nimfr_("createSymlink", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/ossymlinks.nim");
 {nimErr_ = nimErrorFlag();
-	nimlf_(55, "/opt/local/lib/nim/lib/std/private/ossymlinks.nim");	{
+	nimlf_(55, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/ossymlinks.nim");	{
 		int T3_;
 		NimStringV2 colontmpD_;
 		NI32 T7_;
@@ -124,7 +124,7 @@ NIM_BOOL* nimErr_;
 			LA6_:;
 		}
 		{
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			eqdestroy___system_u2629(colontmpD_);
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD_);
 		}
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
@@ -136,20 +136,20 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, expandSymlink__stdZprivateZossymlinks_u19)(
 	NimStringV2 result;
 	NI bufLen_1;
 NIM_BOOL* nimErr_;
-	nimfr_("expandSymlink", "/opt/local/lib/nim/lib/std/private/ossymlinks.nim");
+	nimfr_("expandSymlink", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/ossymlinks.nim");
 {nimErr_ = nimErrorFlag();
 	result.len = 0; result.p = NIM_NIL;
-	nimlf_(68, "/opt/local/lib/nim/lib/std/private/ossymlinks.nim");	bufLen_1 = ((NI)1024);
+	nimlf_(68, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/ossymlinks.nim");	bufLen_1 = ((NI)1024);
 	{
 		nimln_(69);		while (1) {
 			NimStringV2 T3_;
 			NI len_1;
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			nimlf_(70, "/opt/local/lib/nim/lib/std/private/ossymlinks.nim");			if ((bufLen_1) < ((NI)0) || (bufLen_1) > ((NI)IL64(9223372036854775807))){ raiseRangeErrorI(bufLen_1, ((NI)0), ((NI)IL64(9223372036854775807))); goto BeforeRet_;
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			nimlf_(70, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/ossymlinks.nim");			if ((bufLen_1) < ((NI)0) || (bufLen_1) > ((NI)IL64(9223372036854775807))){ raiseRangeErrorI(bufLen_1, ((NI)0), ((NI)IL64(9223372036854775807))); goto BeforeRet_;
 			}
 			T3_.len = 0; T3_.p = NIM_NIL;
 			T3_ = mnewString((bufLen_1));
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			eqsink___system_u2638((&result), T3_);
-			nimlf_(71, "/opt/local/lib/nim/lib/std/private/ossymlinks.nim");			len_1 = readlink(nimToCStringConv(symlinkPath_p0), nimToCStringConv(result), bufLen_1);
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqsink___system_u2638((&result), T3_);
+			nimlf_(71, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/ossymlinks.nim");			len_1 = readlink(nimToCStringConv(symlinkPath_p0), nimToCStringConv(result), bufLen_1);
 			nimln_(72);			{
 				NI32 T8_;
 				if (!(len_1 < ((NI)0))) goto LA6_;

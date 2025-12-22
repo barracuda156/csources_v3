@@ -97,9 +97,9 @@ static N_INLINE(void, popFrame)(void) {
 }
 N_LIB_PRIVATE N_NIMCALL(void, createSymlink__stdZprivateZossymlinks_u13)(NimStringV2 src_p0, NimStringV2 dest_p1) {
 NIM_BOOL* nimErr_;
-	nimfr_("createSymlink", "/opt/local/lib/nim/lib/std/private/ossymlinks.nim");
+	nimfr_("createSymlink", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/ossymlinks.nim");
 {nimErr_ = nimErrorFlag();
-	nimlf_(55, "/opt/local/lib/nim/lib/std/private/ossymlinks.nim");	{
+	nimlf_(55, "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/ossymlinks.nim");	{
 		int T3_;
 		NimStringV2 colontmpD_;
 		NI32 T7_;
@@ -122,7 +122,7 @@ NIM_BOOL* nimErr_;
 			LA6_:;
 		}
 		{
-			nimlf_(1699, "/opt/local/lib/nim/lib/system.nim");			eqdestroy___system_u2629(colontmpD_);
+			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD_);
 		}
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
@@ -132,7 +132,7 @@ LA4_: ;
 }
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, expandSymlink__stdZprivateZossymlinks_u19)(NimStringV2 symlinkPath_p0) {
 	NimStringV2 result;
-	nimfr_("expandSymlink", "/opt/local/lib/nim/lib/std/private/ossymlinks.nim");
+	nimfr_("expandSymlink", "/Users/svacchanda/Dev/nim-2.2.6/lib/std/private/ossymlinks.nim");
 	result.len = 0; result.p = NIM_NIL;
 	nimln_(1699);	eqcopy___system_u2632((&result), symlinkPath_p0);
 	popFrame();

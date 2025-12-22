@@ -17,26 +17,26 @@
 #undef far
 #undef powerpc
 #undef unix
-typedef struct tyObject_Double__RSHi1gZLxCCa4KmZxwrAPg tyObject_Double__RSHi1gZLxCCa4KmZxwrAPg;
-typedef struct tyObject_uint64x2__89aqplP4M9czKZLP9aC7SkaSg tyObject_uint64x2__89aqplP4M9czKZLP9aC7SkaSg;
-typedef struct tyObject_MulCmp__IOzKfdoxpiHoeMBW9cWwLpQ tyObject_MulCmp__IOzKfdoxpiHoeMBW9cWwLpQ;
-struct tyObject_Double__RSHi1gZLxCCa4KmZxwrAPg {
+typedef struct tyObject_Double__Pf011jIxfc0etjoqz7Fl2Q tyObject_Double__Pf011jIxfc0etjoqz7Fl2Q;
+typedef struct tyObject_uint64x2__MEW9c9b4Z7r8Ah9b9av9bOBhTBQ tyObject_uint64x2__MEW9c9b4Z7r8Ah9b9av9bOBhTBQ;
+typedef struct tyObject_MulCmp__rcGfEWtSAfH9cLSyW84p4Rg tyObject_MulCmp__rcGfEWtSAfH9cLSyW84p4Rg;
+struct tyObject_Double__Pf011jIxfc0etjoqz7Fl2Q {
 	NU64 bits;
 };
-struct tyObject_uint64x2__89aqplP4M9czKZLP9aC7SkaSg {
+struct tyObject_uint64x2__MEW9c9b4Z7r8Ah9b9av9bOBhTBQ {
 	NU64 hi;
 	NU64 lo;
 };
-typedef tyObject_uint64x2__89aqplP4M9czKZLP9aC7SkaSg tyArray__Otljz4qxkA64hj0A9bdwKBg[619];
-struct tyObject_MulCmp__IOzKfdoxpiHoeMBW9cWwLpQ {
+typedef tyObject_uint64x2__MEW9c9b4Z7r8Ah9b9av9bOBhTBQ tyArray__N8XblBbDuJThmryeB35h4g[619];
+struct tyObject_MulCmp__rcGfEWtSAfH9cLSyW84p4Rg {
 	NU64 mul;
 	NU64 cmp;
 };
-typedef tyObject_MulCmp__IOzKfdoxpiHoeMBW9cWwLpQ tyArray__9bPZYRiMfXfCtA7e53mH17A[25];
+typedef tyObject_MulCmp__rcGfEWtSAfH9cLSyW84p4Rg tyArray__mvwfWhiPd7QOx1lF9aNNEDQ[25];
 static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1);
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
-N_LIB_PRIVATE NIM_CONST tyArray__Otljz4qxkA64hj0A9bdwKBg pow10__stdZprivateZdragonbox_u125 = {{18408377700990114895ULL, 2731688931043774331ULL}
+N_LIB_PRIVATE NIM_CONST tyArray__N8XblBbDuJThmryeB35h4g pow10__stdZprivateZdragonbox_u125 = {{18408377700990114895ULL, 2731688931043774331ULL}
 ,
 {11505236063118821809ULL, 8624834609543440813ULL}
 ,
@@ -1275,7 +1275,7 @@ N_LIB_PRIVATE NIM_CONST tyArray__Otljz4qxkA64hj0A9bdwKBg pow10__stdZprivateZdrag
 {17800590868057611064ULL, 13315998749649870503ULL}
 }
 ;
-N_LIB_PRIVATE NIM_CONST tyArray__9bPZYRiMfXfCtA7e53mH17A mod5__stdZprivateZdragonbox_u208 = {{1ULL, 18446744073709551615ULL}
+N_LIB_PRIVATE NIM_CONST tyArray__mvwfWhiPd7QOx1lF9aNNEDQ mod5__stdZprivateZdragonbox_u208 = {{1ULL, 18446744073709551615ULL}
 ,
 {14757395258967641293ULL, 3689348814741910323ULL}
 ,
@@ -1327,7 +1327,7 @@ N_LIB_PRIVATE NIM_CONST tyArray__9bPZYRiMfXfCtA7e53mH17A mod5__stdZprivateZdrago
 }
 ;
 extern NIM_BOOL nimInErrorMode__system_u4256;
-N_LIB_PRIVATE N_NIMCALL(NU64, physicalSignificand__stdZprivateZdragonbox_u54)(tyObject_Double__RSHi1gZLxCCa4KmZxwrAPg this_p0) {
+N_LIB_PRIVATE N_NIMCALL(NU64, physicalSignificand__stdZprivateZdragonbox_u54)(tyObject_Double__Pf011jIxfc0etjoqz7Fl2Q this_p0) {
 	NU64 result;
 {	result = (NU64)(this_p0.bits & 4503599627370495ULL);
 	goto BeforeRet_;
@@ -1351,25 +1351,25 @@ NIM_BOOL* nimErr_;
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
 }
-N_LIB_PRIVATE N_NIMCALL(tyObject_Double__RSHi1gZLxCCa4KmZxwrAPg, constructDouble__stdZprivateZdragonbox_u51)(NF value_p0) {
-	tyObject_Double__RSHi1gZLxCCa4KmZxwrAPg result;
+N_LIB_PRIVATE N_NIMCALL(tyObject_Double__Pf011jIxfc0etjoqz7Fl2Q, constructDouble__stdZprivateZdragonbox_u51)(NF value_p0) {
+	tyObject_Double__Pf011jIxfc0etjoqz7Fl2Q result;
 	NU64 colontmpD_;
 	union { NF source; NU64 dest; } LOC1;
-	nimZeroMem((void*)(&result), sizeof(tyObject_Double__RSHi1gZLxCCa4KmZxwrAPg));
+	nimZeroMem((void*)(&result), sizeof(tyObject_Double__Pf011jIxfc0etjoqz7Fl2Q));
 	colontmpD_ = (NU64)0;
 	LOC1.source = value_p0;
 	colontmpD_ = LOC1.dest;
 	result.bits = colontmpD_;
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NU64, physicalExponent__stdZprivateZdragonbox_u57)(tyObject_Double__RSHi1gZLxCCa4KmZxwrAPg this_p0) {
+N_LIB_PRIVATE N_NIMCALL(NU64, physicalExponent__stdZprivateZdragonbox_u57)(tyObject_Double__Pf011jIxfc0etjoqz7Fl2Q this_p0) {
 	NU64 result;
 {	result = (NU64)((NU64)((NU64)(this_p0.bits & 9218868437227405312ULL)) >> (NU64)(((NI32)52)));
 	goto BeforeRet_;
 	}BeforeRet_: ;
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NI, signBit__stdZprivateZdragonbox_u76)(tyObject_Double__RSHi1gZLxCCa4KmZxwrAPg this_p0) {
+N_LIB_PRIVATE N_NIMCALL(NI, signBit__stdZprivateZdragonbox_u76)(tyObject_Double__Pf011jIxfc0etjoqz7Fl2Q this_p0) {
 	NI result;
 {	result = !(((NU64)(this_p0.bits & 9223372036854775808ULL) == 0ULL));
 	goto BeforeRet_;
