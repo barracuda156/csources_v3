@@ -48,6 +48,7 @@ if [ $# -eq 1 ] ; then
   esac
   echo "removing files..."
 
+  rm -f $bindir/nim
   rm -f $configdir/nim.cfg
   rm -f $configdir/nimdoc.cfg
   rm -f $configdir/nimdoc.tex.cfg

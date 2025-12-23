@@ -1430,9 +1430,9 @@ static N_INLINE(NIM_BOOL, equalMem__system_u1736)(void* a_p0, void* b_p1, NI siz
 static N_INLINE(int, nimCmpMem)(void* a_p0, void* b_p1, NI size_p2);
 N_LIB_PRIVATE N_NIMCALL(void, handleCmdInput__commands_u1182)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
 N_LIB_PRIVATE N_NIMCALL(void, handleStdinInput__commands_u1177)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
-N_LIB_PRIVATE N_NIMCALL(void, setFromProjectName__options_u3675)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 projectName_p1);
+N_LIB_PRIVATE N_NIMCALL(void, setFromProjectName__options_u3674)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 projectName_p1);
 N_LIB_PRIVATE N_NIMCALL(void, eqsink___system_u2638)(NimStringV2* dest_p0, NimStringV2 src_p1);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, canonicalizePath__options_u3671)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 path_p1);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, canonicalizePath__options_u3670)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 path_p1);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, nosgetCurrentDir)(void);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___system_u2629)(NimStringV2 dest_p0);
 N_LIB_PRIVATE N_NIMCALL(void, setCmd__commands_u1209)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw cmd_p1);
@@ -1813,7 +1813,7 @@ LA9_: ;
 LA10_: ;
 	{
 		nimln_(48);		if (!!(((*conf_p1).projectName.len == 0))) goto LA13_;
-		nimln_(49);		setFromProjectName__options_u3675(conf_p1, (*conf_p1).projectName);
+		nimln_(49);		setFromProjectName__options_u3674(conf_p1, (*conf_p1).projectName);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	goto LA1_;
@@ -1825,7 +1825,7 @@ LA13_: ;
 		nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		nimlf_(51, "/Users/svacchanda/Dev/nim-2.2.6/compiler/cmdlinehelper.nim");		colontmpD_ = nosgetCurrentDir();
 		if (NIM_UNLIKELY(*nimErr_)) goto LA16_;
 		T17_.len = 0; T17_.p = NIM_NIL;
-		T17_ = canonicalizePath__options_u3671(conf_p1, colontmpD_);
+		T17_ = canonicalizePath__options_u3670(conf_p1, colontmpD_);
 		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___system_u2629(T17_); goto LA16_;}
 		nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		eqsink___system_u2638((&(*conf_p1).projectPath), T17_);
 		{

@@ -1630,7 +1630,7 @@ static const struct {
   NI cap; NIM_CHAR data[3+1];
 } TM__yPaXWsjYzX34ek6cfhmMUw_53 = { 3 | NIM_STRLIT_FLAG, "dot" };
 static const NimStringV2 TM__yPaXWsjYzX34ek6cfhmMUw_54 = {3, (NimStrPayload*)&TM__yPaXWsjYzX34ek6cfhmMUw_53};
-extern NIM_CONST tyArray__pq8mfSp9bT2PbH9bKmz9cdOdA stdlibDirs__options_u3937;
+extern NIM_CONST tyArray__pq8mfSp9bT2PbH9bKmz9cdOdA stdlibDirs__options_u3936;
 extern TFrame* framePtr__system_u2667;
 extern NIM_BOOL nimInErrorMode__system_u4256;
 static NIM_CONST NU32 TM__yPaXWsjYzX34ek6cfhmMUw_2[3] = {3701606400, 2420798720, 77246976};
@@ -2115,7 +2115,7 @@ LA17_: ;
 					nimlf_(43, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/iterators.nim");					i_1 = ((NI)0);
 					{
 						nimln_(44);						while (1) {
-							nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");							eqcopy___system_u2632((&dir_1), stdlibDirs__options_u3937[(i_1)- 0]);
+							nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");							eqcopy___system_u2632((&dir_1), stdlibDirs__options_u3936[(i_1)- 0]);
 							nimlf_(54, "/Users/svacchanda/Dev/nim-2.2.6/compiler/depends.nim");							{
 								NIM_BOOL T26_;
 								tyTuple__7q7q3E6Oj24ZNVJb9aonhAg colontmpD_;

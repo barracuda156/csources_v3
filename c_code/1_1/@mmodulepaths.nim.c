@@ -463,7 +463,7 @@ static N_INLINE(void, popFrame)(void);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, getModuleName__modulepaths_u10)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p1);
 static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1);
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, pathSubs__options_u3752)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 p_p1, NimStringV2 config_p2);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, pathSubs__options_u3751)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 p_p1, NimStringV2 config_p2);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___nodekinds_u168)(tyEnum_TNodeKind__x4wdWsBA6XBD9brKs9cC6Yug e_p0);
 N_LIB_PRIVATE N_NOINLINE(void, raiseFieldErrorStr)(NimStringV2 f_p0, NimStringV2 discVal_p1);
 N_LIB_PRIVATE N_NIMCALL(tyTuple__7q7q3E6Oj24ZNVJb9aonhAg, nossplitFile)(NimStringV2 path_p0);
@@ -485,8 +485,8 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, renderTree__renderer_u59)(tyObject_TNode__g
 N_LIB_PRIVATE N_NIMCALL(void, prepareAdd)(NimStringV2* s_p0, NI addLen_p1);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___ast_u3261)(tyObject_TNode__glIoDmeM2cKACf9btlenMgA* dest_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, nsuFormatSingleElem)(NimStringV2 formatstr_p0, NimStringV2 a_p1);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, findModule__options_u4098)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 modulename_p1, NimStringV2 currentModule_p2);
-static N_INLINE(NIM_BOOL, isEmpty__options_u4083)(NimStringV2 x_p0);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, findModule__options_u4097)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 modulename_p1, NimStringV2 currentModule_p2);
+static N_INLINE(NIM_BOOL, isEmpty__options_u4082)(NimStringV2 x_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___renderer_u2165)(tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p0);
 N_LIB_PRIVATE N_NIMCALL(NI32, fileInfoIdx__msgs_u385)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 filename_p1);
 static const struct {
@@ -1005,7 +1005,7 @@ NIM_BOOL* nimErr_;
 		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___stdZprivateZosdirs_u88(T5_); goto LA3_;}
 		colontmpD__2 = T5_;
 		T6_.len = 0; T6_.p = NIM_NIL;
-		T6_ = pathSubs__options_u3752(conf_p0, (*n_p1)._kind_3.strVal, colontmpD__2.Field0);
+		T6_ = pathSubs__options_u3751(conf_p0, (*n_p1)._kind_3.strVal, colontmpD__2.Field0);
 		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___system_u2629(T6_); goto LA3_;}
 		result = T6_;
 		{
@@ -1282,7 +1282,7 @@ LA20_: ;
 	popFrame();
 	return result;
 }
-static N_INLINE(NIM_BOOL, isEmpty__options_u4083)(NimStringV2 x_p0) {
+static N_INLINE(NIM_BOOL, isEmpty__options_u4082)(NimStringV2 x_p0) {
 	NIM_BOOL result;
 	nimfr_("isEmpty", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 	result = (x_p0.len == ((NI)0));
@@ -1305,12 +1305,12 @@ NIM_BOOL* nimErr_;
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	nimln_(73);	colontmpD_ = toFullPath__msgs_u605(conf_p0, (*n_p1).info.fileIndex);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
-	fullPath_1 = findModule__options_u4098(conf_p0, modulename_1, colontmpD_);
+	fullPath_1 = findModule__options_u4097(conf_p0, modulename_1, colontmpD_);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	nimln_(74);	{
 		NIM_BOOL T4_;
 		T4_ = (NIM_BOOL)0;
-		T4_ = isEmpty__options_u4083(fullPath_1);
+		T4_ = isEmpty__options_u4082(fullPath_1);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 		if (!T4_) goto LA5_;
 		nimln_(75);		{

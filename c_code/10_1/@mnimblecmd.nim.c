@@ -344,7 +344,7 @@ struct tySequence__6j25whH7XTBoIXcM0x1T7A_Content { NI cap; tyTuple__9cdgeqdY7FR
 static N_INLINE(NIM_BOOL, contains__nimblecmd_u17)(NimStringV2* a_p0, NI a_p0Len_0, NimStringV2 item_p1);
 static N_INLINE(NI, find__nimblecmd_u22)(NimStringV2* a_p0, NI a_p0Len_0, NimStringV2 item_p1);
 N_LIB_PRIVATE N_NOINLINE(void, raiseIndexError2)(NI i_p0, NI n_p1);
-N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, eqeq___options_u3654)(NimStringV2 x_p0, NimStringV2 y_p1);
+N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, eqeq___options_u3653)(NimStringV2 x_p0, NimStringV2 y_p1);
 N_LIB_PRIVATE N_NOINLINE(void, raiseOverflow)(void);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
 static N_INLINE(void, nimFrame)(TFrame* s_p0);
@@ -530,7 +530,7 @@ NIM_BOOL* nimErr_;
 				nimln_(1766);				{
 					NIM_BOOL T6_;
 					T6_ = (NIM_BOOL)0;
-					T6_ = eqeq___options_u3654((*i_1), item_p1);
+					T6_ = eqeq___options_u3653((*i_1), item_p1);
 					if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 					if (!T6_) goto LA7_;
 					goto BeforeRet_;
@@ -1787,7 +1787,7 @@ NIM_BOOL* nimErr_;
 				nimln_(1766);				{
 					NIM_BOOL T7_;
 					T7_ = (NIM_BOOL)0;
-					T7_ = eqeq___options_u3654((*i_1), item_p1);
+					T7_ = eqeq___options_u3653((*i_1), item_p1);
 					if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 					if (!T7_) goto LA8_;
 					goto BeforeRet_;

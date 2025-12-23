@@ -388,7 +388,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, toFullPath__msgs_u624)(tyObject_ConfigRefco
 N_LIB_PRIVATE N_NIMCALL(tyObject_TIdent__QYkDa9cS0Nii6pHQECIVbTQ*, getIdent__idents_u208)(tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw* ic_p0, NimStringV2 identifier_p1);
 N_LIB_PRIVATE N_NIMCALL(void, splitFile__pathutils_u39)(NimStringV2 x_p0, tyTuple__7q7q3E6Oj24ZNVJb9aonhAg* Result);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg, newLineInfo__msgs_u419)(NI32 fileInfoIdx_p0, NI line_p1, NI col_p2);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, getPackageName__options_u3732)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 path_p1);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, getPackageName__options_u3731)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 path_p1);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ*, newSym__ast_u4220)(tyEnum_TSymKind__PWkeBIqUek9caJdN9cVpzM7Q symKind_p0, tyObject_TIdent__QYkDa9cS0Nii6pHQECIVbTQ* name_p1, tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ* idgen_p2, tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* owner_p3, tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg info_p4, tySet_tyEnum_TOption__MDtAAcBXengiSJgpWNXC3Q options_p5);
 N_LIB_PRIVATE N_NIMCALL(tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ*, idGeneratorForPackage__ast_u3125)(NI32 nextIdWillBe_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___ast_u3103)(tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ* dest_p0);
@@ -491,7 +491,7 @@ NIM_BOOL* nimErr_;
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	nimln_(31);	info_1 = newLineInfo__msgs_u419(fileIdx_p2, ((NI)1), ((NI)1));
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
-	nimln_(32);	pkgName_1 = getPackageName__options_u3732(conf_p0, filename_1);
+	nimln_(32);	pkgName_1 = getPackageName__options_u3731(conf_p0, filename_1);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	nimln_(33);	pkgIdent_1 = getIdent__idents_u208(cache_p1, pkgName_1);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;

@@ -128,7 +128,7 @@ LA8_: ;
 static N_INLINE(void, popFrame)(void) {
 	framePtr__system_u2667 = (*framePtr__system_u2667).prev;
 }
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u3945)(NimStringV2 x_p0) {
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u3944)(NimStringV2 x_p0) {
 	NimStringV2 result;
 	NimStringV2 colontmpD_;
 	nimfr_("$", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
@@ -138,7 +138,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u3945)(NimStringV2 x_p0) {
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u4035)(NimStringV2 x_p0) {
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u4034)(NimStringV2 x_p0) {
 	NimStringV2 result;
 	NimStringV2 colontmpD_;
 	nimfr_("$", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
@@ -180,7 +180,7 @@ NIM_BOOL* nimErr_;
 	popFrame();
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, eqeq___options_u3654)(NimStringV2 x_p0, NimStringV2 y_p1) {
+N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, eqeq___options_u3653)(NimStringV2 x_p0, NimStringV2 y_p1) {
 	NIM_BOOL result;
 NIM_BOOL* nimErr_;
 	nimfr_("==", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");

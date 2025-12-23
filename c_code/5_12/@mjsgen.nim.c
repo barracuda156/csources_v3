@@ -2290,7 +2290,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, nsuUnindent)(NimStringV2 s_p0, NI count_p1,
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, wholeCode__jsgen_u8259)(tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ* graph_p0, tyObject_TJSGen__JEFH86jBReyPV89aK9bksOig* m_p1);
 N_LIB_PRIVATE N_NIMCALL(void, generateIfMethodDispatchers__cgmeth_u1029)(tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ* g_p0, tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ* idgen_p1);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ*, resolveSym__modulegraphs_u3506)(tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ* g_p0, tyObject_LazySym__RfYAQeVsuBav78B1nMX4kQ* t_p1);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, prepareToWriteOutput__options_u3644)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, prepareToWriteOutput__options_u3643)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
 N_LIB_PRIVATE N_NIMCALL(void, genSourceMap__sourcemap_u811)(NimStringV2 source_p0, NimStringV2 outFile_p1, tyObject_SourceMap__P6NkS2IiXTxth9c9c6vVT9brQ* Result);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, percent___jsgen_u8361)(NimStringV2* args_p1, NI args_p1Len_0);
 N_LIB_PRIVATE N_NIMCALL(void, writeFile__stdZsyncio_u532)(NimStringV2 filename_p0, NimStringV2 content_p1);
@@ -29422,7 +29422,7 @@ LA17_: ;
 appendString((&T24_), colontmpD__2);
 appendString((&T24_), colontmpD__3);
 		code_1 = T24_;
-		nimln_(3197);		outFile_1 = prepareToWriteOutput__options_u3644((*m_1).config);
+		nimln_(3197);		outFile_1 = prepareToWriteOutput__options_u3643((*m_1).config);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA23_;
 		nimln_(3199);		{
 			tyObject_SourceMap__P6NkS2IiXTxth9c9c6vVT9brQ map_1;

@@ -393,7 +393,7 @@ N_LIB_PRIVATE N_NOINLINE(void, raiseRangeErrorI)(NI64 i_p0, NI64 a_p1, NI64 b_p2
 static N_INLINE(NIM_BOOL, nimAddInt)(NI a_p0, NI b_p1, NI* res_p2);
 N_LIB_PRIVATE N_NOINLINE(void, raiseOverflow)(void);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, rawNewString)(NI space_p0);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, toGeneratedFile__options_u3818)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 path_p1, NimStringV2 ext_p2);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, toGeneratedFile__options_u3817)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 path_p1, NimStringV2 ext_p2);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___OOZdistZchecksumsZsrcZchecksumsZsha1_u935)(tyArray__YtcvxHNKV4YiecPE9ap1mcA self_p0);
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, open__stdZsyncio_u414)(FILE** f_p0, NimStringV2 filename_p1, tyEnum_FileMode__aSVjmZSaHbpn4VsiAwHiBg mode_p2, NI bufSize_p3);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, readAll__stdZsyncio_u383)(FILE* file_p0);
@@ -731,7 +731,7 @@ appendString((&T7_), cache_p2);
 appendString((&T8_), TM__69a9b06YSkBJW7wqzuZfJ29aQ_9);
 appendString((&T8_), colontmpD__3);
 		colontmpD__4 = T8_;
-		filename_1 = toGeneratedFile__options_u3818(conf_p4, colontmpD__4, TM__69a9b06YSkBJW7wqzuZfJ29aQ_11);
+		filename_1 = toGeneratedFile__options_u3817(conf_p4, colontmpD__4, TM__69a9b06YSkBJW7wqzuZfJ29aQ_11);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA6_;
 		nimln_(37);		f_1 = 0;
 		nimln_(38);		{

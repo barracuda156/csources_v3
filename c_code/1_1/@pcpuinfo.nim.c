@@ -49,7 +49,7 @@ static N_INLINE(void, nimFrame)(TFrame* s_p0);
 N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached__system_u4479)(void);
 static N_INLINE(void, popFrame)(void);
 extern NIM_BOOL nimInErrorMode__system_u4261;
-extern tyProc__rqDB0lSi1Vc0javF8wle7Q Dl_2382364684_;
+extern tyProc__rqDB0lSi1Vc0javF8wle7Q Dl_2399141900_;
 extern TFrame* framePtr__system_u2667;
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2) {
 	void* T1_;
@@ -96,7 +96,7 @@ static N_INLINE(NI, countProcessorsImpl__pureZconcurrencyZcpuinfo_u6)(void) {
 	nimfr_("countProcessorsImpl", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/concurrency/cpuinfo.nim");
 {	result = (NI)0;
 	nimZeroMem((void*)(&si_1), sizeof(tyObject_SystemInfo__IeUcgIg9ah6chOCfxb9caEfQ));
-	nimlf_(78, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/concurrency/cpuinfo.nim");	Dl_2382364684_((&si_1));
+	nimlf_(78, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/concurrency/cpuinfo.nim");	Dl_2399141900_((&si_1));
 	nimln_(79);	if ((NI64)(si_1.dwNumberOfProcessors) < ((NI)(-2147483647 -1)) || (NI64)(si_1.dwNumberOfProcessors) > ((NI)2147483647)){ raiseRangeErrorI(si_1.dwNumberOfProcessors, ((NI)(-2147483647 -1)), ((NI)2147483647)); goto BeforeRet_;
 	}
 	result = ((NI) (si_1.dwNumberOfProcessors));

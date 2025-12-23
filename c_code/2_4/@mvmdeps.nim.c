@@ -271,7 +271,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, nosparentDir)(NimStringV2 path_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, toFullPath__msgs_u624)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NI32 fileIdx_p1);
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, nosfileExists)(NimStringV2 filename_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqsink___system_u2638)(NimStringV2* dest_p0, NimStringV2 src_p1);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, findFile__options_u4087)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 f_p1, NIM_BOOL suppressStdlib_p2);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, findFile__options_u4086)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 f_p1, NIM_BOOL suppressStdlib_p2);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, readFile__stdZsyncio_u527)(NimStringV2 filename_p0);
 N_LIB_PRIVATE N_NIMCALL(NI32, fileInfoIdx__msgs_u404)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 filename_p1);
 N_LIB_PRIVATE N_NIMCALL(void, appendToModule__ast_u4673)(tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* m_p0, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p1);
@@ -3628,7 +3628,7 @@ NIM_BOOL* nimErr_;
 		if (NIM_UNLIKELY(*nimErr_)) goto LA2_;
 		if (!!(T8_)) goto LA9_;
 		nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		nimlf_(22, "/Users/svacchanda/Dev/nim-2.2.6/compiler/vmdeps.nim");		T11_.len = 0; T11_.p = NIM_NIL;
-		T11_ = findFile__options_u4087(conf_p3, file_p0, NIM_FALSE);
+		T11_ = findFile__options_u4086(conf_p3, file_p0, NIM_FALSE);
 		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___system_u2629(T11_); goto LA2_;}
 		nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		eqsink___system_u2638((&filename_1), T11_);
 	}

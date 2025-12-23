@@ -821,7 +821,7 @@ N_LIB_PRIVATE N_NIMCALL(void, eqsink___ast_u3270)(tyObject_TNode__glIoDmeM2cKACf
 N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, copyTree__ast_u6920)(tyObject_TNode__glIoDmeM2cKACf9btlenMgA* src_p0);
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, isRecursiveStructuralType__types_u4134)(tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* t_p0, tyObject_PackedSet__qA9cIf5S6ff7ZfqJQzs9c9avA* cycleDetector_p1);
 N_LIB_PRIVATE N_NIMCALL(void, eqcopy___pureZcollectionsZintsets_u250)(tyObject_PackedSet__qA9cIf5S6ff7ZfqJQzs9c9avA* dest_p0, tyObject_PackedSet__qA9cIf5S6ff7ZfqJQzs9c9avA* src_p1);
-N_LIB_PRIVATE N_NIMCALL(NI16, floatInt64Align__options_u4321)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
+N_LIB_PRIVATE N_NIMCALL(NI16, floatInt64Align__options_u4320)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, canFormAcycleAux__types_u610)(tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ* g_p0, tyObject_PackedSet__qA9cIf5S6ff7ZfqJQzs9c9avA* marker_p1, tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* typ_p2, tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* orig_p3, NIM_BOOL withRef_p4, NIM_BOOL hasTrace_p5);
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, sameBackendType__types_u643)(tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* x_p0, tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* y_p1);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ*, getAttachedOp__modulegraphs_u5006)(tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ* g_p0, tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* t_p1, tyEnum_TTypeAttachedOp__SrhnVui9arR1BdTZHZa3s4Q op_p2);
@@ -13306,7 +13306,7 @@ LA11_: ;
 	{
 		NI16 T14_;
 		nimln_(1527);		T14_ = (NI16)0;
-		T14_ = floatInt64Align__options_u4321(conf_p0);
+		T14_ = floatInt64Align__options_u4320(conf_p0);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		(*t_p1).align = T14_;
 	}
@@ -15952,7 +15952,7 @@ LA98_: ;
 				NI16 T101_;
 				nimln_(300);				(*typ_p1).size = IL64(8);
 				nimln_(301);				T101_ = (NI16)0;
-				T101_ = floatInt64Align__options_u4321(conf_p0);
+				T101_ = floatInt64Align__options_u4320(conf_p0);
 				if (NIM_UNLIKELY(*nimErr_)) goto LA11_;
 				(*typ_p1).align = T101_;
 			}
@@ -16011,7 +16011,7 @@ LA119_: ;
 				nimln_(317);				if (!(length_1 <= IL64(64))) goto LA122_;
 				nimln_(318);				(*typ_p1).size = IL64(8);
 				nimln_(319);				T124_ = (NI16)0;
-				T124_ = floatInt64Align__options_u4321(conf_p0);
+				T124_ = floatInt64Align__options_u4320(conf_p0);
 				if (NIM_UNLIKELY(*nimErr_)) goto LA109_;
 				(*typ_p1).align = T124_;
 			}

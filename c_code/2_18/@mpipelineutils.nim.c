@@ -1338,8 +1338,8 @@ static N_INLINE(int, nimCmpMem)(void* a_p0, void* b_p1, NI size_p2);
 static N_INLINE(void, nimFrame)(TFrame* s_p0);
 N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached__system_u4479)(void);
 static N_INLINE(void, popFrame)(void);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, findModule__options_u4107)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 modulename_p1, NimStringV2 currentModule_p2);
-static N_INLINE(NIM_BOOL, isEmpty__options_u4092)(NimStringV2 x_p0);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, findModule__options_u4106)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 modulename_p1, NimStringV2 currentModule_p2);
+static N_INLINE(NIM_BOOL, isEmpty__options_u4091)(NimStringV2 x_p0);
 N_LIB_PRIVATE N_NIMCALL(NI32, fileInfoIdx__msgs_u404)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 filename_p1);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___system_u2629)(NimStringV2 dest_p0);
 extern NIM_BOOL nimInErrorMode__system_u4261;
@@ -1421,7 +1421,7 @@ LA1_: ;
 	}BeforeRet_: ;
 	popFrame();
 }
-static N_INLINE(NIM_BOOL, isEmpty__options_u4092)(NimStringV2 x_p0) {
+static N_INLINE(NIM_BOOL, isEmpty__options_u4091)(NimStringV2 x_p0) {
 	NIM_BOOL result;
 	nimfr_("isEmpty", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 	result = (x_p0.len == ((NI)0));
@@ -1436,12 +1436,12 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI32)0;
 	fullPath_1.len = 0; fullPath_1.p = NIM_NIL;
-	nimln_(10);	fullPath_1 = findModule__options_u4107(conf_p0, module_p1, relativeTo_p2);
+	nimln_(10);	fullPath_1 = findModule__options_u4106(conf_p0, module_p1, relativeTo_p2);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	nimln_(11);	{
 		NIM_BOOL T4_;
 		T4_ = (NIM_BOOL)0;
-		T4_ = isEmpty__options_u4092(fullPath_1);
+		T4_ = isEmpty__options_u4091(fullPath_1);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 		if (!T4_) goto LA5_;
 		nimln_(12);		result = ((NI32)-1);

@@ -1999,7 +1999,7 @@ c_code/2_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pos.nim.c -o c_code/2_3/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseopt.nim.c -o c_code/2_3/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@phashes.nim.c -o c_code/2_1/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@phashes.nim.c -o c_code/2_3/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pstrtabs.nim.c -o c_code/2_3/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@ptables.nim.c -o c_code/2_3/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstrformat.nim.c -o c_code/2_1/@pstrformat.nim.o
@@ -2194,7 +2194,7 @@ c_code/2_1/@pstd@scmdline.nim.o \
 c_code/2_3/@pos.nim.o \
 c_code/2_3/@pparseopt.nim.o \
 c_code/1_1/@psequtils.nim.o \
-c_code/2_1/@phashes.nim.o \
+c_code/2_3/@phashes.nim.o \
 c_code/2_3/@pstrtabs.nim.o \
 c_code/2_3/@ptables.nim.o \
 c_code/2_1/@pstrformat.nim.o \
@@ -3166,7 +3166,7 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pos.nim.c -o c_code/2_4/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseopt.nim.c -o c_code/2_4/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@phashes.nim.c -o c_code/2_2/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_6/@phashes.nim.c -o c_code/2_6/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pstrtabs.nim.c -o c_code/2_4/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@ptables.nim.c -o c_code/2_4/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstrformat.nim.c -o c_code/2_2/@pstrformat.nim.o
@@ -3361,7 +3361,7 @@ c_code/2_2/@pstd@scmdline.nim.o \
 c_code/2_4/@pos.nim.o \
 c_code/2_4/@pparseopt.nim.o \
 c_code/1_2/@psequtils.nim.o \
-c_code/2_2/@phashes.nim.o \
+c_code/2_6/@phashes.nim.o \
 c_code/2_4/@pstrtabs.nim.o \
 c_code/2_4/@ptables.nim.o \
 c_code/2_2/@pstrformat.nim.o \
@@ -3944,7 +3944,7 @@ c_code/2_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pos.nim.c -o c_code/2_3/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseopt.nim.c -o c_code/2_3/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@phashes.nim.c -o c_code/2_1/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@phashes.nim.c -o c_code/2_3/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pstrtabs.nim.c -o c_code/2_3/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@ptables.nim.c -o c_code/2_3/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstrformat.nim.c -o c_code/2_1/@pstrformat.nim.o
@@ -4139,7 +4139,7 @@ c_code/2_1/@pstd@scmdline.nim.o \
 c_code/2_3/@pos.nim.o \
 c_code/2_3/@pparseopt.nim.o \
 c_code/1_1/@psequtils.nim.o \
-c_code/2_1/@phashes.nim.o \
+c_code/2_3/@phashes.nim.o \
 c_code/2_3/@pstrtabs.nim.o \
 c_code/2_3/@ptables.nim.o \
 c_code/2_1/@pstrformat.nim.o \
@@ -4333,7 +4333,7 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pos.nim.c -o c_code/2_4/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseopt.nim.c -o c_code/2_4/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@phashes.nim.c -o c_code/2_2/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_6/@phashes.nim.c -o c_code/2_6/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pstrtabs.nim.c -o c_code/2_4/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@ptables.nim.c -o c_code/2_4/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstrformat.nim.c -o c_code/2_2/@pstrformat.nim.o
@@ -4528,7 +4528,7 @@ c_code/2_2/@pstd@scmdline.nim.o \
 c_code/2_4/@pos.nim.o \
 c_code/2_4/@pparseopt.nim.o \
 c_code/1_2/@psequtils.nim.o \
-c_code/2_2/@phashes.nim.o \
+c_code/2_6/@phashes.nim.o \
 c_code/2_4/@pstrtabs.nim.o \
 c_code/2_4/@ptables.nim.o \
 c_code/2_2/@pstrformat.nim.o \
@@ -4722,7 +4722,7 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pos.nim.c -o c_code/2_4/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseopt.nim.c -o c_code/2_4/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@phashes.nim.c -o c_code/2_2/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_6/@phashes.nim.c -o c_code/2_6/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pstrtabs.nim.c -o c_code/2_4/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@ptables.nim.c -o c_code/2_4/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstrformat.nim.c -o c_code/2_2/@pstrformat.nim.o
@@ -4917,7 +4917,7 @@ c_code/2_2/@pstd@scmdline.nim.o \
 c_code/2_4/@pos.nim.o \
 c_code/2_4/@pparseopt.nim.o \
 c_code/1_2/@psequtils.nim.o \
-c_code/2_2/@phashes.nim.o \
+c_code/2_6/@phashes.nim.o \
 c_code/2_4/@pstrtabs.nim.o \
 c_code/2_4/@ptables.nim.o \
 c_code/2_2/@pstrformat.nim.o \
@@ -5111,7 +5111,7 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pos.nim.c -o c_code/2_3/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseopt.nim.c -o c_code/2_3/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@phashes.nim.c -o c_code/2_1/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@phashes.nim.c -o c_code/2_3/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pstrtabs.nim.c -o c_code/2_3/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@ptables.nim.c -o c_code/2_3/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstrformat.nim.c -o c_code/2_1/@pstrformat.nim.o
@@ -5306,7 +5306,7 @@ c_code/2_1/@pstd@scmdline.nim.o \
 c_code/2_3/@pos.nim.o \
 c_code/2_3/@pparseopt.nim.o \
 c_code/1_1/@psequtils.nim.o \
-c_code/2_1/@phashes.nim.o \
+c_code/2_3/@phashes.nim.o \
 c_code/2_3/@pstrtabs.nim.o \
 c_code/2_3/@ptables.nim.o \
 c_code/2_1/@pstrformat.nim.o \
@@ -5500,7 +5500,7 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pos.nim.c -o c_code/2_3/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseopt.nim.c -o c_code/2_3/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@phashes.nim.c -o c_code/2_1/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@phashes.nim.c -o c_code/2_3/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pstrtabs.nim.c -o c_code/2_3/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@ptables.nim.c -o c_code/2_3/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstrformat.nim.c -o c_code/2_1/@pstrformat.nim.o
@@ -5695,7 +5695,7 @@ c_code/2_1/@pstd@scmdline.nim.o \
 c_code/2_3/@pos.nim.o \
 c_code/2_3/@pparseopt.nim.o \
 c_code/1_1/@psequtils.nim.o \
-c_code/2_1/@phashes.nim.o \
+c_code/2_3/@phashes.nim.o \
 c_code/2_3/@pstrtabs.nim.o \
 c_code/2_3/@ptables.nim.o \
 c_code/2_1/@pstrformat.nim.o \
@@ -6278,7 +6278,7 @@ c_code/2_3/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pos.nim.c -o c_code/2_4/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pparseopt.nim.c -o c_code/2_4/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@phashes.nim.c -o c_code/2_2/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_6/@phashes.nim.c -o c_code/2_6/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pstrtabs.nim.c -o c_code/2_4/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@ptables.nim.c -o c_code/2_4/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstrformat.nim.c -o c_code/2_2/@pstrformat.nim.o
@@ -6473,7 +6473,7 @@ c_code/2_2/@pstd@scmdline.nim.o \
 c_code/2_4/@pos.nim.o \
 c_code/2_4/@pparseopt.nim.o \
 c_code/1_2/@psequtils.nim.o \
-c_code/2_2/@phashes.nim.o \
+c_code/2_6/@phashes.nim.o \
 c_code/2_4/@pstrtabs.nim.o \
 c_code/2_4/@ptables.nim.o \
 c_code/2_2/@pstrformat.nim.o \
@@ -7056,7 +7056,7 @@ c_code/2_4/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pos.nim.c -o c_code/2_3/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pparseopt.nim.c -o c_code/2_3/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@phashes.nim.c -o c_code/2_1/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@phashes.nim.c -o c_code/2_3/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pstrtabs.nim.c -o c_code/2_3/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@ptables.nim.c -o c_code/2_3/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstrformat.nim.c -o c_code/2_1/@pstrformat.nim.o
@@ -7251,7 +7251,7 @@ c_code/2_1/@pstd@scmdline.nim.o \
 c_code/2_3/@pos.nim.o \
 c_code/2_3/@pparseopt.nim.o \
 c_code/1_1/@psequtils.nim.o \
-c_code/2_1/@phashes.nim.o \
+c_code/2_3/@phashes.nim.o \
 c_code/2_3/@pstrtabs.nim.o \
 c_code/2_3/@ptables.nim.o \
 c_code/2_1/@pstrformat.nim.o \
@@ -10198,7 +10198,7 @@ c_code/3_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/3_6/@pos.nim.c -o c_code/3_6/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_6/@pparseopt.nim.c -o c_code/3_6/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_2/@psequtils.nim.c -o c_code/1_2/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_2/@phashes.nim.c -o c_code/3_2/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_6/@phashes.nim.c -o c_code/3_6/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_4/@pstrtabs.nim.c -o c_code/2_4/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_6/@ptables.nim.c -o c_code/3_6/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_2/@pstrformat.nim.c -o c_code/2_2/@pstrformat.nim.o
@@ -10393,7 +10393,7 @@ c_code/2_2/@pstd@scmdline.nim.o \
 c_code/3_6/@pos.nim.o \
 c_code/3_6/@pparseopt.nim.o \
 c_code/1_2/@psequtils.nim.o \
-c_code/3_2/@phashes.nim.o \
+c_code/3_6/@phashes.nim.o \
 c_code/2_4/@pstrtabs.nim.o \
 c_code/3_6/@ptables.nim.o \
 c_code/2_2/@pstrformat.nim.o \
@@ -10650,7 +10650,7 @@ c_code/3_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@pos.nim.c -o c_code/3_16/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@pparseopt.nim.c -o c_code/3_16/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/1_1/@psequtils.nim.c -o c_code/1_1/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/3_1/@phashes.nim.c -o c_code/3_1/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@phashes.nim.c -o c_code/3_16/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_3/@pstrtabs.nim.c -o c_code/2_3/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/3_16/@ptables.nim.c -o c_code/3_16/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/2_1/@pstrformat.nim.c -o c_code/2_1/@pstrformat.nim.o
@@ -10845,7 +10845,7 @@ c_code/2_1/@pstd@scmdline.nim.o \
 c_code/3_16/@pos.nim.o \
 c_code/3_16/@pparseopt.nim.o \
 c_code/1_1/@psequtils.nim.o \
-c_code/3_1/@phashes.nim.o \
+c_code/3_16/@phashes.nim.o \
 c_code/2_3/@pstrtabs.nim.o \
 c_code/3_16/@ptables.nim.o \
 c_code/2_1/@pstrformat.nim.o \
@@ -12281,7 +12281,7 @@ c_code/4_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@pos.nim.c -o c_code/4_8/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@pparseopt.nim.c -o c_code/4_8/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@psequtils.nim.c -o c_code/4_1/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@phashes.nim.c -o c_code/4_1/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@phashes.nim.c -o c_code/4_8/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@pstrtabs.nim.c -o c_code/4_8/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_8/@ptables.nim.c -o c_code/4_8/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_1/@pstrformat.nim.c -o c_code/4_1/@pstrformat.nim.o
@@ -12477,7 +12477,7 @@ c_code/4_1/@pstd@scmdline.nim.o \
 c_code/4_8/@pos.nim.o \
 c_code/4_8/@pparseopt.nim.o \
 c_code/4_1/@psequtils.nim.o \
-c_code/4_1/@phashes.nim.o \
+c_code/4_8/@phashes.nim.o \
 c_code/4_8/@pstrtabs.nim.o \
 c_code/4_8/@ptables.nim.o \
 c_code/4_1/@pstrformat.nim.o \
@@ -12672,7 +12672,7 @@ c_code/4_8/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@pos.nim.c -o c_code/4_9/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@pparseopt.nim.c -o c_code/4_9/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@psequtils.nim.c -o c_code/4_2/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@phashes.nim.c -o c_code/4_2/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@phashes.nim.c -o c_code/4_9/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_9/@pstrtabs.nim.c -o c_code/4_9/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@ptables.nim.c -o c_code/4_2/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/4_2/@pstrformat.nim.c -o c_code/4_2/@pstrformat.nim.o
@@ -12868,7 +12868,7 @@ c_code/4_2/@pstd@scmdline.nim.o \
 c_code/4_9/@pos.nim.o \
 c_code/4_9/@pparseopt.nim.o \
 c_code/4_2/@psequtils.nim.o \
-c_code/4_2/@phashes.nim.o \
+c_code/4_9/@phashes.nim.o \
 c_code/4_9/@pstrtabs.nim.o \
 c_code/4_2/@ptables.nim.o \
 c_code/4_2/@pstrformat.nim.o \
@@ -13954,7 +13954,7 @@ c_code/5_2/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pos.nim.c -o c_code/5_6/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseopt.nim.c -o c_code/5_6/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@phashes.nim.c -o c_code/5_6/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrtabs.nim.c -o c_code/5_6/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ptables.nim.c -o c_code/5_6/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstrformat.nim.c -o c_code/5_2/@pstrformat.nim.o
@@ -14149,7 +14149,7 @@ c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_6/@pos.nim.o \
 c_code/5_6/@pparseopt.nim.o \
 c_code/5_2/@psequtils.nim.o \
-c_code/5_2/@phashes.nim.o \
+c_code/5_6/@phashes.nim.o \
 c_code/5_6/@pstrtabs.nim.o \
 c_code/5_6/@ptables.nim.o \
 c_code/5_2/@pstrformat.nim.o \
@@ -14739,7 +14739,7 @@ c_code/5_7/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pos.nim.c -o c_code/5_6/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseopt.nim.c -o c_code/5_6/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@phashes.nim.c -o c_code/5_6/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrtabs.nim.c -o c_code/5_6/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ptables.nim.c -o c_code/5_6/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstrformat.nim.c -o c_code/5_2/@pstrformat.nim.o
@@ -14934,7 +14934,7 @@ c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_6/@pos.nim.o \
 c_code/5_6/@pparseopt.nim.o \
 c_code/5_2/@psequtils.nim.o \
-c_code/5_2/@phashes.nim.o \
+c_code/5_6/@phashes.nim.o \
 c_code/5_6/@pstrtabs.nim.o \
 c_code/5_6/@ptables.nim.o \
 c_code/5_2/@pstrformat.nim.o \
@@ -15142,7 +15142,7 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pos.nim.c -o c_code/5_12/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pparseopt.nim.c -o c_code/5_12/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psequtils.nim.c -o c_code/5_1/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@phashes.nim.c -o c_code/5_1/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@phashes.nim.c -o c_code/5_12/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstrtabs.nim.c -o c_code/5_12/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ptables.nim.c -o c_code/5_12/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstrformat.nim.c -o c_code/5_1/@pstrformat.nim.o
@@ -15337,7 +15337,7 @@ c_code/5_1/@pstd@scmdline.nim.o \
 c_code/5_12/@pos.nim.o \
 c_code/5_12/@pparseopt.nim.o \
 c_code/5_1/@psequtils.nim.o \
-c_code/5_1/@phashes.nim.o \
+c_code/5_12/@phashes.nim.o \
 c_code/5_12/@pstrtabs.nim.o \
 c_code/5_12/@ptables.nim.o \
 c_code/5_1/@pstrformat.nim.o \
@@ -15920,7 +15920,7 @@ c_code/5_12/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pos.nim.c -o c_code/5_6/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pparseopt.nim.c -o c_code/5_6/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@psequtils.nim.c -o c_code/5_2/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@phashes.nim.c -o c_code/5_2/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@phashes.nim.c -o c_code/5_6/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@pstrtabs.nim.c -o c_code/5_6/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_6/@ptables.nim.c -o c_code/5_6/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_2/@pstrformat.nim.c -o c_code/5_2/@pstrformat.nim.o
@@ -16115,7 +16115,7 @@ c_code/5_2/@pstd@scmdline.nim.o \
 c_code/5_6/@pos.nim.o \
 c_code/5_6/@pparseopt.nim.o \
 c_code/5_2/@psequtils.nim.o \
-c_code/5_2/@phashes.nim.o \
+c_code/5_6/@phashes.nim.o \
 c_code/5_6/@pstrtabs.nim.o \
 c_code/5_6/@ptables.nim.o \
 c_code/5_2/@pstrformat.nim.o \
@@ -16698,7 +16698,7 @@ c_code/5_6/@mnim.nim.o $LINK_FLAGS
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pos.nim.c -o c_code/5_12/@pos.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pparseopt.nim.c -o c_code/5_12/@pparseopt.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@psequtils.nim.c -o c_code/5_1/@psequtils.nim.o
-    $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@phashes.nim.c -o c_code/5_1/@phashes.nim.o
+    $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@phashes.nim.c -o c_code/5_12/@phashes.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@pstrtabs.nim.c -o c_code/5_12/@pstrtabs.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_12/@ptables.nim.c -o c_code/5_12/@ptables.nim.o
     $CC $COMP_FLAGS -Ic_code -c c_code/5_1/@pstrformat.nim.c -o c_code/5_1/@pstrformat.nim.o
@@ -16893,7 +16893,7 @@ c_code/5_1/@pstd@scmdline.nim.o \
 c_code/5_12/@pos.nim.o \
 c_code/5_12/@pparseopt.nim.o \
 c_code/5_1/@psequtils.nim.o \
-c_code/5_1/@phashes.nim.o \
+c_code/5_12/@phashes.nim.o \
 c_code/5_12/@pstrtabs.nim.o \
 c_code/5_12/@ptables.nim.o \
 c_code/5_1/@pstrformat.nim.o \

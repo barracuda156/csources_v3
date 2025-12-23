@@ -2911,7 +2911,7 @@ N_LIB_PRIVATE N_NIMCALL(void, setEffectsForProcType__sempass2_u7977)(tyObject_Mo
 N_LIB_PRIVATE N_NIMCALL(void, wrongRedefinition__lookups_u3243)(tyObject_TContext__9c7SSA5WJss9aY087ea34tpg* c_p0, tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg info_p1, NimStringV2 s_p2, tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg conflictsWith_p3, tyEnum_TMsgKind__GZWe5A9aRIaMRem7QvLPmrg note_p4);
 N_LIB_PRIVATE N_NIMCALL(void, addGenericParamListToScope__sem_u17032)(tyObject_TContext__9c7SSA5WJss9aY087ea34tpg* c_p0, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p1);
 N_LIB_PRIVATE N_NIMCALL(void, addParams__sem_u105)(tyObject_TContext__9c7SSA5WJss9aY087ea34tpg* c_p0, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p1, tyEnum_TSymKind__PWkeBIqUek9caJdN9cVpzM7Q kind_p2);
-static N_INLINE(NIM_BOOL, importantComments__options_u3571)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
+static N_INLINE(NIM_BOOL, importantComments__options_u3570)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, comment__ast_u835)(tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p0);
 N_LIB_PRIVATE N_NIMCALL(void, commenteq___ast_u1333)(tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p0, NimStringV2 a_p1);
 N_LIB_PRIVATE N_NIMCALL(void, popOwner__semdata_u434)(tyObject_TContext__9c7SSA5WJss9aY087ea34tpg* c_p0);
@@ -3368,7 +3368,7 @@ N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, typeSectionTyp
 N_LIB_PRIVATE N_NIMCALL(void, processMagicType__sem_u9613)(tyObject_TContext__9c7SSA5WJss9aY087ea34tpg* c_p0, tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* m_p1);
 N_LIB_PRIVATE N_NIMCALL(void, setMagicIntegral__sem_u9604)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* m_p1, tyEnum_TTypeKind__9aaBHVux9bcpmQgjLJmktiUQ kind_p2, NI size_p3);
 N_LIB_PRIVATE N_NIMCALL(void, setMagicType__sem_u9595)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* m_p1, tyEnum_TTypeKind__9aaBHVux9bcpmQgjLJmktiUQ kind_p2, NI size_p3);
-N_LIB_PRIVATE N_NIMCALL(NI16, floatInt64Align__options_u4294)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
+N_LIB_PRIVATE N_NIMCALL(NI16, floatInt64Align__options_u4293)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
 N_LIB_PRIVATE N_NIMCALL(void, checkCovariantParamsUsages__sem_u17196)(tyObject_TContext__9c7SSA5WJss9aY087ea34tpg* c_p0, tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* genericType_p1);
 N_LIB_PRIVATE N_NIMCALL(void, rttiDestroy__sem_u32786)(void* dest_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___sem_u32721)(tyObject_Env_semstmtsdotnim_checkCovariantParamsUsages___C16yEB0PVFV4Pg9c9aHioHNg* dest_p0);
@@ -44154,7 +44154,7 @@ LA4_: ;
 	}BeforeRet_: ;
 	popFrame();
 }
-static N_INLINE(NIM_BOOL, importantComments__options_u3571)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0) {
+static N_INLINE(NIM_BOOL, importantComments__options_u3570)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0) {
 	NIM_BOOL result;
 	nimfr_("importantComments", "/Users/svacchanda/Dev/nim-2.2.6/compiler/options.nim");
 	result = ((*conf_p0).cmd == ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)12) || (*conf_p0).cmd >= ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)14) && (*conf_p0).cmd <= ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)16) || (*conf_p0).cmd >= ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)21) && (*conf_p0).cmd <= ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)24));
@@ -58194,7 +58194,7 @@ LA170_: ;
 			NIM_BOOL T174_;
 			NimStringV2 colontmpD__14;
 			T174_ = (NIM_BOOL)0;
-			T174_ = importantComments__options_u3571((*(*c_p0).graph).config);
+			T174_ = importantComments__options_u3570((*(*c_p0).graph).config);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA151_;
 			if (!(T174_)) goto LA175_;
 			colontmpD__13 = comment__ast_u835((*proto_1).ast);
@@ -92469,7 +92469,7 @@ LA252_: ;
 											NIM_BOOL T261_;
 											NimStringV2 colontmpD__10;
 											T261_ = (NIM_BOOL)0;
-											T261_ = importantComments__options_u3571((*(*c_p0).graph).config);
+											T261_ = importantComments__options_u3570((*(*c_p0).graph).config);
 											if (NIM_UNLIKELY(*nimErr_)) goto LA183_;
 											if (!T261_) goto LA262_;
 											colontmpD__10.len = 0; colontmpD__10.p = NIM_NIL;
@@ -93395,7 +93395,7 @@ LA127_: ;
 										NIM_BOOL T135_;
 										NimStringV2 colontmpD__6;
 										T135_ = (NIM_BOOL)0;
-										T135_ = importantComments__options_u3571((*(*c_p0).graph).config);
+										T135_ = importantComments__options_u3570((*(*c_p0).graph).config);
 										if (NIM_UNLIKELY(*nimErr_)) goto LA89_;
 										if (!T135_) goto LA136_;
 										colontmpD__6.len = 0; colontmpD__6.p = NIM_NIL;
@@ -94225,7 +94225,7 @@ NIM_BOOL* nimErr_;
 LA4_: ;
 		if (!T3_) goto LA5_;
 		nimln_(2363);		T7_ = (NI16)0;
-		T7_ = floatInt64Align__options_u4294(conf_p0);
+		T7_ = floatInt64Align__options_u4293(conf_p0);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		(*(*m_p1).typ).align = T7_;
 	}

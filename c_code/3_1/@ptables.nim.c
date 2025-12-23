@@ -1623,7 +1623,7 @@ N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___options_u817)(tySequence__BvZ5bOo1Bvsq
 N_LIB_PRIVATE N_NIMCALL(void, newSeq__lineinfos_u421)(tySequence__7lEisrXlQEzwtUKW5pzRCw* s_p0, NI len_p1);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___lineinfos_u563)(tySequence__7lEisrXlQEzwtUKW5pzRCw dest_p0);
 static N_INLINE(NI, rawGet__lineinfos_u704)(tyObject_Table__JyJOdiRf1NoaUXldh8qHzA t_p0, NimStringV2 key_p1, NI* hc_p2);
-N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u602)(NimStringV2 x_p0);
+N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u603)(NimStringV2 x_p0);
 static N_INLINE(NIM_BOOL, eqStrings)(NimStringV2 a_p0, NimStringV2 b_p1);
 static N_INLINE(NIM_BOOL, equalMem__system_u1736)(void* a_p0, void* b_p1, NI size_p2);
 static N_INLINE(int, nimCmpMem)(void* a_p0, void* b_p1, NI size_p2);
@@ -3149,7 +3149,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -3604,7 +3604,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -10833,7 +10833,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -11511,7 +11511,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -14119,7 +14119,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -14481,7 +14481,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -19178,7 +19178,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -20905,7 +20905,7 @@ NIM_BOOL* nimErr_;
 	}
 LA4_: ;
 	nimln_(2373);	T6_ = (NI)0;
-	T6_ = hash__pureZhashes_u602(key_p1);
+	T6_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	T7_ = (t_p0.data.len-1);
 	h_1 = (NI)(T6_ & T7_);
@@ -21009,7 +21009,7 @@ NIM_BOOL* nimErr_;
 	nimfr_("ctRawInsert", "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/tables.nim");
 {nimErr_ = nimErrorFlag();
 	nimlf_(2358, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/tables.nim");	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p2);
+	T1_ = hash__pureZhashes_u603(key_p2);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	T2_ = ((*data_p1).len-1);
 	h_1 = (NI)(T1_ & T2_);
@@ -21167,7 +21167,7 @@ LA25_: ;
 									nimln_(143);									if (index_1 < 0 || index_1 >= (*t_p0).data.len){ raiseIndexError2(index_1,(*t_p0).data.len-1); goto BeforeRet_;
 									}
 									T27_ = (NI)0;
-									T27_ = hash__pureZhashes_u602((*t_p0).data.p->data[index_1].Field0);
+									T27_ = hash__pureZhashes_u603((*t_p0).data.p->data[index_1].Field0);
 									if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 									rX60gensym195__1 = (NI)(T27_ & mskX60gensym195__1);
 									nimln_(144);									{
@@ -22128,7 +22128,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -22492,7 +22492,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -22834,7 +22834,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -23239,7 +23239,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -23343,7 +23343,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -23699,7 +23699,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -24041,7 +24041,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -24125,7 +24125,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{
@@ -26295,7 +26295,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimlf_(72, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/hashcommon.nim");	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u602(key_p1);
+	T1_ = hash__pureZhashes_u603(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{

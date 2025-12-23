@@ -1453,7 +1453,7 @@ N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pathutils_u73)(tyTuple__7q7q3E6Oj24ZNV
 N_LIB_PRIVATE N_NIMCALL(tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ*, newModule__modules_u28)(tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ* graph_p0, NI32 fileIdx_p1);
 N_LIB_PRIVATE N_NIMCALL(NI32, fileInfoIdx__msgs_u385)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 filename_p1);
 N_LIB_PRIVATE N_NIMCALL(void, resetSysTypes__magicsys_u93)(tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ* g_p0);
-static N_INLINE(NIM_BOOL, isEmpty__options_u4083)(NimStringV2 x_p0);
+static N_INLINE(NIM_BOOL, isEmpty__options_u4082)(NimStringV2 x_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, nosaddFileExt)(NimStringV2 filename_p0, NimStringV2 ext_p1);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ*, makeModule__modules_u44)(tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ* graph_p0, NimStringV2 filename_p1);
 static const struct {
@@ -1724,7 +1724,7 @@ NIM_BOOL* nimErr_;
 	}BeforeRet_: ;
 	popFrame();
 }
-static N_INLINE(NIM_BOOL, isEmpty__options_u4083)(NimStringV2 x_p0) {
+static N_INLINE(NIM_BOOL, isEmpty__options_u4082)(NimStringV2 x_p0) {
 	NIM_BOOL result;
 	nimfr_("isEmpty", "/Users/svacchanda/Dev/nim-2.2.6/compiler/pathutils.nim");
 	result = (x_p0.len == ((NI)0));
@@ -1741,7 +1741,7 @@ NIM_BOOL* nimErr_;
 	nimln_(52);	{
 		NIM_BOOL T4_;
 		T4_ = (NIM_BOOL)0;
-		T4_ = isEmpty__options_u4083((*conf_p0).projectFull);
+		T4_ = isEmpty__options_u4082((*conf_p0).projectFull);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 		if (!T4_) goto LA5_;
 		nimln_(53);		liMessage__msgs_u1209(conf_p0, gCmdLineInfo__msgs_u423, ((tyEnum_TMsgKind__GZWe5A9aRIaMRem7QvLPmrg)1), TM__M5T16KOkc0tDi9bZeKl6v1w_10, ((tyEnum_TErrorHandling__t9b9ctkDg9cyYS2qCuIenISuA)1), (&TM__M5T16KOkc0tDi9bZeKl6v1w_11), NIM_FALSE, NIM_FALSE);

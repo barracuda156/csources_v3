@@ -39,10 +39,10 @@ static const struct {
 } TM__SF9bmOn6gWc1K49aIR3JF9a2A_6 = { 8 | NIM_STRLIT_FLAG, "kernel32" };
 static const NimStringV2 TM__SF9bmOn6gWc1K49aIR3JF9a2A_7 = {8, (NimStrPayload*)&TM__SF9bmOn6gWc1K49aIR3JF9a2A_6};
 static void* TM__SF9bmOn6gWc1K49aIR3JF9a2A_2;
-tyProc__rqDB0lSi1Vc0javF8wle7Q Dl_2382364684_;
+tyProc__rqDB0lSi1Vc0javF8wle7Q Dl_2399141900_;
 N_LIB_PRIVATE N_NIMCALL(void, atpstdatsprivateatswin_getsysteminfodotnim_DatInit000)(void) {
 if (!((TM__SF9bmOn6gWc1K49aIR3JF9a2A_2 = nimLoadLibrary(TM__SF9bmOn6gWc1K49aIR3JF9a2A_5))
 )) nimLoadLibraryError(TM__SF9bmOn6gWc1K49aIR3JF9a2A_7);
-	Dl_2382364684_ = (tyProc__rqDB0lSi1Vc0javF8wle7Q) nimGetProcAddr(TM__SF9bmOn6gWc1K49aIR3JF9a2A_2, "GetSystemInfo");
+	Dl_2399141900_ = (tyProc__rqDB0lSi1Vc0javF8wle7Q) nimGetProcAddr(TM__SF9bmOn6gWc1K49aIR3JF9a2A_2, "GetSystemInfo");
 }
 

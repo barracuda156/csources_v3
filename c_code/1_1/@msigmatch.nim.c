@@ -2476,7 +2476,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u343)(tyEnum_SuggestInlayH
 static N_INLINE(void, nimAddCharV1)(NimStringV2* s_p0, NIM_CHAR c_p1);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___systemZdollars_u9)(NI xX60gensym0__p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, nimBoolToStr)(NIM_BOOL x_p0);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u4291)(tyEnum_IdeCmd__WujtzlAfDXSF54JLzYwUWA c_p0);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u4290)(tyEnum_IdeCmd__WujtzlAfDXSF54JLzYwUWA c_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___ast_u309)(tyEnum_TSymKind__PWkeBIqUek9caJdN9cVpzM7Q e_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, nsuJoinSep)(NimStringV2* a_p0, NI a_p0Len_0, NimStringV2 sep_p1);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___prefixmatches_u7)(tyEnum_PrefixMatch__IoCU9aLTHSH6vEC9brQ9a9aqYQ e_p0);
@@ -27950,7 +27950,7 @@ NIM_BOOL* nimErr_;
 	goto LA1_;
 LA3_: ;
 	{
-		nimln_(234);		result = dollar___options_u4291((*suggest_p0).section);
+		nimln_(234);		result = dollar___options_u4290((*suggest_p0).section);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimln_(235);		nimAddCharV1((&result), 9);
 		nimln_(236);		{

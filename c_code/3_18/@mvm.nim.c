@@ -2066,7 +2066,7 @@ N_LIB_PRIVATE N_NIMCALL(void, colonanonymous___vm_u13675)(tyObject_VmArgs__9c8Dq
 N_LIB_PRIVATE N_CLOSURE(void, colonanonymous___vm_u13677)(tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA* a_p0, void* ClE_0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, querySettingImpl__vm_u13185)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NI64 switch_p1);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, eqdup___system_u2635)(NimStringV2 src_p0);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, getNimcacheDir__options_u3739)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, getNimcacheDir__options_u3738)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u141)(tyEnum_TBackend__Ybih4ukfhUItVa54JMNNCg e_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u210)(tyEnum_TGCMode__2e9arYPJbfgg0BkpiBOGrXQ e_p0);
 N_LIB_PRIVATE N_CLOSURE(void, colonanonymous___vm_u13679)(tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA* a_p0, void* ClE_0);
@@ -2106,7 +2106,7 @@ N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, contains__vm_u9839)(tyObject_BTree__glrlJ5bkh8
 N_LIB_PRIVATE N_NIMCALL(tyObject_BTree__glrlJ5bkh8PzzmJZu71u7A*, X5BX5D___vm_u9698)(tyObject_Table__S3q02OPmYteyIOi4xe9c0hA* t_p0, NimStringV2 key_p1);
 N_LIB_PRIVATE N_CLOSURE(void, colonanonymous___vm_u13891)(tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA* a_p0, void* ClE_0);
 N_LIB_PRIVATE N_CLOSURE(void, hashVmImpl__vm_u13893)(tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA* a_p0, void* ClE_0);
-N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u608)(NimStringV2 sBuf_p0, NI sPos_p1, NI ePos_p2);
+N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u609)(NimStringV2 sBuf_p0, NI sPos_p1, NI ePos_p2);
 N_LIB_PRIVATE N_NIMCALL(void, setResult__vm_u239)(tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA* a_p0, NI64 v_p1);
 N_LIB_PRIVATE N_CLOSURE(void, hashVmImplByte__vm_u13900)(tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA* a_p0, void* ClE_0);
 N_LIB_PRIVATE N_NIMCALL(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ, newSeq__vm_u13921)(NI len_p0);
@@ -6772,7 +6772,7 @@ NIM_BOOL* nimErr_;
 	break;
 	case ((tyEnum_SingleValueSetting__Ih9aPqQxGeAvtfWNQ9a9bva1g)3):
 	{
-		nimlf_(162, "/Users/svacchanda/Dev/nim-2.2.6/compiler/vmops.nim");		result = getNimcacheDir__options_u3739(conf_p0);
+		nimlf_(162, "/Users/svacchanda/Dev/nim-2.2.6/compiler/vmops.nim");		result = getNimcacheDir__options_u3738(conf_p0);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
@@ -7730,7 +7730,7 @@ NIM_BOOL* nimErr_;
 	T2_ = (NI64)0;
 	T2_ = getInt__vm_u282(a_p0, ((NI)2));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	res_1 = hash__pureZhashes_u608(colontmpD_, ((NI) (T1_)), ((NI) (T2_)));
+	res_1 = hash__pureZhashes_u609(colontmpD_, ((NI) (T1_)), ((NI) (T2_)));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	nimln_(313);	{
 		if (!((*(*(*colonenvP__1).c0).config).backend == ((tyEnum_TBackend__Ybih4ukfhUItVa54JMNNCg)3))) goto LA5_;

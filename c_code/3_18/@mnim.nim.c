@@ -1462,7 +1462,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, nosparentDir)(NimStringV2 path_p0);
 static N_INLINE(NIM_BOOL, nimSubInt)(NI a_p0, NI b_p1, NI* res_p2);
 N_LIB_PRIVATE N_NOINLINE(void, raiseIndexError2)(NI i_p0, NI n_p1);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, substr__system_u8419)(NimStringV2 s_p0, NI first_p1, NI last_p2);
-N_LIB_PRIVATE N_NIMCALL(void, disableNimblePath__options_u3686)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
+N_LIB_PRIVATE N_NIMCALL(void, disableNimblePath__options_u3685)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pureZparseopt_u129)(tyObject_OptParser__A9aTZvqIB9bOHsTzAaJa2vIQ* dest_p0);
 N_LIB_PRIVATE N_NIMCALL(void, initDefinesProg__cmdlinehelper_u28)(tyObject_NimProgcolonObjectType___TI8ifAI1kLfRqo3PvVs3FA* self_p0, tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p1, NimStringV2 name_p2);
 N_LIB_PRIVATE N_NIMCALL(NI, paramCount__stdZcmdline_u62)(void);
@@ -1477,7 +1477,7 @@ N_LIB_PRIVATE N_NIMCALL(void, mainCommand__main_u919)(tyObject_ModuleGraphcolonO
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, hasHint__options_u554)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, tyEnum_TMsgKind__9aQXjCbHLIif7xJLUycnHUw note_p1);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, GC_getStatistics__system_u7443)(void);
 N_LIB_PRIVATE N_NIMCALL(void, echoBinSafe)(NimStringV2* args_p0, NI args_p0Len_0);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, absOutFile__options_u3624)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, absOutFile__options_u3623)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, getNimRunExe__nim_u52)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, isDefined__options_u958)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, NimStringV2 symbol_p1);
 static N_INLINE(NimStringV2, findNodeJs__nodejs_u2)(void);
@@ -1492,7 +1492,7 @@ N_LIB_PRIVATE N_NIMCALL(NimStringV2, nsuStrip)(NimStringV2 s_p0, NIM_BOOL leadin
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, nsuFormatOpenArray)(NimStringV2 formatstr_p0, NimStringV2* a_p1, NI a_p1Len_0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u174)(tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw e_p0);
 N_LIB_PRIVATE N_NIMCALL(void, openDefaultBrowser__pureZbrowsers_u11)(NimStringV2 url_p0);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u3945)(NimStringV2 x_p0);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___options_u3944)(NimStringV2 x_p0);
 N_LIB_PRIVATE N_NIMCALL(tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw*, newIdentCache__idents_u217)(void);
 N_LIB_PRIVATE N_NIMCALL(void, msgQuit__msgs_u479)(NI8 x_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___idents_u340)(tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw* dest_p0);
@@ -2153,7 +2153,7 @@ LA36_: ;
 		T49_ = nimbleLockExists__nim_u17(config_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 		if (!T49_) goto LA50_;
-		nimln_(86);		disableNimblePath__options_u3686(config_p2);
+		nimln_(86);		disableNimblePath__options_u3685(config_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	}
 LA50_: ;
@@ -2388,7 +2388,7 @@ LA47_: ;
 		NimStringV2 output_1;
 		if (!(((*conf_p1).globalOptions &((NU64)1<<((NU)((((tyEnum_TGlobalOption__T4ap49alSgVHUO9cv8ibTheQ)13)))&63U)))!=0)) goto LA51_;
 		output_1.len = 0; output_1.p = NIM_NIL;
-		nimln_(132);		output_1 = absOutFile__options_u3624(conf_p1);
+		nimln_(132);		output_1 = absOutFile__options_u3623(conf_p1);
 		if (NIM_UNLIKELY(*nimErr_)) goto LA53_;
 		nimln_(133);		switch ((*conf_p1).cmd) {
 		case ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)2) ... ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)6):
@@ -2527,7 +2527,7 @@ appendString((&T75_), (*conf_p1).arguments);
 				if (NIM_UNLIKELY(*nimErr_)) goto LA79_;
 			}
 LA82_: ;
-			nimlf_(155, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nim.nim");			colontmpD__7 = dollar___options_u3945(output_1);
+			nimlf_(155, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nim.nim");			colontmpD__7 = dollar___options_u3944(output_1);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA79_;
 			openDefaultBrowser__pureZbrowsers_u11(colontmpD__7);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA79_;

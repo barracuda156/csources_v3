@@ -1741,7 +1741,7 @@ N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___system_u2629)(NimStringV2 dest_p0);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, freshVar__transf_u824)(tyObject_PTransfcolonObjectType___5FMil9c3zpLFOggBw17shag* c_p0, tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* v_p1);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ*, copySym__ast_u6279)(tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* s_p0, tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ* idgen_p1);
 static N_INLINE(void, setOwner__icZic_u12941)(tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* s_p0, tyObject_TSym__CyqSEGRbp9cNMwKdHILnkEQ* owner_p1);
-static N_INLINE(NIM_BOOL, importantComments__options_u3571)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
+static N_INLINE(NIM_BOOL, importantComments__options_u3570)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0);
 N_LIB_PRIVATE N_NIMCALL(void, commenteq___ast_u1333)(tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p0, NimStringV2 a_p1);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, comment__ast_u835)(tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p0);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, transformYield__transf_u1962)(tyObject_PTransfcolonObjectType___5FMil9c3zpLFOggBw17shag* c_p0, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p1);
@@ -7558,7 +7558,7 @@ NIM_BOOL* nimErr_;
 	popFrame();
 	return result;
 }
-static N_INLINE(NIM_BOOL, importantComments__options_u3571)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0) {
+static N_INLINE(NIM_BOOL, importantComments__options_u3570)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0) {
 	NIM_BOOL result;
 	nimfr_("importantComments", "/Users/svacchanda/Dev/nim-2.2.6/compiler/options.nim");
 	result = ((*conf_p0).cmd == ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)12) || (*conf_p0).cmd >= ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)14) && (*conf_p0).cmd <= ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)16) || (*conf_p0).cmd >= ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)21) && (*conf_p0).cmd <= ((tyEnum_Command__l6X9aFk9aag8AT1MeGS5HiEw)24));
@@ -7674,7 +7674,7 @@ LA25_: ;
 							NIM_BOOL T32_;
 							NimStringV2 colontmpD_;
 							T32_ = (NIM_BOOL)0;
-							T32_ = importantComments__options_u3571((*(*c_p0).graph).config);
+							T32_ = importantComments__options_u3570((*(*c_p0).graph).config);
 							if (NIM_UNLIKELY(*nimErr_)) goto LA21_;
 							if (!T32_) goto LA33_;
 							colontmpD_.len = 0; colontmpD_.p = NIM_NIL;
@@ -10517,7 +10517,7 @@ LA62_: ;
 			NIM_BOOL T80_;
 			NimStringV2 colontmpD__3;
 			T80_ = (NIM_BOOL)0;
-			T80_ = importantComments__options_u3571((*(*c_p0).graph).config);
+			T80_ = importantComments__options_u3570((*(*c_p0).graph).config);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA71_;
 			if (!T80_) goto LA81_;
 			colontmpD__3.len = 0; colontmpD__3.p = NIM_NIL;
