@@ -74,7 +74,7 @@ struct tyObject_HSlice__003Cb5qdlpJUt9cvktB372w {
 	NI b;
 };
 N_LIB_PRIVATE N_NIMCALL(void, failedAssertImpl__stdZassertions_u242)(NimStringV2 msg_p0);
-N_LIB_PRIVATE N_NIMCALL(void, eqcopy___pureZstreams_u676)(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw** dest_p0, tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* src_p1, NIM_BOOL cyclic_p2);
+N_LIB_PRIVATE N_NIMCALL(void, eqcopy___pureZstreams_u714)(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw** dest_p0, tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* src_p1, NIM_BOOL cyclic_p2);
 static N_INLINE(void, nimCopyMem)(void* dest_p0, void* source_p1, NI size_p2);
 N_LIB_PRIVATE N_NIMCALL(void, eqsink___system_u2638)(NimStringV2* dest_p0, NimStringV2 src_p1);
 N_NIMCALL(NimStringV2, mnewString)(NI len_p0);
@@ -514,7 +514,7 @@ LA3_: ;
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 LA7_: ;
-	nimlf_(1208, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");	eqcopy___pureZstreams_u676(&(*L_p0).input, input_p1, NIM_TRUE);
+	nimlf_(1208, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");	eqcopy___pureZstreams_u714(&(*L_p0).input, input_p1, NIM_TRUE);
 	nimlf_(143, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/lexbase.nim");	(*L_p0).bufpos = ((NI)0);
 	nimln_(144);	(*L_p0).offsetBase = ((NI)0);
 	nimln_(145);	nimCopyMem((void*)(*L_p0).refillChars, (NIM_CONST void*)refillChars_p3, 32);

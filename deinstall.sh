@@ -127,6 +127,7 @@ if [ $# -eq 1 ] ; then
     rm -f $nimbleDir/compiler/layeredtable.nim
     rm -f $nimbleDir/compiler/layouter.nim
     rm -f $nimbleDir/compiler/lexer.nim
+    rm -f $nimbleDir/compiler/lexer.nim.orig
     rm -f $nimbleDir/compiler/liftdestructors.nim
     rm -f $nimbleDir/compiler/liftlocals.nim
     rm -f $nimbleDir/compiler/lineinfos.nim

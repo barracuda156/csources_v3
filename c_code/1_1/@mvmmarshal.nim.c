@@ -295,7 +295,7 @@ static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
 N_LIB_PRIVATE N_NIMCALL(tyObject_Table__r9bRVE6U3dzw3pX09avAsNYQ, initTable__vmmarshal_u1927)(NI initialSize_p0);
 N_LIB_PRIVATE N_NIMCALL(void, open__pureZparsejson_u80)(tyObject_JsonParser__UQzhTMe1otyOVTOQpzPg5Q* my_p0, tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* input_p1, NimStringV2 filename_p2, NIM_BOOL rawStringLiterals_p3);
-N_LIB_PRIVATE N_NIMCALL(tyObject_StringStreamObj__Ey24i3eOtpVcrdQvWxsnJg*, newStringStream__pureZstreams_u829)(NimStringV2 s_p0);
+N_LIB_PRIVATE N_NIMCALL(tyObject_StringStreamObj__Ey24i3eOtpVcrdQvWxsnJg*, newStringStream__pureZstreams_u867)(NimStringV2 s_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, eqdup___system_u2635)(NimStringV2 src_p0);
 N_LIB_PRIVATE N_NIMCALL(void, next__pureZparsejson_u674)(tyObject_JsonParser__UQzhTMe1otyOVTOQpzPg5Q* my_p0);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, loadAny__vmmarshal_u164)(tyObject_JsonParser__UQzhTMe1otyOVTOQpzPg5Q* p_p0, tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* t_p1, tyObject_Table__r9bRVE6U3dzw3pX09avAsNYQ* tab_p2, tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw* cache_p3, tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p4, tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ* idgen_p5);
@@ -359,7 +359,7 @@ static N_INLINE(tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ*, skipModifier__ast_u536
 N_LIB_PRIVATE N_NIMCALL(void, internalErrorImpl__msgs_u1580)(tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* conf_p0, tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg info_p1, NimStringV2 errMsg_p2, tyTuple__kN8up2W6YKc5YA9avn5mV5w info2_p3);
 static N_INLINE(void, close__pureZparsejson_u313)(tyObject_JsonParser__UQzhTMe1otyOVTOQpzPg5Q* my_p0);
 N_LIB_PRIVATE N_NIMCALL(void, close__pureZlexbase_u15)(tyObject_BaseLexer__YkbBTQaTsXPweEonhLIMMA* L_p0);
-N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pureZstreams_u612)(tyObject_StringStreamObj__Ey24i3eOtpVcrdQvWxsnJg* dest_p0);
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pureZstreams_u650)(tyObject_StringStreamObj__Ey24i3eOtpVcrdQvWxsnJg* dest_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pureZparsejson_u128)(tyObject_JsonParser__UQzhTMe1otyOVTOQpzPg5Q* dest_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___vmmarshal_u1948)(tyObject_Table__r9bRVE6U3dzw3pX09avAsNYQ dest_p0);
 static N_INLINE(void, initIntSet__pureZcollectionsZintsets_u608)(tyObject_PackedSet__qA9cIf5S6ff7ZfqJQzs9c9avA* Result);
@@ -1972,7 +1972,7 @@ NIM_BOOL* nimErr_;
 	nimln_(311);	nimZeroMem((void*)(&p_1), sizeof(tyObject_JsonParser__UQzhTMe1otyOVTOQpzPg5Q));
 	p_1.Sup.Sup.m_type = (&NTIv2__UQzhTMe1otyOVTOQpzPg5Q_);
 	nimln_(312);	nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");	colontmpD_ = eqdup___system_u2635(s_p0);
-	nimlf_(312, "/Users/svacchanda/Dev/nim-2.2.6/compiler/vmmarshal.nim");	colontmpD__2 = newStringStream__pureZstreams_u829(colontmpD_);
+	nimlf_(312, "/Users/svacchanda/Dev/nim-2.2.6/compiler/vmmarshal.nim");	colontmpD__2 = newStringStream__pureZstreams_u867(colontmpD_);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	open__pureZparsejson_u80((&p_1), (*((tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw**) (&(colontmpD__2)))), TM__eBu3XSE68i5yQmrMcuBiww_3, NIM_FALSE);
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
@@ -1987,7 +1987,7 @@ NIM_BOOL* nimErr_;
 	}
 	{
 		oldNimErrFin1_ = *nimErr_; *nimErr_ = NIM_FALSE;
-		nimlf_(1208, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");		eqdestroy___pureZstreams_u612(colontmpD__2);
+		nimlf_(1208, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");		eqdestroy___pureZstreams_u650(colontmpD__2);
 		nimlf_(113, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/parsejson.nim");		eqdestroy___pureZparsejson_u128((&p_1));
 		nimlf_(281, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/collections/tables.nim");		eqdestroy___vmmarshal_u1948(tab_1);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;

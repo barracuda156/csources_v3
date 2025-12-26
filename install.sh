@@ -921,6 +921,8 @@ if [ $# -eq 1 ] ; then
   chmod 644 "$nimbleDir/compiler/layouter.nim"
   cp "compiler/lexer.nim" "$nimbleDir/compiler/lexer.nim"
   chmod 644 "$nimbleDir/compiler/lexer.nim"
+  cp "compiler/lexer.nim.orig" "$nimbleDir/compiler/lexer.nim.orig"
+  chmod 644 "$nimbleDir/compiler/lexer.nim.orig"
   cp "compiler/liftdestructors.nim" "$nimbleDir/compiler/liftdestructors.nim"
   chmod 644 "$nimbleDir/compiler/liftdestructors.nim"
   cp "compiler/liftlocals.nim" "$nimbleDir/compiler/liftlocals.nim"
