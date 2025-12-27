@@ -167,7 +167,7 @@ N_LIB_PRIVATE N_NOINLINE(void, raiseFieldErrorStr)(NimStringV2 f_p0, NimStringV2
 N_LIB_PRIVATE N_NOINLINE(void, raiseOverflow)(void);
 N_LIB_PRIVATE N_NOINLINE(void, raiseRangeErrorI)(NI64 i_p0, NI64 a_p1, NI64 b_p2);
 N_LIB_PRIVATE N_NIMCALL(NI, toInt__system_u1687)(NF f_p0);
-N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u603)(NimStringV2 x_p0);
+N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u587)(NimStringV2 x_p0);
 static N_INLINE(NI, len__ast_u3197)(tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p0);
 N_LIB_PRIVATE N_NOINLINE(void, raiseIndexError2)(NI i_p0, NI n_p1);
 static N_INLINE(NI, emarkdollar___pureZhashes_u20)(NI h_p0);
@@ -430,7 +430,7 @@ LA20_: ;
 		nimln_(37);		if (!(((TM__i0pupOlr9bomnd8TcZjCBKw_19[(NU)(((*n_p0).kind))>>3] &(1U<<((NU)(((*n_p0).kind))&7U)))!=0))) 		{ raiseFieldErrorStr(TM__i0pupOlr9bomnd8TcZjCBKw_21, dollar___nodekinds_u168((*n_p0).kind)); goto BeforeRet_;
 		}
 		T24_ = (NI)0;
-		T24_ = hash__pureZhashes_u603((*n_p0)._kind_3.strVal);
+		T24_ = hash__pureZhashes_u587((*n_p0)._kind_3.strVal);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		result = emarkamp___pureZhashes_u5(result, T24_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;

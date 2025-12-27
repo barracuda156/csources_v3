@@ -460,10 +460,10 @@ struct tyObject_Cfile__HnC1bEjrP9btX8mw9aPr1IFA {
 };
 struct tySequence__1rGaW8auEm56xdkzwf3QtA_Content { NI cap; tyObject_Cfile__HnC1bEjrP9btX8mw9aPr1IFA data[SEQ_DECL_SIZE]; };
 N_LIB_PRIVATE N_NIMCALL(void, openParser__parser_u120)(tyObject_Parser__tBCp9cSlahPnMj9csI9cbE2kw* p_p0, NI32 fileIdx_p1, tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA* inputStream_p2, tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw* cache_p3, tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* config_p4);
-N_LIB_PRIVATE N_NIMCALL(void, reset__lexer_u1865)(tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* obj_p0);
+N_LIB_PRIVATE N_NIMCALL(void, reset__lexer_u1902)(tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* obj_p0);
 N_LIB_PRIVATE N_NIMCALL(void, openLexer__lexer_u257)(tyObject_Lexer__dYZ7SP9aY2B360jzRfbJA5A* lex_p0, NI32 fileIdx_p1, tyObject_TLLStream__9bIYo37pxg03KGN9auYHG3aA* inputstream_p2, tyObject_IdentCachecolonObjectType___lyO1JarwShjJV9bt6jX8H9bw* cache_p3, tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* config_p4);
 N_LIB_PRIVATE N_NIMCALL(void, getTok__parser_u40)(tyObject_Parser__tBCp9cSlahPnMj9csI9cbE2kw* p_p0);
-N_LIB_PRIVATE N_NIMCALL(void, rawGetTok__lexer_u1861)(tyObject_Lexer__dYZ7SP9aY2B360jzRfbJA5A* L_p0, tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* tok_p1);
+N_LIB_PRIVATE N_NIMCALL(void, rawGetTok__lexer_u1898)(tyObject_Lexer__dYZ7SP9aY2B360jzRfbJA5A* L_p0, tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* tok_p1);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
 static N_INLINE(void, nimFrame)(TFrame* s_p0);
 N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached__system_u4477)(void);
@@ -585,7 +585,7 @@ N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, optPragmas__pa
 N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, newProcNode__ast_u5453)(tyEnum_TNodeKind__x4wdWsBA6XBD9brKs9cC6Yug kind_p0, tyObject_TLineInfo__dRML6lEdWbJjn0UQBSfqmg info_p1, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* body_p2, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* params_p3, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* name_p4, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* pattern_p5, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* genericParams_p6, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* pragmas_p7, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* exceptions_p8);
 static N_INLINE(void, replaceSon__ast_u5297)(tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p0, NI i_p1, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* newson_p2);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, parseOperators__parser_u714)(tyObject_Parser__tBCp9cSlahPnMj9csI9cbE2kw* p_p0, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* headNode_p1, NI limit_p2, tyEnum_PrimaryMode__YSoARI3EYfnyOGuBu306qw mode_p3);
-N_LIB_PRIVATE N_NIMCALL(NI, getPrecedence__lexer_u1632)(tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* tok_p0);
+N_LIB_PRIVATE N_NIMCALL(NI, getPrecedence__lexer_u1669)(tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* tok_p0);
 static N_INLINE(void, checkBinary__parser_u292)(tyObject_Parser__tBCp9cSlahPnMj9csI9cbE2kw* p_p0);
 static N_INLINE(NIM_BOOL, isRightAssociative__parser_u273)(tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* tok_p0);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, parseTuple__parser_u869)(tyObject_Parser__tBCp9cSlahPnMj9csI9cbE2kw* p_p0, NIM_BOOL indentAllowed_p1);
@@ -896,7 +896,7 @@ NIM_BOOL* nimErr_;
 	nimln_(138);	(*p_p0).bufposPrevious = (*p_p0).lex.Sup.bufpos;
 	nimln_(139);	T1_ = (tyObject_Lexer__dYZ7SP9aY2B360jzRfbJA5A*)0;
 	T1_ = (&(*p_p0).lex);
-	rawGetTok__lexer_u1861(T1_, (&(*p_p0).tok));
+	rawGetTok__lexer_u1898(T1_, (&(*p_p0).tok));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	nimln_(140);	(*p_p0).hasProgress = NIM_TRUE;
 	}BeforeRet_: ;
@@ -907,7 +907,7 @@ N_LIB_PRIVATE N_NIMCALL(void, openParser__parser_u120)(tyObject_Parser__tBCp9cSl
 NIM_BOOL* nimErr_;
 	nimfr_("openParser", "/Users/svacchanda/Dev/nim-2.2.6/compiler/parser.nim");
 {nimErr_ = nimErrorFlag();
-	nimln_(153);	reset__lexer_u1865((&(*p_p0).tok));
+	nimln_(153);	reset__lexer_u1902((&(*p_p0).tok));
 	nimln_(154);	openLexer__lexer_u257((&(*p_p0).lex), fileIdx_p1, inputStream_p2, cache_p3, config_p4);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	nimln_(157);	getTok__parser_u40(p_p0);
@@ -4155,7 +4155,7 @@ NIM_BOOL* nimErr_;
 	colontmpD__2 = (tyEnum_PrimaryMode__YSoARI3EYfnyOGuBu306qw)0;
 	nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");	eqcopy___ast_u3264(&result, headNode_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	nimlf_(949, "/Users/svacchanda/Dev/nim-2.2.6/compiler/parser.nim");	opPrec_1 = getPrecedence__lexer_u1632((&(*p_p0).tok));
+	nimlf_(949, "/Users/svacchanda/Dev/nim-2.2.6/compiler/parser.nim");	opPrec_1 = getPrecedence__lexer_u1669((&(*p_p0).tok));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	nimln_(950);	{
 		if (!(mode_p3 == ((tyEnum_PrimaryMode__YSoARI3EYfnyOGuBu306qw)2))) goto LA3_;
@@ -4227,7 +4227,7 @@ LA11_: ;
 			if (NIM_UNLIKELY(*nimErr_)) goto LA13_;
 			eqwasMoved___ast_u3258(&a_1);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA13_;
-			nimlf_(967, "/Users/svacchanda/Dev/nim-2.2.6/compiler/parser.nim");			opPrec_1 = getPrecedence__lexer_u1632((&(*p_p0).tok));
+			nimlf_(967, "/Users/svacchanda/Dev/nim-2.2.6/compiler/parser.nim");			opPrec_1 = getPrecedence__lexer_u1669((&(*p_p0).tok));
 			if (NIM_UNLIKELY(*nimErr_)) goto LA13_;
 			{
 				LA13_:;

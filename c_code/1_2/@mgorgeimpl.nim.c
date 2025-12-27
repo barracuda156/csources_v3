@@ -403,13 +403,13 @@ N_LIB_PRIVATE N_NIMCALL(tyObject_ProcessObj__KLGigMjswVAYpOGVEXAT5A*, nospstartP
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pureZosproc_u221)(tyObject_ProcessObj__KLGigMjswVAYpOGVEXAT5A* dest_p0);
 N_LIB_PRIVATE N_NIMCALL(void, write__pureZstreams_u184)(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* s_p0, NimStringV2 x_p1);
 N_LIB_PRIVATE N_NIMCALL(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw*, nospinputStream)(tyObject_ProcessObj__KLGigMjswVAYpOGVEXAT5A* p_p0);
-N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pureZstreams_u711)(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* dest_p0);
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pureZstreams_u673)(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* dest_p0);
 N_LIB_PRIVATE N_NIMCALL(void, close__pureZstreams_u58)(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* s_p0);
 N_LIB_PRIVATE N_NIMCALL(tyTuple__XOVT24GHXwqiEj5GCsEGCA, readOutput__gorgeimpl_u10)(tyObject_ProcessObj__KLGigMjswVAYpOGVEXAT5A* p_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqsink___system_u2638)(NimStringV2* dest_p0, NimStringV2 src_p1);
 N_LIB_PRIVATE N_NIMCALL(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw*, nospoutputStream)(tyObject_ProcessObj__KLGigMjswVAYpOGVEXAT5A* p_p0);
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, atEnd__pureZstreams_u67)(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* s_p0);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, readLine__pureZstreams_u608)(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* s_p0);
+N_LIB_PRIVATE N_NIMCALL(NimStringV2, readLine__pureZstreams_u570)(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* s_p0);
 N_LIB_PRIVATE N_NIMCALL(void, prepareAdd)(NimStringV2* s_p0, NI addLen_p1);
 N_LIB_PRIVATE N_NIMCALL(void, setLengthStrV2)(NimStringV2* s_p0, NI newLen_p1);
 N_LIB_PRIVATE N_NIMCALL(NI, nospwaitForExit)(tyObject_ProcessObj__KLGigMjswVAYpOGVEXAT5A* p_p0, NI timeout_p1);
@@ -538,7 +538,7 @@ NIM_BOOL* nimErr_;
 			if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 			if (!!(T4_)) goto LA3;
 			colontmpD_.len = 0; colontmpD_.p = NIM_NIL;
-			nimln_(25);			colontmpD_ = readLine__pureZstreams_u608(output_1);
+			nimln_(25);			colontmpD_ = readLine__pureZstreams_u570(output_1);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA5_;
 			prepareAdd((&result.Field0), colontmpD_.len + 0);
 appendString((&result.Field0), colontmpD_);
@@ -571,7 +571,7 @@ LA10_: ;
 		LA1_:;
 	}
 	{
-		nimlf_(1208, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");		eqdestroy___pureZstreams_u711(output_1);
+		nimlf_(1208, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");		eqdestroy___pureZstreams_u673(output_1);
 	}
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
@@ -744,13 +744,13 @@ LA13_: ;
 			colontmpD__6 = NIM_NIL;
 			nimln_(47);			T28_ = NIM_NIL;
 			T28_ = nospinputStream(p_1);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___pureZstreams_u711(T28_); goto LA27_;}
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___pureZstreams_u673(T28_); goto LA27_;}
 			colontmpD__5 = T28_;
 			write__pureZstreams_u184(colontmpD__5, input_p1);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA27_;
 			nimln_(48);			T29_ = NIM_NIL;
 			T29_ = nospinputStream(p_1);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___pureZstreams_u711(T29_); goto LA27_;}
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___pureZstreams_u673(T29_); goto LA27_;}
 			colontmpD__6 = T29_;
 			close__pureZstreams_u58(colontmpD__6);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA27_;
@@ -758,8 +758,8 @@ LA13_: ;
 				LA27_:;
 			}
 			{
-				nimlf_(1208, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");				eqdestroy___pureZstreams_u711(colontmpD__6);
-				eqdestroy___pureZstreams_u711(colontmpD__5);
+				nimlf_(1208, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");				eqdestroy___pureZstreams_u673(colontmpD__6);
+				eqdestroy___pureZstreams_u673(colontmpD__5);
 			}
 			if (NIM_UNLIKELY(*nimErr_)) goto LA20_;
 		}
@@ -849,13 +849,13 @@ LA4_: ;
 			colontmpD__9 = NIM_NIL;
 			nimln_(66);			T60_ = NIM_NIL;
 			T60_ = nospinputStream(p_2);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___pureZstreams_u711(T60_); goto LA59_;}
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___pureZstreams_u673(T60_); goto LA59_;}
 			colontmpD__8 = T60_;
 			write__pureZstreams_u184(colontmpD__8, input_p1);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA59_;
 			nimln_(67);			T61_ = NIM_NIL;
 			T61_ = nospinputStream(p_2);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___pureZstreams_u711(T61_); goto LA59_;}
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___pureZstreams_u673(T61_); goto LA59_;}
 			colontmpD__9 = T61_;
 			close__pureZstreams_u58(colontmpD__9);
 			if (NIM_UNLIKELY(*nimErr_)) goto LA59_;
@@ -863,8 +863,8 @@ LA4_: ;
 				LA59_:;
 			}
 			{
-				nimlf_(1208, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");				eqdestroy___pureZstreams_u711(colontmpD__9);
-				eqdestroy___pureZstreams_u711(colontmpD__8);
+				nimlf_(1208, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");				eqdestroy___pureZstreams_u673(colontmpD__9);
+				eqdestroy___pureZstreams_u673(colontmpD__8);
 			}
 			if (NIM_UNLIKELY(*nimErr_)) goto LA52_;
 		}

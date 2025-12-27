@@ -2105,7 +2105,7 @@ N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, contains__vm_u9858)(tyObject_BTree__glrlJ5bkh8
 N_LIB_PRIVATE N_NIMCALL(tyObject_BTree__glrlJ5bkh8PzzmJZu71u7A*, X5BX5D___vm_u9717)(tyObject_Table__S3q02OPmYteyIOi4xe9c0hA* t_p0, NimStringV2 key_p1);
 N_LIB_PRIVATE N_CLOSURE(void, colonanonymous___vm_u13910)(tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA* a_p0, void* ClE_0);
 N_LIB_PRIVATE N_CLOSURE(void, hashVmImpl__vm_u13912)(tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA* a_p0, void* ClE_0);
-N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u609)(NimStringV2 sBuf_p0, NI sPos_p1, NI ePos_p2);
+N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u593)(NimStringV2 sBuf_p0, NI sPos_p1, NI ePos_p2);
 N_LIB_PRIVATE N_NIMCALL(void, setResult__vm_u258)(tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA* a_p0, NI64 v_p1);
 N_LIB_PRIVATE N_CLOSURE(void, hashVmImplByte__vm_u13919)(tyObject_VmArgs__9c8Dqpt8vgSz7ubBqRBfX9aA* a_p0, void* ClE_0);
 N_LIB_PRIVATE N_NIMCALL(tySequence__6H5Oh5UUvVCLiakt9aTwtUQ, newSeq__vm_u13940)(NI len_p0);
@@ -7736,7 +7736,7 @@ NIM_BOOL* nimErr_;
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	if ((T2_) < ((NI)(-2147483647 -1)) || (T2_) > ((NI)2147483647)){ raiseRangeErrorI(T2_, ((NI)(-2147483647 -1)), ((NI)2147483647)); goto BeforeRet_;
 	}
-	res_1 = hash__pureZhashes_u609(colontmpD_, ((NI) (T1_)), ((NI) (T2_)));
+	res_1 = hash__pureZhashes_u593(colontmpD_, ((NI) (T1_)), ((NI) (T2_)));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	nimln_(313);	{
 		if (!((*(*(*colonenvP__1).c0).config).backend == ((tyEnum_TBackend__Ybih4ukfhUItVa54JMNNCg)3))) goto LA5_;

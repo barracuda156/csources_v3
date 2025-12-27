@@ -432,7 +432,7 @@ N_LIB_PRIVATE N_NIMCALL(void, openLexer__lexer_u371)(tyObject_Lexer__dYZ7SP9aY2B
 N_LIB_PRIVATE N_NIMCALL(void*, newSeqPayload)(NI cap_p0, NI elemSize_p1, NI elemAlign_p2);
 N_LIB_PRIVATE N_NIMCALL(void, confTok__nimconf_u196)(tyObject_Lexer__dYZ7SP9aY2B360jzRfbJA5A* L_p0, tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* tok_p1, tyObject_ConfigRefcolonObjectType___4LOAQhP1cPlqnqeNwoNsSQ* config_p2, tySequence__shxop0zPIs5Ec3k71aCLuQ* condStack_p3);
 N_LIB_PRIVATE N_NIMCALL(void, ppGetTok__nimconf_u16)(tyObject_Lexer__dYZ7SP9aY2B360jzRfbJA5A* L_p0, tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* tok_p1);
-N_LIB_PRIVATE N_NIMCALL(void, rawGetTok__lexer_u1861)(tyObject_Lexer__dYZ7SP9aY2B360jzRfbJA5A* L_p0, tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* tok_p1);
+N_LIB_PRIVATE N_NIMCALL(void, rawGetTok__lexer_u1898)(tyObject_Lexer__dYZ7SP9aY2B360jzRfbJA5A* L_p0, tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* tok_p1);
 static N_INLINE(NIM_BOOL, eqeq___idents_u368)(tyObject_TIdent__QYkDa9cS0Nii6pHQECIVbTQ* a_p0, tyObject_TIdent__QYkDa9cS0Nii6pHQECIVbTQ* b_p1);
 static N_INLINE(NIM_BOOL, eqStrings)(NimStringV2 a_p0, NimStringV2 b_p1);
 static N_INLINE(NIM_BOOL, equalMem__system_u1736)(void* a_p0, void* b_p1, NI size_p2);
@@ -708,12 +708,12 @@ N_LIB_PRIVATE N_NIMCALL(void, ppGetTok__nimconf_u16)(tyObject_Lexer__dYZ7SP9aY2B
 NIM_BOOL* nimErr_;
 	nimfr_("ppGetTok", "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimconf.nim");
 {nimErr_ = nimErrorFlag();
-	nimlf_(26, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimconf.nim");	rawGetTok__lexer_u1861(L_p0, tok_p1);
+	nimlf_(26, "/Users/svacchanda/Dev/nim-2.2.6/compiler/nimconf.nim");	rawGetTok__lexer_u1898(L_p0, tok_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	{
 		nimln_(27);		while (1) {
 			if (!((*tok_p1).tokType == ((tyEnum_TokType__SdW5gqyVqipn5MhqfJqW6w)111))) goto LA2;
-			rawGetTok__lexer_u1861(L_p0, tok_p1);
+			rawGetTok__lexer_u1898(L_p0, tok_p1);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		} LA2: ;
 	}

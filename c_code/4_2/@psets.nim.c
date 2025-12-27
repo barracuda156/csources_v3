@@ -169,7 +169,7 @@ static N_INLINE(void, popFrame)(void);
 N_LIB_PRIVATE N_NOINLINE(void, raiseRangeErrorI)(NI64 i_p0, NI64 a_p1, NI64 b_p2);
 N_LIB_PRIVATE N_NIMCALL(void, newSeq__options_u1080)(tySequence__4eRCaZmrYLLw2k30GPTiMw* s_p0, NI len_p1);
 static N_INLINE(NI, rawGet__options_u2262)(tyObject_HashSet__Ex6eoD26ZgcwKuA4K2YqQA t_p0, NimStringV2 key_p1, NI* hc_p2);
-N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u603)(NimStringV2 x_p0);
+N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u587)(NimStringV2 x_p0);
 static N_INLINE(NIM_BOOL, isFilled__pureZcollectionsZsets_u40)(NI hcode_p0);
 N_LIB_PRIVATE N_NOINLINE(void, raiseIndexError2)(NI i_p0, NI n_p1);
 static N_INLINE(NIM_BOOL, eqStrings)(NimStringV2 a_p0, NimStringV2 b_p1);
@@ -416,7 +416,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (NI)0;
 	nimln_(72);	nimln_(59);	T1_ = (NI)0;
-	T1_ = hash__pureZhashes_u603(key_p1);
+	T1_ = hash__pureZhashes_u587(key_p1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*hc_p2) = T1_;
 	nimln_(72);	{

@@ -129,9 +129,9 @@ N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached__system_u4477)(void);
 static N_INLINE(void, popFrame)(void);
 N_LIB_PRIVATE N_NIMCALL(NI, rawGet__pureZstrtabs_u287)(tyObject_StringTableObj__RnML7uCmT0weq0MtD619c1A* t_p0, NimStringV2 key_p1);
 N_LIB_PRIVATE N_NIMCALL(NI, myhash__pureZstrtabs_u265)(tyObject_StringTableObj__RnML7uCmT0weq0MtD619c1A* t_p0, NimStringV2 key_p1);
-N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u603)(NimStringV2 x_p0);
-N_LIB_PRIVATE N_NIMCALL(NI, hashIgnoreCase__pureZhashes_u681)(NimStringV2 x_p0);
-N_LIB_PRIVATE N_NIMCALL(NI, hashIgnoreStyle__pureZhashes_u614)(NimStringV2 x_p0);
+N_LIB_PRIVATE N_NIMCALL(NI, hash__pureZhashes_u587)(NimStringV2 x_p0);
+N_LIB_PRIVATE N_NIMCALL(NI, hashIgnoreCase__pureZhashes_u665)(NimStringV2 x_p0);
+N_LIB_PRIVATE N_NIMCALL(NI, hashIgnoreStyle__pureZhashes_u598)(NimStringV2 x_p0);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
 N_LIB_PRIVATE N_NOINLINE(void, raiseIndexError2)(NI i_p0, NI n_p1);
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, myCmp__pureZstrtabs_u269)(tyObject_StringTableObj__RnML7uCmT0weq0MtD619c1A* t_p0, NimStringV2 a_p1, NimStringV2 b_p2);
@@ -287,19 +287,19 @@ NIM_BOOL* nimErr_;
 	nimln_(118);	switch ((*t_p0).mode) {
 	case ((tyEnum_StringTableMode__ZR9b9ba6KxbjkMzLUDgvkT7w)0):
 	{
-		nimln_(119);		result = hash__pureZhashes_u603(key_p1);
+		nimln_(119);		result = hash__pureZhashes_u587(key_p1);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_StringTableMode__ZR9b9ba6KxbjkMzLUDgvkT7w)1):
 	{
-		nimln_(120);		result = hashIgnoreCase__pureZhashes_u681(key_p1);
+		nimln_(120);		result = hashIgnoreCase__pureZhashes_u665(key_p1);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_StringTableMode__ZR9b9ba6KxbjkMzLUDgvkT7w)2):
 	{
-		nimln_(121);		result = hashIgnoreStyle__pureZhashes_u614(key_p1);
+		nimln_(121);		result = hashIgnoreStyle__pureZhashes_u598(key_p1);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;

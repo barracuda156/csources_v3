@@ -13362,7 +13362,7 @@ N_LIB_PRIVATE N_NIMCALL(void, newSeq__ast_u2884)(tySequence__eEiJh1AF9cWpSMsPnnE
 	shrink__ast_u2888(s_p0, ((NI)0));
 	setLen__ast_u2892((&(*s_p0)), len_p1);
 }
-N_LIB_PRIVATE N_NIMCALL(void, reset__lexer_u1865)(tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* obj_p0) {
+N_LIB_PRIVATE N_NIMCALL(void, reset__lexer_u1902)(tyObject_Token__kh2HgoW0S1BaXTv0KHSfWA* obj_p0) {
 NIM_BOOL* nimErr_;
 	nimfr_("reset", "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");
 {nimErr_ = nimErrorFlag();
@@ -20794,7 +20794,7 @@ N_LIB_PRIVATE N_NIMCALL(void, newSeq__vmmarshal_u936)(tySequence__L8YtxHQc3cWxl6
 	shrink__vmmarshal_u657(s_p0, ((NI)0));
 	setLen__vmmarshal_u650((&(*s_p0)), len_p1);
 }
-N_LIB_PRIVATE N_NIMCALL(NI, clamp__pureZstreams_u770)(NI x_p0, NI a_p1, NI b_p2) {
+N_LIB_PRIVATE N_NIMCALL(NI, clamp__pureZstreams_u732)(NI x_p0, NI a_p1, NI b_p2) {
 	NI result;
 	nimfr_("clamp", "/Users/svacchanda/Dev/nim-2.2.6/lib/system/comparisons.nim");
 {	nimlf_(289, "/Users/svacchanda/Dev/nim-2.2.6/lib/system/comparisons.nim");	{

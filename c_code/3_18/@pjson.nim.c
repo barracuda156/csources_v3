@@ -359,7 +359,7 @@ N_LIB_PRIVATE N_NIMCALL(void, nl__pureZjson_u4713)(NimStringV2* s_p0, NIM_BOOL m
 N_LIB_PRIVATE N_NIMCALL(NI, newIndent__pureZjson_u4708)(NI curr_p0, NI indent_p1, NIM_BOOL ml_p2);
 static N_INLINE(NIM_BOOL, nimSubInt)(NI a_p0, NI b_p1, NI* res_p2);
 N_LIB_PRIVATE N_NIMCALL(void, initFromJson__pureZjson_u5663)(NIM_BOOL* dst_p0, tyObject_JsonNodeObj__MPqHhhUlcoch6dQHSxp4qg* jsonNode_p1, NimStringV2* jsonPath_p2);
-N_LIB_PRIVATE N_NIMCALL(tyObject_FileStreamObj__D1wy4i4GGAMK9b9bmNa7J1zw*, newFileStream__pureZstreams_u1135)(NimStringV2 filename_p0, tyEnum_FileMode__aSVjmZSaHbpn4VsiAwHiBg mode_p1, NI bufSize_p2);
+N_LIB_PRIVATE N_NIMCALL(tyObject_FileStreamObj__D1wy4i4GGAMK9b9bmNa7J1zw*, newFileStream__pureZstreams_u1097)(NimStringV2 filename_p0, tyEnum_FileMode__aSVjmZSaHbpn4VsiAwHiBg mode_p1, NI bufSize_p2);
 N_LIB_PRIVATE N_NIMCALL(tyObject_JsonNodeObj__MPqHhhUlcoch6dQHSxp4qg*, parseJson__pureZjson_u5611)(tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* s_p0, NimStringV2 filename_p1, NIM_BOOL rawIntegers_p2, NIM_BOOL rawFloats_p3);
 N_LIB_PRIVATE N_NIMCALL(void, open__pureZparsejson_u80)(tyObject_JsonParser__UQzhTMe1otyOVTOQpzPg5Q* my_p0, tyObject_StreamObj__hVem85BkurzpJI5By5q3Lw* input_p1, NimStringV2 filename_p2, NIM_BOOL rawStringLiterals_p3);
 N_LIB_PRIVATE N_NIMCALL(tyEnum_TokKind__Xw7xg7m9bjPPwL79bQ19aP7bQ, getTok__pureZparsejson_u636)(tyObject_JsonParser__UQzhTMe1otyOVTOQpzPg5Q* my_p0);
@@ -381,7 +381,7 @@ N_LIB_PRIVATE N_NIMCALL(void, eat__pureZparsejson_u895)(tyObject_JsonParser__UQz
 static N_INLINE(void, close__pureZparsejson_u313)(tyObject_JsonParser__UQzhTMe1otyOVTOQpzPg5Q* my_p0);
 N_LIB_PRIVATE N_NIMCALL(void, close__pureZlexbase_u15)(tyObject_BaseLexer__YkbBTQaTsXPweEonhLIMMA* L_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pureZparsejson_u128)(tyObject_JsonParser__UQzhTMe1otyOVTOQpzPg5Q* dest_p0);
-N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pureZstreams_u1018)(tyObject_FileStreamObj__D1wy4i4GGAMK9b9bmNa7J1zw* dest_p0);
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___pureZstreams_u980)(tyObject_FileStreamObj__D1wy4i4GGAMK9b9bmNa7J1zw* dest_p0);
 N_LIB_PRIVATE N_NIMCALL(tyObject_JsonNodeObj__MPqHhhUlcoch6dQHSxp4qg*, percent___docgen_u13768)(tyObject_IndexEntry__50nSRmMbqiBEbc8V49cqQIg* o_p0);
 N_LIB_PRIVATE N_NIMCALL(tyObject_JsonNodeObj__MPqHhhUlcoch6dQHSxp4qg*, percent___docgen_u13775)(tyEnum_IndexEntryKind__ulycKiQ4GkbzzLsRyp3MRQ o_p0);
 N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___packagesZdocutilsZrstidx_u13)(tyEnum_IndexEntryKind__ulycKiQ4GkbzzLsRyp3MRQ e_p0);
@@ -3243,7 +3243,7 @@ NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = NIM_NIL;
 	stream_1 = NIM_NIL;
-	nimlf_(1055, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/json.nim");	stream_1 = newFileStream__pureZstreams_u1135(filename_p0, ((tyEnum_FileMode__aSVjmZSaHbpn4VsiAwHiBg)0), ((NI)-1));
+	nimlf_(1055, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/json.nim");	stream_1 = newFileStream__pureZstreams_u1097(filename_p0, ((tyEnum_FileMode__aSVjmZSaHbpn4VsiAwHiBg)0), ((NI)-1));
 	if (NIM_UNLIKELY(*nimErr_)) goto LA1_;
 	nimln_(1056);	{
 		tyObject_IOError__tO5u9ayC6Oa1Eb5PNwZdoRw* T6_;
@@ -3269,7 +3269,7 @@ LA4_: ;
 		LA1_:;
 	}
 	{
-		nimlf_(1336, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");		eqdestroy___pureZstreams_u1018(stream_1);
+		nimlf_(1336, "/Users/svacchanda/Dev/nim-2.2.6/lib/pure/streams.nim");		eqdestroy___pureZstreams_u980(stream_1);
 	}
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;

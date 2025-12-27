@@ -2798,8 +2798,8 @@ LA17_: ;
 N_LIB_PRIVATE N_NIMCALL(tyObject_TNode__glIoDmeM2cKACf9btlenMgA*, evalOp__semfold_u74)(tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ m_p0, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* n_p1, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* a_p2, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* b_p3, tyObject_TNode__glIoDmeM2cKACf9btlenMgA* c_p4, tyObject_IdGeneratorcolonObjectType___4yNoBrt51Y9cm9aIhhWgPWWQ* idgen_p5, tyObject_ModuleGraphcolonObjectType___zRCH5M9ccVGC9aJs5vkX9bGAQ* g_p6) {
 	tyObject_TNode__glIoDmeM2cKACf9btlenMgA* result;
 NIM_BOOL oldNimErrFin107_;
-NIM_BOOL oldNimErrFin224_;
-NIM_BOOL oldNimErrFin303_;
+NIM_BOOL oldNimErrFin222_;
+NIM_BOOL oldNimErrFin301_;
 NIM_BOOL* nimErr_;
 	nimfr_("evalOp", "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");
 {nimErr_ = nimErrorFlag();
@@ -3561,27 +3561,23 @@ LA183_: ;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)57):
 	{
 		NU64 a_2;
-		union { tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA source; NU64 dest; } LOC204;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T205_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T204_;
 		NU64 b_2;
-		union { tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA source; NU64 dest; } LOC206;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T207_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T205_;
 		NI64 c_2;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T221_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T222_;
-		nimlf_(203, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		nimZeroMem((void*)(&T205_), sizeof(tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA));
-		T205_ = getInt__ast_u7077(a_p2);
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T219_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T220_;
+		nimlf_(203, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T204_ = getInt__ast_u7077(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		LOC204.source = T205_;
-		a_2 = LOC204.dest;
-		nimln_(204);		nimZeroMem((void*)(&T207_), sizeof(tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA));
-		T207_ = getInt__ast_u7077(b_p3);
+		a_2 = toUInt64__int128_u304(T204_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		LOC206.source = T207_;
-		b_2 = LOC206.dest;
+		nimln_(204);		T205_ = getInt__ast_u7077(b_p3);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		b_2 = toUInt64__int128_u304(T205_);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimln_(208);		{
 			tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* colontmpD__6;
-			if (!((NU64)(0ULL) < (NU64)(b_2))) goto LA210_;
+			if (!((NU64)(0ULL) < (NU64)(b_2))) goto LA208_;
 			colontmpD__6 = NIM_NIL;
 			nimln_(210);			colontmpD__6 = skipTypes__ast_u5402((*n_p1).typField, TM__JtgqXuJaW0Uz9aqyNPWIZsw_10);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
@@ -3604,10 +3600,10 @@ LA183_: ;
 			case ((tyEnum_TTypeKind__9aaBHVux9bcpmQgjLJmktiUQ)31):
 			{
 				nimln_(215);				{
-					if (!((*(*g_p6).config).target.intSize == ((NI)4))) goto LA218_;
+					if (!((*(*g_p6).config).target.intSize == ((NI)4))) goto LA216_;
 					nimln_(216);					a_2 = (NU64)(a_2 & 4294967295ULL);
 				}
-LA218_: ;
+LA216_: ;
 			}
 			break;
 			default:
@@ -3618,14 +3614,14 @@ LA218_: ;
 			nimlf_(934, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___ast_u3387(colontmpD__6);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		}
-LA210_: ;
+LA208_: ;
 		nimlf_(220, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		c_2 = ((NI64) ((NU64)((NU64)(a_2) >> (NU64)(b_2))));
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(221, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T221_ = toInt128__int128_u1011(c_2);
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(221, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T219_ = toInt128__int128_u1011(c_2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T222_ = NIM_NIL;
-		T222_ = newIntNodeT__semfold_u45(T221_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T222_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T222_);
+		T220_ = NIM_NIL;
+		T220_ = newIntNodeT__semfold_u45(T219_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T220_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T220_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
@@ -3634,132 +3630,132 @@ LA210_: ;
 		tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* colontmpD__7;
 		colontmpD__7 = NIM_NIL;
 		nimlf_(223, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		colontmpD__7 = skipTypes__ast_u5402((*n_p1).typField, TM__JtgqXuJaW0Uz9aqyNPWIZsw_10);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
 		switch ((*colontmpD__7).kind) {
 		case ((tyEnum_TTypeKind__9aaBHVux9bcpmQgjLJmktiUQ)32):
 		{
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T224_;
+			NI8 T225_;
 			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T226_;
 			NI8 T227_;
 			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T228_;
-			NI8 T229_;
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T230_;
-			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T231_;
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(224, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T226_ = getInt__ast_u7077(a_p2);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
+			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T229_;
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(224, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T224_ = getInt__ast_u7077(a_p2);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T225_ = (NI8)0;
+			T225_ = toInt8__int128_u244(T224_);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T226_ = getInt__ast_u7077(b_p3);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
 			T227_ = (NI8)0;
 			T227_ = toInt8__int128_u244(T226_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T228_ = getInt__ast_u7077(b_p3);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T229_ = (NI8)0;
-			T229_ = toInt8__int128_u244(T228_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T230_ = toInt128__semfold_u257((NI8)((NI8)(T227_) >> (NU8)(T229_)));
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T231_ = NIM_NIL;
-			T231_ = newIntNodeT__semfold_u45(T230_, n_p1, idgen_p5, g_p6);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T231_); goto LA224_;}
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T231_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T228_ = toInt128__semfold_u257((NI8)((NI8)(T225_) >> (NU8)(T227_)));
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T229_ = NIM_NIL;
+			T229_ = newIntNodeT__semfold_u45(T228_, n_p1, idgen_p5, g_p6);
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T229_); goto LA222_;}
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T229_);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
 		}
 		break;
 		case ((tyEnum_TTypeKind__9aaBHVux9bcpmQgjLJmktiUQ)33):
 		{
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T231_;
+			NI16 T232_;
 			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T233_;
 			NI16 T234_;
 			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T235_;
-			NI16 T236_;
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T237_;
-			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T238_;
-			nimlf_(225, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T233_ = getInt__ast_u7077(a_p2);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
+			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T236_;
+			nimlf_(225, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T231_ = getInt__ast_u7077(a_p2);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T232_ = (NI16)0;
+			T232_ = toInt16__int128_u187(T231_);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T233_ = getInt__ast_u7077(b_p3);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
 			T234_ = (NI16)0;
 			T234_ = toInt16__int128_u187(T233_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T235_ = getInt__ast_u7077(b_p3);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T236_ = (NI16)0;
-			T236_ = toInt16__int128_u187(T235_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T237_ = toInt128__semfold_u281((NI16)((NI16)(T234_) >> (NU16)(T236_)));
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T238_ = NIM_NIL;
-			T238_ = newIntNodeT__semfold_u45(T237_, n_p1, idgen_p5, g_p6);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T238_); goto LA224_;}
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T238_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T235_ = toInt128__semfold_u281((NI16)((NI16)(T232_) >> (NU16)(T234_)));
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T236_ = NIM_NIL;
+			T236_ = newIntNodeT__semfold_u45(T235_, n_p1, idgen_p5, g_p6);
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T236_); goto LA222_;}
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T236_);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
 		}
 		break;
 		case ((tyEnum_TTypeKind__9aaBHVux9bcpmQgjLJmktiUQ)34):
 		{
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T238_;
+			NI32 T239_;
 			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T240_;
 			NI32 T241_;
 			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T242_;
-			NI32 T243_;
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T244_;
-			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T245_;
-			nimlf_(226, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T240_ = getInt__ast_u7077(a_p2);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
+			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T243_;
+			nimlf_(226, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T238_ = getInt__ast_u7077(a_p2);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T239_ = (NI32)0;
+			T239_ = toInt32__int128_u130(T238_);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T240_ = getInt__ast_u7077(b_p3);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
 			T241_ = (NI32)0;
 			T241_ = toInt32__int128_u130(T240_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T242_ = getInt__ast_u7077(b_p3);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T243_ = (NI32)0;
-			T243_ = toInt32__int128_u130(T242_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T244_ = toInt128__semfold_u305((NI32)((NI32)(T241_) >> (NU32)(T243_)));
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T245_ = NIM_NIL;
-			T245_ = newIntNodeT__semfold_u45(T244_, n_p1, idgen_p5, g_p6);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T245_); goto LA224_;}
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T245_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T242_ = toInt128__semfold_u305((NI32)((NI32)(T239_) >> (NU32)(T241_)));
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T243_ = NIM_NIL;
+			T243_ = newIntNodeT__semfold_u45(T242_, n_p1, idgen_p5, g_p6);
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T243_); goto LA222_;}
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T243_);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
 		}
 		break;
 		case ((tyEnum_TTypeKind__9aaBHVux9bcpmQgjLJmktiUQ)35):
 		case ((tyEnum_TTypeKind__9aaBHVux9bcpmQgjLJmktiUQ)31):
 		{
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T245_;
+			NI64 T246_;
 			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T247_;
 			NI64 T248_;
 			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T249_;
-			NI64 T250_;
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T251_;
-			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T252_;
-			nimlf_(228, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T247_ = getInt__ast_u7077(a_p2);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
+			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T250_;
+			nimlf_(228, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T245_ = getInt__ast_u7077(a_p2);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T246_ = (NI64)0;
+			T246_ = toInt64__int128_u53(T245_);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T247_ = getInt__ast_u7077(b_p3);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
 			T248_ = (NI64)0;
 			T248_ = toInt64__int128_u53(T247_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T249_ = getInt__ast_u7077(b_p3);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T250_ = (NI64)0;
-			T250_ = toInt64__int128_u53(T249_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T251_ = toInt128__int128_u1011((NI64)((NI64)(T248_) >> (NU64)(T250_)));
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
-			T252_ = NIM_NIL;
-			T252_ = newIntNodeT__semfold_u45(T251_, n_p1, idgen_p5, g_p6);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T252_); goto LA224_;}
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T252_);
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T249_ = toInt128__int128_u1011((NI64)((NI64)(T246_) >> (NU64)(T248_)));
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
+			T250_ = NIM_NIL;
+			T250_ = newIntNodeT__semfold_u45(T249_, n_p1, idgen_p5, g_p6);
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T250_); goto LA222_;}
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T250_);
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
 		}
 		break;
 		default:
 		{
 			nimlf_(229, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			internalErrorImpl__msgs_u1580((*g_p6).config, (*n_p1).info, TM__JtgqXuJaW0Uz9aqyNPWIZsw_16, (&TM__JtgqXuJaW0Uz9aqyNPWIZsw_17));
-			if (NIM_UNLIKELY(*nimErr_)) goto LA224_;
+			if (NIM_UNLIKELY(*nimErr_)) goto LA222_;
 		}
 		break;
 		}
 		{
-			LA224_:;
+			LA222_:;
 		}
 		{
-			oldNimErrFin224_ = *nimErr_; *nimErr_ = NIM_FALSE;
+			oldNimErrFin222_ = *nimErr_; *nimErr_ = NIM_FALSE;
 			nimlf_(934, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___ast_u3387(colontmpD__7);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			*nimErr_ = oldNimErrFin224_;
+			*nimErr_ = oldNimErrFin222_;
 		}
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
@@ -3773,45 +3769,45 @@ LA210_: ;
 		nimln_(232);		argB_3 = getInt__ast_u7077(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimln_(233);		{
-			NIM_BOOL T259_;
+			NIM_BOOL T257_;
+			NIM_BOOL T258_;
 			NIM_BOOL T260_;
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T261_;
 			NIM_BOOL T262_;
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T263_;
 			NIM_BOOL T264_;
-			NIM_BOOL T266_;
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T269_;
-			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T270_;
-			T259_ = (NIM_BOOL)0;
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T267_;
+			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T268_;
+			T257_ = (NIM_BOOL)0;
+			T258_ = (NIM_BOOL)0;
+			T258_ = eqeq___int128_u478(argB_3, Zero__int128_u8);
+			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+			T257_ = !(T258_);
+			if (!(T257_)) goto LA259_;
 			T260_ = (NIM_BOOL)0;
-			T260_ = eqeq___int128_u478(argB_3, Zero__int128_u8);
+			T261_ = firstOrd__types_u1192((*g_p6).config, (*n_p1).typField);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T259_ = !(T260_);
-			if (!(T259_)) goto LA261_;
 			T262_ = (NIM_BOOL)0;
-			T263_ = firstOrd__types_u1192((*g_p6).config, (*n_p1).typField);
+			T262_ = eqeq___int128_u478(argA_3, T261_);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+			T260_ = !(T262_);
+			if (T260_) goto LA263_;
 			T264_ = (NIM_BOOL)0;
-			T264_ = eqeq___int128_u478(argA_3, T263_);
+			T264_ = eqeq___int128_u478(argB_3, NegOne__int128_u29);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T262_ = !(T264_);
-			if (T262_) goto LA265_;
-			T266_ = (NIM_BOOL)0;
-			T266_ = eqeq___int128_u478(argB_3, NegOne__int128_u29);
+			T260_ = !(T264_);
+LA263_: ;
+			T257_ = T260_;
+LA259_: ;
+			if (!T257_) goto LA265_;
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(234, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T267_ = div__int128_u879(argA_3, argB_3);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T262_ = !(T266_);
-LA265_: ;
-			T259_ = T262_;
-LA261_: ;
-			if (!T259_) goto LA267_;
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(234, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T269_ = div__int128_u879(argA_3, argB_3);
-			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T270_ = NIM_NIL;
-			T270_ = newIntNodeT__semfold_u45(T269_, n_p1, idgen_p5, g_p6);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T270_); goto BeforeRet_;}
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T270_);
+			T268_ = NIM_NIL;
+			T268_ = newIntNodeT__semfold_u45(T267_, n_p1, idgen_p5, g_p6);
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T268_); goto BeforeRet_;}
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T268_);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		}
-LA267_: ;
+LA265_: ;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)50):
@@ -3823,116 +3819,116 @@ LA267_: ;
 		nimln_(237);		argB_4 = getInt__ast_u7077(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimln_(238);		{
-			NIM_BOOL T274_;
+			NIM_BOOL T272_;
+			NIM_BOOL T273_;
 			NIM_BOOL T275_;
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T276_;
 			NIM_BOOL T277_;
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T278_;
 			NIM_BOOL T279_;
-			NIM_BOOL T281_;
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T284_;
-			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T285_;
-			T274_ = (NIM_BOOL)0;
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T282_;
+			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T283_;
+			T272_ = (NIM_BOOL)0;
+			T273_ = (NIM_BOOL)0;
+			T273_ = eqeq___int128_u478(argB_4, Zero__int128_u8);
+			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+			T272_ = !(T273_);
+			if (!(T272_)) goto LA274_;
 			T275_ = (NIM_BOOL)0;
-			T275_ = eqeq___int128_u478(argB_4, Zero__int128_u8);
+			T276_ = firstOrd__types_u1192((*g_p6).config, (*n_p1).typField);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T274_ = !(T275_);
-			if (!(T274_)) goto LA276_;
 			T277_ = (NIM_BOOL)0;
-			T278_ = firstOrd__types_u1192((*g_p6).config, (*n_p1).typField);
+			T277_ = eqeq___int128_u478(argA_4, T276_);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+			T275_ = !(T277_);
+			if (T275_) goto LA278_;
 			T279_ = (NIM_BOOL)0;
-			T279_ = eqeq___int128_u478(argA_4, T278_);
+			T279_ = eqeq___int128_u478(argB_4, NegOne__int128_u29);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T277_ = !(T279_);
-			if (T277_) goto LA280_;
-			T281_ = (NIM_BOOL)0;
-			T281_ = eqeq___int128_u478(argB_4, NegOne__int128_u29);
+			T275_ = !(T279_);
+LA278_: ;
+			T272_ = T275_;
+LA274_: ;
+			if (!T272_) goto LA280_;
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(239, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T282_ = mod__int128_u885(argA_4, argB_4);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T277_ = !(T281_);
-LA280_: ;
-			T274_ = T277_;
-LA276_: ;
-			if (!T274_) goto LA282_;
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(239, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T284_ = mod__int128_u885(argA_4, argB_4);
-			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T285_ = NIM_NIL;
-			T285_ = newIntNodeT__semfold_u45(T284_, n_p1, idgen_p5, g_p6);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T285_); goto BeforeRet_;}
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T285_);
+			T283_ = NIM_NIL;
+			T283_ = newIntNodeT__semfold_u45(T282_, n_p1, idgen_p5, g_p6);
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T283_); goto BeforeRet_;}
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T283_);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		}
-LA282_: ;
+LA280_: ;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)53):
 	{
-		NF T287_;
-		NF T288_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T289_;
-		nimlf_(240, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T287_ = (NF)0;
-		T287_ = getFloat__ast_u7092(a_p2);
+		NF T285_;
+		NF T286_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T287_;
+		nimlf_(240, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T285_ = (NF)0;
+		T285_ = getFloat__ast_u7092(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T288_ = (NF)0;
-		T288_ = getFloat__ast_u7092(b_p3);
+		T286_ = (NF)0;
+		T286_ = getFloat__ast_u7092(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T289_ = NIM_NIL;
-		T289_ = newFloatNodeT__semfold_u55(((NF)(T287_) + (NF)(T288_)), n_p1, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T289_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T289_);
+		T287_ = NIM_NIL;
+		T287_ = newFloatNodeT__semfold_u55(((NF)(T285_) + (NF)(T286_)), n_p1, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T287_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T287_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)54):
 	{
-		NF T291_;
-		NF T292_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T293_;
-		nimlf_(241, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T291_ = (NF)0;
-		T291_ = getFloat__ast_u7092(a_p2);
+		NF T289_;
+		NF T290_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T291_;
+		nimlf_(241, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T289_ = (NF)0;
+		T289_ = getFloat__ast_u7092(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T292_ = (NF)0;
-		T292_ = getFloat__ast_u7092(b_p3);
+		T290_ = (NF)0;
+		T290_ = getFloat__ast_u7092(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T293_ = NIM_NIL;
-		T293_ = newFloatNodeT__semfold_u55(((NF)(T291_) - (NF)(T292_)), n_p1, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T293_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T293_);
+		T291_ = NIM_NIL;
+		T291_ = newFloatNodeT__semfold_u55(((NF)(T289_) - (NF)(T290_)), n_p1, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T291_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T291_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)55):
 	{
-		NF T295_;
-		NF T296_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T297_;
-		nimlf_(242, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T295_ = (NF)0;
-		T295_ = getFloat__ast_u7092(a_p2);
+		NF T293_;
+		NF T294_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T295_;
+		nimlf_(242, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T293_ = (NF)0;
+		T293_ = getFloat__ast_u7092(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T296_ = (NF)0;
-		T296_ = getFloat__ast_u7092(b_p3);
+		T294_ = (NF)0;
+		T294_ = getFloat__ast_u7092(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T297_ = NIM_NIL;
-		T297_ = newFloatNodeT__semfold_u55(((NF)(T295_) * (NF)(T296_)), n_p1, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T297_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T297_);
+		T295_ = NIM_NIL;
+		T295_ = newFloatNodeT__semfold_u55(((NF)(T293_) * (NF)(T294_)), n_p1, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T295_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T295_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)56):
 	{
-		NF T299_;
-		NF T300_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T301_;
-		nimlf_(244, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T299_ = (NF)0;
-		T299_ = getFloat__ast_u7092(a_p2);
+		NF T297_;
+		NF T298_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T299_;
+		nimlf_(244, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T297_ = (NF)0;
+		T297_ = getFloat__ast_u7092(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T300_ = (NF)0;
-		T300_ = getFloat__ast_u7092(b_p3);
+		T298_ = (NF)0;
+		T298_ = getFloat__ast_u7092(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T301_ = NIM_NIL;
-		T301_ = newFloatNodeT__semfold_u55(((NF)(T299_) / (NF)(T300_)), n_p1, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T301_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T301_);
+		T299_ = NIM_NIL;
+		T299_ = newFloatNodeT__semfold_u55(((NF)(T297_) / (NF)(T298_)), n_p1, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T299_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T299_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
@@ -3940,75 +3936,75 @@ LA282_: ;
 	{
 		tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ* colontmpD__8;
 		NIM_BOOL val_1;
+		NIM_BOOL T302_;
 		NIM_BOOL T304_;
+		NIM_BOOL T305_;
 		NIM_BOOL T306_;
 		NIM_BOOL T307_;
 		NIM_BOOL T308_;
-		NIM_BOOL T309_;
-		NIM_BOOL T310_;
-		NI T314_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T317_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T318_;
+		NI T312_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T315_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T316_;
 		colontmpD__8 = NIM_NIL;
-		nimlf_(246, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T304_ = (NIM_BOOL)0;
-		T304_ = ((*a_p2).kind == ((tyEnum_TNodeKind__x4wdWsBA6XBD9brKs9cC6Yug)23));
-		if (T304_) goto LA305_;
-		nimln_(250);		T306_ = (NIM_BOOL)0;
-		nimln_(249);		T307_ = (NIM_BOOL)0;
+		nimlf_(246, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T302_ = (NIM_BOOL)0;
+		T302_ = ((*a_p2).kind == ((tyEnum_TNodeKind__x4wdWsBA6XBD9brKs9cC6Yug)23));
+		if (T302_) goto LA303_;
+		nimln_(250);		T304_ = (NIM_BOOL)0;
+		nimln_(249);		T305_ = (NIM_BOOL)0;
+		T306_ = (NIM_BOOL)0;
+		nimln_(248);		T307_ = (NIM_BOOL)0;
 		T308_ = (NIM_BOOL)0;
-		nimln_(248);		T309_ = (NIM_BOOL)0;
-		T310_ = (NIM_BOOL)0;
-		T310_ = !(((*a_p2).typField == ((tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ*) NIM_NIL)));
-		if (!(T310_)) goto LA311_;
+		T308_ = !(((*a_p2).typField == ((tyObject_TType__CdMzjATh5pJqb9cfK8v1XJQ*) NIM_NIL)));
+		if (!(T308_)) goto LA309_;
 		colontmpD__8 = skipTypes__ast_u5402((*a_p2).typField, TM__JtgqXuJaW0Uz9aqyNPWIZsw_10);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA303_;
-		T310_ = ((*colontmpD__8).kind == ((tyEnum_TTypeKind__9aaBHVux9bcpmQgjLJmktiUQ)25));
-LA311_: ;
-		T309_ = T310_;
-		if (!(T309_)) goto LA312_;
-		nimln_(249);		T309_ = ((*a_p2).kind == ((tyEnum_TNodeKind__x4wdWsBA6XBD9brKs9cC6Yug)160));
-LA312_: ;
-		T308_ = T309_;
-		if (!(T308_)) goto LA313_;
-		T314_ = (NI)0;
-		T314_ = len__ast_u3197(a_p2);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA303_;
-		T308_ = (T314_ == ((NI)2));
-LA313_: ;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA301_;
+		T308_ = ((*colontmpD__8).kind == ((tyEnum_TTypeKind__9aaBHVux9bcpmQgjLJmktiUQ)25));
+LA309_: ;
 		T307_ = T308_;
-		if (!(T307_)) goto LA315_;
-		nimln_(250);		if (((TM__JtgqXuJaW0Uz9aqyNPWIZsw_7[(NU)(((*a_p2).kind))>>3] &(1U<<((NU)(((*a_p2).kind))&7U)))!=0)) 		{ raiseFieldErrorStr(TM__JtgqXuJaW0Uz9aqyNPWIZsw_18, dollar___nodekinds_u168((*a_p2).kind)); goto LA303_;
-		}
-		if (((NI)0) < 0 || ((NI)0) >= (*a_p2)._kind_6.sons.len){ raiseIndexError2(((NI)0),(*a_p2)._kind_6.sons.len-1); goto LA303_;
-		}
-		T307_ = ((*(*a_p2)._kind_6.sons.p->data[((NI)0)]).kind == ((tyEnum_TNodeKind__x4wdWsBA6XBD9brKs9cC6Yug)23));
-LA315_: ;
+		if (!(T307_)) goto LA310_;
+		nimln_(249);		T307_ = ((*a_p2).kind == ((tyEnum_TNodeKind__x4wdWsBA6XBD9brKs9cC6Yug)160));
+LA310_: ;
 		T306_ = T307_;
-		if (!(T306_)) goto LA316_;
-		if (((TM__JtgqXuJaW0Uz9aqyNPWIZsw_7[(NU)(((*a_p2).kind))>>3] &(1U<<((NU)(((*a_p2).kind))&7U)))!=0)) 		{ raiseFieldErrorStr(TM__JtgqXuJaW0Uz9aqyNPWIZsw_19, dollar___nodekinds_u168((*a_p2).kind)); goto LA303_;
+		if (!(T306_)) goto LA311_;
+		T312_ = (NI)0;
+		T312_ = len__ast_u3197(a_p2);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA301_;
+		T306_ = (T312_ == ((NI)2));
+LA311_: ;
+		T305_ = T306_;
+		if (!(T305_)) goto LA313_;
+		nimln_(250);		if (((TM__JtgqXuJaW0Uz9aqyNPWIZsw_7[(NU)(((*a_p2).kind))>>3] &(1U<<((NU)(((*a_p2).kind))&7U)))!=0)) 		{ raiseFieldErrorStr(TM__JtgqXuJaW0Uz9aqyNPWIZsw_18, dollar___nodekinds_u168((*a_p2).kind)); goto LA301_;
 		}
-		if (((NI)1) < 0 || ((NI)1) >= (*a_p2)._kind_6.sons.len){ raiseIndexError2(((NI)1),(*a_p2)._kind_6.sons.len-1); goto LA303_;
+		if (((NI)0) < 0 || ((NI)0) >= (*a_p2)._kind_6.sons.len){ raiseIndexError2(((NI)0),(*a_p2)._kind_6.sons.len-1); goto LA301_;
 		}
-		T306_ = ((*(*a_p2)._kind_6.sons.p->data[((NI)1)]).kind == ((tyEnum_TNodeKind__x4wdWsBA6XBD9brKs9cC6Yug)23));
-LA316_: ;
-		T304_ = T306_;
-LA305_: ;
-		val_1 = T304_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(251, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T317_ = toInt128__types_u1221(val_1);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA303_;
-		T318_ = NIM_NIL;
-		T318_ = newIntNodeT__semfold_u45(T317_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T318_); goto LA303_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T318_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA303_;
+		T305_ = ((*(*a_p2)._kind_6.sons.p->data[((NI)0)]).kind == ((tyEnum_TNodeKind__x4wdWsBA6XBD9brKs9cC6Yug)23));
+LA313_: ;
+		T304_ = T305_;
+		if (!(T304_)) goto LA314_;
+		if (((TM__JtgqXuJaW0Uz9aqyNPWIZsw_7[(NU)(((*a_p2).kind))>>3] &(1U<<((NU)(((*a_p2).kind))&7U)))!=0)) 		{ raiseFieldErrorStr(TM__JtgqXuJaW0Uz9aqyNPWIZsw_19, dollar___nodekinds_u168((*a_p2).kind)); goto LA301_;
+		}
+		if (((NI)1) < 0 || ((NI)1) >= (*a_p2)._kind_6.sons.len){ raiseIndexError2(((NI)1),(*a_p2)._kind_6.sons.len-1); goto LA301_;
+		}
+		T304_ = ((*(*a_p2)._kind_6.sons.p->data[((NI)1)]).kind == ((tyEnum_TNodeKind__x4wdWsBA6XBD9brKs9cC6Yug)23));
+LA314_: ;
+		T302_ = T304_;
+LA303_: ;
+		val_1 = T302_;
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(251, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T315_ = toInt128__types_u1221(val_1);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA301_;
+		T316_ = NIM_NIL;
+		T316_ = newIntNodeT__semfold_u45(T315_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T316_); goto LA301_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T316_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA301_;
 		{
-			LA303_:;
+			LA301_:;
 		}
 		{
-			oldNimErrFin303_ = *nimErr_; *nimErr_ = NIM_FALSE;
+			oldNimErrFin301_ = *nimErr_; *nimErr_ = NIM_FALSE;
 			nimlf_(934, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___ast_u3387(colontmpD__8);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			*nimErr_ = oldNimErrFin303_;
+			*nimErr_ = oldNimErrFin301_;
 		}
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
@@ -4018,24 +4014,24 @@ LA305_: ;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)80):
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)83):
 	{
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T322_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T320_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T321_;
+		NIM_BOOL T322_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T323_;
-		NIM_BOOL T324_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T325_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T326_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(253, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T322_ = getOrdValue__types_u167(a_p2);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T324_;
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(253, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T320_ = getOrdValue__types_u167(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T323_ = getOrdValue__types_u167(b_p3);
+		T321_ = getOrdValue__types_u167(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T324_ = (NIM_BOOL)0;
-		T324_ = lt___int128_u470(T322_, T323_);
+		T322_ = (NIM_BOOL)0;
+		T322_ = lt___int128_u470(T320_, T321_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T325_ = toInt128__types_u1221(T324_);
+		T323_ = toInt128__types_u1221(T322_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T326_ = NIM_NIL;
-		T326_ = newIntNodeT__semfold_u45(T325_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T326_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T326_);
+		T324_ = NIM_NIL;
+		T324_ = newIntNodeT__semfold_u45(T323_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T324_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T324_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
@@ -4044,24 +4040,24 @@ LA305_: ;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)79):
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)82):
 	{
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T328_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T326_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T327_;
+		NIM_BOOL T328_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T329_;
-		NIM_BOOL T330_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T331_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T332_;
-		nimlf_(255, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T328_ = getOrdValue__types_u167(a_p2);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T330_;
+		nimlf_(255, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T326_ = getOrdValue__types_u167(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T329_ = getOrdValue__types_u167(b_p3);
+		T327_ = getOrdValue__types_u167(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T330_ = (NIM_BOOL)0;
-		T330_ = lteq___int128_u474(T328_, T329_);
+		T328_ = (NIM_BOOL)0;
+		T328_ = lteq___int128_u474(T326_, T327_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T331_ = toInt128__types_u1221(T330_);
+		T329_ = toInt128__types_u1221(T328_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T332_ = NIM_NIL;
-		T332_ = newIntNodeT__semfold_u45(T331_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T332_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T332_);
+		T330_ = NIM_NIL;
+		T330_ = newIntNodeT__semfold_u45(T329_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T330_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T330_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
@@ -4070,87 +4066,87 @@ LA305_: ;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)78):
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)81):
 	{
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T334_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T332_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T333_;
+		NIM_BOOL T334_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T335_;
-		NIM_BOOL T336_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T337_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T338_;
-		nimlf_(257, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T334_ = getOrdValue__types_u167(a_p2);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T336_;
+		nimlf_(257, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T332_ = getOrdValue__types_u167(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T335_ = getOrdValue__types_u167(b_p3);
+		T333_ = getOrdValue__types_u167(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T336_ = (NIM_BOOL)0;
-		T336_ = eqeq___int128_u478(T334_, T335_);
+		T334_ = (NIM_BOOL)0;
+		T334_ = eqeq___int128_u478(T332_, T333_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T337_ = toInt128__types_u1221(T336_);
+		T335_ = toInt128__types_u1221(T334_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T338_ = NIM_NIL;
-		T338_ = newIntNodeT__semfold_u45(T337_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T338_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T338_);
+		T336_ = NIM_NIL;
+		T336_ = newIntNodeT__semfold_u45(T335_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T336_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T336_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)75):
 	{
-		NF T340_;
-		NF T341_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T342_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T343_;
-		nimlf_(258, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T340_ = (NF)0;
-		T340_ = getFloat__ast_u7092(a_p2);
+		NF T338_;
+		NF T339_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T340_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T341_;
+		nimlf_(258, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T338_ = (NF)0;
+		T338_ = getFloat__ast_u7092(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T341_ = (NF)0;
-		T341_ = getFloat__ast_u7092(b_p3);
+		T339_ = (NF)0;
+		T339_ = getFloat__ast_u7092(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T342_ = toInt128__types_u1221((T340_ < T341_));
+		T340_ = toInt128__types_u1221((T338_ < T339_));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T343_ = NIM_NIL;
-		T343_ = newIntNodeT__semfold_u45(T342_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T343_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T343_);
+		T341_ = NIM_NIL;
+		T341_ = newIntNodeT__semfold_u45(T340_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T341_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T341_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)74):
 	{
-		NF T345_;
-		NF T346_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T347_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T348_;
-		nimlf_(259, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T345_ = (NF)0;
-		T345_ = getFloat__ast_u7092(a_p2);
+		NF T343_;
+		NF T344_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T345_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T346_;
+		nimlf_(259, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T343_ = (NF)0;
+		T343_ = getFloat__ast_u7092(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T346_ = (NF)0;
-		T346_ = getFloat__ast_u7092(b_p3);
+		T344_ = (NF)0;
+		T344_ = getFloat__ast_u7092(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T347_ = toInt128__types_u1221((T345_ <= T346_));
+		T345_ = toInt128__types_u1221((T343_ <= T344_));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T348_ = NIM_NIL;
-		T348_ = newIntNodeT__semfold_u45(T347_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T348_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T348_);
+		T346_ = NIM_NIL;
+		T346_ = newIntNodeT__semfold_u45(T345_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T346_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T346_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)73):
 	{
-		NF T350_;
-		NF T351_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T352_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T353_;
-		nimlf_(260, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T350_ = (NF)0;
-		T350_ = getFloat__ast_u7092(a_p2);
+		NF T348_;
+		NF T349_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T350_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T351_;
+		nimlf_(260, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T348_ = (NF)0;
+		T348_ = getFloat__ast_u7092(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T351_ = (NF)0;
-		T351_ = getFloat__ast_u7092(b_p3);
+		T349_ = (NF)0;
+		T349_ = getFloat__ast_u7092(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T352_ = toInt128__types_u1221((T350_ == T351_));
+		T350_ = toInt128__types_u1221((T348_ == T349_));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T353_ = NIM_NIL;
-		T353_ = newIntNodeT__semfold_u45(T352_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T353_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T353_);
+		T351_ = NIM_NIL;
+		T351_ = newIntNodeT__semfold_u45(T350_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T351_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T351_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
@@ -4158,23 +4154,23 @@ LA305_: ;
 	{
 		NimStringV2 colontmpD__9;
 		NimStringV2 colontmpD__10;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T356_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T357_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T354_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T355_;
 		colontmpD__9.len = 0; colontmpD__9.p = NIM_NIL;
 		colontmpD__10.len = 0; colontmpD__10.p = NIM_NIL;
 		nimlf_(261, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		colontmpD__9 = getStr__ast_u7095(a_p2);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA355_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA353_;
 		colontmpD__10 = getStr__ast_u7095(b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA355_;
-		T356_ = toInt128__types_u1221((cmpStrings(colontmpD__9, colontmpD__10) < 0));
-		if (NIM_UNLIKELY(*nimErr_)) goto LA355_;
-		T357_ = NIM_NIL;
-		T357_ = newIntNodeT__semfold_u45(T356_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T357_); goto LA355_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T357_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA355_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA353_;
+		T354_ = toInt128__types_u1221((cmpStrings(colontmpD__9, colontmpD__10) < 0));
+		if (NIM_UNLIKELY(*nimErr_)) goto LA353_;
+		T355_ = NIM_NIL;
+		T355_ = newIntNodeT__semfold_u45(T354_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T355_); goto LA353_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T355_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA353_;
 		{
-			LA355_:;
+			LA353_:;
 		}
 		{
 			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__10);
@@ -4187,23 +4183,23 @@ LA305_: ;
 	{
 		NimStringV2 colontmpD__11;
 		NimStringV2 colontmpD__12;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T362_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T363_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T360_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T361_;
 		colontmpD__11.len = 0; colontmpD__11.p = NIM_NIL;
 		colontmpD__12.len = 0; colontmpD__12.p = NIM_NIL;
 		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(262, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		colontmpD__11 = getStr__ast_u7095(a_p2);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA361_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA359_;
 		colontmpD__12 = getStr__ast_u7095(b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA361_;
-		T362_ = toInt128__types_u1221((cmpStrings(colontmpD__11, colontmpD__12) <= 0));
-		if (NIM_UNLIKELY(*nimErr_)) goto LA361_;
-		T363_ = NIM_NIL;
-		T363_ = newIntNodeT__semfold_u45(T362_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T363_); goto LA361_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T363_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA361_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA359_;
+		T360_ = toInt128__types_u1221((cmpStrings(colontmpD__11, colontmpD__12) <= 0));
+		if (NIM_UNLIKELY(*nimErr_)) goto LA359_;
+		T361_ = NIM_NIL;
+		T361_ = newIntNodeT__semfold_u45(T360_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T361_); goto LA359_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T361_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA359_;
 		{
-			LA361_:;
+			LA359_:;
 		}
 		{
 			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__12);
@@ -4216,23 +4212,23 @@ LA305_: ;
 	{
 		NimStringV2 colontmpD__13;
 		NimStringV2 colontmpD__14;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T368_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T369_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T366_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T367_;
 		colontmpD__13.len = 0; colontmpD__13.p = NIM_NIL;
 		colontmpD__14.len = 0; colontmpD__14.p = NIM_NIL;
 		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(263, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		colontmpD__13 = getStr__ast_u7095(a_p2);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA367_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA365_;
 		colontmpD__14 = getStr__ast_u7095(b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA367_;
-		T368_ = toInt128__types_u1221(eqStrings(colontmpD__13, colontmpD__14));
-		if (NIM_UNLIKELY(*nimErr_)) goto LA367_;
-		T369_ = NIM_NIL;
-		T369_ = newIntNodeT__semfold_u45(T368_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T369_); goto LA367_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T369_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA367_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA365_;
+		T366_ = toInt128__types_u1221(eqStrings(colontmpD__13, colontmpD__14));
+		if (NIM_UNLIKELY(*nimErr_)) goto LA365_;
+		T367_ = NIM_NIL;
+		T367_ = newIntNodeT__semfold_u45(T366_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T367_); goto LA365_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T367_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA365_;
 		{
-			LA367_:;
+			LA365_:;
 		}
 		{
 			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__14);
@@ -4243,382 +4239,382 @@ LA305_: ;
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)77):
 	{
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T371_;
+		NI64 T372_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T373_;
 		NI64 T374_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T375_;
-		NI64 T376_;
-		NIM_BOOL T377_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T378_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T379_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(265, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T373_ = getOrdValue__types_u167(a_p2);
+		NIM_BOOL T375_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T376_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T377_;
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(265, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T371_ = getOrdValue__types_u167(a_p2);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		T372_ = (NI64)0;
+		T372_ = toInt64__int128_u53(T371_);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		T373_ = getOrdValue__types_u167(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		T374_ = (NI64)0;
 		T374_ = toInt64__int128_u53(T373_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T375_ = getOrdValue__types_u167(b_p3);
+		T375_ = (NIM_BOOL)0;
+		T375_ = ltpercent___system_u1098(T372_, T374_);
+		T376_ = toInt128__types_u1221(T375_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T376_ = (NI64)0;
-		T376_ = toInt64__int128_u53(T375_);
-		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T377_ = (NIM_BOOL)0;
-		T377_ = ltpercent___system_u1098(T374_, T376_);
-		T378_ = toInt128__types_u1221(T377_);
-		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T379_ = NIM_NIL;
-		T379_ = newIntNodeT__semfold_u45(T378_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T379_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T379_);
+		T377_ = NIM_NIL;
+		T377_ = newIntNodeT__semfold_u45(T376_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T377_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T377_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)76):
 	{
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T379_;
+		NI64 T380_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T381_;
 		NI64 T382_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T383_;
-		NI64 T384_;
-		NIM_BOOL T385_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T386_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T387_;
-		nimlf_(267, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T381_ = getOrdValue__types_u167(a_p2);
+		NIM_BOOL T383_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T384_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T385_;
+		nimlf_(267, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T379_ = getOrdValue__types_u167(a_p2);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		T380_ = (NI64)0;
+		T380_ = toInt64__int128_u53(T379_);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		T381_ = getOrdValue__types_u167(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		T382_ = (NI64)0;
 		T382_ = toInt64__int128_u53(T381_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T383_ = getOrdValue__types_u167(b_p3);
+		T383_ = (NIM_BOOL)0;
+		T383_ = lteqpercent___system_u1078(T380_, T382_);
+		T384_ = toInt128__types_u1221(T383_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T384_ = (NI64)0;
-		T384_ = toInt64__int128_u53(T383_);
-		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T385_ = (NIM_BOOL)0;
-		T385_ = lteqpercent___system_u1078(T382_, T384_);
-		T386_ = toInt128__types_u1221(T385_);
-		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T387_ = NIM_NIL;
-		T387_ = newIntNodeT__semfold_u45(T386_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T387_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T387_);
+		T385_ = NIM_NIL;
+		T385_ = newIntNodeT__semfold_u45(T384_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T385_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T385_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)60):
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)106):
 	{
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T387_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T388_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T389_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T390_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T391_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T392_;
-		nimlf_(268, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T389_ = getInt__ast_u7077(a_p2);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T390_;
+		nimlf_(268, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T387_ = getInt__ast_u7077(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T390_ = getInt__ast_u7077(b_p3);
+		T388_ = getInt__ast_u7077(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T391_ = bitand__int128_u504(T389_, T390_);
+		T389_ = bitand__int128_u504(T387_, T388_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T392_ = NIM_NIL;
-		T392_ = newIntNodeT__semfold_u45(T391_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T392_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T392_);
+		T390_ = NIM_NIL;
+		T390_ = newIntNodeT__semfold_u45(T389_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T390_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T390_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)61):
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)107):
 	{
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T392_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T393_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T394_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T395_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T396_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T397_;
-		nimlf_(269, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T394_ = getInt__ast_u7077(a_p2);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T395_;
+		nimlf_(269, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T392_ = getInt__ast_u7077(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T395_ = getInt__ast_u7077(b_p3);
+		T393_ = getInt__ast_u7077(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T396_ = bitor__int128_u508(T394_, T395_);
+		T394_ = bitor__int128_u508(T392_, T393_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T397_ = NIM_NIL;
-		T397_ = newIntNodeT__semfold_u45(T396_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T397_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T397_);
+		T395_ = NIM_NIL;
+		T395_ = newIntNodeT__semfold_u45(T394_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T395_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T395_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)62):
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)90):
 	{
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T397_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T398_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T399_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T400_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T401_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T402_;
-		nimlf_(270, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T399_ = getInt__ast_u7077(a_p2);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T400_;
+		nimlf_(270, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T397_ = getInt__ast_u7077(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T400_ = getInt__ast_u7077(b_p3);
+		T398_ = getInt__ast_u7077(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T401_ = bitxor__int128_u512(T399_, T400_);
+		T399_ = bitxor__int128_u512(T397_, T398_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T402_ = NIM_NIL;
-		T402_ = newIntNodeT__semfold_u45(T401_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T402_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T402_);
+		T400_ = NIM_NIL;
+		T400_ = newIntNodeT__semfold_u45(T399_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T400_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T400_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)65):
 	{
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA val_2;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T402_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T403_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T404_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T405_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T406_;
-		NI64 T407_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T408_;
-		nimlf_(272, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T404_ = getInt__ast_u7077(a_p2);
+		NI64 T405_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T406_;
+		nimlf_(272, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T402_ = getInt__ast_u7077(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T405_ = getInt__ast_u7077(b_p3);
+		T403_ = getInt__ast_u7077(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T406_ = plus___int128_u681(T404_, T405_);
+		T404_ = plus___int128_u681(T402_, T403_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T407_ = (NI64)0;
-		T407_ = getSize__types_u3479((*g_p6).config, (*n_p1).typField);
+		T405_ = (NI64)0;
+		T405_ = getSize__types_u3479((*g_p6).config, (*n_p1).typField);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		val_2 = maskBytes__int128_u1148(T406_, ((NI) (T407_)));
+		val_2 = maskBytes__int128_u1148(T404_, ((NI) (T405_)));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(273, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T408_ = NIM_NIL;
-		T408_ = newIntNodeT__semfold_u45(val_2, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T408_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T408_);
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(273, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T406_ = NIM_NIL;
+		T406_ = newIntNodeT__semfold_u45(val_2, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T406_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T406_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)66):
 	{
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA val_3;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T408_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T409_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T410_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T411_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T412_;
-		NI64 T413_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T414_;
-		nimlf_(275, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T410_ = getInt__ast_u7077(a_p2);
+		NI64 T411_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T412_;
+		nimlf_(275, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T408_ = getInt__ast_u7077(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T411_ = getInt__ast_u7077(b_p3);
+		T409_ = getInt__ast_u7077(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T412_ = minus___int128_u707(T410_, T411_);
+		T410_ = minus___int128_u707(T408_, T409_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T413_ = (NI64)0;
-		T413_ = getSize__types_u3479((*g_p6).config, (*n_p1).typField);
+		T411_ = (NI64)0;
+		T411_ = getSize__types_u3479((*g_p6).config, (*n_p1).typField);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		val_3 = maskBytes__int128_u1148(T412_, ((NI) (T413_)));
+		val_3 = maskBytes__int128_u1148(T410_, ((NI) (T411_)));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(276, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T414_ = NIM_NIL;
-		T414_ = newIntNodeT__semfold_u45(val_3, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T414_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T414_);
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(276, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T412_ = NIM_NIL;
+		T412_ = newIntNodeT__semfold_u45(val_3, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T412_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T412_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)67):
 	{
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA val_4;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T414_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T415_;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T416_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T417_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T418_;
-		NI64 T419_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T420_;
-		nimlf_(279, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T416_ = getInt__ast_u7077(a_p2);
+		NI64 T417_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T418_;
+		nimlf_(279, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T414_ = getInt__ast_u7077(a_p2);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T417_ = getInt__ast_u7077(b_p3);
+		T415_ = getInt__ast_u7077(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T418_ = star___int128_u777(T416_, T417_);
+		T416_ = star___int128_u777(T414_, T415_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T419_ = (NI64)0;
-		T419_ = getSize__types_u3479((*g_p6).config, (*n_p1).typField);
+		T417_ = (NI64)0;
+		T417_ = getSize__types_u3479((*g_p6).config, (*n_p1).typField);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		val_4 = maskBytes__int128_u1148(T418_, ((NI) (T419_)));
+		val_4 = maskBytes__int128_u1148(T416_, ((NI) (T417_)));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(280, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T420_ = NIM_NIL;
-		T420_ = newIntNodeT__semfold_u45(val_4, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T420_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T420_);
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(280, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T418_ = NIM_NIL;
+		T418_ = newIntNodeT__semfold_u45(val_4, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T418_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T418_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)69):
 	{
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA argA_5;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T420_;
+		NI64 T421_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA argB_5;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T422_;
 		NI64 T423_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA argB_5;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T424_;
-		NI64 T425_;
-		nimlf_(282, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T422_ = getInt__ast_u7077(a_p2);
+		nimlf_(282, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T420_ = getInt__ast_u7077(a_p2);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		T421_ = (NI64)0;
+		T421_ = getSize__types_u3479((*g_p6).config, (*a_p2).typField);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		argA_5 = maskBytes__int128_u1148(T420_, ((NI) (T421_)));
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		nimln_(283);		T422_ = getInt__ast_u7077(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		T423_ = (NI64)0;
 		T423_ = getSize__types_u3479((*g_p6).config, (*a_p2).typField);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		argA_5 = maskBytes__int128_u1148(T422_, ((NI) (T423_)));
-		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimln_(283);		T424_ = getInt__ast_u7077(b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T425_ = (NI64)0;
-		T425_ = getSize__types_u3479((*g_p6).config, (*a_p2).typField);
-		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		argB_5 = maskBytes__int128_u1148(T424_, ((NI) (T425_)));
+		argB_5 = maskBytes__int128_u1148(T422_, ((NI) (T423_)));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimln_(284);		{
-			NIM_BOOL T428_;
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T431_;
-			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T432_;
-			T428_ = (NIM_BOOL)0;
-			T428_ = eqeq___int128_u478(argB_5, Zero__int128_u8);
+			NIM_BOOL T426_;
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T429_;
+			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T430_;
+			T426_ = (NIM_BOOL)0;
+			T426_ = eqeq___int128_u478(argB_5, Zero__int128_u8);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			if (!!(T428_)) goto LA429_;
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(285, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T431_ = mod__int128_u885(argA_5, argB_5);
+			if (!!(T426_)) goto LA427_;
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(285, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T429_ = mod__int128_u885(argA_5, argB_5);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T432_ = NIM_NIL;
-			T432_ = newIntNodeT__semfold_u45(T431_, n_p1, idgen_p5, g_p6);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T432_); goto BeforeRet_;}
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T432_);
+			T430_ = NIM_NIL;
+			T430_ = newIntNodeT__semfold_u45(T429_, n_p1, idgen_p5, g_p6);
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T430_); goto BeforeRet_;}
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T430_);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		}
-LA429_: ;
+LA427_: ;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)68):
 	{
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA argA_6;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T432_;
+		NI64 T433_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA argB_6;
 		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T434_;
 		NI64 T435_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA argB_6;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T436_;
-		NI64 T437_;
-		nimlf_(287, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T434_ = getInt__ast_u7077(a_p2);
+		nimlf_(287, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T432_ = getInt__ast_u7077(a_p2);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		T433_ = (NI64)0;
+		T433_ = getSize__types_u3479((*g_p6).config, (*a_p2).typField);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		argA_6 = maskBytes__int128_u1148(T432_, ((NI) (T433_)));
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		nimln_(288);		T434_ = getInt__ast_u7077(b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		T435_ = (NI64)0;
 		T435_ = getSize__types_u3479((*g_p6).config, (*a_p2).typField);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		argA_6 = maskBytes__int128_u1148(T434_, ((NI) (T435_)));
-		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimln_(288);		T436_ = getInt__ast_u7077(b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T437_ = (NI64)0;
-		T437_ = getSize__types_u3479((*g_p6).config, (*a_p2).typField);
-		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		argB_6 = maskBytes__int128_u1148(T436_, ((NI) (T437_)));
+		argB_6 = maskBytes__int128_u1148(T434_, ((NI) (T435_)));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimln_(289);		{
-			NIM_BOOL T440_;
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T443_;
-			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T444_;
-			T440_ = (NIM_BOOL)0;
-			T440_ = eqeq___int128_u478(argB_6, Zero__int128_u8);
+			NIM_BOOL T438_;
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T441_;
+			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T442_;
+			T438_ = (NIM_BOOL)0;
+			T438_ = eqeq___int128_u478(argB_6, Zero__int128_u8);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			if (!!(T440_)) goto LA441_;
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(290, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T443_ = div__int128_u879(argA_6, argB_6);
+			if (!!(T438_)) goto LA439_;
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(290, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T441_ = div__int128_u879(argA_6, argB_6);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T444_ = NIM_NIL;
-			T444_ = newIntNodeT__semfold_u45(T443_, n_p1, idgen_p5, g_p6);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T444_); goto BeforeRet_;}
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T444_);
+			T442_ = NIM_NIL;
+			T442_ = newIntNodeT__semfold_u45(T441_, n_p1, idgen_p5, g_p6);
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T442_); goto BeforeRet_;}
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T442_);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		}
-LA441_: ;
+LA439_: ;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)117):
 	{
-		NIM_BOOL T446_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T447_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T448_;
-		nimlf_(291, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T446_ = (NIM_BOOL)0;
-		T446_ = containsSets__nimsets_u163((*g_p6).config, a_p2, b_p3);
+		NIM_BOOL T444_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T445_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T446_;
+		nimlf_(291, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T444_ = (NIM_BOOL)0;
+		T444_ = containsSets__nimsets_u163((*g_p6).config, a_p2, b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T447_ = toInt128__types_u1221(T446_);
+		T445_ = toInt128__types_u1221(T444_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T448_ = NIM_NIL;
-		T448_ = newIntNodeT__semfold_u45(T447_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T448_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T448_);
+		T446_ = NIM_NIL;
+		T446_ = newIntNodeT__semfold_u45(T445_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T446_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T446_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)116):
 	{
-		NIM_BOOL T450_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T451_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T452_;
-		nimlf_(292, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T450_ = (NIM_BOOL)0;
-		T450_ = equalSets__nimsets_u170((*g_p6).config, a_p2, b_p3);
+		NIM_BOOL T448_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T449_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T450_;
+		nimlf_(292, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T448_ = (NIM_BOOL)0;
+		T448_ = equalSets__nimsets_u170((*g_p6).config, a_p2, b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T451_ = toInt128__types_u1221(T450_);
+		T449_ = toInt128__types_u1221(T448_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T452_ = NIM_NIL;
-		T452_ = newIntNodeT__semfold_u45(T451_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T452_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T452_);
+		T450_ = NIM_NIL;
+		T450_ = newIntNodeT__semfold_u45(T449_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T450_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T450_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)118):
 	{
+		NIM_BOOL T452_;
 		NIM_BOOL T454_;
-		NIM_BOOL T456_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T457_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T458_;
-		nimlf_(294, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		nimln_(295);		T454_ = (NIM_BOOL)0;
-		T454_ = containsSets__nimsets_u163((*g_p6).config, a_p2, b_p3);
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T455_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T456_;
+		nimlf_(294, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		nimln_(295);		T452_ = (NIM_BOOL)0;
+		T452_ = containsSets__nimsets_u163((*g_p6).config, a_p2, b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		if (!(T454_)) goto LA455_;
-		T456_ = (NIM_BOOL)0;
-		T456_ = equalSets__nimsets_u170((*g_p6).config, a_p2, b_p3);
+		if (!(T452_)) goto LA453_;
+		T454_ = (NIM_BOOL)0;
+		T454_ = equalSets__nimsets_u170((*g_p6).config, a_p2, b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T454_ = !(T456_);
-LA455_: ;
-		nimln_(294);		T457_ = toInt128__types_u1221(T454_);
+		T452_ = !(T454_);
+LA453_: ;
+		nimln_(294);		T455_ = toInt128__types_u1221(T452_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T458_ = NIM_NIL;
-		T458_ = newIntNodeT__semfold_u45(T457_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T458_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T458_);
+		T456_ = NIM_NIL;
+		T456_ = newIntNodeT__semfold_u45(T455_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T456_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T456_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)119):
 	{
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T460_;
-		nimlf_(297, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T460_ = NIM_NIL;
-		T460_ = intersectSets__nimsets_u149((*g_p6).config, a_p2, b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T460_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T460_);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T458_;
+		nimlf_(297, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T458_ = NIM_NIL;
+		T458_ = intersectSets__nimsets_u149((*g_p6).config, a_p2, b_p3);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T458_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T458_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimlf_(298, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		(*result).info = (*n_p1).info;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)120):
 	{
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T462_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(300, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T462_ = NIM_NIL;
-		T462_ = unionSets__nimsets_u135((*g_p6).config, a_p2, b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T462_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T462_);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T460_;
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(300, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T460_ = NIM_NIL;
+		T460_ = unionSets__nimsets_u135((*g_p6).config, a_p2, b_p3);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T460_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T460_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimlf_(301, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		(*result).info = (*n_p1).info;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)121):
 	{
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T464_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(303, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T464_ = NIM_NIL;
-		T464_ = diffSets__nimsets_u142((*g_p6).config, a_p2, b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T464_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T464_);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T462_;
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(303, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T462_ = NIM_NIL;
+		T462_ = diffSets__nimsets_u142((*g_p6).config, a_p2, b_p3);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T462_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T462_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimlf_(304, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		(*result).info = (*n_p1).info;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)122):
 	{
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T466_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(306, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T466_ = NIM_NIL;
-		T466_ = symdiffSets__nimsets_u156((*g_p6).config, a_p2, b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T466_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T466_);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T464_;
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(306, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T464_ = NIM_NIL;
+		T464_ = symdiffSets__nimsets_u156((*g_p6).config, a_p2, b_p3);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T464_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T464_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimlf_(307, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		(*result).info = (*n_p1).info;
 	}
@@ -4628,27 +4624,27 @@ LA455_: ;
 		NimStringV2 colontmpD__15;
 		NimStringV2 colontmpD__16;
 		NimStringV2 colontmpD__17;
-		NimStringV2 T469_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T470_;
+		NimStringV2 T467_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T468_;
 		colontmpD__15.len = 0; colontmpD__15.p = NIM_NIL;
 		colontmpD__16.len = 0; colontmpD__16.p = NIM_NIL;
 		colontmpD__17.len = 0; colontmpD__17.p = NIM_NIL;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(308, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T469_.len = 0; T469_.p = NIM_NIL;
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(308, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T467_.len = 0; T467_.p = NIM_NIL;
 		colontmpD__15 = getStrOrChar__ast_u7098(a_p2);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA468_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA466_;
 		colontmpD__16 = getStrOrChar__ast_u7098(b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA468_;
-		T469_ = rawNewString(colontmpD__15.len + colontmpD__16.len + 0);
-appendString((&T469_), colontmpD__15);
-appendString((&T469_), colontmpD__16);
-		colontmpD__17 = T469_;
-		T470_ = NIM_NIL;
-		T470_ = newStrNodeT__semfold_u64(colontmpD__17, n_p1, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T470_); goto LA468_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T470_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA468_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA466_;
+		T467_ = rawNewString(colontmpD__15.len + colontmpD__16.len + 0);
+appendString((&T467_), colontmpD__15);
+appendString((&T467_), colontmpD__16);
+		colontmpD__17 = T467_;
+		T468_ = NIM_NIL;
+		T468_ = newStrNodeT__semfold_u64(colontmpD__17, n_p1, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T468_); goto LA466_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T468_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA466_;
 		{
-			LA468_:;
+			LA466_:;
 		}
 		{
 			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__17);
@@ -4660,18 +4656,18 @@ appendString((&T469_), colontmpD__16);
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)132):
 	{
-		NIM_BOOL T474_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T475_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T476_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(309, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T474_ = (NIM_BOOL)0;
-		T474_ = inSet__nimsets_u8(a_p2, b_p3);
+		NIM_BOOL T472_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T473_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T474_;
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(309, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T472_ = (NIM_BOOL)0;
+		T472_ = inSet__nimsets_u8(a_p2, b_p3);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T475_ = toInt128__types_u1221(T474_);
+		T473_ = toInt128__types_u1221(T472_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T476_ = NIM_NIL;
-		T476_ = newIntNodeT__semfold_u45(T475_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T476_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T476_);
+		T474_ = NIM_NIL;
+		T474_ = newIntNodeT__semfold_u45(T473_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T474_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T474_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
@@ -4682,49 +4678,49 @@ appendString((&T469_), colontmpD__16);
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)102):
 	{
 		nimlf_(314, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		{
-			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T481_;
-			NIM_BOOL T482_;
+			tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T479_;
+			NIM_BOOL T480_;
+			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T483_;
+			T479_ = getOrdValue__types_u167(a_p2);
+			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+			T480_ = (NIM_BOOL)0;
+			T480_ = eqeq___int128_u1054(T479_, IL64(0));
+			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+			if (!T480_) goto LA481_;
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(314, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T483_ = NIM_NIL;
+			T483_ = newStrNodeT__semfold_u64(TM__JtgqXuJaW0Uz9aqyNPWIZsw_22, n_p1, g_p6);
+			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T483_); goto BeforeRet_;}
+			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T483_);
+			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		}
+		goto LA477_;
+LA481_: ;
+		{
 			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T485_;
-			T481_ = getOrdValue__types_u167(a_p2);
-			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			T482_ = (NIM_BOOL)0;
-			T482_ = eqeq___int128_u1054(T481_, IL64(0));
-			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-			if (!T482_) goto LA483_;
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			nimlf_(314, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T485_ = NIM_NIL;
-			T485_ = newStrNodeT__semfold_u64(TM__JtgqXuJaW0Uz9aqyNPWIZsw_22, n_p1, g_p6);
+			nimlf_(315, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T485_ = NIM_NIL;
+			T485_ = newStrNodeT__semfold_u64(TM__JtgqXuJaW0Uz9aqyNPWIZsw_24, n_p1, g_p6);
 			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T485_); goto BeforeRet_;}
 			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T485_);
 			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		}
-		goto LA479_;
-LA483_: ;
-		{
-			tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T487_;
-			nimlf_(315, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");			T487_ = NIM_NIL;
-			T487_ = newStrNodeT__semfold_u64(TM__JtgqXuJaW0Uz9aqyNPWIZsw_24, n_p1, g_p6);
-			if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T487_); goto BeforeRet_;}
-			nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");			eqsink___ast_u3270(&result, T487_);
-			if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		}
-LA479_: ;
+LA477_: ;
 	}
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)103):
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)101):
 	{
 		NimStringV2 colontmpD__18;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T490_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T488_;
 		colontmpD__18.len = 0; colontmpD__18.p = NIM_NIL;
 		nimlf_(317, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		colontmpD__18 = getStrOrChar__ast_u7098(a_p2);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA489_;
-		T490_ = NIM_NIL;
-		T490_ = newStrNodeT__semfold_u64(colontmpD__18, n_p1, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T490_); goto LA489_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T490_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA489_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA487_;
+		T488_ = NIM_NIL;
+		T488_ = newStrNodeT__semfold_u64(colontmpD__18, n_p1, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T488_); goto LA487_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T488_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA487_;
 		{
-			LA489_:;
+			LA487_:;
 		}
 		{
 			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__18);
@@ -4735,17 +4731,17 @@ LA479_: ;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)104):
 	{
 		NimStringV2 colontmpD__19;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T495_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T493_;
 		colontmpD__19.len = 0; colontmpD__19.p = NIM_NIL;
 		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(318, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		colontmpD__19 = getStrOrChar__ast_u7098(a_p2);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA494_;
-		T495_ = NIM_NIL;
-		T495_ = newStrNodeT__semfold_u64(colontmpD__19, n_p1, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T495_); goto LA494_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T495_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA494_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA492_;
+		T493_ = NIM_NIL;
+		T493_ = newStrNodeT__semfold_u64(colontmpD__19, n_p1, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T493_); goto LA492_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T493_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA492_;
 		{
-			LA494_:;
+			LA492_:;
 		}
 		{
 			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__19);
@@ -4756,17 +4752,17 @@ LA479_: ;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)105):
 	{
 		NimStringV2 colontmpD__20;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T500_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T498_;
 		colontmpD__20.len = 0; colontmpD__20.p = NIM_NIL;
 		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(319, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		colontmpD__20 = ordinalValToString__semfold_u162(a_p2, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA499_;
-		T500_ = NIM_NIL;
-		T500_ = newStrNodeT__semfold_u64(colontmpD__20, n_p1, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T500_); goto LA499_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T500_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA499_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA497_;
+		T498_ = NIM_NIL;
+		T498_ = newStrNodeT__semfold_u64(colontmpD__20, n_p1, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T498_); goto LA497_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T498_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA497_;
 		{
-			LA499_:;
+			LA497_:;
 		}
 		{
 			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__20);
@@ -4776,11 +4772,11 @@ LA479_: ;
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)142):
 	{
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T504_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(321, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T504_ = NIM_NIL;
-		T504_ = copyTree__ast_u6920(a_p2);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T504_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T504_);
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T502_;
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(321, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		T502_ = NIM_NIL;
+		T502_ = copyTree__ast_u6920(a_p2);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T502_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T502_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		nimlf_(934, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");		eqcopy___ast_u3390(&(*result).typField, (*n_p1).typField);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
@@ -4789,24 +4785,24 @@ LA479_: ;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)210):
 	{
 		NimStringV2 colontmpD__21;
-		NIM_BOOL T507_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T508_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T509_;
+		NIM_BOOL T505_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T506_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T507_;
 		colontmpD__21.len = 0; colontmpD__21.p = NIM_NIL;
 		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(324, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		colontmpD__21 = getStr__ast_u7095(a_p2);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA506_;
-		T507_ = (NIM_BOOL)0;
-		T507_ = testCompileOption__commands_u932((*g_p6).config, colontmpD__21, (*n_p1).info);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA506_;
-		T508_ = toInt128__types_u1221(T507_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA506_;
-		T509_ = NIM_NIL;
-		T509_ = newIntNodeT__semfold_u45(T508_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T509_); goto LA506_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T509_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA506_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA504_;
+		T505_ = (NIM_BOOL)0;
+		T505_ = testCompileOption__commands_u932((*g_p6).config, colontmpD__21, (*n_p1).info);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA504_;
+		T506_ = toInt128__types_u1221(T505_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA504_;
+		T507_ = NIM_NIL;
+		T507_ = newIntNodeT__semfold_u45(T506_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T507_); goto LA504_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T507_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA504_;
 		{
-			LA506_:;
+			LA504_:;
 		}
 		{
 			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__21);
@@ -4818,27 +4814,27 @@ LA479_: ;
 	{
 		NimStringV2 colontmpD__22;
 		NimStringV2 colontmpD__23;
-		NIM_BOOL T514_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T515_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T516_;
+		NIM_BOOL T512_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T513_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T514_;
 		colontmpD__22.len = 0; colontmpD__22.p = NIM_NIL;
 		colontmpD__23.len = 0; colontmpD__23.p = NIM_NIL;
 		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(326, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		nimln_(327);		colontmpD__22 = getStr__ast_u7095(a_p2);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA513_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA511_;
 		colontmpD__23 = getStr__ast_u7095(b_p3);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA513_;
-		T514_ = (NIM_BOOL)0;
-		T514_ = testCompileOptionArg__commands_u785((*g_p6).config, colontmpD__22, colontmpD__23, (*n_p1).info);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA513_;
-		nimln_(326);		T515_ = toInt128__types_u1221(T514_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA513_;
-		T516_ = NIM_NIL;
-		T516_ = newIntNodeT__semfold_u45(T515_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T516_); goto LA513_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T516_);
-		if (NIM_UNLIKELY(*nimErr_)) goto LA513_;
+		if (NIM_UNLIKELY(*nimErr_)) goto LA511_;
+		T512_ = (NIM_BOOL)0;
+		T512_ = testCompileOptionArg__commands_u785((*g_p6).config, colontmpD__22, colontmpD__23, (*n_p1).info);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA511_;
+		nimln_(326);		T513_ = toInt128__types_u1221(T512_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA511_;
+		T514_ = NIM_NIL;
+		T514_ = newIntNodeT__semfold_u45(T513_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T514_); goto LA511_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T514_);
+		if (NIM_UNLIKELY(*nimErr_)) goto LA511_;
 		{
-			LA513_:;
+			LA511_:;
 		}
 		{
 			nimlf_(1699, "/Users/svacchanda/Dev/nim-2.2.6/lib/system.nim");			eqdestroy___system_u2629(colontmpD__23);
@@ -4849,18 +4845,18 @@ LA479_: ;
 	break;
 	case ((tyEnum_TMagic__DGsy2myyVTcCP3BVeXRYBQ)92):
 	{
-		NIM_BOOL T520_;
-		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T521_;
-		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T522_;
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(329, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		nimln_(330);		T520_ = (NIM_BOOL)0;
-		T520_ = exprStructuralEquivalent__trees_u63(a_p2, b_p3, NIM_TRUE);
+		NIM_BOOL T518_;
+		tyObject_Int128__WeXb6N7KovPZ59apkQzGuhA T519_;
+		tyObject_TNode__glIoDmeM2cKACf9btlenMgA* T520_;
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		nimlf_(329, "/Users/svacchanda/Dev/nim-2.2.6/compiler/semfold.nim");		nimln_(330);		T518_ = (NIM_BOOL)0;
+		T518_ = exprStructuralEquivalent__trees_u63(a_p2, b_p3, NIM_TRUE);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		nimln_(329);		T521_ = toInt128__types_u1221(T520_);
+		nimln_(329);		T519_ = toInt128__types_u1221(T518_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T522_ = NIM_NIL;
-		T522_ = newIntNodeT__semfold_u45(T521_, n_p1, idgen_p5, g_p6);
-		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T522_); goto BeforeRet_;}
-		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T522_);
+		T520_ = NIM_NIL;
+		T520_ = newIntNodeT__semfold_u45(T519_, n_p1, idgen_p5, g_p6);
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___ast_u3261(T520_); goto BeforeRet_;}
+		nimlf_(1023, "/Users/svacchanda/Dev/nim-2.2.6/compiler/ast.nim");		eqsink___ast_u3270(&result, T520_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 	break;
