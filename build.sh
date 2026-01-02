@@ -206,6 +206,15 @@ case $ucpu in
         powerpc64le)
         mycpu="powerpc64el"
       esac
+    elif [ "$myos" = "macosx" ] ; then
+      mycpu="$("$CC" -dumpmachine | sed 's/-.*//')"
+      if [ "$mycpu" = "powerpc64" ] ; then
+        COMP_FLAGS="$COMP_FLAGS -arch ppc64"
+        LINK_FLAGS="$LINK_FLAGS -arch ppc64"
+      else
+        COMP_FLAGS="$COMP_FLAGS -arch ppc"
+        LINK_FLAGS="$LINK_FLAGS -arch ppc"
+      fi
     else
       mycpu="powerpc"
     fi
